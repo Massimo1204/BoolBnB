@@ -45,7 +45,7 @@ class ApartmentsTableSeeder extends Seeder
             if($i % 10 == 0){
                 $count++;
                 $countImg=0;
-                $response = Http::get('https://api.unsplash.com/search/photos?client_id=x7wuqYgBvdtaD-KAanKQUq-aFQPr1b0AgWKs2FAiwWM&&query=apartment&&page=' . $count);
+                $response = Http::get('https://api.unsplash.com/search/photos?client_id='.env("APP_KEYHOUSE").'&&query=apartment&&page=' . $count);
                 $data = json_decode($response->body(), true);
             }
             if($data["results"][$countImg]["description"]== null){
