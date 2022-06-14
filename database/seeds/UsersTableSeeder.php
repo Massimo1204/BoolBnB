@@ -22,5 +22,16 @@ class UsersTableSeeder extends Seeder
         $admin->birth_date = $faker->date();
         $admin->profile_picture = "https://cdn2.vectorstock.com/i/1000x1000/13/76/icon-of-user-avatar-for-web-site-or-mobile-vector-4031376.jpg";
         $admin->save();
+
+        for ($i=0; $i < 10 ; $i++) {
+            $newUser = new User();
+            $newUser->first_name = $faker->firstName();
+            $newUser->last_name = $faker->lastName();
+            $newUser->email = $faker->email();
+            $newUser->password = Hash::make("boolbnb" . $i) ;
+            $newUser->birth_date = $faker->date();
+            $newUser->profile_picture = "https://cdn2.vectorstock.com/i/1000x1000/13/76/icon-of-user-avatar-for-web-site-or-mobile-vector-4031376.jpg";
+            $newUser->save();
+        }
     }
 }
