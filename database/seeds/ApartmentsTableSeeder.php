@@ -20,13 +20,8 @@ class ApartmentsTableSeeder extends Seeder
         $user_ids = User::pluck('id')->toArray();
         // $response = Http::get('https://api.unsplash.com/search/photos?client_id=x7wuqYgBvdtaD-KAanKQUq-aFQPr1b0AgWKs2FAiwWM&&query=apartment&&per_page=1000');
         $response = Http::get('https://api.unsplash.com/search/photos?client_id=x7wuqYgBvdtaD-KAanKQUq-aFQPr1b0AgWKs2FAiwWM&&query=apartment');
-
-
         $data = json_decode($response->body(), true);
 
-        // for ($i=0; $i < 100 ; $i++) { 
-        //     $img=$data["results"][$i]["urls"]["full"];
-        // }
         
             $count=0;
             $countImg=0;
@@ -48,12 +43,17 @@ class ApartmentsTableSeeder extends Seeder
             $newApartment->square_meters = $faker->numberBetween(30,3000);
             $newApartment->available = $faker->boolean();
             $newApartment->price = $faker->randomFloat(2,70,1000);
-            $newApartment->description = $faker->paragraph(3);
             if($i % 10 == 0){
                 $count++;
                 $countImg=0;
                 $response = Http::get('https://api.unsplash.com/search/photos?client_id=x7wuqYgBvdtaD-KAanKQUq-aFQPr1b0AgWKs2FAiwWM&&query=apartment&&page=' . $count);
                 $data = json_decode($response->body(), true);
+            }
+            if($data["results"][$countImg]["description"]== null){
+                $newApartment->description =$faker->paragraph(3);;
+            }
+            else{
+                $newApartment->description = $data["results"][$countImg]["description"];
             }
             $newApartment->image = $data["results"][$countImg]["urls"]["full"];          
             
