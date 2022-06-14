@@ -31,7 +31,14 @@ Route::namespace('Guest')
 ->group(function(){
     Route::get('/', 'HomeController@index');
     // Route::resource('posts',"PostsController");
-
 });
 
-Route::get('/admin/create', 'Admin\ApartmentsController@create')->name('home');
+Route::get('/user/create', 'User\ApartmentController@create')->name('home');
+
+Route::middleware('auth')
+    ->namespace('User')
+    ->name('user.')
+    ->prefix('user')
+    ->group( function() {
+        Route::get('/messages/create', 'MessageController@create')->name('messages.create');
+});

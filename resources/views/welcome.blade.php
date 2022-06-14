@@ -65,7 +65,12 @@
         </style>
     </head>
     <body>
-        <h1 class="text-danger">ciao</h1>
+        <a href="{{ route('user.messages.create')}}">
+            <h1 class="text-danger">
+                message create
+            </h1>
+        </a>
+
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
