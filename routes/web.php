@@ -34,4 +34,7 @@ Route::namespace('Guest')
 
 });
 
-Route::get('/admin/create', 'Admin\ApartmentsController@create')->name('home');
+
+// Route::get('/apartment/create', 'User\ApartmentController@create');
+
+Route::resource('/apartment',"User\ApartmentController");

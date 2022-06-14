@@ -10232,3 +10232,6 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.apartment .col-12, .apartment .col-3 {
+  margin: 1rem 0;
+}
