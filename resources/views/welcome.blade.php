@@ -8,6 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
         <!-- Styles -->
         <style>
@@ -64,6 +65,7 @@
         </style>
     </head>
     <body>
+        <h1 class="text-danger">ciao</h1>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -80,7 +82,6 @@
             @endif
 
             <div class="content">
-                <h1 class="text-danger">ciao</h1>
                 <?php
                     $count=10;
 
