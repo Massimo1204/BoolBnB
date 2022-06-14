@@ -48,12 +48,3 @@ class ApartmentsTableSeeder extends Seeder
         }
     }
 }
-
-
-// $client = new Client();
-// $stateQuery = $client->get('http://states-and-cities.com/api/v1/states%27);
-// $states = $stateQuery->getBody();
-// $states = json_decode($states, true);
-// foreach ($states as $state) {
-//     \App\Models\State::create(['name' => $state['name']]);
-// }
