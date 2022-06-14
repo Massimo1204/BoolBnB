@@ -15,10 +15,10 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             ApartmentsTableSeeder::class,
             PicturesTableSeeder::class,
+            ServicesTableSeeder::class,
             ViewsTableSeeder::class,
             MessagesTableSeeder::class,
             SponsorshipsTableSeeder::class,
-            // ServicesTableSeeder::class,
             // ApartmentServiceTableSeeder::class,
             // ApartmentSponsorTableSeeder::class,
         ]);
