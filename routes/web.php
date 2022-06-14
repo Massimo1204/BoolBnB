@@ -19,4 +19,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::namespace('Guest')
+->prefix('home')
+->name("home.")
+->group(function(){
+    Route::get('/', 'HomeController@index');
+    // Route::resource('posts',"PostsController");
+
+});
+
+// Route::get('/admin/home', 'HomeController@index')->name('home');
