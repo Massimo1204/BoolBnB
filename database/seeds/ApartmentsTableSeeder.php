@@ -24,7 +24,9 @@ class ApartmentsTableSeeder extends Seeder
             $Appartments = json_decode($Appartments, true);
             for($c=0;$c<10;$c++){
                 $link=$Appartments['results'][$c]['urls']['full'];
+                $desc=$Appartments['results'][$c]['description'];
                 $imgs[]=$link;
+                $descs[]=$desc;
             }
         }
         for($i=10; $i < 60; $i++){
@@ -45,9 +47,8 @@ class ApartmentsTableSeeder extends Seeder
             $newApartment->available = $faker->boolean();
             $newApartment->price = $faker->randomFloat(2,70,1000);
             $newApartment->image = $imgs[$i];
-            
+            $newApartment->description = $descs[$i];
             $newApartment->save();
-
         }
     }
 }

@@ -25,6 +25,10 @@ Route::get('/users/{user}', 'Auth\EditController@index')
 ->name('user.edit')
 ->middleware('auth');
 
+Route::put('/users/{user}', 'Auth\EditController@update')
+->name('user.update')
+->middleware('auth');
+
 Route::namespace('Guest')
 ->prefix('home')
 ->name("home.")
@@ -33,12 +37,7 @@ Route::namespace('Guest')
     // Route::resource('posts',"PostsController");
 });
 
-Route::get('/user/create', 'User\ApartmentController@create')->name('home');
+// Route::get('/apartment/create', 'User\ApartmentController@create');
 
-Route::middleware('auth')
-    ->namespace('User')
-    ->name('user.')
-    ->prefix('user')
-    ->group( function() {
-        Route::get('/messages/create', 'MessageController@create')->name('messages.create');
-});
+Route::resource('/apartment',"User\ApartmentController");
+

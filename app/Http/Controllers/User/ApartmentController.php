@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use App\Model\Apartment;
 
 class ApartmentController extends Controller
 {
@@ -14,7 +17,7 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments= Apartment::all();
+        $apartments = Apartment::all();
         return view('guest.home', compact("apartments"));
     }
 
@@ -36,7 +39,33 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $request->validate([
+        //     'title' => 'unique:posts|required|max:20',
+        //     'description' => 'required|min:10',
+        // ]);
+        $data = $request->all();
+
+        $newApartment = new Apartment();
+        $newApartment->title = $data["title"];
+        $newApartment->user_id = Auth::user()->id;
+        $newApartment->image = Storage::put('uploads',$data["image"]);
+        $newApartment->description = $data["description"];
+        $newApartment->n_rooms = $data["n_rooms"];
+        $newApartment->n_bedrooms = $data["n_bedrooms"];
+        $newApartment->n_beds = $data["n_beds"];
+        $newApartment->n_bathrooms = $data["n_bathrooms"];
+        $newApartment->guests = $data["guests"];
+        $newApartment->visible = $data["visible"];
+        $newApartment->available = $data["available"];
+        $newApartment->price = $data["price"];
+        $newApartment->square_meters = $data["square_meters"];
+        $newApartment->lat = $data["lat"];
+        $newApartment->long = $data["long"];
+        $newApartment->address = $data["address"];
+        $newApartment->save();
+        // $newApartment->()->sync($data['category_id']);
+
+        // return redirect()->route("admin.posts.show", $newPost->id);
     }
 
     /**
