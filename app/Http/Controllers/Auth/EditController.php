@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class EditController extends Controller
 {
@@ -68,9 +70,15 @@ class EditController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+
+        $request['profile_picture'] = Storage::put('uploads', $request['profile_picture']);
+        $request['password'] = Hash::make($request['password']);
+        $data = $request->all();
+
+        $user->update($data);
+        return redirect()->route('login');
     }
 
     /**
