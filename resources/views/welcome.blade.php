@@ -82,21 +82,6 @@
             @endif
 
             <div class="content">
-                <?php
-                    $count=10;
-
-                    $response = Http::get('https://api.unsplash.com/search/photos?client_id=x7wuqYgBvdtaD-KAanKQUq-aFQPr1b0AgWKs2FAiwWM&&query=apartment&&page=' . $count);
-                    $data = json_decode($response->body(), true);
-                    for ($i=0; $i < 10 ; $i++) { 
-                        $img=$data["results"][$i]["urls"]["full"];
-                ?>
-                <div class="w-50">
-
-                    <img src="{{$img}}" alt="" class="w-50">
-                </div>
-                <?php 
-                    }
-                ?>
                 <div class="title m-b-md">
                     Laravel
                 </div>
