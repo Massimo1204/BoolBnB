@@ -28,4 +28,4 @@ Route::namespace('Guest')
 
 });
 
-// Route::get('/admin/home', 'HomeController@index')->name('home');
+Route::get('/admin/create', 'Admin\ApartmentsController@create')->name('home');
