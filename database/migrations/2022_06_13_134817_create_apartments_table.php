@@ -23,7 +23,7 @@ class CreateApartmentsTable extends Migration
             $table->unsignedTinyInteger('n_beds');
             $table->unsignedTinyInteger('guests');
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->float('price', 7, 2);
             $table->unsignedMediumInteger('square_meters');
             $table->text('image');
