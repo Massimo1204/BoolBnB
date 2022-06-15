@@ -72,7 +72,7 @@
                             <label for="profile_picture" class="col-md-4 col-form-label text-md-right">{{ __('Profile Picture') }}</label>
 
                             <div class="col-md-6">
-                                <input id="profile_picture" type="file" class="form-control @error('profile_picture') is-invalid @enderror" name="profile_picture" required>
+                                <input id="profile_picture" type="file" class="form-control @error('profile_picture') is-invalid @enderror" name="profile_picture">
 
                                 @error('profile_picture')
                                     <span class="invalid-feedback" role="alert">
