@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Model\Picture;
+use App\Model\Service;
+use App\Model\Apartment;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
-use App\Model\Apartment;
-use App\Model\Picture;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
 {
@@ -30,7 +31,10 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view('user.apartments.create');
+        $services = Service::all();
+
+        return view('user.apartments.create', compact('services'));
+
     }
 
     /**
@@ -110,6 +114,8 @@ class ApartmentController extends Controller
                 $newPicture->save();
             }
         }
+
+        $newApartment->services()->sync($data['service']);
 
         return redirect()->route('apartment.show', ["apartment" => $newApartment]);
     }
