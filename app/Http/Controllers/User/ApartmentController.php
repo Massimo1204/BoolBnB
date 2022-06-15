@@ -143,7 +143,15 @@ class ApartmentController extends Controller
     {
         $services = Service::all();
 
-        return view('user.apartments.edit', compact('apartment'), compact('services') );
+        if($apartment->user_id == Auth::user()->id){
+
+            return view('user.apartments.edit', compact('apartment'), compact('services') );
+        }
+        else{
+
+            return redirect()->route('apartment.index')->with('error-message', 'Accesso negato');
+        }
+
     }
 
     /**

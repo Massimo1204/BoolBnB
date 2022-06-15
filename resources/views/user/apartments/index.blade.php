@@ -6,6 +6,11 @@
         {{session('deleted-message')}}
     </div>
 @endif
+@if (session('error-message'))
+    <div class="mx-2 alert alert-danger">
+        {{session('error-message')}}
+    </div>
+@endif
 <div class="d-flex flex-wrap justify-content-center">
         @foreach ($apartments as $apartment)
             <div class="apartment-wrapper mx-3">

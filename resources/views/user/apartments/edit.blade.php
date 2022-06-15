@@ -154,4 +154,29 @@
             </div>
         </form>
     </div>
+    @if (Auth::user()->id == $apartment->user_id)
+        <form action="{{ route('user.apartment.destroy', $apartment->id) }}" method="POST" class="apartment-form-destroyer"
+            apartment-title="{{ $apartment->title }}">
+            @csrf
+            @method('DELETE')
+
+            <button type="submit" class="btn btn-danger btn-sm">Delete</a>
+        </form>
+    @endif
+@endsection
+
+@section('footer-scripts')
+    <script defer>
+        const deleteForm = document.querySelector('.apartment-form-destroyer');
+
+        deleteForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // § blocchiamo l'invio del form
+            userConfirmation = window.confirm(
+                `Sei sicuro di voler eliminare ${this.getAttribute('apartment-title')}?`);
+            if (userConfirmation) {
+                this.submit();
+            }
+
+        });
+    </script>
 @endsection
