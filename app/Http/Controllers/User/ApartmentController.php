@@ -18,8 +18,8 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::paginate(5);
-        return view('guest.home', compact("apartments"));
+        $apartments = Apartment::paginate(12);
+        return view('user.apartments.index', compact("apartments"));
     }
 
     /**

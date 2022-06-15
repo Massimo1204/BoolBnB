@@ -7,11 +7,15 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-.apartment{
-  .col-12, .col-3{
-    // height: 4rem;
-    margin: 1rem 0;
-
-  }
-
+.apartment-wrapper{
+  height: 500px;
+    .card{
+      a{
+        img{
+          width: 400px;
+          height: 400px;
+          object-fit: cover;
+        }
+      }
+    }
 }
