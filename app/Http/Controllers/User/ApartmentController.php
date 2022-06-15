@@ -9,10 +9,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use App\Model\Apartment;
 use App\Model\View;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
 {
@@ -69,7 +67,7 @@ class ApartmentController extends Controller
             "min" => " è troppo corto",
         ]);
 
-        $data = $request->all();    
+        $data = $request->all();
         if($request['visible'] != null){
             $data['visible'] = 1;
         }
