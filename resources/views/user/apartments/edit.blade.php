@@ -83,7 +83,7 @@
             </div>
             <div class="col-12">
                 <label for="visible">Spuntare la seguente checkbox per rendere l'appartamento visibile </label>
-                <input type="checkbox" name="visible" id="visible" 
+                <input type="checkbox" name="visible" id="visible"
                 @if ($apartment->visible==1)
                     checked
                 @endif>
@@ -95,7 +95,7 @@
                     checked
                 @endif>
             </div>
-            <div class="col-12">    
+            <div class="col-12">
                 <label for="price">Inserisci il prezzo a notte per ospite: </label>
                 <input type="number" name="price" id="price" value="{{$apartment->price}}">
                 @error('price')
@@ -117,6 +117,24 @@
                 <label for="address">inserisci la via:</label>
                 <input class="w-100" type="text" name="address" id="address" value="{{$apartment->address}}">
                 @error('address')
+                    <div class="alert alert-danger mt-2">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="col-12">
+                <label for="address_number">inserisci in numero:</label>
+                <input class="w-100" type="text" name="address_number" id="address_number" value="{{$apartment->address_number}}">
+                @error('address_number')
+                    <div class="alert alert-danger mt-2">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="col-12">
+                <label for="address_city">inserisci la città:</label>
+                <input class="w-100" type="text" name="address_city" id="address_city" value="{{$apartment->address_city}}">
+                @error('address_city')
                     <div class="alert alert-danger mt-2">
                         {{ $message }}
                     </div>

@@ -97,7 +97,9 @@ class ApartmentController extends Controller
         $newApartment->square_meters = $data["square_meters"];
         $newApartment->lat = $dataResponse["results"][0]["position"]["lat"];
         $newApartment->long = $dataResponse["results"][0]["position"]["lon"];
-        $newApartment->address = $tempAddress;
+        $newApartment->address = $data['address'];
+        $newApartment->address_number = $data['address_number'];
+        $newApartment->address_city = $data['address_city'];
         $newApartment->save();
         return redirect()->route('apartment.show', ["apartment" => $newApartment]);
     }
@@ -163,7 +165,8 @@ class ApartmentController extends Controller
         else
             $data['available'] = 0;
 
-        $newAddress = str_replace(" ", "%20", $data["address"]);
+        $tempAddress = $data['address'].' '.$data['address_number'].' '.$data['address_city'];
+        $newAddress = str_replace(" ", "%20", $tempAddress);
         $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
         $dataResponse = json_decode($response->body(), true);
 
@@ -187,9 +190,11 @@ class ApartmentController extends Controller
         $apartment->lat = $dataResponse["results"][0]["position"]["lat"];
         $apartment->long = $dataResponse["results"][0]["position"]["lon"];
         $apartment->address = $data["address"];
+        $apartment->address = $data["address_number"];
+        $apartment->address = $data["address_city"];
         $apartment->save();
 
-        return redirect('home');
+        return redirect()->route('apartment.show', ["apartment" => $apartment]);
     }
 
     /**
