@@ -19,76 +19,36 @@ class EditController extends Controller
     {
         return view('auth.edit', compact('user'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
     {
-
-        $request['profile_picture'] = Storage::put('uploads', $request['profile_picture']);
         $request['password'] = Hash::make($request['password']);
         $data = $request->all();
+        if($request['profile_picture'] != null){
+
+            $data['profile_picture'] = Storage::put('uploads', $data['profile_picture']);
+        }
+
+        $request->validate([
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'birth_date' => ['date'],
+            'password' => ['required', 'string', 'min:8'],
+        ],
+        [
+            "required" => "Non puoi aggiornare uno User senza :attribute.",
+        ]
+    );
 
         $user->update($data);
         return redirect()->route('login');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

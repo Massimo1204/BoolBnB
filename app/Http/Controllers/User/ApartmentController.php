@@ -18,7 +18,7 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::all();
+        $apartments = Apartment::paginate(5);
         return view('guest.home', compact("apartments"));
     }
 
@@ -44,8 +44,22 @@ class ApartmentController extends Controller
         //     'title' => 'unique:posts|required|max:20',
         //     'description' => 'required|min:10',
         // ]);
+
         $data = $request->all();
-        
+        if($request['visible'] != null){
+            $data['visible'] = 1;
+        }
+
+        else{
+            $data['visible'] = 0;
+        }
+
+        if($request['available'] != null){
+            $data['available'] = 1;
+        }
+        else{
+            $data['available'] = 0;
+        }
         $newAddress = str_replace(" ", "%20", $data["address"]);
         $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
         $dataResponse = json_decode($response->body(), true);
@@ -67,6 +81,7 @@ class ApartmentController extends Controller
         $newApartment->long = $dataResponse["results"][0]["position"]["lon"];
         $newApartment->address = $data["address"];
         $newApartment->save();
+        return redirect()->route('home.');
         // return redirect()->route("admin.posts.show", $newPost->id);
     }
 
@@ -76,9 +91,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Apartment $apartment)
     {
-        //
+        return view('user.apartments.show', compact('apartment'));
     }
 
     /**
@@ -107,11 +122,13 @@ class ApartmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Apartment $apartment
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Apartment $apartment)
     {
-        //
+        $apartment->delete();
+
+        return redirect()->route('guest.home')->with('deleted-message', 'The selected apartment has been deleted');
     }
 }

@@ -65,7 +65,6 @@
         </style>
     </head>
     <body>
-        <h1 class="text-danger">ciao</h1>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">

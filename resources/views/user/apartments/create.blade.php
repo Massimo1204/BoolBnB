@@ -14,7 +14,7 @@
             </div>
             <div class="col-12">
                 <label for="image">Carica una foto:</label>
-                <input type="file" name="image" id="image">    
+                <input type="file" name="image" id="image">
             </div>
             <div class="col-12">
                 <label for="description">Descrizione</label>
@@ -33,20 +33,24 @@
                 <input type="number" name="n_beds" id="n_beds">
             </div>
             <div class="col-3">
-                <label for="n_bathrooms">Numero di bagni:</label>
-                <input type="number" name="n_bathrooms" id="n_bathrooms">
-            </div>
-            <div class="col-3">
                 <label for="guests">Numero massimo di ospiti:</label>
                 <input type="number" name="guests" id="guests">
             </div>
-            <div class="col-3">
+            {{-- <div class="col-3">
                 <label for="visible">Spuntare la seguente checkbox per rendere l'appartamento visibile </label>
                 <input type="number" name="visible" id="visible">
             </div>
             <div class="col-3">
                 <label for="available">Spuntare la seguente checkbox per rendere l'appartamento disponibile </label>
                 <input type="number" name="available" id="available">
+            </div> --}}
+            <div class="col-3">
+                <label for="visible">Spuntare la seguente checkbox per rendere l'appartamento visibile </label>
+                <input type="checkbox" name="visible" id="visible" checked=true>
+            </div>
+            <div class="col-3">
+                <label for="available">Spuntare la seguente checkbox per rendere l'appartamento disponibile </label>
+                <input type="checkbox" name="available" id="available" checked=true>
             </div>
             <div class="col-3">
                 <label for="price">Inserisci il prezzo a notte per ospite: </label>
