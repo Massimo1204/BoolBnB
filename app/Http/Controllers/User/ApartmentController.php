@@ -133,9 +133,7 @@ class ApartmentController extends Controller
     public function update(Request $request, Apartment $apartment)
     {
         $data = $request->all();
-<<<<<<< HEAD
 
-=======
 
         if($request['visible'] != null)
             $data['visible'] = 1;
@@ -147,7 +145,6 @@ class ApartmentController extends Controller
         else
             $data['available'] = 0;
 
->>>>>>> cdd7fa806c10c2b177de628b9f7d037ca53b5e15
         $newAddress = str_replace(" ", "%20", $data["address"]);
         $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
         $dataResponse = json_decode($response->body(), true);
