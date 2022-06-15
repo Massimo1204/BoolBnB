@@ -168,6 +168,6 @@ class ApartmentController extends Controller
     {
         $apartment->delete();
 
-        return redirect()->route('guest.home')->with('deleted-message', 'The selected apartment has been deleted');
+        return redirect()->route('apartment.index')->with('deleted-message', 'The selected apartment has been deleted');
     }
 }
