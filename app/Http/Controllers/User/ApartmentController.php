@@ -54,10 +54,11 @@ class ApartmentController extends Controller
             'address' => ['required', 'string','min:3'],
             'address_number' => ['required', 'string','min:1'],
             'address_city' => ['required', 'string','min:3'],
-
         ],
         [
             "required" => "Non puoi inserire un Appartamento senza :attribute.",
+            "numeric" => ":attribute deve essere un numero",
+            "min" => ":attribute troppo corto",
         ]);
 
         $data = $request->all();
