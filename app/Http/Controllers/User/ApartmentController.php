@@ -43,7 +43,25 @@ class ApartmentController extends Controller
         //     'title' => 'unique:posts|required|max:20',
         //     'description' => 'required|min:10',
         // ]);
+
         $data = $request->all();
+
+        if($request['visible'] != null){
+            $data['visible'] = 1;
+        }
+
+        else{
+            $data['visible'] = 0;
+        }
+
+        if($request['available'] != null){
+            $data['available'] = 1;
+        }
+        else{
+            $data['available'] = 0;
+        }
+
+        // dd($data);
 
         $newApartment = new Apartment();
         $newApartment->title = $data["title"];
@@ -65,7 +83,7 @@ class ApartmentController extends Controller
         $newApartment->save();
         // $newApartment->()->sync($data['category_id']);
 
-        // return redirect()->route("admin.posts.show", $newPost->id);
+        return redirect()->route('home.');
     }
 
     /**
