@@ -56,15 +56,6 @@
                 <label for="square_meters">Inserisci il numero di metri quadrati: </label>
                 <input type="number" name="square_meters" id="square_meters">
             </div>
-            <div class="col-3">
-                <label for="lat">Inserisci la latitudine: </label>
-                <input type="number" name="lat" id="lat">
-            </div>
-            <div class="col-3">
-                <label for="long">Inserisci la longitudine:</label>
-                <input type="number" name="long" id="long">
-            </div>
-            <div class="col-12">
                 <label for="address">inserisci la via:</label>
                 <input class="w-100" type="text" name="address" id="address">
             </div>

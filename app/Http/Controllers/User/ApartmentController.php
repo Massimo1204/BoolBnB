@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Model\Apartment;
+use Illuminate\Support\Facades\Http;
 
 class ApartmentController extends Controller
 {
@@ -44,7 +45,10 @@ class ApartmentController extends Controller
         //     'description' => 'required|min:10',
         // ]);
         $data = $request->all();
-
+        
+        $newAddress = str_replace(" ", "%20", $data["address"]);
+        $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
+        $dataResponse = json_decode($response->body(), true);
         $newApartment = new Apartment();
         $newApartment->title = $data["title"];
         $newApartment->user_id = Auth::user()->id;
@@ -59,12 +63,10 @@ class ApartmentController extends Controller
         $newApartment->available = $data["available"];
         $newApartment->price = $data["price"];
         $newApartment->square_meters = $data["square_meters"];
-        $newApartment->lat = $data["lat"];
-        $newApartment->long = $data["long"];
+        $newApartment->lat = $dataResponse["results"][0]["position"]["lat"];
+        $newApartment->long = $dataResponse["results"][0]["position"]["lon"];
         $newApartment->address = $data["address"];
         $newApartment->save();
-        // $newApartment->()->sync($data['category_id']);
-
         // return redirect()->route("admin.posts.show", $newPost->id);
     }
 
