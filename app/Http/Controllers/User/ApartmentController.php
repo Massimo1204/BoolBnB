@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Model\Apartment;
+use App\Model\View;
 use Illuminate\Support\Facades\Http;
 
 class ApartmentController extends Controller
@@ -61,7 +62,7 @@ class ApartmentController extends Controller
             "min" => " è troppo corto",
         ]);
 
-        $data = $request->all();
+        $data = $request->all();    
         if($request['visible'] != null){
             $data['visible'] = 1;
         }
@@ -112,6 +113,7 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
+        $this->StoreView($apartment);
         return view('user.apartments.show', compact('apartment'));
     }
 
@@ -208,5 +210,15 @@ class ApartmentController extends Controller
         $apartment->delete();
 
         return redirect()->route('apartment.index')->with('deleted-message', 'The selected apartment has been deleted');
+    }
+
+
+    public function StoreView($apartment){
+        $clientIP = request()->ip();
+        $Apartment_id=$apartment->id;
+        $newViewer=new View();
+        $newViewer->apartment_id=$Apartment_id;
+        $newViewer->ip_address=$clientIP;
+        $newViewer->save();
     }
 }
