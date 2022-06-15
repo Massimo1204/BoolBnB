@@ -41,10 +41,10 @@ class ApartmentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => ['required', 'string', 'min:20','max:255'],
+            'title' => ['required', 'string', 'min:10','max:255'],
             'image' => ['required'],
             'image.*' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'description' => ['required', 'string','min:20','max:65000'],
+            'description' => ['required', 'string','min:10','max:65000'],
             'n_rooms' => ['required', 'numeric','min:1'],
             'n_bedrooms' => ['required', 'numeric','min:1'],
             'n_bathrooms' => ['required', 'numeric','min:1'],
@@ -54,7 +54,6 @@ class ApartmentController extends Controller
             'address' => ['required', 'string','min:3'],
             'address_number' => ['required', 'string','min:1'],
             'address_city' => ['required', 'string','min:3'],
-
         ],
         [
             "required" => "Non puoi inserire un Appartamento senza :attribute.",
