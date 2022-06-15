@@ -13,11 +13,12 @@
             <img class="w-50" src="{{ asset('/storage') . '/' . $apartment->image}}" alt="">
         @endif
     </div>
-    <form action="{{route('user.apartment.destroy', $apartment->id)}}" method="POST">
-        @csrf
-        @method('DELETE')
+    @if(Auth::user()->id == $apartment->user_id)
+        <form action="{{route('user.apartment.destroy', $apartment->id)}}" method="POST">
+            @csrf
+            @method('DELETE')
 
-        <button type="submit" class="btn btn-danger btn-sm">Delete</a>
-    </form>
-
+            <button type="submit" class="btn btn-danger btn-sm">Delete</a>
+        </form>
+    @endif
 @endsection
