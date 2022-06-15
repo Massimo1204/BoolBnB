@@ -134,7 +134,6 @@ class ApartmentController extends Controller
     {
         $data = $request->all();
 
-
         if($request['visible'] != null)
             $data['visible'] = 1;
         else
@@ -184,6 +183,6 @@ class ApartmentController extends Controller
     {
         $apartment->delete();
 
-        return redirect()->route('home.')->with('deleted-message', 'The selected apartment has been deleted');
+        return redirect()->route('apartment.index')->with('deleted-message', 'The selected apartment has been deleted');
     }
 }
