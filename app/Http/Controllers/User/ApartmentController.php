@@ -132,6 +132,24 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, Apartment $apartment)
     {
+        $request->validate([
+            'title' => ['required', 'string', 'min:10','max:255'],
+            'image.*' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'description' => ['required', 'string','min:10','max:65000'],
+            'n_rooms' => ['required', 'numeric','min:1'],
+            'n_bedrooms' => ['required', 'numeric','min:1'],
+            'n_bathrooms' => ['required', 'numeric','min:1'],
+            'guests' => ['required', 'numeric','min:1'],
+            'n_beds' => ['required', 'numeric','min:1'],
+            'price' => ['required', 'numeric','min:1'],
+            'address' => ['required', 'string','min:3'],
+            'address_number' => ['required', 'string','min:1'],
+            'address_city' => ['required', 'string','min:3'],
+        ],
+        [
+            "required" => "Non puoi inserire un Appartamento senza :attribute.",
+        ]);
+
         $data = $request->all();
 
         if($request['visible'] != null)
