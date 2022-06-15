@@ -43,12 +43,16 @@
             </div>
             <div class="col-12">
                 <label for="visible">Spuntare la seguente checkbox per rendere l'appartamento visibile </label>
-                <input type="checkbox" name="visible" id="visible" checked=true @if ($apartment->visible)checked
+                <input type="checkbox" name="visible" id="visible" 
+                @if ($apartment->visible==1)
+                    checked
                 @endif>
             </div>
             <div class="col-12">
                 <label for="available">Spuntare la seguente checkbox per rendere l'appartamento disponibile </label>
-                <input type="checkbox" name="available" id="available" checked=true @if ($apartment->available)checked
+                <input type="checkbox" name="available" id="available"
+                @if ($apartment->available==1)
+                    checked
                 @endif>
             </div>
             <div class="col-12">    
