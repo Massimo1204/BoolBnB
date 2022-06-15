@@ -18,7 +18,7 @@ class ApartmentController extends Controller
     public function index()
     {
         $apartments = Apartment::all();
-        return view('guest.home', compact("apartments"));
+        return view('user.apartments.index', compact("apartments"));
     }
 
     /**
@@ -74,9 +74,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Apartment $apartment)
     {
-        //
+        return view('user.apartments.show', compact('apartment'));
     }
 
     /**
@@ -108,8 +108,8 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Apartment $apartment)
     {
-        //
+        
     }
 }
