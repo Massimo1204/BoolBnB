@@ -10,7 +10,7 @@
         <div class="row apartment">
             <div class="col-12">
                 <label for="title">Titolo</label>
-                <input class="w-100" type="text" name="title" id="title">
+                <input class="w-100" type="text" name="title" id="title" required>
             </div>
             <div class="col-12">
                 <label for="image">Carica una foto:</label>
@@ -18,27 +18,27 @@
             </div>
             <div class="col-12">
                 <label for="description">Descrizione</label>
-                <textarea class="w-100" name="description" id="description"></textarea>
+                <textarea class="w-100" name="description" id="description"></textarea required>
             </div>
             <div class="col-3">
                 <label for="n_rooms">Numero di stanze:</label>
-                <input type="number" name="n_rooms" id="n_rooms">
+                <input type="number" name="n_rooms" id="n_rooms" required>
             </div>
             <div class="col-3">
                 <label for="n_bedrooms">Numero di stanze da letto:</label>
-                <input type="number" name="n_bedrooms" id="n_bedrooms">
+                <input type="number" name="n_bedrooms" id="n_bedrooms" required>
             </div>
             <div class="col-3">
                 <label for="n_bathrooms">Numero di bagni:</label>
-                <input type="number" name="n_bathrooms" id="n_bathrooms">
+                <input type="number" name="n_bathrooms" id="n_bathrooms" required>
             </div>
             <div class="col-3">
                 <label for="guests">Numero massimo di ospiti:</label>
-                <input type="number" name="guests" id="guests">
+                <input type="number" name="guests" id="guests" required>
             </div>
             <div class="col-3">
                 <label for="n_beds">Numero di letti:</label>
-                <input type="number" name="n_beds" id="n_beds">
+                <input type="number" name="n_beds" id="n_beds" required>
             </div>
             <div class="col-3">
                 <label for="visible">Spuntare la seguente checkbox per rendere l'appartamento visibile </label>
@@ -50,7 +50,7 @@
             </div>
             <div class="col-3">
                 <label for="price">Inserisci il prezzo a notte per ospite: </label>
-                <input type="number" name="price" id="price">
+                <input type="number" name="price" id="price" required>
             </div>
             <div class="col-3">
                 <label for="square_meters">Numero di metri quadrati: </label>
