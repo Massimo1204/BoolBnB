@@ -81,8 +81,7 @@ class ApartmentController extends Controller
         $newApartment->long = $dataResponse["results"][0]["position"]["lon"];
         $newApartment->address = $data["address"];
         $newApartment->save();
-        return redirect()->route('home.');
-        // return redirect()->route("admin.posts.show", $newPost->id);
+        return redirect()->route('apartment.show', ["apartment" => $newApartment]);
     }
 
     /**
