@@ -160,7 +160,7 @@
                             <label for="sponsorship">{{$sponsorship->name}}</label>
                             <input type="radio" name="sponsorship" id="sponsorship" value="{{$sponsorship->id}}">
                         </div>
-                    @endforeach       
+                    @endforeach
                     <button class="btn btn-outline-primary" type="submit">send</button>
                 </div>
             </div>
@@ -172,7 +172,7 @@
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger btn-sm">Delete</a>
-                </form>    
+                </form>
             @endif
         </div>
     </div>
@@ -206,5 +206,18 @@
     </div>
 @endsection
 
-            
 
+@section('footer-scripts')
+    <script defer>
+        const deleteForm = document.querySelector('.apartment-form-destroyer');
+
+        deleteForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // § blocchiamo l'invio del form
+            userConfirmation = window.confirm(
+                `Sei sicuro di voler eliminare ${this.getAttribute('apartment-title')}?`);
+            if (userConfirmation) {
+                this.submit();
+            }
+        });
+    </script>
+@endsection

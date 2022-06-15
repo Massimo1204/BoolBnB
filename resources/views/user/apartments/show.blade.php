@@ -38,14 +38,6 @@
             if (userConfirmation) {
                 this.submit();
             }
-    <div class="text-center">
-        <form action="{{route('user.apartment.destroy', $apartment->id)}}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger btn-sm">Delete</a>
-        </form>
-    </div>
-
         });
     </script>
 @endsection
