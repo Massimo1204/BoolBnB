@@ -143,7 +143,25 @@
                 </div>
                 @enderror
             </div>
+            <div class="mb-3">
+                @foreach ($services as $service)
+                    <input class="form-check-input" type="checkbox"
+                    name="service[]" value="{{$service->id}}">
+                    <label for="categories">
+                        {{$service->name}}
+                    </label>
+                @endforeach
+                @error('service')
+                <div class="alert alert-danger mt-2">
+                    Il nome della città
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
 
+            <div class="row g-3">
+                <input required type="file" class="form-control" name="images[]" placeholder="address" multiple>
+            </div>
             <div class="col-12 text-center mt-5">
                 <button class="btn btn-outline-primary" type="submit">send</button>
             </div>

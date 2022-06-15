@@ -16,8 +16,6 @@ return[
         "Estintore",
         "Kit di pronto soccorso",
         "Wifi",
-        "Allarme antincendio",
-        "Allarme monossido di carbonio",
         "Estintore",
         "Kit di pronto soccorso",
         "Cucina",
@@ -40,14 +38,8 @@ return[
         "Animali ammessi",
         "Consegna bagagli consentita",
         "Permessi soggiorni di lunga durata",
-        "L'ospite ti saluta",
         "Pulizia prima del check-out",
         "Parcheggio gratuito in loco",
-        "Vasca idromassaggio privata",
-        "Parcheggio gratuito in loco",
-        "Vasca idromassaggio privata",
-        "Parcheggio gratuito in loco",
-        "Vasca idromassaggio privata",
 ]
 
 

@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Model\Picture;
+use App\Model\Service;
+use App\Model\Apartment;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
 use App\Model\Apartment;
 use App\Model\View;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
 {
@@ -30,7 +34,10 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view('user.apartments.create');
+        $services = Service::all();
+
+        return view('user.apartments.create', compact('services'));
+
     }
 
     /**
@@ -78,7 +85,6 @@ class ApartmentController extends Controller
             $data['available'] = 0;
         }
         $tempAddress = $data['address'].' '.$data['address_number'].' '.$data['address_city'];
-        // dd($tempAddress);
         $newAddress = str_replace(" ", "%20", $tempAddress);
         $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
         $dataResponse = json_decode($response->body(), true);
@@ -102,6 +108,18 @@ class ApartmentController extends Controller
         $newApartment->address_number = $data['address_number'];
         $newApartment->address_city = $data['address_city'];
         $newApartment->save();
+        $images=array();
+        if($files=$request->file('images')){
+            foreach($files as $file){
+                $newPicture = new Picture();
+                $newPicture->apartment_id = $newApartment->id;
+                $newPicture->image=Storage::put('uploads',$file);
+                $newPicture->save();
+            }
+        }
+
+        $newApartment->services()->sync($data['service']);
+
         return redirect()->route('apartment.show', ["apartment" => $newApartment]);
     }
 
