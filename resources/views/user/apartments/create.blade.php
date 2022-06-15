@@ -14,15 +14,17 @@
                 <input class="w-100" type="text" name="title" id="title" value="{{ old('title') ?? ''}}" required>
                 @error('title')
                         <div class="alert alert-danger mt-2">
+                            Il titolo
                             {{ $message }}
                         </div>
                 @enderror
             </div>
             <div class="col-12">
                 <label for="image">Carica una foto:</label>
-                <input type="file" name="image" id="image" value="{{ old('image') ?? ''}}">
+                <input type="file" name="image" id="image">
                 @error('image')
                         <div class="alert alert-danger mt-2">
+                            L'immagine
                             {{ $message }}
                         </div>
                 @enderror
@@ -32,6 +34,7 @@
                 <textarea class="w-100" name="description" id="description">{{ old('description') ?? ''}}</textarea required>
                 @error('description')
                     <div class="alert alert-danger mt-2">
+                        La descrizione
                         {{ $message }}
                     </div>
                 @enderror
@@ -41,6 +44,7 @@
                 <input type="number" name="n_rooms" id="n_rooms" value="{{ old('n_rooms') ?? ''}}" required>
                 @error('n_rooms')
                     <div class="alert alert-danger mt-2">
+                        IL numero di stanze
                         {{ $message }}
                     </div>
                 @enderror
@@ -50,6 +54,7 @@
                 <input type="number" name="n_bedrooms" id="n_bedrooms" value="{{ old('n_bedrooms') ?? ''}}" required>
                 @error('n_bedrooms')
                     <div class="alert alert-danger mt-2">
+                        Il numero di stanze da letto
                         {{ $message }}
                     </div>
                 @enderror
@@ -59,6 +64,7 @@
                 <input type="number" name="n_bathrooms" id="n_bathrooms" value="{{ old('n_bathrooms') ?? ''}}" required>
                 @error('n_bathrooms')
                     <div class="alert alert-danger mt-2">
+                        Il numero di bagni
                         {{ $message }}
                     </div>
                 @enderror
@@ -68,6 +74,7 @@
                 <input type="number" name="guests" id="guests" value="{{ old('guests') ?? ''}}" required>
                 @error('guests')
                     <div class="alert alert-danger mt-2">
+                        Il numero massimo di ospiti
                         {{ $message }}
                     </div>
                 @enderror
@@ -77,6 +84,7 @@
                 <input type="number" name="n_beds" id="n_beds" value="{{ old('n_beds') ?? ''}}" required>
                 @error('n_beds')
                     <div class="alert alert-danger mt-2">
+                        Il numero di letti
                         {{ $message }}
                     </div>
                 @enderror
@@ -95,6 +103,7 @@
                 <input type="number" name="price" id="price" value="{{ old('price') ?? ''}}" required>
                 @error('price')
                     <div class="alert alert-danger mt-2">
+                        Il prezzo
                         {{ $message }}
                     </div>
                 @enderror
@@ -109,6 +118,7 @@
                 <input class="w-100" type="text" name="address" id="address" value="{{ old('address') ?? ''}}" required>
                 @error('address')
                     <div class="alert alert-danger mt-2">
+                        Il nome della via
                         {{ $message }}
                     </div>
                 @enderror
@@ -118,6 +128,7 @@
                 <input class="w-75" type="text" name="address_number" id="address_number" value="{{ old('address_number') ?? ''}}" required>
                 @error('address_number')
                     <div class="alert alert-danger mt-2">
+                        Il numero civico
                         {{ $message }}
                     </div>
                 @enderror
@@ -127,6 +138,7 @@
                 <input class="w-100" type="text" name="address_city" id="address_city" value="{{ old('address_city') ?? ''}}" required>
                 @error('address_city')
                 <div class="alert alert-danger mt-2">
+                    Il nome della città
                     {{ $message }}
                 </div>
                 @enderror
