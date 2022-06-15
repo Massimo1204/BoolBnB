@@ -185,3 +185,4 @@ class ApartmentController extends Controller
 
         return redirect()->route('apartment.index')->with('deleted-message', 'The selected apartment has been deleted');
     }
+}
