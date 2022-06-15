@@ -118,6 +118,16 @@ class ApartmentController extends Controller
     {
         $data = $request->all();
         
+        if($request['visible'] != null)
+            $data['visible'] = 1;
+        else
+            $data['visible'] = 0;
+
+        if($request['available'] != null)
+            $data['available'] = 1;
+        else
+            $data['available'] = 0;
+        
         $newAddress = str_replace(" ", "%20", $data["address"]);
         $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
         $dataResponse = json_decode($response->body(), true);
