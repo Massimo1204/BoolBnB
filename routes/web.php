@@ -35,10 +35,9 @@ Route::namespace('Guest')
 ->group(function(){
     Route::get('/', 'HomeController@index');
     // Route::resource('posts',"PostsController");
-
 });
-
 
 // Route::get('/apartment/create', 'User\ApartmentController@create');
 
 Route::resource('/apartment',"User\ApartmentController");
+

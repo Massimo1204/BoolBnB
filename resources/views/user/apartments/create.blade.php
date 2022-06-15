@@ -33,10 +33,6 @@
                 <input type="number" name="n_beds" id="n_beds">
             </div>
             <div class="col-3">
-                <label for="n_bathrooms">Numero di bagni:</label>
-                <input type="number" name="n_bathrooms" id="n_bathrooms">
-            </div>
-            <div class="col-3">
                 <label for="guests">Numero massimo di ospiti:</label>
                 <input type="number" name="guests" id="guests">
             </div>
@@ -50,11 +46,11 @@
             </div> --}}
             <div class="col-3">
                 <label for="visible">Spuntare la seguente checkbox per rendere l'appartamento visibile </label>
-                <input type="checkbox" name="visible" id="visible" checked=1>
+                <input type="checkbox" name="visible" id="visible" checked=true>
             </div>
             <div class="col-3">
                 <label for="available">Spuntare la seguente checkbox per rendere l'appartamento disponibile </label>
-                <input type="checkbox" name="available" id="available" checked=1>
+                <input type="checkbox" name="available" id="available" checked=true>
             </div>
             <div class="col-3">
                 <label for="price">Inserisci il prezzo a notte per ospite: </label>
