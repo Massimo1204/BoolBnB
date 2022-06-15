@@ -141,7 +141,9 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        return view('user.apartments.edit', compact('apartment'));
+        $services = Service::all();
+
+        return view('user.apartments.edit', compact('apartment'), compact('services') );
     }
 
     /**
@@ -211,6 +213,8 @@ class ApartmentController extends Controller
         $apartment->address = $data["address_number"];
         $apartment->address = $data["address_city"];
         $apartment->save();
+
+        $apartment->services()->sync($data['service']);
 
         return redirect()->route('apartment.show', ["apartment" => $apartment]);
     }
