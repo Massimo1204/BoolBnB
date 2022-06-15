@@ -40,4 +40,4 @@ Route::namespace('Guest')
 // Route::get('/apartment/create', 'User\ApartmentController@create');
 
 Route::resource('/apartment',"User\ApartmentController");
-
+Route::delete('/apartment/{id}', 'User\ApartmentController@destroy')->name('user.apartment.destroy');
