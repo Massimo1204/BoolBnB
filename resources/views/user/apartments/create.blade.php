@@ -40,14 +40,6 @@
                 <label for="n_beds">Numero di letti:</label>
                 <input type="number" name="n_beds" id="n_beds">
             </div>
-            {{-- <div class="col-3">
-                <label for="visible">Spuntare la seguente checkbox per rendere l'appartamento visibile </label>
-                <input type="number" name="visible" id="visible">
-            </div>
-            <div class="col-3">
-                <label for="available">Spuntare la seguente checkbox per rendere l'appartamento disponibile </label>
-                <input type="number" name="available" id="available">
-            </div> --}}
             <div class="col-3">
                 <label for="visible">Spuntare la seguente checkbox per rendere l'appartamento visibile </label>
                 <input type="checkbox" name="visible" id="visible" checked=true>
@@ -61,13 +53,24 @@
                 <input type="number" name="price" id="price">
             </div>
             <div class="col-3">
-                <label for="square_meters">Inserisci il numero di metri quadrati: </label>
+                <label for="square_meters">Numero di metri quadrati: </label>
                 <input type="number" name="square_meters" id="square_meters">
             </div>
+            <div class="col-3">
                 <label for="address">inserisci la via:</label>
-                <input class="w-100" type="text" name="address" id="address">
+                <input class="w-100" type="text" name="address" id="address" required>
             </div>
-            <div class="col-12">
+            <div class="col-1">
+                <label for="address_number">Numero:</label><br>
+                <input class="w-75" type="text" name="address_number" id="address_number" required>
+            </div>
+            <div class="col-3">
+                <label for="address_city">inserisci la città:</label>
+                <input class="w-100" type="text" name="address_city" id="address_city" required>
+            </div>
+
+
+            <div class="col-12 text-center mt-5">
                 <button class="btn btn-outline-primary" type="submit">send</button>
             </div>
         </div>
