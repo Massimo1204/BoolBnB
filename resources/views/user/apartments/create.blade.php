@@ -33,10 +33,6 @@
                 <input type="number" name="n_beds" id="n_beds">
             </div>
             <div class="col-3">
-                <label for="n_bathrooms">Numero di bagni:</label>
-                <input type="number" name="n_bathrooms" id="n_bathrooms">
-            </div>
-            <div class="col-3">
                 <label for="guests">Numero massimo di ospiti:</label>
                 <input type="number" name="guests" id="guests">
             </div>
