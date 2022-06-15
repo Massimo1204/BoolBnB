@@ -12,18 +12,13 @@
         @else
             <img class="w-50" src="{{ asset('/storage') . '/' . $apartment->image}}" alt="">
         @endif
-        <form action="{{route('apartment.destroy', $apartment)}}" method="post">
+    </div>
+    <div class="text-center">
+        <form action="{{route('user.apartment.destroy', $apartment->id)}}" method="POST">
             @csrf
             @method('DELETE')
-
-            <input type="submit" class="btn btn-danger btn-large" value="Delete">
+            <button type="submit" class="btn btn-danger btn-sm">Delete</a>
         </form>
     </div>
-    <form action="{{route('user.apartment.destroy', $apartment->id)}}" method="POST">
-        @csrf
-        @method('DELETE')
-
-        <button type="submit" class="btn btn-danger btn-sm">Delete</a>
-    </form>
 
 @endsection
