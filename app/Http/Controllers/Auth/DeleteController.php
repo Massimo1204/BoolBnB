@@ -19,6 +19,6 @@ class DeleteController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('guest.home')->with('deleted-message', 'The selected apartment has been deleted');
+        return redirect()->route('guest.home')->with('deleted-message', 'The selected user has been deleted');
     }
 }
