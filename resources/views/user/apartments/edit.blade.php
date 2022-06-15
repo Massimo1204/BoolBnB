@@ -155,62 +155,30 @@
                     <input type="file" class="form-control" name="images[]" id="image[]"  multiple>
                 </div>
                 <div class="col-12">
-                    <h1 class="text-center">
-                        Le foto del tuo appartamento:
-                    </h1>
-                </div>
-                @if (session('deleted-message'))
-                    <div class="mx-2 alert alert-success">
-                        {{session('deleted-message')}}
-                    </div>
-                    @endif
-                    {{-- @dd($apartment->pictures) --}}
-                @foreach ($apartment->pictures as $photo)
-                    <div class="col-4 my-2 position-relative">
-                        <div class="delete position-absolute">
-                            <form action="{{route('picture.destroy',$photo)}}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"><i class="fas fa-x"></i></button>
-                            </form>
+                    @foreach ($sponsorships as $sponsorship)
+                        <div class="col-3">
+                            <label for="sponsorship">{{$sponsorship->name}}</label>
+                            <input type="radio" name="sponsorship" id="sponsorship" value="{{$sponsorship->id}}">
                         </div>
-                        <img src="{{$photo->image}}" alt="apartment img" >
-                    </div>
-
-                @endforeach
-                <div class="col-12">
-
+                    @endforeach       
                     <button class="btn btn-outline-primary" type="submit">send</button>
                 </div>
             </div>
         </form>
-        @if (Auth::user()->id == $apartment->user_id)
-            <form action="{{ route('user.apartment.destroy', $apartment->id) }}" method="POST" class="apartment-form-destroyer"
-                apartment-title="{{ $apartment->title }}">
-                @csrf
-                @method('DELETE')
-
-
-            <button type="submit" class="btn btn-danger btn-sm">Delete</a>
-        </form>
-    @endif
-
-            @foreach ($sponsorships as $sponsorship)
-                <div class="col-3">
-                    <label for="sponsorship">{{$sponsorship->name}}</label>
-                    <input type="radio" name="sponsorship" id="sponsorship" value="{{$sponsorship->id}}">
-                </div>
-            @endforeach
-            <div class="col-12">
-                <button class="btn btn-outline-primary" type="submit">send</button>
-            </div>
+        <div class="delete-button">
+            @if (Auth::user()->id == $apartment->user_id)
+                <form action="{{ route('user.apartment.destroy', $apartment->id) }}" method="POST" class="apartment-form-destroyer"
+                    apartment-title="{{ $apartment->title }}">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</a>
+                </form>    
+            @endif
         </div>
-    </form>
-</div>
-                <button type="submit" class="btn btn-danger btn-sm">Delete</a>
-            </form>
-        @endif
     </div>
+
+
+
     <div class="edit row">
         <div class="col-12">
             <h1 class="text-center">
