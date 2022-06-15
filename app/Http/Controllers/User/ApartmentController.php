@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Model\Apartment;
+use App\Model\Picture;
 use Illuminate\Support\Facades\Http;
 
 class ApartmentController extends Controller
@@ -77,7 +78,6 @@ class ApartmentController extends Controller
             $data['available'] = 0;
         }
         $tempAddress = $data['address'].' '.$data['address_number'].' '.$data['address_city'];
-        // dd($tempAddress);
         $newAddress = str_replace(" ", "%20", $tempAddress);
         $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
         $dataResponse = json_decode($response->body(), true);
@@ -101,6 +101,16 @@ class ApartmentController extends Controller
         $newApartment->address_number = $data['address_number'];
         $newApartment->address_city = $data['address_city'];
         $newApartment->save();
+        $images=array();
+        if($files=$request->file('images')){
+            foreach($files as $file){
+                $newPicture = new Picture();
+                $newPicture->apartment_id = $newApartment->id;
+                $newPicture->image=Storage::put('uploads',$file);
+                $newPicture->save();
+            }
+        }
+
         return redirect()->route('apartment.show', ["apartment" => $newApartment]);
     }
 
