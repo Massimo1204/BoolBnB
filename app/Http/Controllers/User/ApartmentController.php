@@ -45,12 +45,12 @@ class ApartmentController extends Controller
             'image' => ['required'],
             'image.*' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => ['required', 'string','min:20','max:65000'],
-            'n_rooms' => ['required', 'number','min:1'],
-            'n_bedrooms' => ['required', 'number','min:1'],
-            'n_bathrooms' => ['required', 'number','min:1'],
-            'guests' => ['required', 'number','min:1'],
-            'n_beds' => ['required', 'number','min:1'],
-            'price' => ['required', 'number','min:1'],
+            'n_rooms' => ['required', 'numeric','min:1'],
+            'n_bedrooms' => ['required', 'numeric','min:1'],
+            'n_bathrooms' => ['required', 'numeric','min:1'],
+            'guests' => ['required', 'numeric','min:1'],
+            'n_beds' => ['required', 'numeric','min:1'],
+            'price' => ['required', 'numeric','min:1'],
             'address' => ['required', 'string','min:3'],
             'address_number' => ['required', 'string','min:1'],
             'address_city' => ['required', 'string','min:3'],
@@ -58,6 +58,8 @@ class ApartmentController extends Controller
         ],
         [
             "required" => "Non puoi inserire un Appartamento senza :attribute.",
+            "numeric" => ":attribute deve essere un numero",
+            "min" => ":attribute troppo corto",
         ]);
 
         $data = $request->all();
