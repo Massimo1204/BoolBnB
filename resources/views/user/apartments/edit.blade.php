@@ -176,6 +176,7 @@
                         </div>
                         <img src="{{$photo->image}}" alt="apartment img" >
                     </div>
+
                 @endforeach
                 <div class="col-12">
                     <button class="btn btn-outline-primary" type="submit">send</button>
@@ -192,6 +193,19 @@
             <button type="submit" class="btn btn-danger btn-sm">Delete</a>
         </form>
     @endif
+
+            @foreach ($sponsorships as $sponsorship)
+                <div class="col-3">
+                    <label for="sponsorship">{{$sponsorship->name}}</label>
+                    <input type="radio" name="sponsorship" id="sponsorship" value="{{$sponsorship->id}}">
+                </div>
+            @endforeach
+            <div class="col-12">
+                <button class="btn btn-outline-primary" type="submit">send</button>
+            </div>
+        </div>
+    </form>
+</div>
 @endsection
 
             

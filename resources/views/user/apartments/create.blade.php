@@ -167,6 +167,12 @@
                 <input required type="file" class="form-control" name="images[]" id="image[]"  multiple>
 
             </div>
+            @foreach ($sponsorships as $sponsorship)
+                <div class="col-3">
+                    <label for="sponsorship">{{$sponsorship->name}}</label>
+                    <input type="radio" name="sponsorship" id="sponsorship" value="{{$sponsorship->id}}">
+                </div>
+            @endforeach
             <div class="col-12 text-center mt-5">
                 <button class="btn btn-outline-primary" type="submit">send</button>
             </div>

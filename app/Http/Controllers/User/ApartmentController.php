@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Model\View;
 use App\Model\Picture;
 use App\Model\Service;
 use App\Model\Apartment;
+use App\Model\Sponsorship;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use App\Model\View;
 use Illuminate\Support\Facades\Http;
 
 class ApartmentController extends Controller
@@ -33,9 +34,9 @@ class ApartmentController extends Controller
     public function create()
     {
         $services = Service::all();
-
-        return view('user.apartments.create', compact('services'));
-
+        $sponsorships = Sponsorship::all();
+      
+        return view('user.apartments.create', compact('sponsorships','services'));
     }
 
     /**
@@ -115,8 +116,18 @@ class ApartmentController extends Controller
                 $newPicture->save();
             }
         }
-
+      
         $newApartment->services()->sync($data['service']);
+      
+        $sponsorships = Sponsorship::all();
+        foreach($sponsorships as $sponsorship){
+            if($sponsorship->id = $data['sponsorship']){
+                $duration = $sponsorship->duration;
+            }
+        }
+        $endDate = date('Y-m-d h:i:s', strtotime($newApartment->created_at)+60*60*$duration);
+
+        $newApartment->sponsorships()->sync([$data['sponsorship'] => ['start_date' => $newApartment->created_at, 'end_date' => $endDate]]);
 
         return redirect()->route('apartment.show', ["apartment" => $newApartment]);
     }
@@ -142,16 +153,16 @@ class ApartmentController extends Controller
     public function edit(Apartment $apartment)
     {
         $services = Service::all();
+        $sponsorships = Sponsorship::all();
 
         if($apartment->user_id == Auth::user()->id){
 
-            return view('user.apartments.edit', compact('apartment'), compact('services') );
+            return view('user.apartments.edit', compact('apartment', 'services', 'sponsorships') );
         }
         else{
 
             return redirect()->route('apartment.index')->with('error-message', 'Accesso negato');
         }
-
     }
 
     /**
@@ -224,7 +235,17 @@ class ApartmentController extends Controller
 
         $apartment->services()->sync($data['service']);
 
-        return redirect()->route('apartment.show', ["apartment" => $apartment]);
+        $sponsorships = Sponsorship::all();
+        foreach($sponsorships as $sponsorship){
+            if($sponsorship->id = $data['sponsorship']){
+                $duration = $sponsorship->duration;
+            }
+        }
+        $endDate = date('Y-m-d h:i:s', strtotime($apartment->updated_at)+60*60*$duration);
+
+        $apartment->sponsorships()->sync([$data['sponsorship'] => ['start_date' => $apartment->updated_at, 'end_date' => $endDate]]);
+
+        return redirect()->route('apartment.show', compact('apartment'));
     }
 
     /**
