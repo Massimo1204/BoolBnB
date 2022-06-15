@@ -43,6 +43,7 @@ class ApartmentController extends Controller
         $request->validate([
             'title' => ['required', 'string', 'min:20','max:255'],
             'image' => ['required'],
+            'image.*' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => ['required', 'string','min:20','max:65000'],
             'n_rooms' => ['required', 'number','min:1'],
             'n_bedrooms' => ['required', 'number','min:1'],
@@ -132,7 +133,21 @@ class ApartmentController extends Controller
     public function update(Request $request, Apartment $apartment)
     {
         $data = $request->all();
+<<<<<<< HEAD
 
+=======
+
+        if($request['visible'] != null)
+            $data['visible'] = 1;
+        else
+            $data['visible'] = 0;
+
+        if($request['available'] != null)
+            $data['available'] = 1;
+        else
+            $data['available'] = 0;
+
+>>>>>>> cdd7fa806c10c2b177de628b9f7d037ca53b5e15
         $newAddress = str_replace(" ", "%20", $data["address"]);
         $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
         $dataResponse = json_decode($response->body(), true);
