@@ -36,8 +36,8 @@ class EditController extends Controller
         }
 
         $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255','min:2'],
+            'last_name' => ['required', 'string', 'max:255','min:2'],
             'email' => ['required', 'string', 'email', 'max:255'],
             'birth_date' => ['date'],
             'password' => ['required', 'string', 'min:8'],
