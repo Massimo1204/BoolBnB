@@ -40,10 +40,24 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'title' => 'unique:posts|required|max:20',
-        //     'description' => 'required|min:10',
-        // ]);
+        $request->validate([
+            'title' => ['required', 'string', 'min:20','max:255'],
+            'image' => ['required'],
+            'description' => ['required', 'string','min:20','max:65000'],
+            'n_rooms' => ['required', 'number','min:1'],
+            'n_bedrooms' => ['required', 'number','min:1'],
+            'n_bathrooms' => ['required', 'number','min:1'],
+            'guests' => ['required', 'number','min:1'],
+            'n_beds' => ['required', 'number','min:1'],
+            'price' => ['required', 'number','min:1'],
+            'address' => ['required', 'string','min:3'],
+            'address_number' => ['required', 'string','min:1'],
+            'address_city' => ['required', 'string','min:3'],
+
+        ],
+        [
+            "required" => "Non puoi inserire un Appartamento senza :attribute.",
+        ]);
 
         $data = $request->all();
         if($request['visible'] != null){
@@ -118,7 +132,7 @@ class ApartmentController extends Controller
     public function update(Request $request, Apartment $apartment)
     {
         $data = $request->all();
-        
+
         $newAddress = str_replace(" ", "%20", $data["address"]);
         $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
         $dataResponse = json_decode($response->body(), true);
