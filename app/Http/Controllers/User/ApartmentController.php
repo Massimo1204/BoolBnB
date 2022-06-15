@@ -60,7 +60,9 @@ class ApartmentController extends Controller
         else{
             $data['available'] = 0;
         }
-        $newAddress = str_replace(" ", "%20", $data["address"]);
+        $tempAddress = $data['address'].' '.$data['address_number'].' '.$data['address_city'];
+        // dd($tempAddress);
+        $newAddress = str_replace(" ", "%20", $tempAddress);
         $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
         $dataResponse = json_decode($response->body(), true);
         $newApartment = new Apartment();
@@ -79,7 +81,7 @@ class ApartmentController extends Controller
         $newApartment->square_meters = $data["square_meters"];
         $newApartment->lat = $dataResponse["results"][0]["position"]["lat"];
         $newApartment->long = $dataResponse["results"][0]["position"]["lon"];
-        $newApartment->address = $data["address"];
+        $newApartment->address = $tempAddress;
         $newApartment->save();
         return redirect()->route('home.');
         // return redirect()->route("admin.posts.show", $newPost->id);
