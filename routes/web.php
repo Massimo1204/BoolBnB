@@ -25,8 +25,13 @@ Route::get('/users/{user}', 'Auth\EditController@index')
 ->name('user.edit')
 ->middleware('auth');
 
+
 Route::put('/users/{user}', 'Auth\EditController@update')
 ->name('user.update')
+->middleware('auth');
+
+Route::get('/user', 'User\HomeController@index')
+->name('user.home')
 ->middleware('auth');
 
 Route::namespace('Guest')
