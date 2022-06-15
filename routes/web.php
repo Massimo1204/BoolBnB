@@ -42,7 +42,7 @@ Route::namespace('Guest')
     // Route::resource('posts',"PostsController");
 });
 
-// Route::get('/apartment/create', 'User\ApartmentController@create');
+Route::delete('/picture/{id}', 'User\PicturesDeleteController@destroy')->name("picture.destroy");
 
 Route::resource('/apartment',"User\ApartmentController");
 Route::delete('/apartment/{id}', 'User\ApartmentController@destroy')->name('user.apartment.destroy');

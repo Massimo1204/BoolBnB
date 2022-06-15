@@ -7,6 +7,12 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// Fontawesome
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
 .apartment-wrapper{
   height: 500px;
     .card{
@@ -18,4 +24,24 @@
         }
       }
     }
+}
+.edit{
+  .col-4{
+    height: 250px;
+    .delete{
+      top: 1rem;
+      right: 1rem;
+    }
+    i{
+      font-size: 1.5rem;
+
+    }
+    img{
+      height: 100%;
+      width: 100%;
+    }
+  }
+  i:hover{
+    color: red;
+  }
 }

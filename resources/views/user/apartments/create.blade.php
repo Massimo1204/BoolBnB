@@ -143,6 +143,7 @@
                 </div>
                 @enderror
             </div>
+
             <div class="mb-3">
                 @foreach ($services as $service)
                     <input class="form-check-input" type="checkbox"
@@ -161,6 +162,10 @@
 
             <div class="row g-3">
                 <input required type="file" class="form-control" name="images[]" placeholder="address" multiple>
+            <div class="col-12">
+                <label for="image[]">inserisci altre foto del tuo appartamento</label>
+                <input required type="file" class="form-control" name="images[]" id="image[]"  multiple>
+
             </div>
             <div class="col-12 text-center mt-5">
                 <button class="btn btn-outline-primary" type="submit">send</button>
