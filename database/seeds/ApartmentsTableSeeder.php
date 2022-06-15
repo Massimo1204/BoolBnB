@@ -40,6 +40,8 @@ class ApartmentsTableSeeder extends Seeder
             $newApartment->guests = $faker->numberBetween(1,20);
             $newApartment->title = $faker->word();
             $newApartment->address = $faker->streetAddress();
+            $newApartment->address_number = $faker->numberBetween(1,99);
+            $newApartment->address_city = $faker->city();
             $newApartment->lat = $faker->latitude($min=36.647000, $max= 44.000000);
             $newApartment->long = $faker->longitude($min=7.900000, $max= 15.080000);
             $newApartment->visible = $faker->boolean();
