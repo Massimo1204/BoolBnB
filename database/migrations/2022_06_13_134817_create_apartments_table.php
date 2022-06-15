@@ -28,8 +28,8 @@ class CreateApartmentsTable extends Migration
             $table->unsignedMediumInteger('square_meters');
             $table->text('image');
             $table->string('address');
-            $table->float('lat');
-            $table->float('long');
+            $table->string('lat');
+            $table->string('long');
             $table->tinyInteger('visible');
             $table->tinyInteger('available');
             $table->timestamps();
