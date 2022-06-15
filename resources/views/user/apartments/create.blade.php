@@ -143,7 +143,9 @@
                 </div>
                 @enderror
             </div>
-
+            <div class="row g-3">
+                <input required type="file" class="form-control" name="images[]" placeholder="address" multiple>
+            </div>
             <div class="col-12 text-center mt-5">
                 <button class="btn btn-outline-primary" type="submit">send</button>
             </div>
