@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Model\Apartment;
 use App\Model\Picture;
+use App\Model\Sponsorship;
 use Illuminate\Support\Facades\Http;
 
 class ApartmentController extends Controller
@@ -30,7 +31,8 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view('user.apartments.create');
+        $sponsorships = Sponsorship::all();
+        return view('user.apartments.create', compact('sponsorships'));
     }
 
     /**
@@ -111,6 +113,16 @@ class ApartmentController extends Controller
             }
         }
 
+        $sponsorships = Sponsorship::all();
+        foreach($sponsorships as $sponsorship){
+            if($sponsorship->id = $data['sponsorship']){
+                $duration = $sponsorship->duration;
+            }
+        }
+        $endDate = date('Y-m-d h:i:s', strtotime($newApartment->created_at)+60*60*$duration);
+
+        $newApartment->sponsorships()->sync([$data['sponsorship'] => ['start_date' => $newApartment->created_at, 'end_date' => $endDate]]);
+
         return redirect()->route('apartment.show', ["apartment" => $newApartment]);
     }
 
@@ -133,7 +145,8 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        return view('user.apartments.edit', compact('apartment'));
+        $sponsorships = Sponsorship::all();
+        return view('user.apartments.edit', compact('apartment', 'sponsorships'));
     }
 
     /**
@@ -203,6 +216,16 @@ class ApartmentController extends Controller
         $apartment->address = $data["address_number"];
         $apartment->address = $data["address_city"];
         $apartment->save();
+
+        $sponsorships = Sponsorship::all();
+        foreach($sponsorships as $sponsorship){
+            if($sponsorship->id = $data['sponsorship']){
+                $duration = $sponsorship->duration;
+            }
+        }
+        $endDate = date('Y-m-d h:i:s', strtotime($apartment->updated_at)+60*60*$duration);
+
+        $apartment->sponsorships()->sync([$data['sponsorship'] => ['start_date' => $apartment->updated_at, 'end_date' => $endDate]]);
 
         return redirect()->route('apartment.show', ["apartment" => $apartment]);
     }
