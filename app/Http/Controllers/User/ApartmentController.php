@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Model\Apartment;
+use Illuminate\Support\Facades\Http;
 
 class ApartmentController extends Controller
 {
@@ -85,9 +86,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Apartment $apartment)
     {
-        //
+        return view('user.apartments.edit', compact('apartment'));
     }
 
     /**
@@ -97,9 +98,37 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Apartment $apartment)
     {
-        //
+        $data = $request->all();
+        
+        $newAddress = str_replace(" ", "%20", $data["address"]);
+        $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
+        $dataResponse = json_decode($response->body(), true);
+
+        $apartment->title = $data["title"];
+        $apartment->user_id = Auth::user()->id;
+        if(isset($data["image"])){
+            $apartment->image = Storage::put('uploads',$data["image"]);
+        }
+        $apartment->description = $data["description"];
+        $apartment->n_rooms = $data["n_rooms"];
+        $apartment->n_bedrooms = $data["n_bedrooms"];
+        $apartment->n_beds = $data["n_beds"];
+        $apartment->n_bathrooms = $data["n_bathrooms"];
+        $apartment->guests = $data["guests"];
+        if(isset($data["visible"]))
+        $apartment->visible = $data["visible"];
+        if(isset($data["available"]))
+        $apartment->available = $data["available"];
+        $apartment->price = $data["price"];
+        $apartment->square_meters = $data["square_meters"];
+        $apartment->lat = $dataResponse["results"][0]["position"]["lat"];
+        $apartment->long = $dataResponse["results"][0]["position"]["lon"];
+        $apartment->address = $data["address"];
+        $apartment->save();
+
+        return redirect('home');
     }
 
     /**
