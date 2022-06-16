@@ -159,7 +159,7 @@
                     {{-- @dd($apartment->pictures) --}}
                     <input type="file" class="form-control" name="images[]" id="image[]"  multiple>
                 </div>
-                <div class="col-10 mx-auto d-flex justify-content-around mt-4">
+                <div class="col-10 mx-auto d-flex justify-content-around my-4">
                     {{-- @foreach ($sponsorships as $sponsorship)
                         <div class="col-3">
                             <label for="sponsorship">{{$sponsorship->name}}</label>
@@ -201,7 +201,7 @@
                         <form action="{{route('picture.destroy',$photo)}}" method="POST" class="picture-form-destroyer" onclick="return confirm('Sei sicuro di voler eliminare la seguente foto?')">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="rounded-1"><i class="fas fa-x"></i></button>
+                            <button type="submit" class="rounded-1 delete">X</button>
                         </form>
                     </div>
                     <img class="rounded-1" src="{{$photo->image}}" alt="apartment img" >
