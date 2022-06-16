@@ -20,7 +20,6 @@ class ViewsTableSeeder extends Seeder
             $newView = new View();
             $newView->apartment_id = $faker->randomElement($apartment_ids);
             $newView->ip_address = $faker->randomFloat();
-            $newView->created_at = $faker->dateTimeThisYear();
             $newView->save();
         }
     }

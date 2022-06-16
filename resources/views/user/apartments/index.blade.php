@@ -16,7 +16,11 @@
             <div class="apartment-wrapper mx-3">
                 <div class="card">
                     <a href="{{route('apartment.show', $apartment)}}">
-                        <img class="border border-rounded" src="{{$apartment->image}}" alt="apartment">
+                        @if (str_starts_with($apartment->image, 'https://') || str_starts_with($apartment->image, 'http://') || str_starts_with($apartment->image, 'uploads/'))
+                            <img class="w-50" src="{{ $apartment->image }}" alt="">
+                        @else
+                            <img class="w-50" src="{{ asset('/storage') . '/' . $apartment->image }}" alt="">
+                        @endif
                     </a>
                 </div>
             </div>
