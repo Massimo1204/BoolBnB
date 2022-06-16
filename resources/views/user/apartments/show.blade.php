@@ -18,7 +18,7 @@
             <div class="btn btn-primary btn-sm">
                 <a class="text-white text-decoration-none" href="{{ route('apartment.edit', $apartment) }}">Edit</a>
             </div>
-            <form action="{{ route('user.apartment.destroy', $apartment->id) }}" method="POST" class="apartment-form-destroyer"
+            <form action="{{ route('apartment.destroy', $apartment->id) }}" method="POST" class="apartment-form-destroyer"
                 apartment-title="{{ $apartment->title }}">
                 @csrf
                 @method('DELETE')

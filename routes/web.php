@@ -41,5 +41,5 @@ Route::namespace('Guest')
 
 Route::delete('/picture/{id}', 'User\PicturesDeleteController@destroy')->name("picture.destroy");
 
-Route::resource('/apartment',"User\ApartmentController")->middleware('auth');
-Route::delete('/apartment/{id}', 'User\ApartmentController@destroy')->name('user.apartment.destroy');
+Route::resource('/user/apartment',"User\ApartmentController")->middleware('auth');
+// Route::delete('/apartment/{id}', 'User\ApartmentController@destroy')->name('user.apartment.destroy');
