@@ -20537,9 +20537,6 @@ readers do not read off random characters that represent icons */
   top: 1rem;
   right: 1rem;
 }
-.edit .col-4 i {
-  font-size: 1.5rem;
-}
 .edit .col-4 img {
   height: 100%;
   width: 100%;
