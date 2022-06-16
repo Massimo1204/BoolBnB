@@ -148,7 +148,8 @@
                     @foreach ($services as $service)
                         <div class="service">
                             <input class="form-check-input" type="checkbox"
-                            name="service[]" value="{{$service->id}}">
+                            name="service[]" value="{{$service->id}}"
+                            {{ (is_array(old('service')) and in_array($service->id, old('service'))) ? ' checked' : '' }}>
                             <label for="categories">
                                 {{$service->name}}
                             </label>
