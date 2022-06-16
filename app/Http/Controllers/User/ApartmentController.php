@@ -245,14 +245,14 @@ class ApartmentController extends Controller
         $apartment->address = $data["address_city"];
         $apartment->save();
         $apartment->services()->sync($data['service']);
-        $sponsorships = Sponsorship::all();
-        foreach($sponsorships as $sponsorship){
-            if($sponsorship->id = $data['sponsorship']){
-                $duration = $sponsorship->duration;
-            }
-        }
-        $endDate = date('Y-m-d h:i:s', strtotime($apartment->updated_at)+60*60*$duration);
-        $apartment->sponsorships()->sync([$data['sponsorship'] => ['start_date' => $apartment->updated_at, 'end_date' => $endDate]]);
+        // $sponsorships = Sponsorship::all();
+        // foreach($sponsorships as $sponsorship){
+        //     if($sponsorship->id = $data['sponsorship']){
+        //         $duration = $sponsorship->duration;
+        //     }
+        // }
+        // $endDate = date('Y-m-d h:i:s', strtotime($apartment->updated_at)+60*60*$duration);
+        // $apartment->sponsorships()->sync([$data['sponsorship'] => ['start_date' => $apartment->updated_at, 'end_date' => $endDate]]);
         return redirect()->route('apartment.show', compact('apartment'));
     }
 
