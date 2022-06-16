@@ -12,8 +12,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $apartments = Apartment::where('user_id',  Auth::user()->id)->orderBy('id', 'desc')->paginate(20);
-
-        return view('user.home', ['apartments' => $apartments]);
+        $apartments = Apartment::paginate(12);
+        return view('user.home', compact('apartments'));
     }
 }

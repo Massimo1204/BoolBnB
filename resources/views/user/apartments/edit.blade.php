@@ -206,7 +206,7 @@
                     </div>
                     <div class="delete-button">
                         @if (Auth::user()->id == $apartment->user_id)
-                            <form action="{{ route('user.apartment.destroy', $apartment->id) }}" method="POST" class="apartment-form-destroyer" onclick="return confirm('Sei sicuro di voler eliminare l\'appartamento {{$apartment->title}} ?' )">
+                            <form action="{{ route('apartment.destroy', $apartment->id) }}" method="POST" class="apartment-form-destroyer" onclick="return confirm('Sei sicuro di voler eliminare l\'appartamento {{$apartment->title}} ?' )">
                                 {{-- apartment-title="{{ $apartment->title }}" --}}
                                 @csrf
                                 @method('DELETE')

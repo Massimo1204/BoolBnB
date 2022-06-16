@@ -23,9 +23,15 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    BoolBnB
-                </a>
+                @if (!Auth::check())
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        BoolBnB
+                    </a>
+                @else
+                    <a class="navbar-brand" href="{{ url('/user') }}">
+                        BoolBnB
+                    </a>
+                @endif
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -71,7 +77,7 @@
                     <ul class="navbar-nav ml-auto">
                         <li>
 
-                            <a href="{{ route('user.home') }}">
+                            <a href="{{ route('apartment.index') }}">
                                 I tuoi appartamaneti
                             </a>
                         </li>
