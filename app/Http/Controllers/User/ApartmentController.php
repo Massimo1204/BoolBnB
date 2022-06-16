@@ -47,6 +47,7 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'title' => ['required', 'string', 'min:5','max:255'],
             'image' => ['required'],
@@ -68,67 +69,82 @@ class ApartmentController extends Controller
             "numeric" => " deve essere un numero",
             "min" => " è troppo corto",
         ]);
-
+        
         $data = $request->all();
-        if($request['visible'] != null){
-            $data['visible'] = 1;
-        }
-
-        else{
-            $data['visible'] = 0;
-        }
-
-        if($request['available'] != null){
-            $data['available'] = 1;
-        }
-        else{
-            $data['available'] = 0;
-        }
         $tempAddress = $data['address'].' '.$data['address_number'].' '.$data['address_city'];
         $newAddress = str_replace(" ", "%20", $tempAddress);
         $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
+        // $response = Http::get('https://api.tomtom.com/search/2/search' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
+        
         $dataResponse = json_decode($response->body(), true);
-        $newApartment = new Apartment();
-        $newApartment->title = $data["title"];
-        $newApartment->user_id = Auth::user()->id;
-        $newApartment->image = Storage::put('uploads',$data["image"]);
-        $newApartment->description = $data["description"];
-        $newApartment->n_rooms = $data["n_rooms"];
-        $newApartment->n_bedrooms = $data["n_bedrooms"];
-        $newApartment->n_beds = $data["n_beds"];
-        $newApartment->n_bathrooms = $data["n_bathrooms"];
-        $newApartment->guests = $data["guests"];
-        $newApartment->visible = $data["visible"];
-        $newApartment->available = $data["available"];
-        $newApartment->price = $data["price"];
-        $newApartment->square_meters = $data["square_meters"];
-        $newApartment->lat = $dataResponse["results"][0]["position"]["lat"];
-        $newApartment->long = $dataResponse["results"][0]["position"]["lon"];
-        $newApartment->address = $data['address'];
-        $newApartment->address_number = $data['address_number'];
-        $newApartment->address_city = $data['address_city'];
-        $newApartment->save();
-        $images=array();
-        if($files=$request->file('images')){
-            foreach($files as $file){
-                $newPicture = new Picture();
-                $newPicture->apartment_id = $newApartment->id;
-                $newPicture->image=Storage::put('uploads',$file);
-                $newPicture->save();
+        if(strtolower($dataResponse["results"][0]["address"]["streetName"]) == strtolower($data["address"]) && )
+        {
+            if($request['visible'] != null){
+                $data['visible'] = 1;
             }
-        }
-        $newApartment->services()->sync($data['service']);
-        $sponsorships = Sponsorship::all();
-        foreach($sponsorships as $sponsorship){
-            if($sponsorship->id = $data['sponsorship']){
-                $duration = $sponsorship->duration;
+    
+            else{
+                $data['visible'] = 0;
             }
+    
+            if($request['available'] != null){
+                $data['available'] = 1;
+            }
+            else{
+                $data['available'] = 0;
+            }
+            
+            $newApartment = new Apartment();
+            $newApartment->title = $data["title"];
+            $newApartment->user_id = Auth::user()->id;
+            $newApartment->image = Storage::put('uploads',$data["image"]);
+            $newApartment->description = $data["description"];
+            $newApartment->n_rooms = $data["n_rooms"];
+            $newApartment->n_bedrooms = $data["n_bedrooms"];
+            $newApartment->n_beds = $data["n_beds"];
+            $newApartment->n_bathrooms = $data["n_bathrooms"];
+            $newApartment->guests = $data["guests"];
+            $newApartment->visible = $data["visible"];
+            $newApartment->available = $data["available"];
+            $newApartment->price = $data["price"];
+            $newApartment->square_meters = $data["square_meters"];
+            $newApartment->lat = $dataResponse["results"][0]["position"]["lat"];
+            $newApartment->long = $dataResponse["results"][0]["position"]["lon"];
+            $newApartment->address = $data['address'];
+            $newApartment->address_number = $data['address_number'];
+            $newApartment->address_city = $data['address_city'];
+            $newApartment->save();
+            $images=array();
+            if($files=$request->file('images')){
+                foreach($files as $file){
+                    $newPicture = new Picture();
+                    $newPicture->apartment_id = $newApartment->id;
+                    $newPicture->image=Storage::put('uploads',$file);
+                    $newPicture->save();
+                }
+            }
+            $newApartment->services()->sync($data['service']);
+            $sponsorships = Sponsorship::all();
+            foreach($sponsorships as $sponsorship){
+                if($sponsorship->id = $data['sponsorship']){
+                    $duration = $sponsorship->duration;
+                }
+            }
+            $endDate = date('Y-m-d h:i:s', strtotime($newApartment->created_at)+60*60*$duration);
+            $newApartment->sponsorships()->sync([$data['sponsorship'] => ['start_date' => $newApartment->created_at, 'end_date' => $endDate]]);
+            return redirect()->route('apartment.show', ["apartment" => $newApartment]);
         }
-        $endDate = date('Y-m-d h:i:s', strtotime($newApartment->created_at)+60*60*$duration);
-        $newApartment->sponsorships()->sync([$data['sponsorship'] => ['start_date' => $newApartment->created_at, 'end_date' => $endDate]]);
-        return redirect()->route('apartment.show', ["apartment" => $newApartment]);
-    }
-
+        else{
+            $request->validate([
+                'address' => ['required', 'numeric','min:3'],
+            ],
+            [
+                "required" => " è richiesto",
+                "numeric" => " Non riconosciamo questo indirizzo. L'hai inserito correttamente?",
+                "min" => " è troppo corto",
+            ]);
+        }
+    }   
     /**
      * Display the specified resource.
      *
