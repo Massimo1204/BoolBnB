@@ -15,7 +15,7 @@
     @foreach ($apartments as $apartment)
         <div class="apartment-wrapper mx-3">
             <div class="card">
-                <a href="{{route('apartment.show', $apartment)}}">
+                <a href="{{route('guest.show', $apartment)}}">
                     <img class="border border-rounded" src="{{$apartment->image}}" alt="apartment">
                 </a>
             </div>

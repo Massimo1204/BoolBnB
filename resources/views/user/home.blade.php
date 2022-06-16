@@ -16,7 +16,7 @@
             </div>
             <div class="col-3">
                 <a href="{{ route('apartment.create') }}">Aggiungi nuovo Appartmanento</a>
-             </div>
+            </div>
         </div>
     </div>
 
@@ -26,7 +26,11 @@
             <div class="apartment-wrapper mx-3">
                 <div class="card">
                     <a href="{{ route('apartment.show', $apartment) }}">
-                        <img class="border border-rounded" src="{{ $apartment->image }}" alt="apartment">
+                        @if (str_starts_with($apartment->image, 'https://') || str_starts_with($apartment->image, 'http://'))
+                            <img class="border border-rounded" src="{{ $apartment->image }}" alt="apartment">
+                        @else
+                            <img class="border border-rounded" src="{{ asset('/storage') . '/' . $apartment->image }}" alt="apartment">
+                        @endif
                     </a>
                 </div>
             </div>
