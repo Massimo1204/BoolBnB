@@ -20526,6 +20526,10 @@ readers do not read off random characters that represent icons */
   height: 42vh;
 }
 
+.pagination {
+  justify-content: center;
+}
+
 .edit .col-4 {
   height: 250px;
 }
