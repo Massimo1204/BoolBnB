@@ -20509,7 +20509,8 @@ readers do not read off random characters that represent icons */
 }
 
 .apartment-wrapper {
-  height: 500px;
+  height: 430px;
+  margin-top: 50px;
 }
 .apartment-wrapper .card a img {
   width: 400px;
