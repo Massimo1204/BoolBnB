@@ -17,7 +17,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $apartments= Apartment::paginate(5);
+        $apartments = Apartment::paginate(12);
         return view('guest.home', compact("apartments"));
     }
 }

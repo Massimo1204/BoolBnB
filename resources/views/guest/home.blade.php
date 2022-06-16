@@ -1,15 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-      @foreach ($apartments as $apartment)
-        <div class="col-md-3">
-          <div class="card">
-              <img src="{{$apartment->image}}" alt="">
-            </div>
-          </div>
-      @endforeach
+@if (session('deleted-message'))
+    <div class="mx-2 alert alert-success">
+        {{session('deleted-message')}}
     </div>
+@endif
+@if (session('error-message'))
+    <div class="mx-2 alert alert-danger">
+        {{session('error-message')}}
+    </div>
+@endif
+<div class="d-flex flex-wrap justify-content-center">
+        @foreach ($apartments as $apartment)
+            <div class="apartment-wrapper mx-3">
+                <div class="card">
+                    <a href="{{route('apartment.show', $apartment)}}">
+                        <img class="border border-rounded" src="{{$apartment->image}}" alt="apartment">
+                    </a>
+                </div>
+            </div>
+        @endforeach
 </div>
 @endsection
