@@ -76,7 +76,7 @@ class ApartmentController extends Controller
         // $response = Http::get('https://api.tomtom.com/search/2/search' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
         
         $dataResponse = json_decode($response->body(), true);
-        if(strtolower($dataResponse["results"][0]["address"]["streetName"]) == strtolower($data["address"]))
+        if(strtolower($dataResponse["results"][0]["address"]["streetName"]) == strtolower($data["address"]) )
         {
             if($request['visible'] != null){
                 $data['visible'] = 1;
