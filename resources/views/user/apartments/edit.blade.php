@@ -170,22 +170,19 @@
                     <label for="address_city">Servizi:</label><br>
                     <div class="servizi d-flex flex-column flex-wrap">
                         @foreach ($services as $service)
-                        <div class="service">
-                            <input required class="form-check-input ms-2" type="checkbox" name="service[]" value="{{ $service->id }}"
-                            {{ $apartment->services->contains($service) ? 'checked' : '' }}>
-                        <label for="categories">
-                            {{ $service->name }}
-                        </label>
+                            <div class="service">
+                                <input class="form-check-input ms-2" type="checkbox" name="service[]" value="{{ $service->id }}"
+                                {{ $apartment->services->contains($service) ? 'checked' : '' }}>
+                                <label for="categories">
+                                    {{ $service->name }}
+                                </label>
+                            </div>
                         @endforeach
                         @error('service')
                             <div class="alert alert-danger mt-2">
                                 {{ $message }}
                             </div>
                         @enderror
-                            <label for="categories">
-                                {{ $service->name }}
-                            </label>
-                        </div>
                     </div>
                 </div>
                 <div class="col-12">
