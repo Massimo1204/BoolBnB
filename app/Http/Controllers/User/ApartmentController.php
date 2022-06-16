@@ -116,9 +116,7 @@ class ApartmentController extends Controller
                 $newPicture->save();
             }
         }
-      
         $newApartment->services()->sync($data['service']);
-      
         $sponsorships = Sponsorship::all();
         foreach($sponsorships as $sponsorship){
             if($sponsorship->id = $data['sponsorship']){
@@ -126,9 +124,7 @@ class ApartmentController extends Controller
             }
         }
         $endDate = date('Y-m-d h:i:s', strtotime($newApartment->created_at)+60*60*$duration);
-
         $newApartment->sponsorships()->sync([$data['sponsorship'] => ['start_date' => $newApartment->created_at, 'end_date' => $endDate]]);
-
         return redirect()->route('apartment.show', ["apartment" => $newApartment]);
     }
 
@@ -156,11 +152,9 @@ class ApartmentController extends Controller
         $sponsorships = Sponsorship::all();
 
         if($apartment->user_id == Auth::user()->id){
-
             return view('user.apartments.edit', compact('apartment', 'services', 'sponsorships') );
         }
         else{
-
             return redirect()->route('apartment.index')->with('error-message', 'Accesso negato');
         }
     }
@@ -232,9 +226,7 @@ class ApartmentController extends Controller
         $apartment->address = $data["address_number"];
         $apartment->address = $data["address_city"];
         $apartment->save();
-
         $apartment->services()->sync($data['service']);
-
         $sponsorships = Sponsorship::all();
         foreach($sponsorships as $sponsorship){
             if($sponsorship->id = $data['sponsorship']){
@@ -242,9 +234,7 @@ class ApartmentController extends Controller
             }
         }
         $endDate = date('Y-m-d h:i:s', strtotime($apartment->updated_at)+60*60*$duration);
-
         $apartment->sponsorships()->sync([$data['sponsorship'] => ['start_date' => $apartment->updated_at, 'end_date' => $endDate]]);
-
         return redirect()->route('apartment.show', compact('apartment'));
     }
 
@@ -257,7 +247,6 @@ class ApartmentController extends Controller
     public function destroy(Apartment $apartment)
     {
         $apartment->delete();
-
         return redirect()->route('apartment.index')->with('deleted-message', 'The selected apartment has been deleted');
     }
 
