@@ -20519,6 +20519,13 @@ readers do not read off random characters that represent icons */
      object-fit: cover;
 }
 
+.edit-container .row .col-12 {
+  margin: 0.3rem 0;
+}
+.edit-container .row .col-12 .servizi {
+  height: 42vh;
+}
+
 .edit .col-4 {
   height: 250px;
 }
