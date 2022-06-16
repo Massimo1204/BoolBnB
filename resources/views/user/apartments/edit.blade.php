@@ -36,7 +36,7 @@
                 @endforeach
             </div>
         </div>
-        <form class="row g-3" action="{{ route('apartment.update', $apartment) }}" method="post"
+        <form class="row" action="{{ route('apartment.update', $apartment) }}" method="post"
             enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -194,7 +194,7 @@
                     {{-- @dd($apartment->pictures) --}}
                     <input type="file" class="form-control" name="images[]" id="image[]" multiple>
                 </div>
-                <div class="col-10 mx-auto d-flex justify-content-around mt-3">
+                <div class="col-10 mt-3">
                     {{-- @foreach ($sponsorships as $sponsorship)
                         <div class="col-3">
                             <label for="sponsorship">{{ $sponsorship->name }}</label>
@@ -208,13 +208,13 @@
                 </div>
             </div>
         </form>
-        <div class="delete-button">
+        <div class="delete-button mt-2">
             @if (Auth::user()->id == $apartment->user_id)
                 <form action="{{ route('apartment.destroy', $apartment->id) }}" method="POST" class="apartment-form-destroyer" onclick="return confirm('Sei sicuro di voler eliminare l\'appartamento {{$apartment->title}} ?' )">
                     {{-- apartment-title="{{ $apartment->title }}" --}}
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-md ">Delete</a>
+                    <button type="submit" class="btn btn-danger btn-md ms-auto">Delete</a>
                 </form>
             @endif
         </div>
