@@ -6,6 +6,33 @@
         Modifica Appartamento
     </h1>
     <div class="container edit-container mt-5 w-50">
+        <div class="edit">
+            <div class="col-12">
+                <h6>
+                    Le foto del tuo appartamento:
+                </h6>
+            </div>
+            @if (session('deleted-message'))
+                <div class="mx-2 alert alert-success">
+                    {{session('deleted-message')}}
+                </div>
+            @endif
+                {{-- @dd($apartment->pictures) --}}
+            <div class="col-12 d-flex flex-wrap mb-4">
+                @foreach ($apartment->pictures as $photo)
+                <div class="col-4 p-1 position-relative">
+                    <div class="delete position-absolute">
+                        <form action="{{route('picture.destroy',$photo)}}" method="POST" class="picture-form-destroyer" onclick="return confirm('Sei sicuro di voler eliminare la seguente foto?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="rounded-1 delete">X</button>
+                        </form>
+                    </div>
+                    <img class="rounded-1" src="{{$photo->image}}" alt="apartment img" >
+                </div>
+                @endforeach
+            </div>
+        </div>
         <form class="row g-3" action="{{ route('apartment.update', $apartment) }}" method="post"
             enctype="multipart/form-data">
             @csrf
@@ -21,7 +48,7 @@
                     @enderror
                 </div>
                 <div class="col-12">
-                    <label for="image">Carica una foto:</label>
+                    <label for="image">Carica la foto cover:</label>
                     <input type="file" name="image" id="image" value="{{ $apartment->image }}">
                     @error('image')
                         <div class="alert alert-danger mt-2">
@@ -159,7 +186,7 @@
                     {{-- @dd($apartment->pictures) --}}
                     <input type="file" class="form-control" name="images[]" id="image[]"  multiple>
                 </div>
-                <div class="col-10 mx-auto d-flex justify-content-around my-4">
+                <div class="col-10 mx-auto d-flex justify-content-around mt-3">
                     {{-- @foreach ($sponsorships as $sponsorship)
                         <div class="col-3">
                             <label for="sponsorship">{{$sponsorship->name}}</label>
@@ -182,33 +209,7 @@
                 </div>
             </div>
         </form>
-        <div class="edit">
-            <div class="col-12">
-                <h1 class="text-center">
-                    Le foto del tuo appartamento:
-                </h1>
-            </div>
-            @if (session('deleted-message'))
-                <div class="mx-2 alert alert-success">
-                    {{session('deleted-message')}}
-                </div>
-            @endif
-                {{-- @dd($apartment->pictures) --}}
-            <div class="col-12 d-flex flex-wrap">
-                @foreach ($apartment->pictures as $photo)
-                <div class="col-4 p-1 position-relative">
-                    <div class="delete position-absolute">
-                        <form action="{{route('picture.destroy',$photo)}}" method="POST" class="picture-form-destroyer" onclick="return confirm('Sei sicuro di voler eliminare la seguente foto?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="rounded-1 delete">X</button>
-                        </form>
-                    </div>
-                    <img class="rounded-1" src="{{$photo->image}}" alt="apartment img" >
-                </div>
-                @endforeach
-            </div>
-        </div>
+        
     </div>
 @endsection
 {{-- @section('footer-scripts')
