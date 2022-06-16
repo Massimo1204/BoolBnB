@@ -20519,6 +20519,17 @@ readers do not read off random characters that represent icons */
      object-fit: cover;
 }
 
+.edit-container .row .col-12 {
+  margin: 0.3rem 0;
+}
+.edit-container .row .col-12 .servizi {
+  height: 42vh;
+}
+
+.pagination {
+  justify-content: center;
+}
+
 .edit .col-4 {
   height: 250px;
 }
@@ -20532,7 +20543,4 @@ readers do not read off random characters that represent icons */
 .edit .col-4 img {
   height: 100%;
   width: 100%;
-}
-.edit i:hover {
-  color: red;
 }

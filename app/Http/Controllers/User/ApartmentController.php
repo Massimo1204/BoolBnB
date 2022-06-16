@@ -35,7 +35,7 @@ class ApartmentController extends Controller
     {
         $services = Service::all();
         $sponsorships = Sponsorship::all();
-      
+
         return view('user.apartments.create', compact('sponsorships','services'));
     }
 
@@ -62,9 +62,10 @@ class ApartmentController extends Controller
             'address' => ['required', 'string','min:3'],
             'address_number' => ['required', 'string','min:1'],
             'address_city' => ['required', 'string','min:3'],
+            'service' => ['required'],
         ],
         [
-            "required" => " è richiesto",
+            "required" => "Non puoi inserire un Appartamento senza :attribute.",
             "numeric" => " deve essere un numero",
             "min" => " è troppo corto",
         ]);
@@ -197,6 +198,7 @@ class ApartmentController extends Controller
             'address' => ['required', 'string','min:3'],
             'address_number' => ['required', 'string','min:1'],
             'address_city' => ['required', 'string','min:3'],
+            'service' => ['required'],
         ],
         [
             "required" => "Non puoi inserire un Appartamento senza :attribute.",

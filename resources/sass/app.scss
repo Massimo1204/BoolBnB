@@ -26,6 +26,19 @@
       }
     }
 }
+.edit-container{
+  .row{
+      .col-12{
+        margin: .3rem 0;
+        .servizi{
+          height: 42vh;
+        }
+      }
+  }
+}
+.pagination{
+  justify-content: center;
+}
 .edit{
   .col-4{
     height: 250px;
@@ -42,7 +55,7 @@
       width: 100%;
     }
   }
-  i:hover{
-    color: red;
-  }
+  // i:hover{
+  //   color: red;
+  // }
 }
