@@ -167,7 +167,7 @@
         </form>
         <div class="delete-button">
             @if (Auth::user()->id == $apartment->user_id)
-                <form action="{{ route('user.apartment.destroy', $apartment->id) }}" method="POST" class="apartment-form-destroyer">
+                <form action="{{ route('user.apartment.destroy', $apartment->id) }}" method="POST" class="apartment-form-destroyer" onclick="return confirm('Sei sicuro di voler eliminare l\'appartamento {{$apartment->title}} ?' )">
                     {{-- apartment-title="{{ $apartment->title }}" --}}
                     @csrf
                     @method('DELETE')
@@ -208,9 +208,7 @@
                 </div>
     </div>
 @endsection
-
-
-@section('footer-scripts')
+{{-- @section('footer-scripts')
     <script defer>
         const deleteForm = document.querySelector('.apartment-form-destroyer');
 
@@ -223,4 +221,4 @@
             }
         });
     </script>
-@endsection
+@endsection --}}
