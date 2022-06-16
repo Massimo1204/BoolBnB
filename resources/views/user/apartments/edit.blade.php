@@ -167,11 +167,11 @@
         </form>
         <div class="delete-button">
             @if (Auth::user()->id == $apartment->user_id)
-                <form action="{{ route('user.apartment.destroy', $apartment->id) }}" method="POST" class="apartment-form-destroyer"
-                    apartment-title="{{ $apartment->title }}">
+                <form action="{{ route('user.apartment.destroy', $apartment->id) }}" method="POST" class="apartment-form-destroyer">
+                    {{-- apartment-title="{{ $apartment->title }}" --}}
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm">Delete</a>
+                    <button type="submit" class="btn btn-danger btn-sm mt-3 ms-1">Delete</a>
                 </form>
             @endif
         </div>
@@ -191,18 +191,21 @@
             </div>
             @endif
             {{-- @dd($apartment->pictures) --}}
-        @foreach ($apartment->pictures as $photo)
-            <div class="col-4 my-2 position-relative">
-                <div class="delete position-absolute">
-                    <form action="{{route('picture.destroy',$photo)}}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit"><i class="fas fa-x"></i></button>
-                    </form>
+                <div class="row">
+
+                    @foreach ($apartment->pictures as $photo)
+                        <div class="col-4 my-2 position-relative">
+                            <div class="delete position-absolute">
+                                <form action="{{route('picture.destroy',$photo)}}" method="POST" class="picture-form-destroyer" onclick="return confirm('Sei sicuro di voler eliminare la seguente foto?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"><i class="fas fa-x"></i></button>
+                                </form>
+                            </div>
+                            <img src="{{$photo->image}}" alt="apartment img" >
+                        </div>
+                    @endforeach
                 </div>
-                <img src="{{$photo->image}}" alt="apartment img" >
-            </div>
-        @endforeach
     </div>
 @endsection
 
