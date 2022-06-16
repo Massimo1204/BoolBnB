@@ -154,7 +154,6 @@
                 @endforeach
                 @error('service')
                 <div class="alert alert-danger mt-2">
-                    Il nome della città
                     {{ $message }}
                 </div>
                 @enderror
@@ -173,7 +172,7 @@
                     <input type="radio" name="sponsorship" id="sponsorship" value="{{$sponsorship->id}}">
                 </div>
             @endforeach
-            
+
             <div class="col-12 text-center mt-5">
                 <button class="btn btn-outline-primary" type="submit">send</button>
             </div>
