@@ -172,7 +172,7 @@ class ApartmentController extends Controller
             return view('user.apartments.edit', compact('apartment', 'services', 'sponsorships') );
         }
         else{
-            return redirect()->route('apartment.index')->with('error-message', 'Accesso negato');
+            return redirect()->route('user.home')->with('error-message', 'Accesso negato');
         }
     }
 
