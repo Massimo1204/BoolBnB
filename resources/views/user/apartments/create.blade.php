@@ -1,16 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="text-center">
-    Aggiungi un nuovo Appartamento
-</h1>
-<div class="container mt-5 w-50">
-    <form class="row g-3" action="{{route("apartment.store")}}" method="post" enctype="multipart/form-data">
+<div class="container create-container mt-1 w-50">
+    <h1 class="text-center">
+        Aggiungi un nuovo Appartamento
+    </h1>
+    <form class="row mt-4 g-3" action="{{route("apartment.store")}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row apartment">
             <div class="col-12">
                 <label for="title">Titolo</label>
-
                 <input class="w-100" type="text" name="title" id="title" value="{{ old('title') ?? ''}}" required>
                 @error('title')
                         <div class="alert alert-danger mt-2">
@@ -20,7 +19,7 @@
                 @enderror
             </div>
             <div class="col-12">
-                <label for="image">Carica una foto:</label>
+                <label for="image">Carica la foto cover:</label>
                 <input type="file" name="image" id="image">
                 @error('image')
                         <div class="alert alert-danger mt-2">
@@ -39,7 +38,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="col-3">
+            <div class="col-12">
                 <label for="n_rooms">Numero di stanze:</label>
                 <input type="number" name="n_rooms" id="n_rooms" value="{{ old('n_rooms') ?? ''}}" required>
                 @error('n_rooms')
@@ -49,7 +48,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="col-3">
+            <div class="col-12">
                 <label for="n_bedrooms">Numero di stanze da letto:</label>
                 <input type="number" name="n_bedrooms" id="n_bedrooms" value="{{ old('n_bedrooms') ?? ''}}" required>
                 @error('n_bedrooms')
@@ -59,7 +58,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="col-3">
+            <div class="col-12">
                 <label for="n_bathrooms">Numero di bagni:</label>
                 <input type="number" name="n_bathrooms" id="n_bathrooms" value="{{ old('n_bathrooms') ?? ''}}" required>
                 @error('n_bathrooms')
@@ -69,7 +68,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="col-3">
+            <div class="col-12">
                 <label for="guests">Numero massimo di ospiti:</label>
                 <input type="number" name="guests" id="guests" value="{{ old('guests') ?? ''}}" required>
                 @error('guests')
@@ -79,7 +78,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="col-3">
+            <div class="col-12">
                 <label for="n_beds">Numero di letti:</label>
                 <input type="number" name="n_beds" id="n_beds" value="{{ old('n_beds') ?? ''}}" required>
                 @error('n_beds')
@@ -89,15 +88,15 @@
                     </div>
                 @enderror
             </div>
-            <div class="col-3">
+            <div class="col-12">
                 <label for="visible">Spuntare la seguente checkbox per rendere l'appartamento visibile </label>
                 <input type="checkbox" name="visible" id="visible" checked=true>
             </div>
-            <div class="col-3">
+            <div class="col-12">
                 <label for="available">Spuntare la seguente checkbox per rendere l'appartamento disponibile </label>
                 <input type="checkbox" name="available" id="available" checked=true>
             </div>
-            <div class="col-3">
+            <div class="col-12">
                 <label for="price">Inserisci il prezzo a notte per ospite: </label>
 
                 <input type="number" name="price" id="price" value="{{ old('price') ?? ''}}" required>
@@ -108,13 +107,12 @@
                     </div>
                 @enderror
             </div>
-            <div class="col-3">
+            <div class="col-12">
                 <label for="square_meters">Numero di metri quadrati: </label>
                 <input type="number" name="square_meters" id="square_meters" value="{{ old('square_meters') ?? ''}}">
             </div>
-            <div class="col-3">
+            <div class="col-12">
                 <label for="address">inserisci la via:</label>
-
                 <input class="w-100" type="text" name="address" id="address" value="{{ old('address') ?? ''}}" required>
                 @error('address')
                     <div class="alert alert-danger mt-2">
@@ -123,9 +121,9 @@
                     </div>
                 @enderror
             </div>
-            <div class="col-1">
+            <div class="col-4">
                 <label for="address_number">Numero:</label><br>
-                <input class="w-75" type="text" name="address_number" id="address_number" value="{{ old('address_number') ?? ''}}" required>
+                <input class="w-100" type="number" name="address_number" id="address_number" value="{{ old('address_number') ?? ''}}" required>
                 @error('address_number')
                     <div class="alert alert-danger mt-2">
                         Il numero civico
@@ -133,7 +131,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="col-3">
+            <div class="col-8">
                 <label for="address_city">inserisci la città:</label>
                 <input class="w-100" type="text" name="address_city" id="address_city" value="{{ old('address_city') ?? ''}}" required>
                 @error('address_city')
@@ -144,22 +142,27 @@
                 @enderror
             </div>
 
-            <div class="mb-3">
-                @foreach ($services as $service)
-                    <input class="form-check-input" type="checkbox"
-                    name="service[]" value="{{$service->id}}">
-                    <label for="categories">
-                        {{$service->name}}
-                    </label>
-                @endforeach
-                @error('service')
-                <div class="alert alert-danger mt-2">
-                    {{ $message }}
+            <div class="col-12 mb-3">
+                <label for="address_city">Servizi:</label><br>
+                <div class="servizi d-flex flex-column flex-wrap">
+                    @foreach ($services as $service)
+                        <div class="service">
+                            <input class="form-check-input" type="checkbox"
+                            name="service[]" value="{{$service->id}}">
+                            <label for="categories">
+                                {{$service->name}}
+                            </label>
+                        </div>
+                    @endforeach
+                    @error('service')
+                        <div class="alert alert-danger mt-2">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
-                @enderror
             </div>
 
-            <div class="row g-3">
+            <div class="col-12">
                 <div class="col-12">
                     <label for="image[]">inserisci altre foto del tuo appartamento</label>
                     <input type="file" class="form-control" name="images[]" id="image[]"  multiple>
@@ -167,13 +170,13 @@
             </div>
 
             {{-- @foreach ($sponsorships as $sponsorship)
-                <div class="col-3">
+                <div class="col-12">
                     <label for="sponsorship">{{$sponsorship->name}}</label>
                     <input type="radio" name="sponsorship" id="sponsorship" value="{{$sponsorship->id}}">
                 </div>
             @endforeach --}}
 
-            <div class="col-12 text-center mt-5">
+            <div class="col-12 text-center mt-3">
                 <button class="btn btn-outline-primary" type="submit">send</button>
             </div>
         </div>

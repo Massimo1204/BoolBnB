@@ -20519,10 +20519,10 @@ readers do not read off random characters that represent icons */
      object-fit: cover;
 }
 
-.edit-container .row .col-12 {
+.edit-container .row .col-12, .create-container .row .col-12 {
   margin: 0.3rem 0;
 }
-.edit-container .row .col-12 .servizi {
+.edit-container .row .col-12 .servizi, .create-container .row .col-12 .servizi {
   height: 42vh;
 }
 
