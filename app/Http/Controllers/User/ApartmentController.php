@@ -35,7 +35,7 @@ class ApartmentController extends Controller
     {
         $services = Service::all();
         $sponsorships = Sponsorship::all();
-      
+
         return view('user.apartments.create', compact('sponsorships','services'));
     }
 
@@ -47,7 +47,7 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $request->validate([
             'title' => ['required', 'string', 'min:5','max:255'],
             'image' => ['required'],
@@ -62,37 +62,38 @@ class ApartmentController extends Controller
             'address' => ['required', 'string','min:3'],
             'address_number' => ['required', 'string','min:1'],
             'address_city' => ['required', 'string','min:3'],
+            'service' => ['required'],
         ],
         [
-            "required" => " è richiesto",
+            "required" => "Non puoi inserire un Appartamento senza :attribute",
             "numeric" => " deve essere un numero",
             "min" => " è troppo corto",
         ]);
-        
+
         $data = $request->all();
         $tempAddress = $data['address'].' '.$data['address_number'].' '.$data['address_city'];
         $newAddress = str_replace(" ", "%20", $tempAddress);
         $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
         // $response = Http::get('https://api.tomtom.com/search/2/search' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
-        
+
         $dataResponse = json_decode($response->body(), true);
         if(strtolower($dataResponse["results"][0]["address"]["streetName"]) == strtolower($data["address"]) )
         {
             if($request['visible'] != null){
                 $data['visible'] = 1;
             }
-    
+
             else{
                 $data['visible'] = 0;
             }
-    
+
             if($request['available'] != null){
                 $data['available'] = 1;
             }
             else{
                 $data['available'] = 0;
             }
-            
+
             $newApartment = new Apartment();
             $newApartment->title = $data["title"];
             $newApartment->user_id = Auth::user()->id;
@@ -123,14 +124,14 @@ class ApartmentController extends Controller
                 }
             }
             $newApartment->services()->sync($data['service']);
-            $sponsorships = Sponsorship::all();
-            foreach($sponsorships as $sponsorship){
-                if($sponsorship->id = $data['sponsorship']){
-                    $duration = $sponsorship->duration;
-                }
-            }
-            $endDate = date('Y-m-d h:i:s', strtotime($newApartment->created_at)+60*60*$duration);
-            $newApartment->sponsorships()->sync([$data['sponsorship'] => ['start_date' => $newApartment->created_at, 'end_date' => $endDate]]);
+            // $sponsorships = Sponsorship::all();
+            // foreach($sponsorships as $sponsorship){
+            //     if($sponsorship->id = $data['sponsorship']){
+            //         $duration = $sponsorship->duration;
+            //     }
+            // }
+            // $endDate = date('Y-m-d h:i:s', strtotime($newApartment->created_at)+60*60*$duration);
+            // $newApartment->sponsorships()->sync([$data['sponsorship'] => ['start_date' => $newApartment->created_at, 'end_date' => $endDate]]);
             return redirect()->route('apartment.show', ["apartment" => $newApartment]);
         }
         else{
@@ -143,7 +144,7 @@ class ApartmentController extends Controller
                 "min" => " è troppo corto",
             ]);
         }
-    }   
+    }
     /**
      * Display the specified resource.
      *
@@ -197,9 +198,10 @@ class ApartmentController extends Controller
             'address' => ['required', 'string','min:3'],
             'address_number' => ['required', 'string','min:1'],
             'address_city' => ['required', 'string','min:3'],
+            'service' => ['required'],
         ],
         [
-            "required" => "Non puoi inserire un Appartamento senza :attribute.",
+            "required" => "Non puoi inserire un Appartamento senza :attribute",
         ]);
 
         $data = $request->all();
