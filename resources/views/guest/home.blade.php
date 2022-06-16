@@ -21,7 +21,8 @@
             </div>
         </div>
     @endforeach
+</div>
+<div class="mx-auto">
     {{ $apartments->links() }}
 </div>
-
 @endsection
