@@ -159,7 +159,7 @@
                                 {{ $service->name }}
                             </label>
                         </div>
-                        @endforeach
+                        {{-- @endforeach --}}
                     </div>
                 </div>
                 <div class="col-12">
@@ -190,8 +190,6 @@
                 </div>
             </div>
         </form>
-<<<<<<< HEAD
-<<<<<<< HEAD
         <div class="delete-button">
             @if (Auth::user()->id == $apartment->user_id)
                 <form action="{{ route('user.apartment.destroy', $apartment->id) }}" method="POST"
