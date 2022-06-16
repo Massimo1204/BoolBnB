@@ -35,7 +35,7 @@ class ApartmentController extends Controller
     {
         $services = Service::all();
         $sponsorships = Sponsorship::all();
-
+      
         return view('user.apartments.create', compact('sponsorships','services'));
     }
 
@@ -62,10 +62,9 @@ class ApartmentController extends Controller
             'address' => ['required', 'string','min:3'],
             'address_number' => ['required', 'string','min:1'],
             'address_city' => ['required', 'string','min:3'],
-            'service' => ['required'],
         ],
         [
-            "required" => "Non puoi inserire un Appartamento senza :attribute.",
+            "required" => " è richiesto",
             "numeric" => " deve essere un numero",
             "min" => " è troppo corto",
         ]);
@@ -77,7 +76,7 @@ class ApartmentController extends Controller
         // $response = Http::get('https://api.tomtom.com/search/2/search' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
         
         $dataResponse = json_decode($response->body(), true);
-        if(strtolower($dataResponse["results"][0]["address"]["streetName"]) == strtolower($data["address"]) && )
+        if(strtolower($dataResponse["results"][0]["address"]["streetName"]) == strtolower($data["address"]) )
         {
             if($request['visible'] != null){
                 $data['visible'] = 1;
@@ -198,7 +197,6 @@ class ApartmentController extends Controller
             'address' => ['required', 'string','min:3'],
             'address_number' => ['required', 'string','min:1'],
             'address_city' => ['required', 'string','min:3'],
-            'service' => ['required'],
         ],
         [
             "required" => "Non puoi inserire un Appartamento senza :attribute.",
