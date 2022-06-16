@@ -12,8 +12,11 @@
                 <h1>I tuoi appartamenti:</h1>
             </div>
             <div class="col-3">
-                <a href="{{ route('apartment.index') }}">Vai alla lista di tutti gli appartamenti</a>
+               <a href="{{ route('apartment.index') }}">Vai alla lista di tutti gli appartamenti</a>
             </div>
+            <div class="col-3">
+                <a href="{{ route('apartment.create') }}">Aggiungi nuovo Appartmanento</a>
+             </div>
         </div>
     </div>
 
