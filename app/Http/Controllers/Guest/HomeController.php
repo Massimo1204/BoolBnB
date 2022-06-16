@@ -20,4 +20,9 @@ class HomeController extends Controller
         $apartments = Apartment::paginate(12);
         return view('guest.home', compact("apartments"));
     }
+
+    public function show(Apartment $apartment)
+    {
+        return view('guest.show', compact("apartment"));
+    }
 }
