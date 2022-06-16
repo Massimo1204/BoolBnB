@@ -144,7 +144,7 @@
                     <div class="servizi d-flex flex-column flex-wrap">
                         @foreach ($services as $service)
                         <div class="service">
-                            <input class="form-check-input ms-2" type="checkbox" name="service[]" value="{{ $service->id }}"
+                            <input required class="form-check-input ms-2" type="checkbox" name="service[]" value="{{ $service->id }}"
                             {{ $apartment->services->contains($service) ? 'checked' : '' }}>
                         <label for="categories">
                             {{ $service->name }}
