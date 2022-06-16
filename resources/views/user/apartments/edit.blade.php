@@ -5,7 +5,7 @@
     <h1 class="text-center">
         Modifica Appartamento
     </h1>
-    <div class="container mt-5 w-50 ">
+    <div class="container edit-container mt-5 w-50">
         <form class="row g-3" action="{{ route('apartment.update', $apartment) }}" method="post"
             enctype="multipart/form-data">
             @csrf
@@ -141,71 +141,75 @@
                     @enderror
                 </div>
                 <div class="col-12 mb-3">
-                    @foreach ($services as $service)
-                        <input class="form-check-input" type="checkbox" name="service[]" value="{{ $service->id }}"
+                    <label for="address_city">Servizi:</label><br>
+                    <div class="servizi d-flex flex-column flex-wrap">
+                        @foreach ($services as $service)
+                        <div class="service">
+                            <input class="form-check-input ms-2" type="checkbox" name="service[]" value="{{ $service->id }}"
                             {{ $apartment->services->contains($service) ? 'checked' : '' }}>
-                        <label for="categories">
-                            {{ $service->name }}
-                        </label>
-                    @endforeach
+                            <label for="categories">
+                                {{ $service->name }}
+                            </label>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="edit">
+                    <div class="col-12">
+                        <h1 class="text-center">
+                            Le foto del tuo appartamento:
+                        </h1>
+                    </div>
+                    @if (session('deleted-message'))
+                        <div class="mx-2 alert alert-success">
+                            {{session('deleted-message')}}
+                        </div>
+                    @endif
+                        {{-- @dd($apartment->pictures) --}}
+                    <div class="col-12 d-flex flex-wrap">
+                        @foreach ($apartment->pictures as $photo)
+                        <div class="col-4 p-1 position-relative">
+                            <div class="delete position-absolute">
+                                <form action="{{route('picture.destroy',$photo)}}" method="POST" class="picture-form-destroyer" onclick="return confirm('Sei sicuro di voler eliminare la seguente foto?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="rounded-1"><i class="fas fa-x"></i></button>
+                                </form>
+                            </div>
+                            <img class="rounded-1" src="{{$photo->image}}" alt="apartment img" >
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
                 <div class="col-12">
                     <label for="image[]">inserisci altre foto del tuo appartamento</label>
                     {{-- @dd($apartment->pictures) --}}
                     <input type="file" class="form-control" name="images[]" id="image[]"  multiple>
                 </div>
-                <div class="col-12">
-                    @foreach ($sponsorships as $sponsorship)
+                <div class="col-10 mx-auto d-flex justify-content-around mt-4">
+                    {{-- @foreach ($sponsorships as $sponsorship)
                         <div class="col-3">
                             <label for="sponsorship">{{$sponsorship->name}}</label>
                             <input type="radio" name="sponsorship" id="sponsorship" value="{{$sponsorship->id}}">
                         </div>
-                    @endforeach
-                    <button class="btn btn-outline-primary" type="submit">send</button>
+                    @endforeach --}}
+                    <div class="Send my-auto">
+                        <button class="btn btn-outline-primary btn-md" type="submit">send</button>
+                    </div>
+                    <div class="delete-button">
+                        @if (Auth::user()->id == $apartment->user_id)
+                            <form action="{{ route('user.apartment.destroy', $apartment->id) }}" method="POST" class="apartment-form-destroyer" onclick="return confirm('Sei sicuro di voler eliminare l\'appartamento {{$apartment->title}} ?' )">
+                                {{-- apartment-title="{{ $apartment->title }}" --}}
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-md ">Delete</a>
+                            </form>
+                        @endif
+                    </div>
                 </div>
             </div>
         </form>
-        <div class="delete-button">
-            @if (Auth::user()->id == $apartment->user_id)
-                <form action="{{ route('user.apartment.destroy', $apartment->id) }}" method="POST" class="apartment-form-destroyer" onclick="return confirm('Sei sicuro di voler eliminare l\'appartamento {{$apartment->title}} ?' )">
-                    {{-- apartment-title="{{ $apartment->title }}" --}}
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm mt-3 ms-1">Delete</a>
-                </form>
-            @endif
-        </div>
-    </div>
 
-
-
-    <div class="edit row">
-        <div class="col-12">
-            <h1 class="text-center">
-                Le foto del tuo appartamento:
-            </h1>
-        </div>
-        @if (session('deleted-message'))
-            <div class="mx-2 alert alert-success">
-                {{session('deleted-message')}}
-            </div>
-            @endif
-            {{-- @dd($apartment->pictures) --}}
-                <div class="row">
-
-                    @foreach ($apartment->pictures as $photo)
-                        <div class="col-4 my-2 position-relative">
-                            <div class="delete position-absolute">
-                                <form action="{{route('picture.destroy',$photo)}}" method="POST" class="picture-form-destroyer" onclick="return confirm('Sei sicuro di voler eliminare la seguente foto?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"><i class="fas fa-x"></i></button>
-                                </form>
-                            </div>
-                            <img src="{{$photo->image}}" alt="apartment img" >
-                        </div>
-                    @endforeach
-                </div>
     </div>
 @endsection
 {{-- @section('footer-scripts')
