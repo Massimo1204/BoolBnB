@@ -27,7 +27,11 @@
                             <button type="submit" class="rounded-1 delete">X</button>
                         </form>
                     </div>
-                    <img class="rounded-1" src="{{$photo->image}}" alt="apartment img" >
+                    @if (str_starts_with($apartment->image, 'https://') || str_starts_with($apartment->image, 'http://'))
+                        <img class="rounded-1" src="{{$photo->image}}" alt="apartment img" >
+                    @else
+                        <img class="rounded-1" src="{{ asset('/storage') . '/' . $photo->image }}" alt="">
+                    @endif
                 </div>
                 @endforeach
             </div>
