@@ -21,6 +21,7 @@
             </div>
         </div>
     @endforeach
-        {{ $apartments->links() }}
+    {{ $apartments->links() }}
 </div>
+
 @endsection
