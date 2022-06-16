@@ -14,16 +14,18 @@
         @endif
     </div>
     @if (Auth::user()->id == $apartment->user_id)
-        <div class="col-2">
-            <a href="{{ route('apartment.edit', $apartment) }}">Edit</a>
+        <div class="d-flex justify-content-evenly mt-3">
+            <div class="btn btn-primary btn-sm">
+                <a class="text-white text-decoration-none" href="{{ route('apartment.edit', $apartment) }}">Edit</a>
+            </div>
+            <form action="{{ route('user.apartment.destroy', $apartment->id) }}" method="POST" class="apartment-form-destroyer"
+                apartment-title="{{ $apartment->title }}">
+                @csrf
+                @method('DELETE')
+    
+                <button type="submit" class="btn btn-danger btn-sm text-white">Delete</a>
+            </form>
         </div>
-        <form action="{{ route('user.apartment.destroy', $apartment->id) }}" method="POST" class="apartment-form-destroyer"
-            apartment-title="{{ $apartment->title }}">
-            @csrf
-            @method('DELETE')
-
-            <button type="submit" class="btn btn-danger btn-sm">Delete</a>
-        </form>
     @endif
 @endsection
 
