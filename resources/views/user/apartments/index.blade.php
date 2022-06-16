@@ -12,15 +12,20 @@
     </div>
 @endif
 <div class="d-flex flex-wrap justify-content-center">
-        @foreach ($apartments as $apartment)
-            <div class="apartment-wrapper mx-3">
-                <div class="card">
-                    <a href="{{route('apartment.show', $apartment)}}">
-                        <img class="border border-rounded" src="{{$apartment->image}}" alt="apartment">
-                    </a>
-                </div>
-            </div>
-        @endforeach
-        {{ $apartments->links() }}
+      @foreach ($apartments as $apartment)
+          <div class="apartment-wrapper mx-3">
+              <div class="card">
+                  <a href="{{route('apartment.show', $apartment)}}">
+                      @if (str_starts_with($apartment->image, 'https://') || str_starts_with($apartment->image, 'http://') || str_starts_with($apartment->image, 'uploads/'))
+                          <img class="w-50" src="{{ $apartment->image }}" alt="">
+                      @else
+                          <img class="w-50" src="{{ asset('/storage') . '/' . $apartment->image }}" alt="">
+                      @endif
+                  </a>
+              </div>
+          </div>
+      </div>
+      @endforeach
 </div>
+    {{ $apartments->links() }}
 @endsection

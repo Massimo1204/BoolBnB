@@ -162,33 +162,6 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="edit">
-                    <div class="col-12">
-                        <h1 class="text-center">
-                            Le foto del tuo appartamento:
-                        </h1>
-                    </div>
-                    @if (session('deleted-message'))
-                        <div class="mx-2 alert alert-success">
-                            {{session('deleted-message')}}
-                        </div>
-                    @endif
-                        {{-- @dd($apartment->pictures) --}}
-                    <div class="col-12 d-flex flex-wrap">
-                        @foreach ($apartment->pictures as $photo)
-                        <div class="col-4 p-1 position-relative">
-                            <div class="delete position-absolute">
-                                <form action="{{route('picture.destroy',$photo)}}" method="POST" class="picture-form-destroyer" onclick="return confirm('Sei sicuro di voler eliminare la seguente foto?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="rounded-1"><i class="fas fa-x"></i></button>
-                                </form>
-                            </div>
-                            <img class="rounded-1" src="{{$photo->image}}" alt="apartment img" >
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
                 <div class="col-12">
                     <label for="image[]">inserisci altre foto del tuo appartamento</label>
                     {{-- @dd($apartment->pictures) --}}
@@ -217,6 +190,7 @@
                 </div>
             </div>
         </form>
+<<<<<<< HEAD
 <<<<<<< HEAD
         <div class="delete-button">
             @if (Auth::user()->id == $apartment->user_id)
@@ -263,9 +237,33 @@
                 </div>
             @endforeach
         </div>
-=======
-
->>>>>>> 106fe89e9d26b58195ace638e29f4a95824e1f5c
+        <div class="edit">
+            <div class="col-12">
+                <h1 class="text-center">
+                    Le foto del tuo appartamento:
+                </h1>
+            </div>
+            @if (session('deleted-message'))
+                <div class="mx-2 alert alert-success">
+                    {{session('deleted-message')}}
+                </div>
+            @endif
+                {{-- @dd($apartment->pictures) --}}
+            <div class="col-12 d-flex flex-wrap">
+                @foreach ($apartment->pictures as $photo)
+                <div class="col-4 p-1 position-relative">
+                    <div class="delete position-absolute">
+                        <form action="{{route('picture.destroy',$photo)}}" method="POST" class="picture-form-destroyer" onclick="return confirm('Sei sicuro di voler eliminare la seguente foto?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="rounded-1"><i class="fas fa-x"></i></button>
+                        </form>
+                    </div>
+                    <img class="rounded-1" src="{{$photo->image}}" alt="apartment img" >
+                </div>
+                @endforeach
+            </div>
+        </div>
     </div>
 @endsection
 {{-- @section('footer-scripts')
