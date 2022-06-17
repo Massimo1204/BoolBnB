@@ -128,26 +128,6 @@
                         <li class="list-group-item active" id="5-result"></li>
                     </ul>
             </div>
-            <div class="col-4">
-                <label for="address_number">Numero:</label><br>
-                <input class="w-100" type="number" name="address_number" id="address_number" value="{{ old('address_number') ?? ''}}" required>
-                @error('address_number')
-                    <div class="alert alert-danger mt-2">
-                        Il numero civico
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            <div class="col-8">
-                <label for="address_city">inserisci la città:</label>
-                <input class="w-100" type="text" name="address_city" id="address_city" value="{{ old('address_city') ?? ''}}" required>
-                @error('address_city')
-                <div class="alert alert-danger mt-2">
-                    Il nome della città
-                    {{ $message }}
-                </div>
-                @enderror
-            </div>
 
             <div class="col-12 mb-3">
                 <label for="address_city">Servizi:</label><br>
@@ -209,15 +189,17 @@
                         let id=index+1+"-result";
                         let li=document.getElementById(id);
                         if(data["results"][index]["address"]["freeformAddress"] != undefined && data["results"][index]["address"]["countryCode"] != undefined ){
-                            li.innerHTML = data["results"][index]["address"]["freeformAddress"] + " " +data["results"][index]["address"]["countryCode"];
+                            li.innerHTML = data["results"][index]["address"]["freeformAddress"] + " " + data["results"][index]["address"]["countryCode"];
+                            li.addEventListener('click',function(){
+                                address.value = data["results"][index]["address"]["freeformAddress"] + " " + data["results"][index]["address"]["countryCode"];
+                                document.getElementById("results").classList.add("d-none");
+                            })  
                         }
-                        // console.log(data["results"][index]["address"]["streetName"]);
                         document.getElementById("results").classList.remove("d-none");
-                        // if(li.value == " "){
-                        //     document.getElementById("results").classList.add("d-none");
-
-                        // }
                     }
+                }
+                if(address.value == ""){
+                    document.getElementById("results").classList.add("d-none");
                 }
             }
     </script>
