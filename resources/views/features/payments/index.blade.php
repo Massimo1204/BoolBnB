@@ -15,14 +15,13 @@
     @endif
 
     <div class="d-flex justify-content-center">
-        <form method="post" id="payment-form" action="{{route('payments.checkout')}}">
+        <form method="post" id="payment-form" action="{{route('payments.checkout', [$sponsorship, $apartment])}}">
             @csrf
-    
             <section>
                 <label for="amount">
                     <span class="input-label">Amount</span>
                     <div class="input-wrapper amount-wrapper">
-                        <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="10">
+                        <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="{{$amount}}">
                     </div>
                 </label>
     
