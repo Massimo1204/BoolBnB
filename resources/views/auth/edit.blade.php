@@ -69,7 +69,7 @@
                         </div>
 
                         <div class="form-group row mb-3">
-                            <label for="profile_picture" class="col-md-4 col-form-label text-md-right">{{ __('Profile Picture') }}*</label>
+                            <label for="profile_picture" class="col-md-4 col-form-label text-md-right">{{ __('Profile Picture') }}</label>
 
                             <div class="col-md-6">
                                 <input id="profile_picture" type="file" class="form-control @error('profile_picture') is-invalid @enderror" name="profile_picture">
