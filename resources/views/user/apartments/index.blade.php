@@ -8,30 +8,30 @@
     @endif
     <div class="container">
         <div class="row">
-            <div class="col-3">
-                <h1>I tuoi appartamenti:</h1>
-            </div>
-            <div class="col-3">
-                <a href="{{ route('user.home') }}">Vai alla lista di tutti gli appartamenti</a>
-            </div>
-            <div class="col-3">
-                <a href="{{ route('apartment.create') }}">Aggiungi nuovo Appartmanento</a>
+            <div class="col-12 mb-5">
+                <a href="{{ route('apartment.create') }}" class=" text-black">Aggiungi nuovo Appartmanento <i class="fa-solid fa-plus"></i> </a>
             </div>
         </div>
     </div>
-    <div class="d-flex flex-wrap justify-content-center">
-        @foreach ($apartments as $apartment)
-            <div class="apartment-wrapper mx-3">
-                <div class="card">
-                    <a href="{{ route('apartment.show', $apartment) }}">
-                        @if (str_starts_with($apartment->image, 'https://') || str_starts_with($apartment->image, 'http://'))
-                            <img class="border border-rounded" src="{{ $apartment->image }}" alt="apartment">
-                        @else
-                            <img class="border border-rounded" src="{{ asset('/storage') . '/' . $apartment->image }}" alt="apartment">
-                        @endif
-                    </a>
-                </div>
+    @if ($apartments->total())
+        <div class="d-flex flex-wrap justify-content-center">
+            <div class="col-12 text-center">
+                <h1>I tuoi appartamenti</h1>
             </div>
-        @endforeach
-    </div>
+            @foreach ($apartments as $apartment)
+                <div class="apartment-wrapper mx-3">
+                    <div class="card">
+                        <a href="{{ route('apartment.show', $apartment) }}">
+                            @if (str_starts_with($apartment->image, 'https://') || str_starts_with($apartment->image, 'http://'))
+                                <img class="border border-rounded" src="{{ $apartment->image }}" alt="apartment">
+                            @else
+                                <img class="border border-rounded" src="{{ asset('/storage') . '/' . $apartment->image }}"
+                                    alt="apartment">
+                            @endif
+                        </a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @endif
 @endsection
