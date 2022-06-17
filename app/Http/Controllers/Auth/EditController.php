@@ -28,6 +28,18 @@ class EditController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $request->validate([
+            'first_name' => ['required', 'string', 'max:255','min:2'],
+            'last_name' => ['required', 'string', 'max:255','min:2'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'profile_picture' => ['mimes:jpeg,jpg,png,gif'],
+            'password' => ['required', 'string', 'min:8'],
+            'password_confirmation' => ['required_with:password','same:password']
+        ],
+        [
+            "required" => "Non puoi aggiornare uno User senza :attribute.",
+        ]
+        );
         $request['password'] = Hash::make($request['password']);
         $data = $request->all();
         if($request['profile_picture'] != null){
@@ -35,17 +47,6 @@ class EditController extends Controller
             $data['profile_picture'] = Storage::put('uploads', $data['profile_picture']);
         }
 
-        $request->validate([
-            'first_name' => ['required', 'string', 'max:255','min:2'],
-            'last_name' => ['required', 'string', 'max:255','min:2'],
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'profile_picture' => ['mimes:jpeg,jpg,png,gif'],
-            'password' => ['required', 'string', 'min:8'],
-        ],
-        [
-            "required" => "Non puoi aggiornare uno User senza :attribute.",
-        ]
-        );
 
         $user->update($data);
         return redirect()->route('login');
