@@ -43,3 +43,11 @@ Route::delete('/picture/{id}', 'User\PicturesDeleteController@destroy')->name("p
 
 Route::resource('/user/apartment',"User\ApartmentController")->middleware('auth');
 // Route::delete('/apartment/{id}', 'User\ApartmentController@destroy')->name('user.apartment.destroy');
+
+Route::namespace('Payments')
+->prefix('/payments')
+->name('payments.')
+->group( function() {
+    Route::get('/index', 'PaymentController@index')->name('index');
+    Route::post('/checkout', 'PaymentController@store')->name('checkout');
+});
