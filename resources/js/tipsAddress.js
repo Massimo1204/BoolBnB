@@ -14,17 +14,19 @@ function callApi() {
             for (let index = 0; index < 5; index++) {
                 let id=index+1+"-result";
                 let li=document.getElementById(id);
-                if(data["results"][index]["address"]["freeformAddress"] != undefined && data["results"][index]["address"]["countryCode"] != undefined ){
-                    li.innerHTML = data["results"][index]["address"]["freeformAddress"] + " " + data["results"][index]["address"]["countryCode"];
-                    li.addEventListener('click',function(){
-                        address.value = data["results"][index]["address"]["freeformAddress"] + " " + data["results"][index]["address"]["countryCode"];
-                        document.getElementById("results").classList.add("d-none");
-                    })  
-                    li.classList.remove("d-none"); 
+                if(address.value == ""){
+                    li.classList.add("d-none");
+                }
+                else{
+                    if(data["results"][index]["address"]["freeformAddress"] != undefined && data["results"][index]["address"]["countryCode"] != undefined ){
+                        li.innerHTML = data["results"][index]["address"]["freeformAddress"] + " " + data["results"][index]["address"]["countryCode"];
+                        li.addEventListener('click',function(){
+                            address.value = data["results"][index]["address"]["freeformAddress"] + " " + data["results"][index]["address"]["countryCode"];
+                            document.getElementById("results").classList.add("d-none");
+                        })  
+                        li.classList.remove("d-none"); 
+                    }
                 }
             }
-        }
-        if(address.value == ""){
-            document.getElementById("results").classList.add("d-none");
         }
     }
