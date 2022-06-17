@@ -59,9 +59,7 @@ class ApartmentController extends Controller
             'guests' => ['required', 'numeric','min:1'],
             'n_beds' => ['required', 'numeric','min:1'],
             'price' => ['required', 'numeric','min:1'],
-            'address' => ['required', 'string','min:3'],
-            'address_number' => ['required', 'string','min:1'],
-            'address_city' => ['required', 'string','min:3'],
+            'address' => ['required', 'string','min:8'],
             'service' => ['required'],
         ],
         [
@@ -71,8 +69,7 @@ class ApartmentController extends Controller
         ]);
 
         $data = $request->all();
-        $tempAddress = $data['address'].' '.$data['address_number'].' '.$data['address_city'];
-        $newAddress = str_replace(" ", "%20", $tempAddress);
+        $newAddress = str_replace(" ", "%20", $data['address']);
         $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
         // $response = Http::get('https://api.tomtom.com/search/2/search' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
 
@@ -111,8 +108,6 @@ class ApartmentController extends Controller
             $newApartment->lat = $dataResponse["results"][0]["position"]["lat"];
             $newApartment->long = $dataResponse["results"][0]["position"]["lon"];
             $newApartment->address = $data['address'];
-            $newApartment->address_number = $data['address_number'];
-            $newApartment->address_city = $data['address_city'];
             $newApartment->save();
             $images=array();
             if($files=$request->file('images')){
@@ -196,8 +191,6 @@ class ApartmentController extends Controller
             'n_beds' => ['required', 'numeric','min:1'],
             'price' => ['required', 'numeric','min:1'],
             'address' => ['required', 'string','min:3'],
-            'address_number' => ['required', 'string','min:1'],
-            'address_city' => ['required', 'string','min:3'],
             'service' => ['required'],
         ],
         [
@@ -216,8 +209,7 @@ class ApartmentController extends Controller
         else
             $data['available'] = 0;
 
-        $tempAddress = $data['address'].' '.$data['address_number'].' '.$data['address_city'];
-        $newAddress = str_replace(" ", "%20", $tempAddress);
+        $newAddress = str_replace(" ", "%20", $data['address']);
         $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
         $dataResponse = json_decode($response->body(), true);
 
@@ -241,8 +233,6 @@ class ApartmentController extends Controller
         $apartment->lat = $dataResponse["results"][0]["position"]["lat"];
         $apartment->long = $dataResponse["results"][0]["position"]["lon"];
         $apartment->address = $data["address"];
-        $apartment->address = $data["address_number"];
-        $apartment->address = $data["address_city"];
         $apartment->save();
         $apartment->services()->sync($data['service']);
         // $sponsorships = Sponsorship::all();
