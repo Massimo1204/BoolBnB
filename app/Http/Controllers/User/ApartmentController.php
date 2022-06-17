@@ -69,12 +69,10 @@ class ApartmentController extends Controller
         ]);
 
         $data = $request->all();
-        $newAddress = str_replace(" ", "%20", $data['address']);
-        $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
-        // $response = Http::get('https://api.tomtom.com/search/2/search' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
-
+        $newAddress = rawurlencode($data['address']);
+        $response = Http::get('https://api.tomtom.com/search/2/search/' . $newAddress . '.json?countrySet=IT&lat=37.337&lon=-121.89&extendedPostalCodesFor=Str&minFuzzyLevel=1&maxFuzzyLevel=2&view=Unified&relatedPois=off&key=' . env("APP_KEYMAPS") . '&countrySet=Italia');
         $dataResponse = json_decode($response->body(), true);
-        if((strtolower($dataResponse["results"][0]["address"]["streetName"]) == strtolower($data["address"])) && (strtolower($dataResponse["results"][0]["address"]["localName"]) == strtolower($data["address_city"])))
+        if(strtolower($dataResponse["results"][0]["address"]["freeformAddress"] . " " . $dataResponse["results"][0]["address"]["countryCode"]) == strtolower($data["address"]))
         {
             if($request['visible'] != null){
                 $data['visible'] = 1;
