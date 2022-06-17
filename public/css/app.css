@@ -20542,6 +20542,18 @@ readers do not read off random characters that represent icons */
   width: 100%;
 }
 
+div.show-img {
+  height: 70vh;
+}
+div.show-img img {
+  height: 100%;
+}
+
+div.show-thumbnails {
+  height: 25vh;
+}
+div.show-thumbnails img {
+  height: 100%;
 #results li {
   cursor: pointer;
 }
