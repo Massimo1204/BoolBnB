@@ -20541,3 +20541,7 @@ readers do not read off random characters that represent icons */
   height: 100%;
   width: 100%;
 }
+
+#results li {
+  cursor: pointer;
+}
