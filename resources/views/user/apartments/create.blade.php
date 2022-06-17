@@ -120,12 +120,12 @@
                         {{ $message }}
                     </div>
                 @enderror
-                    <ul class="list-group d-none" id="results">
-                        <li class="list-group-item active" id="1-result"></li>
-                        <li class="list-group-item active" id="2-result"></li>
-                        <li class="list-group-item active" id="3-result"></li>
-                        <li class="list-group-item active" id="4-result"></li>
-                        <li class="list-group-item active" id="5-result"></li>
+                    <ul class="list-group" id="results">
+                        <li class="list-group-item active d-none" id="1-result"></li>
+                        <li class="list-group-item active d-none" id="2-result"></li>
+                        <li class="list-group-item active d-none" id="3-result"></li>
+                        <li class="list-group-item active d-none" id="4-result"></li>
+                        <li class="list-group-item active d-none" id="5-result"></li>
                     </ul>
             </div>
 
@@ -172,35 +172,5 @@
 </div>
 @endsection
 @section('footer-scripts')
-    <script defer>
-        let address = document.getElementById('address');
-        address.addEventListener('keyup', logKey);
-        function logKey() {
-                let newAdress = address.value.replace(/ /g, "%20");
-                let search ='https://api.tomtom.com/search/2/search/' + newAdress + '.json?countrySet=IT&lat=37.337&lon=-121.89&extendedPostalCodesFor=Str&minFuzzyLevel=1&maxFuzzyLevel=2&view=Unified&relatedPois=off&key=PAeaq8AFofiaFnTYcbMQMTBAW7ENmXLB&countrySet=Italia';
-                let request = new XMLHttpRequest(); // Create a request variable and assign a new XMLHttpRequest object to it.
-                request.open('GET', search); // Open a new connection, using the GET request on the URL endpoint
-                request.send();
-                
-                let tips;
-                request.onload = async function () {
-                    const data = JSON.parse(this.response);
-                    for (let index = 0; index < 5; index++) {
-                        let id=index+1+"-result";
-                        let li=document.getElementById(id);
-                        if(data["results"][index]["address"]["freeformAddress"] != undefined && data["results"][index]["address"]["countryCode"] != undefined ){
-                            li.innerHTML = data["results"][index]["address"]["freeformAddress"] + " " + data["results"][index]["address"]["countryCode"];
-                            li.addEventListener('click',function(){
-                                address.value = data["results"][index]["address"]["freeformAddress"] + " " + data["results"][index]["address"]["countryCode"];
-                                document.getElementById("results").classList.add("d-none");
-                            })  
-                        }
-                        document.getElementById("results").classList.remove("d-none");
-                    }
-                }
-                if(address.value == ""){
-                    document.getElementById("results").classList.add("d-none");
-                }
-            }
-    </script>
+    <script src="{{ asset('js/tipsAddress.js') }}"></script>
 @endsection
