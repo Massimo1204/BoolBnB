@@ -60,7 +60,7 @@
                                     <input id="search-focus" type="search" id="form1" class="form-control" />
                                 </div>
                                 <button type="button" class="btn btn-primary">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <i class="fa-solid fa-magnifying-glass text-white"></i>
                                 </button>
                             </div>
                         </li>
