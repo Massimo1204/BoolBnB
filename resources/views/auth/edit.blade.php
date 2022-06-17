@@ -118,12 +118,19 @@
                                     class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}*</label>
 
                                 <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control"
-                                        name="password_confirmation" required autocomplete="new-password">
+                                    <input id="password-confirm" type="password" class="form-control
+                                    @if ($errors->any())
+                                    @foreach ($errors->all() as $error)
+                                        @if (strpos($error, 'password confirmation') !== false)
+                                        is-invalid
+                                        @endif
+                                    @endforeach
+                                @endif " name="password_confirmation" required
+                                        autocomplete="new-password">
                                     @if ($errors->any())
                                         @foreach ($errors->all() as $error)
                                             @if (strpos($error, 'password confirmation') !== false)
-                                                <p class="text-danger">{{ $error }}</p>
+                                                <strong class="text-danger fs-small mt-1">{{ $error }}</strong>
                                             @endif
                                         @endforeach
                                     @endif
@@ -131,7 +138,7 @@
                             </div>
                     </div>
 
-                    <div class="form-group row mb-0">
+                    <div class="form-group row mb-2">
                         <div class="col-md-6 offset-md-4">
                             <button type="submit" class="btn btn-primary">
                                 {{ __('Edit') }}
