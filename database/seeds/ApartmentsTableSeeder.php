@@ -18,8 +18,9 @@ class ApartmentsTableSeeder extends Seeder
     public function run(Faker $faker)
     {
         $user_ids = User::pluck('id')->toArray();
+        $RandDescs=config('descs');
         for($i=0;$i<6;$i++){
-            $AppartmentQuery = Http::get('https://api.unsplash.com/search/photos?client_id='.env("APP_KEYHOUSE").'&&query=house-exterior&&page='.$i);
+            $AppartmentQuery = Http::get('https://api.unsplash.com/search/photos?client_id='.env("APP_KEYHOUSE").'&&query=apartment-building&&page='.$i);
             $Appartments = $AppartmentQuery->getBody();
             $Appartments = json_decode($Appartments, true);
             for($c=0;$c<10;$c++){
@@ -29,7 +30,7 @@ class ApartmentsTableSeeder extends Seeder
                 $descs[]=$desc;
             }
         }
-        for($i=10; $i < 60; $i++){
+        for($i=0; $i < 60; $i++){
 
             $newApartment = new Apartment();
             $newApartment->user_id = $faker->randomElement($user_ids);
@@ -48,10 +49,9 @@ class ApartmentsTableSeeder extends Seeder
             $newApartment->price = $faker->randomFloat(2,70,1000);
             $newApartment->image = $imgs[$i];
             if($descs[$i] == null){
-                $newApartment->description = $faker->paragraph(6);;
+                $newApartment->description = $RandDescs[rand(0,6)];
             }
             else{
-
                 $newApartment->description = $descs[$i];
             }
             $newApartment->save();
