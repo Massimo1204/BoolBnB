@@ -39,12 +39,13 @@ class EditController extends Controller
             'first_name' => ['required', 'string', 'max:255','min:2'],
             'last_name' => ['required', 'string', 'max:255','min:2'],
             'email' => ['required', 'string', 'email', 'max:255'],
+            'profile_picture' => ['mimes:jpeg,jpg,png,gif'],
             'password' => ['required', 'string', 'min:8'],
         ],
         [
             "required" => "Non puoi aggiornare uno User senza :attribute.",
         ]
-    );
+        );
 
         $user->update($data);
         return redirect()->route('login');
