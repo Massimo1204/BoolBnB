@@ -209,15 +209,17 @@
                         let id=index+1+"-result";
                         let li=document.getElementById(id);
                         if(data["results"][index]["address"]["freeformAddress"] != undefined && data["results"][index]["address"]["countryCode"] != undefined ){
-                            li.innerHTML = data["results"][index]["address"]["freeformAddress"] + " " +data["results"][index]["address"]["countryCode"];
+                            li.innerHTML = data["results"][index]["address"]["freeformAddress"] + " " + data["results"][index]["address"]["countryCode"];
+                            li.addEventListener('click',function(){
+                                address.value = data["results"][index]["address"]["freeformAddress"] + " " + data["results"][index]["address"]["countryCode"];
+                                document.getElementById("results").classList.add("d-none");
+                            })  
                         }
-                        // console.log(data["results"][index]["address"]["streetName"]);
                         document.getElementById("results").classList.remove("d-none");
-                        // if(li.value == " "){
-                        //     document.getElementById("results").classList.add("d-none");
-
-                        // }
                     }
+                }
+                if(address.value == ""){
+                    document.getElementById("results").classList.add("d-none");
                 }
             }
     </script>
