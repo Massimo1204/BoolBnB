@@ -20554,6 +20554,7 @@ div.show-thumbnails {
 }
 div.show-thumbnails img {
   height: 100%;
-#results li {
+}
+div.show-thumbnails img #results li {
   cursor: pointer;
 }
