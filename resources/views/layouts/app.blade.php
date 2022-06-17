@@ -78,7 +78,7 @@
                                     Area Riservata
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end border-0 shadow pt-1"
+                                <div class="dropdown-menu dropdown-menu-end border-0 shadow pt-3"
                                     aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('login') }}">
                                         {{ __('Login') }}
@@ -96,7 +96,7 @@
                                     {{ ucfirst(Auth::user()->first_name) . ' ' . ucfirst(Auth::user()->last_name) }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end border-0 shadow pt-1"
+                                <div class="dropdown-menu dropdown-menu-end border-0 shadow pt-3"
                                     aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="#">
                                         {{ __('Messaggi') }}
