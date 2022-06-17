@@ -178,70 +178,86 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, Apartment $apartment)
     {
-        $request->validate([
-            'title' => ['required', 'string', 'min:10','max:255'],
-            'image.*' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'description' => ['required', 'string','min:10','max:65000'],
-            'n_rooms' => ['required', 'numeric','min:1'],
-            'n_bedrooms' => ['required', 'numeric','min:1'],
-            'n_bathrooms' => ['required', 'numeric','min:1'],
-            'guests' => ['required', 'numeric','min:1'],
-            'n_beds' => ['required', 'numeric','min:1'],
-            'price' => ['required', 'numeric','min:1'],
-            'address' => ['required', 'string','min:3'],
-            'service' => ['required'],
-        ],
-        [
-            "required" => "Non puoi inserire un Appartamento senza :attribute",
-        ]);
-
-        $data = $request->all();
-
-        if($request['visible'] != null)
-            $data['visible'] = 1;
-        else
-            $data['visible'] = 0;
-
-        if($request['available'] != null)
-            $data['available'] = 1;
-        else
-            $data['available'] = 0;
-
-        $newAddress = str_replace(" ", "%20", $data['address']);
-        $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
-        $dataResponse = json_decode($response->body(), true);
-
-        $apartment->title = $data["title"];
-        $apartment->user_id = Auth::user()->id;
-        if(isset($data["image"])){
-            $apartment->image = Storage::put('uploads',$data["image"]);
+        {
+            $request->validate([
+                'title' => ['required', 'string', 'min:10','max:255'],
+                'image.*' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'description' => ['required', 'string','min:10','max:65000'],
+                'n_rooms' => ['required', 'numeric','min:1'],
+                'n_bedrooms' => ['required', 'numeric','min:1'],
+                'n_bathrooms' => ['required', 'numeric','min:1'],
+                'guests' => ['required', 'numeric','min:1'],
+                'n_beds' => ['required', 'numeric','min:1'],
+                'price' => ['required', 'numeric','min:1'],
+                'address' => ['required', 'string','min:3'],
+                'service' => ['required'],
+            ],
+            [
+                "required" => "Non puoi inserire un Appartamento senza :attribute",
+            ]);
+            $data = $request->all();
+            $newAddress = rawurlencode($data['address']);
+            $response = Http::get('https://api.tomtom.com/search/2/search/' . $newAddress . '.json?countrySet=IT&lat=37.337&lon=-121.89&extendedPostalCodesFor=Str&minFuzzyLevel=1&maxFuzzyLevel=2&view=Unified&relatedPois=off&key=' . env("APP_KEYMAPS") . '&countrySet=Italia');
+            $dataResponse = json_decode($response->body(), true);
+            if(strtolower($dataResponse["results"][0]["address"]["freeformAddress"] . " " . $dataResponse["results"][0]["address"]["countryCode"]) == strtolower($data["address"]))
+            {
+                if($request['visible'] != null)
+                    $data['visible'] = 1;
+                else
+                    $data['visible'] = 0;
+    
+                if($request['available'] != null)
+                    $data['available'] = 1;
+                else
+                    $data['available'] = 0;
+    
+                $newAddress = str_replace(" ", "%20", $data['address']);
+                $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
+                $dataResponse = json_decode($response->body(), true);
+    
+                $apartment->title = $data["title"];
+                $apartment->user_id = Auth::user()->id;
+                if(isset($data["image"])){
+                    $apartment->image = Storage::put('uploads',$data["image"]);
+                }
+                $apartment->description = $data["description"];
+                $apartment->n_rooms = $data["n_rooms"];
+                $apartment->n_bedrooms = $data["n_bedrooms"];
+                $apartment->n_beds = $data["n_beds"];
+                $apartment->n_bathrooms = $data["n_bathrooms"];
+                $apartment->guests = $data["guests"];
+                if(isset($data["visible"]))
+                $apartment->visible = $data["visible"];
+                if(isset($data["available"]))
+                $apartment->available = $data["available"];
+                $apartment->price = $data["price"];
+                $apartment->square_meters = $data["square_meters"];
+                $apartment->lat = $dataResponse["results"][0]["position"]["lat"];
+                $apartment->long = $dataResponse["results"][0]["position"]["lon"];
+                $apartment->address = $data["address"];
+                $apartment->save();
+                $apartment->services()->sync($data['service']);
+                // $sponsorships = Sponsorship::all();
+                // foreach($sponsorships as $sponsorship){
+                //     if($sponsorship->id = $data['sponsorship']){
+                //         $duration = $sponsorship->duration;
+                //     }
+                // }
+                // $endDate = date('Y-m-d h:i:s', strtotime($apartment->updated_at)+60*60*$duration);
+                // $apartment->sponsorships()->sync([$data['sponsorship'] => ['start_date' => $apartment->updated_at, 'end_date' => $endDate]]);
+                return redirect()->route('apartment.show', compact('apartment'));
+            }
+            else{
+                $request->validate([
+                    'address' => ['required', 'numeric','min:3'],
+                ],
+                [
+                    "required" => " è richiesto",
+                    "numeric" => " Non riconosciamo questo indirizzo. L'hai inserito correttamente?",
+                    "min" => " è troppo corto",
+                ]);
+            }    
         }
-        $apartment->description = $data["description"];
-        $apartment->n_rooms = $data["n_rooms"];
-        $apartment->n_bedrooms = $data["n_bedrooms"];
-        $apartment->n_beds = $data["n_beds"];
-        $apartment->n_bathrooms = $data["n_bathrooms"];
-        $apartment->guests = $data["guests"];
-        if(isset($data["visible"]))
-        $apartment->visible = $data["visible"];
-        if(isset($data["available"]))
-        $apartment->available = $data["available"];
-        $apartment->price = $data["price"];
-        $apartment->square_meters = $data["square_meters"];
-        $apartment->lat = $dataResponse["results"][0]["position"]["lat"];
-        $apartment->long = $dataResponse["results"][0]["position"]["lon"];
-        $apartment->address = $data["address"];
-        $apartment->save();
-        $apartment->services()->sync($data['service']);
-        // $sponsorships = Sponsorship::all();
-        // foreach($sponsorships as $sponsorship){
-        //     if($sponsorship->id = $data['sponsorship']){
-        //         $duration = $sponsorship->duration;
-        //     }
-        // }
-        // $endDate = date('Y-m-d h:i:s', strtotime($apartment->updated_at)+60*60*$duration);
-        // $apartment->sponsorships()->sync([$data['sponsorship'] => ['start_date' => $apartment->updated_at, 'end_date' => $endDate]]);
-        return redirect()->route('apartment.show', compact('apartment'));
     }
 
     /**

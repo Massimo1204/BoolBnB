@@ -149,26 +149,13 @@
                             {{ $message }}
                         </div>
                     @enderror
-                </div>
-                <div class="col-12">
-                    <label for="address_number">inserisci in numero:</label>
-                    <input class="w-100" type="text" name="address_number" id="address_number"
-                        value="{{ $apartment->address_number }}">
-                    @error('address_number')
-                        <div class="alert alert-danger mt-2">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="col-12">
-                    <label for="address_city">inserisci la città:</label>
-                    <input class="w-100" type="text" name="address_city" id="address_city"
-                        value="{{ $apartment->address_city }}">
-                    @error('address_city')
-                        <div class="alert alert-danger mt-2">
-                            {{ $message }}
-                        </div>
-                    @enderror
+                    <ul class="list-group" id="results">
+                        <li class="list-group-item active d-none" id="1-result"></li>
+                        <li class="list-group-item active d-none" id="2-result"></li>
+                        <li class="list-group-item active d-none" id="3-result"></li>
+                        <li class="list-group-item active d-none" id="4-result"></li>
+                        <li class="list-group-item active d-none" id="5-result"></li>
+                    </ul>
                 </div>
                 <div class="col-12 mb-3">
                     <label for="address_city">Servizi:</label><br>
@@ -220,17 +207,6 @@
         </div>
     </div>
 @endsection
-{{-- @section('footer-scripts')
-    <script defer>
-        const deleteForm = document.querySelector('.apartment-form-destroyer');
-
-        deleteForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // § blocchiamo l'invio del form
-            userConfirmation = window.confirm(
-                `Sei sicuro di voler eliminare ${this.getAttribute('apartment-title')}?`);
-            if (userConfirmation) {
-                this.submit();
-            }
-        });
-    </script>
-@endsection --}}
+@section('footer-scripts')
+    <script src="{{ asset('js/tipsAddress.js') }}"></script>
+@endsection
