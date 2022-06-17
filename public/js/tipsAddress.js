@@ -96,7 +96,7 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "APP_KEYMAPS", function() { return APP_KEYMAPS; });
-var APP_KEYMAPS = "PAeaq8AFofiaFnTYcbMQMTBAW7ENmXLB";
+var APP_KEYMAPS = "B7gX4qqVZD8IACpKc56l2sU0pQBw3ECq";
 
 
 /***/ }),
@@ -181,7 +181,7 @@ function callApi() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/admin/corso boolean/prova finale/BoolBnB/resources/js/tipsAddress.js */"./resources/js/tipsAddress.js");
+module.exports = __webpack_require__(/*! /Users/alessandrobaldassarre/boolean/BoolBnB/resources/js/tipsAddress.js */"./resources/js/tipsAddress.js");
 
 
 /***/ })
