@@ -2,6 +2,16 @@
 
 @section('content')
 <div class="container-fluid">
+    @if (session('sponsor-success-message'))
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-success">
+                    {{session('sponsor-success-message')}}
+                </div>
+            </div>
+        </div>
+    @endif
+
     <div class="row mb-3">
         <div class="col-12 text-center">
             <h1>{{ ucfirst($apartment->title) }}</h1>
@@ -37,6 +47,9 @@
         <div class="d-flex justify-content-evenly mt-3">
             <div class="btn btn-primary btn-sm">
                 <a class="text-white text-decoration-none" href="{{ route('apartment.edit', $apartment) }}">Edit</a>
+            </div>
+            <div>
+                <a type="button" class="btn btn-success" href="{{route('sponsorship.index', $apartment)}}">Attiva sponsorizzazione</a>
             </div>
             <form action="{{ route('apartment.destroy', $apartment->id) }}" method="POST" class="apartment-form-destroyer"
                 apartment-title="{{ $apartment->title }}">
