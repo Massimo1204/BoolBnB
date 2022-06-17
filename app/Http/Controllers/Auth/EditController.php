@@ -39,7 +39,6 @@ class EditController extends Controller
             'first_name' => ['required', 'string', 'max:255','min:2'],
             'last_name' => ['required', 'string', 'max:255','min:2'],
             'email' => ['required', 'string', 'email', 'max:255'],
-            'birth_date' => ['date'],
             'password' => ['required', 'string', 'min:8'],
         ],
         [
