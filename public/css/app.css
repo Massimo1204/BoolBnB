@@ -20558,3 +20558,7 @@ div.show-thumbnails img {
 div.show-thumbnails img #results li {
   cursor: pointer;
 }
+
+#results li {
+  cursor: pointer;
+}
