@@ -1,18 +1,38 @@
 @extends('layouts.app')
 
 @section('content')
-    @if (session('deleted-message'))
-        <div class="alert alert-warning">
-            {{ session('deleted-message') }}
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12 text-center">
+            <h1>{{ ucfirst($apartment->title) }}</h1>
         </div>
-    @endif
-    <div class="d-flex justify-content-center w-100">
-        @if (str_starts_with($apartment->image, 'https://') || str_starts_with($apartment->image, 'http://'))
-            <img class="w-50" src="{{ $apartment->image }}" alt="">
-        @else
-            <img class="w-50" src="{{ asset('/storage') . '/' . $apartment->image }}" alt="">
-        @endif
     </div>
+    <div class="row justify-content-center">
+        <div class="col-8 show-img mb-3">
+            @if (str_starts_with($apartment->image, 'https://') || str_starts_with($apartment->image, 'http://'))
+                <img class="rounded-1 w-100" src="{{ $apartment->image }}" alt="{{ $apartment->title }}">
+            @else
+                <img class="rounded-1 w-100" src="{{ asset('/storage') . '/' . $apartment->image }}" alt="{{ $apartment->title }}">
+            @endif
+        </div>
+        <div class="col-12 mb-3">
+            <div class="row justify-content-center">
+                @foreach ($apartment->pictures as $photo)
+                    <div class="col-2 show-thumbnails">
+                        @if (str_starts_with($apartment->image, 'https://') || str_starts_with($apartment->image, 'http://'))
+                            <img class="rounded-1 w-100" src="{{$photo->image}}" alt="apartment img" >
+                        @else
+                            <img class="rounded-1 w-100" src="{{ asset('/storage') . '/' . $photo->image }}" alt="apartment img">
+                        @endif
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        <div class="col-10">
+            <p class="fs-3">{{ $apartment->description }}</p>
+        </div>
+    </div>
+</div>
     @if (Auth::user()->id == $apartment->user_id)
         <div class="d-flex justify-content-evenly mt-3">
             <div class="btn btn-primary btn-sm">
