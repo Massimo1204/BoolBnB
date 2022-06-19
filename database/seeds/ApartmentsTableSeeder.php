@@ -19,7 +19,7 @@ class ApartmentsTableSeeder extends Seeder
     {
         $user_ids = User::pluck('id')->toArray();
         $RandDescs=config('descs');
-        for($i=0;$i<6;$i++){
+        for($i=2;$i<8;$i++){
             $AppartmentQuery = Http::get('https://api.unsplash.com/search/photos?client_id='.env("APP_KEYHOUSE").'&&query=apartment-building&&page='.$i);
             $Appartments = $AppartmentQuery->getBody();
             $Appartments = json_decode($Appartments, true);
