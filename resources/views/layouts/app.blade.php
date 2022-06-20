@@ -38,7 +38,7 @@
                                     BoolBnB
                                 </a>
                             @else
-                                <a class="navbar-brand" href="{{ url('/user') }}">
+                                <a class="navbar-brand" href="{{ url('/') }}">
                                     BoolBnB
                                 </a>
                             @endif
