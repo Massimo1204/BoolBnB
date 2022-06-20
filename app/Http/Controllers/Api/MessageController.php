@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\Apartment;
 use App\Model\Message;
 
 class MessageController extends Controller
@@ -16,5 +17,11 @@ class MessageController extends Controller
 
     public function store(Request $request){
 
+    }
+
+    public function getApartmentMessages(Apartment $apartment){
+        $messages = $apartment->messages;
+
+        return response()->json($messages);
     }
 }
