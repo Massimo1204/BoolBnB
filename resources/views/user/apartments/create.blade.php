@@ -10,7 +10,7 @@
         <div class="row apartment">
             <div class="col-12">
                 <label for="title">Titolo</label>
-                <input class="w-100" type="text" name="title" id="title" value="{{ old('title') ?? ''}}" required>
+                <input class="form-control" type="text" name="title" id="title" value="{{ old('title') ?? ''}}" required autocomplete="on" autofocus minlength="5">
                 @error('title')
                         <div class="alert alert-danger mt-2">
                             Il titolo
@@ -20,7 +20,7 @@
             </div>
             <div class="col-12">
                 <label for="image">Carica la foto cover:</label>
-                <input type="file" name="image" id="image">
+                <input class="form-control" type="file" name="image" id="image" required autocomplete="on" autofocus>
                 @error('image')
                         <div class="alert alert-danger mt-2">
                             L'immagine
@@ -30,7 +30,7 @@
             </div>
             <div class="col-12">
                 <label for="description">Descrizione</label>
-                <textarea class="w-100" name="description" id="description">{{ old('description') ?? ''}}</textarea required>
+                <textarea class="form-control" name="description" id="description" required autocomplete="on" autofocus minlength="10">{{ old('description') ?? ''}}</textarea>
                 @error('description')
                     <div class="alert alert-danger mt-2">
                         La descrizione
@@ -40,7 +40,7 @@
             </div>
             <div class="col-12">
                 <label for="n_rooms">Numero di stanze:</label>
-                <input type="number" name="n_rooms" id="n_rooms" value="{{ old('n_rooms') ?? ''}}" required>
+                <input type="number" name="n_rooms" id="n_rooms" value="{{ old('n_rooms') ?? ''}}" required min="1">
                 @error('n_rooms')
                     <div class="alert alert-danger mt-2">
                         IL numero di stanze
@@ -50,7 +50,7 @@
             </div>
             <div class="col-12">
                 <label for="n_bedrooms">Numero di stanze da letto:</label>
-                <input type="number" name="n_bedrooms" id="n_bedrooms" value="{{ old('n_bedrooms') ?? ''}}" required>
+                <input type="number" name="n_bedrooms" id="n_bedrooms" value="{{ old('n_bedrooms') ?? ''}}" required min="1">
                 @error('n_bedrooms')
                     <div class="alert alert-danger mt-2">
                         Il numero di stanze da letto
@@ -60,7 +60,7 @@
             </div>
             <div class="col-12">
                 <label for="n_bathrooms">Numero di bagni:</label>
-                <input type="number" name="n_bathrooms" id="n_bathrooms" value="{{ old('n_bathrooms') ?? ''}}" required>
+                <input type="number" name="n_bathrooms" id="n_bathrooms" value="{{ old('n_bathrooms') ?? ''}}" required min="1">
                 @error('n_bathrooms')
                     <div class="alert alert-danger mt-2">
                         Il numero di bagni
@@ -70,7 +70,7 @@
             </div>
             <div class="col-12">
                 <label for="guests">Numero massimo di ospiti:</label>
-                <input type="number" name="guests" id="guests" value="{{ old('guests') ?? ''}}" required>
+                <input type="number" name="guests" id="guests" value="{{ old('guests') ?? ''}}" required min="1">
                 @error('guests')
                     <div class="alert alert-danger mt-2">
                         Il numero massimo di ospiti
@@ -80,7 +80,7 @@
             </div>
             <div class="col-12">
                 <label for="n_beds">Numero di letti:</label>
-                <input type="number" name="n_beds" id="n_beds" value="{{ old('n_beds') ?? ''}}" required>
+                <input type="number" name="n_beds" id="n_beds" value="{{ old('n_beds') ?? ''}}" required min="1">
                 @error('n_beds')
                     <div class="alert alert-danger mt-2">
                         Il numero di letti
