@@ -118,14 +118,7 @@ class ApartmentController extends Controller
                     }
                 }
                 $newApartment->services()->sync($data['service']);
-                // $sponsorships = Sponsorship::all();
-                // foreach($sponsorships as $sponsorship){
-                //     if($sponsorship->id = $data['sponsorship']){
-                //         $duration = $sponsorship->duration;
-                //     }
-                // }
-                // $endDate = date('Y-m-d h:i:s', strtotime($newApartment->created_at)+60*60*$duration);
-                // $newApartment->sponsorships()->sync([$data['sponsorship'] => ['start_date' => $newApartment->created_at, 'end_date' => $endDate]]);
+   
                 return redirect()->route('apartment.show', ["apartment" => $newApartment]);
             }
             else{
@@ -246,14 +239,7 @@ class ApartmentController extends Controller
                     $apartment->address = $data["address"];
                     $apartment->save();
                     $apartment->services()->sync($data['service']);
-                    // $sponsorships = Sponsorship::all();
-                    // foreach($sponsorships as $sponsorship){
-                    //     if($sponsorship->id = $data['sponsorship']){
-                    //         $duration = $sponsorship->duration;
-                    //     }
-                    // }
-                    // $endDate = date('Y-m-d h:i:s', strtotime($apartment->updated_at)+60*60*$duration);
-                    // $apartment->sponsorships()->sync([$data['sponsorship'] => ['start_date' => $apartment->updated_at, 'end_date' => $endDate]]);
+
                     return redirect()->route('apartment.show', compact('apartment'));
                 }
                 else{
