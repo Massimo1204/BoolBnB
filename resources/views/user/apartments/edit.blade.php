@@ -124,7 +124,7 @@
                 </div>
                 <div class="col-12">
                     <label for="price">Inserisci il prezzo a notte per ospite:* </label>
-                    <input type="number" name="price" id="price" value="{{ $apartment->price }}" required min="1">
+                    <input type="number" step="0.01" name="price" id="price" value="{{ $apartment->price }}" required min="1">
                     @error('price')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
@@ -182,12 +182,6 @@
                     <input type="file" class="form-control" name="images[]" id="image[]" multiple>
                 </div>
                 <div class="col-10 mt-3">
-                    {{-- @foreach ($sponsorships as $sponsorship)
-                        <div class="col-3">
-                            <label for="sponsorship">{{ $sponsorship->name }}</label>
-                            <input type="radio" name="sponsorship" id="sponsorship" value="{{ $sponsorship->id }}">
-                        </div>
-                    @endforeach --}}
                     <div class="Send my-auto">
                         <button class="btn btn-outline-primary btn-md" type="submit">send</button>
                     </div>
