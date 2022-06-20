@@ -11,7 +11,7 @@
         {{session('error-message')}}
     </div>
 @endif
-<div class="d-flex flex-wrap justify-content-center">
+{{-- <div class="d-flex flex-wrap justify-content-center">
     @foreach ($apartments as $apartment)
         <div class="apartment-wrapper mx-3">
             <div class="card">
@@ -24,5 +24,6 @@
 </div>
 <div class="mx-auto">
     {{ $apartments->links() }}
-</div>
+</div> --}}
+<div id="root"></div>
 @endsection
