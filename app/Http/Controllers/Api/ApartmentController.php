@@ -13,4 +13,8 @@ class ApartmentController extends Controller
 
         return response()->json($apartments);
     }
+    public function show($id){
+        $apartment=Apartment::findOrFail($id);
+        return response()->json($apartment);
+    }
 }

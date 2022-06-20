@@ -18,5 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::middleware('auth:api')->get('/messages', 'Api\MessageController@index');
 Route::get('/apartments', 'Api\ApartmentController@index');
+Route::get('/apartment/{id}','Api\ApartmentController@show');
+
+Route::namespace('Api')->group( function () {
+    Route::post('/message', 'MessageController@store');
+});
+
