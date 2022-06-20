@@ -11,6 +11,7 @@ Vue.use(VueRouter);
 import Home from './pages/Home';
 import Show from './pages/Show';
 import Messages from './pages/Messages';
+import ApartmentMessages from './pages/ApartmentMessages';
 
 const router = new VueRouter({
     mode:'history',
@@ -29,6 +30,11 @@ const router = new VueRouter({
             path:'/messages/:id',
             name:'Messages',
             component:Messages
+        },
+        {
+            path:'/apartment/messages/:id',
+            name:'ApartmentMessages',
+            component:ApartmentMessages
         }
 ]
 })

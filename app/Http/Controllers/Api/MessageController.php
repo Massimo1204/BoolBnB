@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Model\Message;
+use App\Model\Apartment;
 use App\Mail\SendNewMail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -59,5 +60,11 @@ class MessageController extends Controller
         // } catch (ModelNotFoundException  $exception) {
         //     return response('Messaggio non inviato. Si è verificato un errore. Riprovare più tardi [da Laravel]', 204); // o return response('Mail received', 201)
         // }
+    }
+
+    public function getApartmentMessages(Apartment $apartment){
+        $messages = $apartment->messages;
+
+        return response()->json($messages);
     }
 }
