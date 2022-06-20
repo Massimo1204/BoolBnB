@@ -45,6 +45,7 @@ Route::resource('/user/apartment',"User\ApartmentController")->middleware('auth'
 // Route::delete('/apartment/{id}', 'User\ApartmentController@destroy')->name('user.apartment.destroy');
 
 Route::namespace('Features')
+->middleware('auth')
 ->group( function() {
     Route::get('/payments/{sponsorship}/{apartment}', 'PaymentController@index')->name('payments.index');
     Route::post('/payments/checkout/{sponsorship}/{apartment}', 'PaymentController@store')->name('payments.checkout');
