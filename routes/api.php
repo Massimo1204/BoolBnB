@@ -18,4 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/messages', 'Api\MessageController@index');
+Route::middleware('auth:api')->get('/messages', 'Api\MessageController@index');
+Route::get('/apartments', 'Api\ApartmentController@index');
