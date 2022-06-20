@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('/{any}', 'Guest\HomeController@index')->where('any','.*');
 
 Route::get('/users/{user}', 'Auth\EditController@index')
 ->name('user.edit')
@@ -26,9 +27,11 @@ Route::put('/users/{user}', 'Auth\EditController@update')
 ->name('user.update')
 ->middleware('auth');
 
-Route::get('/user', 'User\HomeController@index')
-->name('user.home')
-->middleware('auth');
+Route::delete('/picture/{id}', 'User\PicturesDeleteController@destroy')->name("picture.destroy");
+
+// Route::get('/user', 'User\HomeController@index')
+// ->name('user.home')
+// ->middleware('auth');
 
 // Route::namespace('Guest')
 // ->prefix('/')
@@ -39,7 +42,6 @@ Route::get('/user', 'User\HomeController@index')
 //     // Route::resource('posts',"PostsController");
 // });
 
-Route::delete('/picture/{id}', 'User\PicturesDeleteController@destroy')->name("picture.destroy");
 
 Route::resource('/user/apartment',"User\ApartmentController")->middleware('auth');
 // Route::delete('/apartment/{id}', 'User\ApartmentController@destroy')->name('user.apartment.destroy');
@@ -53,5 +55,3 @@ Route::namespace('Features')
     Route::get('/sponsorship/{apartment}', 'SponsorshipController@index')->name('sponsorship.index');
 });
 
-
-Route::get('/{any}', 'Guest\HomeController@index')->where('any','.*');
