@@ -25,7 +25,8 @@ function callApi() {
                             document.getElementById("results").classList.add("d-none");
                         })  
                         li.classList.remove("d-none"); 
-                    }                }
+                    }                
+                }
             }
         }
     }
