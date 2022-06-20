@@ -157,13 +157,6 @@
                 </div>
             </div>
 
-            {{-- @foreach ($sponsorships as $sponsorship)
-                <div class="col-12">
-                    <label for="sponsorship">{{$sponsorship->name}}</label>
-                    <input type="radio" name="sponsorship" id="sponsorship" value="{{$sponsorship->id}}">
-                </div>
-            @endforeach --}}
-
             <div class="col-12 text-center mt-3">
                 <button class="btn btn-outline-primary" type="submit">send</button>
             </div>
