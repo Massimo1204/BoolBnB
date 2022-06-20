@@ -21,15 +21,15 @@
                 <label for="amount">
                     <span class="input-label">Amount</span>
                     <div class="input-wrapper amount-wrapper">
-                        <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="{{$amount}}">
+                        <input readonly id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="{{$amount}}">
                     </div>
                 </label>
-    
+
                 <div class="bt-drop-in-wrapper">
                     <div id="bt-dropin"></div>
                 </div>
             </section>
-    
+
             <input id="nonce" name="payment_method_nonce" type="hidden" />
             <button class="btn btn-info" type="submit"><span>Test Transaction</span></button>
         </form>
