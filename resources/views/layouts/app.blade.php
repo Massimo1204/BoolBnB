@@ -55,14 +55,14 @@
                     <!-- Center Side Of Navbar -->
                     <ul class="navbar-nav">
                         <li>
-                            <div class="input-group">
+                            {{-- <div class="input-group">
                                 <div class="form-outline">
                                     <input id="search-focus" type="search" id="form1" class="form-control" />
                                 </div>
                                 <button type="button" class="btn btn-primary">
                                     <i class="fa-solid fa-magnifying-glass text-white"></i>
                                 </button>
-                            </div>
+                            </div> --}}
                         </li>
                     </ul>
 

@@ -42,8 +42,8 @@
             @method('PUT')
             <div class="row apartment">
                 <div class="col-12">
-                    <label for="title">Titolo</label>
-                    <input class="w-100" type="text" name="title" id="title" value="{{ $apartment->title }}">
+                    <label for="title">Titolo*</label>
+                    <input class="form-control" type="text" name="title" id="title" value="{{ $apartment->title }}" required autocomplete="on" autofocus minlength="5">
                     @error('title')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
@@ -51,7 +51,7 @@
                     @enderror
                 </div>
                 <div class="col-12">
-                    <label for="image">Carica la foto cover:</label>
+                    <label for="image">Carica la foto cover:*</label>
                     <input type="file" name="image" id="image" value="{{ $apartment->image }}">
                     @error('image')
                         <div class="alert alert-danger mt-2">
@@ -60,9 +60,9 @@
                     @enderror
                 </div>
                 <div class="col-12">
-                    <label for="description">Descrizione</label>
-                    <input class="w-100" type="text" name="description" id="description"
-                        value="{{ $apartment->description }}">
+                    <label for="description">Descrizione*</label>
+                    <input class="form-control" type="text" name="description" id="description"
+                        value="{{ $apartment->description }}" required autocomplete="on" autofocus minlength="10">
                     @error('description')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
@@ -70,8 +70,8 @@
                     @enderror
                 </div>
                 <div class="col-12">
-                    <label for="n_rooms">Numero di stanze:</label>
-                    <input type="number" name="n_rooms" id="n_rooms" value="{{ $apartment->n_rooms }}">
+                    <label for="n_rooms">Numero di stanze:*</label>
+                    <input type="number" name="n_rooms" id="n_rooms" value="{{ $apartment->n_rooms }}" required min="1">
                     @error('n_rooms')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
@@ -79,8 +79,8 @@
                     @enderror
                 </div>
                 <div class="col-12">
-                    <label for="n_bedrooms">Numero di stanze da letto:</label>
-                    <input type="number" name="n_bedrooms" id="n_bedrooms" value="{{ $apartment->n_bedrooms }}">
+                    <label for="n_bedrooms">Numero di stanze da letto:*</label>
+                    <input type="number" name="n_bedrooms" id="n_bedrooms" value="{{ $apartment->n_bedrooms }}" required min="1">
                     @error('n_bedrooms')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
@@ -88,8 +88,8 @@
                     @enderror
                 </div>
                 <div class="col-12">
-                    <label for="n_beds">Numero di bagni:</label>
-                    <input type="number" name="n_beds" id="n_beds" value="{{ $apartment->n_beds }}">
+                    <label for="n_beds">Numero di letti:*</label>
+                    <input type="number" name="n_beds" id="n_beds" value="{{ $apartment->n_beds }}" required min="1">
                     @error('n_beds')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
@@ -97,8 +97,8 @@
                     @enderror
                 </div>
                 <div class="col-12">
-                    <label for="n_bathrooms">Numero di bagni:</label>
-                    <input type="number" name="n_bathrooms" id="n_bathrooms" value="{{ $apartment->n_bathrooms }}">
+                    <label for="n_bathrooms">Numero di bagni:*</label>
+                    <input type="number" name="n_bathrooms" id="n_bathrooms" value="{{ $apartment->n_bathrooms }}" required min="1">
                     @error('n_bathrooms')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
@@ -106,8 +106,8 @@
                     @enderror
                 </div>
                 <div class="col-12">
-                    <label for="guests">Numero massimo di ospiti:</label>
-                    <input type="number" name="guests" id="guests" value="{{ $apartment->guests }}">
+                    <label for="guests">Numero massimo di ospiti:*</label>
+                    <input type="number" name="guests" id="guests" value="{{ $apartment->guests }}" required min="1">
                     @error('guests')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
@@ -123,8 +123,8 @@
                     <input type="checkbox" name="available" id="available" @if ($apartment->available == 1) checked @endif>
                 </div>
                 <div class="col-12">
-                    <label for="price">Inserisci il prezzo a notte per ospite: </label>
-                    <input type="number" name="price" id="price" value="{{ $apartment->price }}">
+                    <label for="price">Inserisci il prezzo a notte per ospite:* </label>
+                    <input type="number" name="price" id="price" value="{{ $apartment->price }}" required min="1">
                     @error('price')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
@@ -142,8 +142,8 @@
                     @enderror
                 </div>
                 <div class="col-12">
-                    <label for="address">inserisci la via:</label>
-                    <input class="w-100" type="text" name="address" id="address" value="{{ $apartment->address }}">
+                    <label for="address">inserisci la via:*</label>
+                    <input class="w-100" type="text" name="address" id="address" value="{{ $apartment->address }}" required>
                     @error('address')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
@@ -158,7 +158,7 @@
                     </ul>
                 </div>
                 <div class="col-12 mb-3">
-                    <label for="address_city">Servizi:</label><br>
+                    <label for="address_city">Servizi:*</label><br>
                     <div class="servizi d-flex flex-column flex-wrap">
                         @foreach ($services as $service)
                             <div class="service">
@@ -191,7 +191,7 @@
                     <div class="Send my-auto">
                         <button class="btn btn-outline-primary btn-md" type="submit">send</button>
                     </div>
-                
+
                 </div>
             </div>
         </form>
