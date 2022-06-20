@@ -25,5 +25,6 @@ Route::get('/apartment/{id}','Api\ApartmentController@show');
 
 Route::namespace('Api')->group( function () {
     Route::post('/message', 'MessageController@store');
+    Route::get('/apartment/messages/{apartment}', 'MessageController@getApartmentMessages');
 });
 
