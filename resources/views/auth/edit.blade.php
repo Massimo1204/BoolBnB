@@ -103,7 +103,7 @@
                                 <div class="col-md-6">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
-                                        required autocomplete="new-password">
+                                        required autocomplete="new-password" onChange="onChange()">
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -130,7 +130,7 @@
                                     @if ($errors->any())
                                         @foreach ($errors->all() as $error)
                                             @if (strpos($error, 'password confirmation') !== false)
-                                                <strong class="text-danger fs-small mt-1">{{ $error }}</strong>
+                                                <strong class="text-danger fs-small mt-1" onChange="onChange()">{{ $error }}</strong>
                                             @endif
                                         @endforeach
                                     @endif
@@ -151,4 +151,19 @@
         </div>
     </div>
     </div>
+@endsection
+
+@section('footer-scripts')
+    <script defer>
+
+        function onChange() {
+            const password = document.querySelector('#password');
+            const confirm = document.querySelector('#password-confirm');
+            if (confirm.value === password.value) {
+                confirm.setCustomValidity('');
+            } else {
+                confirm.setCustomValidity('Passwords do not match');
+            }
+        }
+    </script>
 @endsection
