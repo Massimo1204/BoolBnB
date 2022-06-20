@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-8 show-img mb-3">
+        <div class="col-4 show-img mb-3">
             @if (str_starts_with($apartment->image, 'https://') || str_starts_with($apartment->image, 'http://'))
                 <img class="rounded-1 w-100" src="{{ $apartment->image }}" alt="{{ $apartment->title }}">
             @else
@@ -45,7 +45,7 @@
 </div>
     @if (Auth::user()->id == $apartment->user_id)
         <div class="d-flex justify-content-evenly mt-3">
-            <div class="btn btn-primary btn-sm">
+            <div class="btn btn-primary">
                 <a class="text-white text-decoration-none" href="{{ route('apartment.edit', $apartment) }}">Edit</a>
             </div>
             <div>
@@ -56,7 +56,7 @@
                 @csrf
                 @method('DELETE')
     
-                <button type="submit" class="btn btn-danger btn-sm text-white">Delete</a>
+                <button type="submit" class="btn btn-danger text-white">Delete</a>
             </form>
         </div>
     @endif
