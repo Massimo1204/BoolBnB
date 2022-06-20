@@ -32,10 +32,10 @@ class MessageController extends Controller
                 'text' => 'required'
             ],
             [
-                'full_name.required' => 'Il nome è obbligatorio [da Laravel].',
-                'email.required' => 'La mail è obbligatoria [da Laravel].',
-                'email.email' => 'L\'indirizzo email non è valido [da Laravel].',
-                'text.required' => 'Il testo del messaggio è obbligatorio [da Laravel].'
+                'full_name.required' => 'Il nome è obbligatorio .',
+                'email.required' => 'La mail è obbligatoria .',
+                'email.email' => 'L\'indirizzo email non è valido .',
+                'text.required' => 'Il testo del messaggio è obbligatorio .'
             ]
         );
 
@@ -43,25 +43,17 @@ class MessageController extends Controller
             return response()->json(['errors' => $validator->errors()]);
         }
 
-        // else{
-        //     $message = new Message();
-        //     $message->fill($data);
-        //     $message->save();
-        //     return response()->json(['ok' => "ok"]);
-        // };
 
         $message = new Message();
             $message->fill($data);
             $message->save();
 
-
-        //$data['email'] = "";
         $mail = new SendNewMail($data);
         try {
-            Mail::to(env('MAIL_ADMIN_ADDRESS'))->send($mail); // MAIL_ADMIN_ADDRESS è stata aggiunta nel file ENV
-            return response('Email inviata con successo', 204); // o return response('Mail received', 201)
+            Mail::to(env('MAIL_ADMIN_ADDRESS'))->send($mail);
+            return response('Email inviata con successo', 204);
         } catch (ModelNotFoundException  $exception) {
-            return response('Messaggio non inviato. Si è verificato un errore. Riprovare più tardi [da Laravel]', 204); // o return response('Mail received', 201)
+            return response('Messaggio non inviato. Si è verificato un errore. Riprovare più tardi', 204);
         }
     }
 
