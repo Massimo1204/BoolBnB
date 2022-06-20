@@ -1914,6 +1914,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -2489,7 +2490,15 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("router-view")], 1)
+  return _c(
+    "div",
+    [
+      _c("router-link", { attrs: { to: { name: "home" } } }, [_vm._v("Home")]),
+      _vm._v(" "),
+      _c("router-view"),
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -2520,7 +2529,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("\n      ciao\n  ")])])
+    return _c("div", [_c("h1", [_vm._v("\n        Ciao sono la Home\n    ")])])
   },
 ]
 render._withStripped = true
@@ -18359,8 +18368,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\MAMP\htdocs\Boolean\BoolBnB\resources\js\front.js */"./resources/js/front.js");
-module.exports = __webpack_require__(/*! E:\MAMP\htdocs\Boolean\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\boolean-projects\BoolBnB\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\boolean-projects\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

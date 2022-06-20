@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <h1>
-        ciao
-    </h1>
-  </div>
+    <div>
+        <h1>
+            Ciao sono la Home
+        </h1>
+    </div>
 </template>
 
 <script>
