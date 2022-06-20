@@ -9,7 +9,7 @@
         @csrf
         <div class="row apartment">
             <div class="col-12">
-                <label for="title">Titolo</label>
+                <label for="title">Titolo*</label>
                 <input class="form-control" type="text" name="title" id="title" value="{{ old('title') ?? ''}}" required autocomplete="on" autofocus minlength="5">
                 @error('title')
                         <div class="alert alert-danger mt-2">
@@ -19,7 +19,7 @@
                 @enderror
             </div>
             <div class="col-12">
-                <label for="image">Carica la foto cover:</label>
+                <label for="image">Carica la foto cover:*</label>
                 <input class="form-control" type="file" name="image" id="image" required autocomplete="on" autofocus>
                 @error('image')
                         <div class="alert alert-danger mt-2">
@@ -29,7 +29,7 @@
                 @enderror
             </div>
             <div class="col-12">
-                <label for="description">Descrizione</label>
+                <label for="description">Descrizione*</label>
                 <textarea class="form-control" name="description" id="description" required autocomplete="on" autofocus minlength="10">{{ old('description') ?? ''}}</textarea>
                 @error('description')
                     <div class="alert alert-danger mt-2">
@@ -39,7 +39,7 @@
                 @enderror
             </div>
             <div class="col-12">
-                <label for="n_rooms">Numero di stanze:</label>
+                <label for="n_rooms">Numero di stanze:*</label>
                 <input type="number" name="n_rooms" id="n_rooms" value="{{ old('n_rooms') ?? ''}}" required min="1">
                 @error('n_rooms')
                     <div class="alert alert-danger mt-2">
@@ -49,7 +49,7 @@
                 @enderror
             </div>
             <div class="col-12">
-                <label for="n_bedrooms">Numero di stanze da letto:</label>
+                <label for="n_bedrooms">Numero di stanze da letto:*</label>
                 <input type="number" name="n_bedrooms" id="n_bedrooms" value="{{ old('n_bedrooms') ?? ''}}" required min="1">
                 @error('n_bedrooms')
                     <div class="alert alert-danger mt-2">
@@ -59,7 +59,7 @@
                 @enderror
             </div>
             <div class="col-12">
-                <label for="n_bathrooms">Numero di bagni:</label>
+                <label for="n_bathrooms">Numero di bagni:*</label>
                 <input type="number" name="n_bathrooms" id="n_bathrooms" value="{{ old('n_bathrooms') ?? ''}}" required min="1">
                 @error('n_bathrooms')
                     <div class="alert alert-danger mt-2">
@@ -69,7 +69,7 @@
                 @enderror
             </div>
             <div class="col-12">
-                <label for="guests">Numero massimo di ospiti:</label>
+                <label for="guests">Numero massimo di ospiti:*</label>
                 <input type="number" name="guests" id="guests" value="{{ old('guests') ?? ''}}" required min="1">
                 @error('guests')
                     <div class="alert alert-danger mt-2">
@@ -79,7 +79,7 @@
                 @enderror
             </div>
             <div class="col-12">
-                <label for="n_beds">Numero di letti:</label>
+                <label for="n_beds">Numero di letti:*</label>
                 <input type="number" name="n_beds" id="n_beds" value="{{ old('n_beds') ?? ''}}" required min="1">
                 @error('n_beds')
                     <div class="alert alert-danger mt-2">
@@ -97,7 +97,7 @@
                 <input type="checkbox" name="available" id="available" checked=true>
             </div>
             <div class="col-12">
-                <label for="price">Inserisci il prezzo a notte per ospite: </label>
+                <label for="price">Inserisci il prezzo a notte per ospite:*</label>
 
                 <input type="number" name="price" id="price" value="{{ old('price') ?? ''}}" required>
                 @error('price')
@@ -112,7 +112,7 @@
                 <input type="number" name="square_meters" id="square_meters" value="{{ old('square_meters') ?? ''}}">
             </div>
             <div class="col-12">
-                <label for="address">inserisci la via:</label>
+                <label for="address">inserisci la via:*</label>
                 <input class="w-100" type="text" name="address" id="address" value="{{ old('address') ?? ''}}" required>
                 @error('address')
                     <div class="alert alert-danger mt-2">
@@ -130,7 +130,7 @@
             </div>
 
             <div class="col-12 mb-3">
-                <label for="address_city">Servizi:</label><br>
+                <label for="address_city">Servizi:*</label><br>
                 <div class="servizi d-flex flex-column flex-wrap">
                     @foreach ($services as $service)
                         <div class="service">
