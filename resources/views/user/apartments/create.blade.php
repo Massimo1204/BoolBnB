@@ -113,7 +113,7 @@
             </div>
             <div class="col-12">
                 <label for="address">inserisci la via:*</label>
-                <input class="w-100" type="text" name="address" id="address" value="{{ old('address') ?? ''}}" required>
+                <input class="w-100" type="text" name="address" id="address" value="{{ old('address') ?? ''}}" autocomplete="off" required>
                 @error('address')
                     <div class="alert alert-danger mt-2">
                         Il nome della via
