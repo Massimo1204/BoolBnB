@@ -118,7 +118,7 @@ class ApartmentController extends Controller
                     }
                 }
                 $newApartment->services()->sync($data['service']);
-   
+
                 return redirect()->route('apartment.show', ["apartment" => $newApartment]);
             }
             else{
