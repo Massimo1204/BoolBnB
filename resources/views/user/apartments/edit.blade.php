@@ -43,7 +43,7 @@
             <div class="row apartment">
                 <div class="col-12">
                     <label for="title">Titolo*</label>
-                    <input class="form-control" type="text" name="title" id="title" value="{{ $apartment->title }}" required autocomplete="on" autofocus minlength="5">
+                    <input class="form-control" type="text" name="title" id="title" value="{{ old('title') ?? $apartment->title }}" required autocomplete="on" autofocus minlength="5">
                     @error('title')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
@@ -61,8 +61,8 @@
                 </div>
                 <div class="col-12">
                     <label for="description">Descrizione*</label>
-                    <input class="form-control" type="text" name="description" id="description"
-                        value="{{ $apartment->description }}" required autocomplete="on" autofocus minlength="10">
+                    <textarea class="form-control" type="text" name="description" id="description"
+                        required autocomplete="on" autofocus minlength="10">{{ old('description') ?? $apartment->description}}</textarea>
                     @error('description')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-12">
                     <label for="n_rooms">Numero di stanze:*</label>
-                    <input type="number" name="n_rooms" id="n_rooms" value="{{ $apartment->n_rooms }}" required min="1">
+                    <input type="number" name="n_rooms" id="n_rooms" value="{{ old('n_rooms') ?? $apartment->n_rooms }}" required min="1">
                     @error('n_rooms')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
@@ -80,7 +80,7 @@
                 </div>
                 <div class="col-12">
                     <label for="n_bedrooms">Numero di stanze da letto:*</label>
-                    <input type="number" name="n_bedrooms" id="n_bedrooms" value="{{ $apartment->n_bedrooms }}" required min="1">
+                    <input type="number" name="n_bedrooms" id="n_bedrooms" value="{{ old('n_bedrooms') ?? $apartment->n_bedrooms }}" required min="1">
                     @error('n_bedrooms')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
@@ -89,7 +89,7 @@
                 </div>
                 <div class="col-12">
                     <label for="n_beds">Numero di letti:*</label>
-                    <input type="number" name="n_beds" id="n_beds" value="{{ $apartment->n_beds }}" required min="1">
+                    <input type="number" name="n_beds" id="n_beds" value="{{ old('n_beds') ?? $apartment->n_beds }}" required min="1">
                     @error('n_beds')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
@@ -98,7 +98,7 @@
                 </div>
                 <div class="col-12">
                     <label for="n_bathrooms">Numero di bagni:*</label>
-                    <input type="number" name="n_bathrooms" id="n_bathrooms" value="{{ $apartment->n_bathrooms }}" required min="1">
+                    <input type="number" name="n_bathrooms" id="n_bathrooms" value="{{ old('n_bathrooms') ?? $apartment->n_bathrooms }}" required min="1">
                     @error('n_bathrooms')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
@@ -107,7 +107,7 @@
                 </div>
                 <div class="col-12">
                     <label for="guests">Numero massimo di ospiti:*</label>
-                    <input type="number" name="guests" id="guests" value="{{ $apartment->guests }}" required min="1">
+                    <input type="number" name="guests" id="guests" value="{{ old('guests') ?? $apartment->guests }}" required min="1">
                     @error('guests')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
@@ -124,7 +124,7 @@
                 </div>
                 <div class="col-12">
                     <label for="price">Inserisci il prezzo a notte per ospite:* </label>
-                    <input type="number" step="0.01" name="price" id="price" value="{{ $apartment->price }}" required min="1">
+                    <input type="number" step="0.01" name="price" id="price" value="{{ old('price') ?? $apartment->price }}" required min="1">
                     @error('price')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
@@ -134,7 +134,7 @@
                 <div class="col-12">
                     <label for="square_meters">Inserisci il numero di metri quadrati: </label>
                     <input type="number" name="square_meters" id="square_meters"
-                        value="{{ $apartment->square_meters }}">
+                        value="{{ old('square_meters') ?? $apartment->square_meters }}">
                     @error('square_meters')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
@@ -143,7 +143,7 @@
                 </div>
                 <div class="col-12">
                     <label for="address">inserisci la via:*</label>
-                    <input class="w-100" type="text" name="address" id="address" value="{{ $apartment->address }}" required>
+                    <input class="w-100" type="text" name="address" id="address" value="{{ old('address') ?? $apartment->address }}" autocomplete="off" required>
                     @error('address')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
