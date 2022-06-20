@@ -30,14 +30,14 @@ Route::get('/user', 'User\HomeController@index')
 ->name('user.home')
 ->middleware('auth');
 
-Route::namespace('Guest')
-->prefix('/')
-->name("guest.")
-->group(function(){
-    Route::get('/', 'HomeController@index')->name('index');
-    Route::get('/{apartment}', 'HomeController@show')->name('show');
-    // Route::resource('posts',"PostsController");
-});
+// Route::namespace('Guest')
+// ->prefix('/')
+// ->name("guest.")
+// ->group(function(){
+//     // Route::get('/', 'HomeController@index')->name('index');
+//     // Route::get('/{apartment}', 'HomeController@show')->name('show');
+//     // Route::resource('posts',"PostsController");
+// });
 
 Route::delete('/picture/{id}', 'User\PicturesDeleteController@destroy')->name("picture.destroy");
 
@@ -52,3 +52,6 @@ Route::namespace('Features')
 
     Route::get('/sponsorship/{apartment}', 'SponsorshipController@index')->name('sponsorship.index');
 });
+
+
+Route::get('/{any}', 'Guest\HomeController@index')->where('any','.*');
