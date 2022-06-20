@@ -1,7 +1,7 @@
 <template>
 <div class="col-4 mb-5 ">
     <div class="cardcontainer my-3 px-5">
-        <router-link :to="{name: 'Show'}" class="text-decoration-none">
+        <router-link :to="{name: 'Show', params:{id: apartment.id}}" class="text-decoration-none">
             <div class="photo mx-auto position-relative">
                 <img class="w-100" :src="apartment.image">
                 <div class="price position-absolute px-2 py-2">{{apartment.price}} €</div>
