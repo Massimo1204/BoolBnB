@@ -1,6 +1,9 @@
 <template>
     <div>
-        
+        <div class="pics mx-auto">
+            <img :src="apartment.image" class="w-50" alt="">
+            <img v-for="pic,index in pictures" :key="index" :src="pic.image" class="w-75" alt="">
+        </div>
     </div>
 </template>
 
@@ -21,7 +24,6 @@ export default {
             Axios.get('/api/apartment/'+this.id)
             .then(response=>{
                 this.apartment=response.data;
-                console.log(this.apartment);
             })
         },
         getpics(){
@@ -39,6 +41,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+    .pics{
+        height: 50vh;
+        width: 80vw;
+    }
 </style>
