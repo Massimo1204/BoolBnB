@@ -1,6 +1,9 @@
 <template>
     <div>
-        
+        <div class="pics mx-auto">
+            <img :src="apartment.image" class="w-50" alt="">
+            <img v-for="pic,index in pictures" :key="index" :src="pic.image" class="w-75" alt="">
+        </div>
     </div>
 </template>
 
@@ -13,6 +16,7 @@ export default {
         return {
             id: this.$route.params.id,
             apartment:[],
+            pictures:[],
         }
     },
     methods:{
@@ -21,14 +25,25 @@ export default {
             .then(response=>{
                 this.apartment=response.data;
             })
+        },
+        getpics(){
+            Axios.get('/api/apartment/pictures/'+this.id)
+            .then(response=>{
+                this.pictures=response.data;
+            })
         }
+
     },
     created(){
         this.getInfo();
+        this.getpics();
     }
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+    .pics{
+        height: 50vh;
+        width: 80vw;
+    }
 </style>

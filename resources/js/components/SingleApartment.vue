@@ -1,13 +1,16 @@
 <template>
-<div class="col-4 mb-5 text-center">
-    <div class="cardcontainer my-4">
-    <p class="txt m-0">{{apartment.title}}</p>
-    <div class="photo w-75 mx-auto">
-        <img class="w-100" :src="apartment.image">
-    </div>
-    <div class="content border-bottom border-2">
-        <p>{{ apartment.description}}</p>
-    </div>
+<div class="col-4 mb-5 ">
+    <div class="cardcontainer my-3 px-5">
+        <router-link :to="{name: 'Show'}" class="text-decoration-none">
+            <div class="photo mx-auto position-relative">
+                <img class="w-100" :src="apartment.image">
+                <div class="price position-absolute px-2 py-2">{{apartment.price}} €</div>
+            </div>
+            <h2 class="txt m-0 title text-capitalize text-black">{{apartment.title}}</h2>
+            <div class="content address">
+                <p>{{ apartment.address}}</p>
+            </div>
+        </router-link>
     </div>
 </div>
 </template>
@@ -23,11 +26,9 @@ props: ['apartment']
 </script>
 
 <style scoped lang="scss">
-.cardcontainer{
-    /* height: 400px; */
-}
+@import "../../sass/_variables.scss";
 .content{
-    height: 220px; 
+    // max-height: 220px; 
     overflow: auto;
 }
 .photo{
@@ -37,5 +38,16 @@ props: ['apartment']
         height: 100%;
         border-radius: 15px;
     }
+    .price{
+        background-color: $light-dark-background;
+        border-radius: 50%;
+        bottom: 1rem;
+        left: 1rem;
+    }
+}
+.address
+{
+    color: $medium-dark-background;
+    font-size: 1.2rem;
 }
 </style>
