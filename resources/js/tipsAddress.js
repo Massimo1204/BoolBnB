@@ -8,12 +8,12 @@ function callApi() {
         request.open('GET', search); // Open a new connection, using the GET request on the URL endpoint
         request.send();
         
-        let tips;
         request.onload = async function () {
             const data = JSON.parse(this.response);
             for (let index = 0; index < 5; index++) {
                 let id=index+1+"-result";
                 let li=document.getElementById(id);
+                document.getElementById("results").classList.remove("d-none");
                 if(address.value == ""){
                     li.classList.add("d-none");
                 }
@@ -25,8 +25,7 @@ function callApi() {
                             document.getElementById("results").classList.add("d-none");
                         })  
                         li.classList.remove("d-none"); 
-                    }
-                }
+                    }                }
             }
         }
     }
