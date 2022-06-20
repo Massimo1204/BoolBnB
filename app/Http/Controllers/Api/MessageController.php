@@ -43,23 +43,26 @@ class MessageController extends Controller
             return response()->json(['errors' => $validator->errors()]);
         }
 
-        else{
-            $message = new Message();
+        // else{
+        //     $message = new Message();
+        //     $message->fill($data);
+        //     $message->save();
+        //     return response()->json(['ok' => "ok"]);
+        // };
+
+        $message = new Message();
             $message->fill($data);
             $message->save();
-            return response()->json(['ok' => "ok"]);
-        };
-
 
 
         //$data['email'] = "";
-        // $mail = new SendNewMail($data);
-        // try {
-        //     Mail::to(env('MAIL_ADMIN_ADDRESS'))->send($mail); // MAIL_ADMIN_ADDRESS è stata aggiunta nel file ENV
-        //     return response('Email inviata con successo', 204); // o return response('Mail received', 201)
-        // } catch (ModelNotFoundException  $exception) {
-        //     return response('Messaggio non inviato. Si è verificato un errore. Riprovare più tardi [da Laravel]', 204); // o return response('Mail received', 201)
-        // }
+        $mail = new SendNewMail($data);
+        try {
+            Mail::to(env('MAIL_ADMIN_ADDRESS'))->send($mail); // MAIL_ADMIN_ADDRESS è stata aggiunta nel file ENV
+            return response('Email inviata con successo', 204); // o return response('Mail received', 201)
+        } catch (ModelNotFoundException  $exception) {
+            return response('Messaggio non inviato. Si è verificato un errore. Riprovare più tardi [da Laravel]', 204); // o return response('Mail received', 201)
+        }
     }
 
     public function getApartmentMessages(Apartment $apartment){
