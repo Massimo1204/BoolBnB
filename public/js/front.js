@@ -1941,6 +1941,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "SingleApartment",
   components: {},
@@ -2166,7 +2169,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".cardcontainer[data-v-4de35b2f] {\n  /* height: 400px; */\n}\n.content[data-v-4de35b2f] {\n  height: 220px;\n  overflow: auto;\n}\n.photo[data-v-4de35b2f] {\n  height: 250px;\n  border-radius: 15px;\n}\n.photo img[data-v-4de35b2f] {\n  height: 100%;\n  border-radius: 15px;\n}", ""]);
+exports.push([module.i, ".content[data-v-4de35b2f] {\n  overflow: auto;\n}\n.photo[data-v-4de35b2f] {\n  height: 250px;\n  border-radius: 15px;\n}\n.photo img[data-v-4de35b2f] {\n  height: 100%;\n  border-radius: 15px;\n}\n.photo .price[data-v-4de35b2f] {\n  background-color: #E9E8EB;\n  border-radius: 50%;\n  bottom: 1rem;\n  left: 1rem;\n}\n.address[data-v-4de35b2f] {\n  color: #ABA8AF;\n  font-size: 1.2rem;\n}", ""]);
 
 // exports
 
@@ -3355,23 +3358,43 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-4 mb-5 text-center" }, [
-    _c("div", { staticClass: "cardcontainer my-4" }, [
-      _c("p", { staticClass: "txt m-0" }, [
-        _vm._v(_vm._s(_vm.apartment.title)),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "photo w-75 mx-auto" }, [
-        _c("img", {
-          staticClass: "w-100",
-          attrs: { src: _vm.apartment.image },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "content border-bottom border-2" }, [
-        _c("p", [_vm._v(_vm._s(_vm.apartment.description))]),
-      ]),
-    ]),
+  return _c("div", { staticClass: "col-4 mb-5 " }, [
+    _c(
+      "div",
+      { staticClass: "cardcontainer my-3 px-5" },
+      [
+        _c(
+          "router-link",
+          {
+            staticClass: "text-decoration-none",
+            attrs: { to: { name: "Show", params: { id: _vm.apartment.id } } },
+          },
+          [
+            _c("div", { staticClass: "photo mx-auto position-relative" }, [
+              _c("img", {
+                staticClass: "w-100",
+                attrs: { src: _vm.apartment.image },
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "price position-absolute px-2 py-2" }, [
+                _vm._v(_vm._s(_vm.apartment.price) + " €"),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c(
+              "h2",
+              { staticClass: "txt m-0 title text-capitalize text-black" },
+              [_vm._v(_vm._s(_vm.apartment.title))]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "content address" }, [
+              _c("p", [_vm._v(_vm._s(_vm.apartment.address))]),
+            ]),
+          ]
+        ),
+      ],
+      1
+    ),
   ])
 }
 var staticRenderFns = []
@@ -19529,8 +19552,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\MAMP\htdocs\Boolean\BoolBnB\resources\js\front.js */"./resources/js/front.js");
-module.exports = __webpack_require__(/*! E:\MAMP\htdocs\Boolean\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/admin/corso boolean/prova finale/BoolBnB/resources/js/front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! /Users/admin/corso boolean/prova finale/BoolBnB/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
