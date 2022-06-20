@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /public/js/key.js
+/public/js/app.js
 /public/js/tipsAddress.js
 /resources/js/key.js
 /storage/*.key
