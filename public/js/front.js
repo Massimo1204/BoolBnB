@@ -2431,7 +2431,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("\n      ciao\n  ")])])
+    return _c("div", [_c("h1", [_vm._v("\n        Ciao sono la Home\n    ")])])
   },
 ]
 render._withStripped = true
@@ -2455,16 +2455,9 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div")
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("Hey")])])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

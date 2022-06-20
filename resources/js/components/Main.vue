@@ -1,8 +1,7 @@
 <template>
     <div>
-        <h1>
-            Ciao sono la Home
-        </h1>
+        <router-link :to="{name: 'home'}">Home</router-link>
+        <router-view></router-view>
     </div>
 </template>
 
