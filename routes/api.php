@@ -32,6 +32,6 @@ Route::get('/apartment','Api\ApartmentController@search');
 
 Route::namespace('Api')->group( function () {
     Route::post('/message', 'MessageController@store');
-    Route::get('/apartment/messages/{apartment}', 'MessageController@getApartmentMessages');
+    Route::get('/apartment/messages/{user}', 'MessageController@getApartmentMessages');
 });
 
