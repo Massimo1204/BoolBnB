@@ -1,34 +1,37 @@
 <template>
     <div>
-        <h1 class="text-center border-bottom border-secondary pt-4 pb-5">I tuoi messaggi</h1>
+        <h1 class="text-center border-bottom border-secondary pt-4 pb-5 m-0">I tuoi messaggi</h1>
         <div class="apartment-messages-container d-flex">
             <div class="apartment-messages-wrapper">
                 <div class="d-flex apartment-messages" v-for="(apartment, index) in apartments" :key="'apartment' + index" @click="chooseApartment(index)">
                     <div class="apartment-image-wrapper">
-                        <img class="apartment-message-image img-fluid" :src="apartment.image" :alt="apartment.title">
+                        <img class="apartment-message-image img-fluid" :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" :alt="apartment.title">
                     </div>
-                    <div class="ps-3">
-                        <h4>Nome : {{apartment.title}}</h4>
-                        <h5>Indirizzo : {{apartment.address}}</h5>
-                        <p>Messaggi : {{apartment.messages.length}}</p>
+                    <div class="apartment-message-content">
+                        <h5>Nome : {{apartment.title}}</h5>
+                        <h6>Indirizzo : {{apartment.address}}</h6>
+                        <h5>Messaggi : {{apartment.messages.length}}</h5>
                     </div>
                 </div>
             </div>
             <div class="apartment-chat">
                 <div v-if="apartmentIndex != null">
                     <div class="apartment-single-message" v-for="(message, index) in apartments[apartmentIndex].messages" :key="'apartmentMessages' + index" >
-                        <p>{{message.text}}</p>
+                        <div class="message-chat-content">
+                            <div class="message-sender border-bottom border-secondary">
+                                <h5>Inviato da: {{message.full_name}}</h5>
+                                <h5>Email: {{message.email}}</h5>
+                            </div>
+                            <div class="message-text mt-3">
+                                <h5 class="mb-3">Messaggio: </h5>
+                                <p>
+                                    {{message.text}}
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- <div v-for="(messages, index) in apartments" :key="'apartmentMessages' + index" class="apartment-single-message border-bottom border-secondary">
-                <div class="apartment-message-content p-4">
-                    <h4>From : {{messages.full_name}}</h4>
-                    <h4>Email : {{messages.email}}</h4>
-                    <p>Content : {{messages.text}}</p>
-                    <p>Sent at : {{messages.created_at}}</p>
-                </div>
-            </div> -->
         </div>
     </div>
 </template>
@@ -75,16 +78,33 @@ export default {
 <style lang="scss" scoped>
 div.apartment-messages-container{
     div.apartment-messages-wrapper{
+        width: 33%;
         div.apartment-messages{
             padding: 10px;
             border-bottom: solid black 1px;
             div.apartment-image-wrapper{
                 img.apartment-message-image{
-                    width: 150px;
-                    height: 150px;
+                    width: 120px;
+                    height: 120px;
                     object-fit: fill;
                 }
             }
+            div.apartment-message-content{
+                width: calc(100% - 140px);
+                padding-left: 10px;
+            }
+        }
+    }
+    div.apartment-chat{
+        border-left: 1px solid black;
+        width: 67%;
+        div.apartment-single-message{
+            margin: 20px auto 0 auto;
+            height: 200px;
+            width: 90%;
+            padding: 10px;
+            border: 1px solid black ;
+            border-radius: 15px;
         }
     }
 }
