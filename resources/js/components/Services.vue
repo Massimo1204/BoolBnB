@@ -33,7 +33,7 @@ export default {
             Axios.get('/api/apartment/service/'+ this.id)
             .then(response=>{
                 this.includedServices=response.data;
-                console.log(this.includedServices)
+                // console.log(this.includedServices)
             });
             
         },
@@ -52,7 +52,7 @@ export default {
     created(){
         this.getServices();
         this.getIncludedServices();
-        this.calcIncluded();
+        // this.calcIncluded();
     },
 }
 </script>
