@@ -26,6 +26,6 @@ Route::get('/apartment/pictures/{id}','Api\PicturesController@show');
 
 Route::namespace('Api')->group( function () {
     Route::post('/message', 'MessageController@store');
-    Route::get('/apartment/messages/{apartment}', 'MessageController@getApartmentMessages');
+    Route::get('/apartment/messages/{user}', 'MessageController@getApartmentMessages');
 });
 
