@@ -21,6 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::middleware('auth:api')->get('/messages', 'Api\MessageController@index');
 Route::get('/apartments', 'Api\ApartmentController@index');
+Route::get('/apartmentsall', 'Api\ApartmentController@allApartments');
+
 Route::get('/apartment/{id}','Api\ApartmentController@show');
 Route::get('/apartment/pictures/{id}','Api\PicturesController@show');
 
