@@ -20,6 +20,10 @@
                 <Services :id="id"/>
                 <h3>Map</h3>
                 <h3>Meet The Host</h3>
+                <div>
+                    <img :src="host.profile_picture" :alt="host.id">
+                    <h4>{{host.first_name}} {{host.last_name}}</h4>
+                </div>
             </div>
         </div>
         <h1 class="text-center mt-5" v-if="apartment.visible==0">Nothing To See Here</h1>
@@ -41,6 +45,7 @@ export default {
             id: this.$route.params.id,
             apartment:[],
             pictures:[],
+            host:[]
         }
     },
     methods:{
@@ -55,12 +60,19 @@ export default {
             .then(response=>{
                 this.pictures=response.data;
             })
+        },
+        getHost(){
+            Axios.get('/api/apartment/host/'+this.apartment.user_id)
+            .then(response=>{
+                this.host=response.data;
+                console.log(this.host)
+            })
         }
-
     },
     created(){
         this.getInfo();
         this.getpics();
+        this.getHost();
     }
 }
 </script>
