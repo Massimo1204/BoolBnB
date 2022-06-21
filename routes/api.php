@@ -23,7 +23,11 @@ Route::middleware('auth:api')->get('/messages', 'Api\MessageController@index');
 Route::get('/apartments', 'Api\ApartmentController@index');
 Route::get('/apartment/{id}','Api\ApartmentController@show');
 Route::get('/apartment/pictures/{id}','Api\PicturesController@show');
+
+Route::get('/services','Api\ServicesController@index');
+Route::get('/apartment/service/{apartment}','Api\ApartmentServiceController@show');
 Route::get('/apartment','Api\ApartmentController@search');
+
 
 
 Route::namespace('Api')->group( function () {
