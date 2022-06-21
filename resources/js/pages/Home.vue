@@ -55,15 +55,21 @@ export default {
             })
         },
         search(){
-            axios
-            .get('http://localhost:8000/api/apartment?address='+ this.userSearch.replace(/ /g,"%"))
-            .then(resp =>{
-                this.apartmentsSearch = resp.data.apartmentFiltered;
-                console.log(this.apartmentsSearch);
-            })
-            .catch((error)=>{
-            console.warn(error);
-            })
+            if(this.userSearch != "" ){
+                axios
+                .get('http://localhost:8000/api/apartment?address='+ this.userSearch.replace(/ /g,"%"))
+                .then(resp =>{
+                    this.apartmentsSearch = resp.data.apartmentFiltered;
+                    console.log(this.apartmentsSearch);
+                })
+                .catch((error)=>{
+                console.warn(error);
+                })
+                this.userSearch="";
+            }
+            else{
+                this.apartmentsSearch = this.apartments;
+            }
         },
     },
     created(){
@@ -72,8 +78,11 @@ export default {
     computed: {
         filterApartments(){
             if(this.apartmentsSearch != ""){
-                return this.apartmentsSearch
+                return this.apartmentsSearch;
             }
+            // else if(this.userSearch==""){
+            //     return this.apartments;
+            // }
             return this.apartments;
         },
 }

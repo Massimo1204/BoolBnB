@@ -3,7 +3,7 @@
     <div class="cardcontainer my-3 px-5">
         <router-link :to="{name: 'Show', params:{id: apartment.id}}" class="text-decoration-none">
             <div class="photo mx-auto position-relative">
-                <img class="w-100" :src="apartment.image">
+                <img class="w-100" :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" :alt="apartment.title">
                 <div class="price position-absolute px-2 py-2">{{apartment.price}} €</div>
             </div>
             <h2 class="txt m-0 title text-capitalize text-black">{{apartment.title}}</h2>
