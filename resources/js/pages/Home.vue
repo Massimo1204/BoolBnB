@@ -13,7 +13,7 @@
     </div>
     <div class="row">
         <SingleApartment v-for="(apartment,index) in filterApartments" :key="index" :apartment="apartment" />
-        <div class="col-12 d-flex justify-content-between my-3">
+        <div class="col-12 d-flex justify-content-between my-3" v-if="apartmentsSearch == ''">
             <div v-if="pagination.current_page == 1"></div>
             <button class="btn btn-outline-primary" @click="getApartments(pagination.current_page - 1)" v-if="pagination.current_page > 1">prev</button>
             <h5>Pagina: {{pagination.current_page}}</h5>
@@ -26,7 +26,6 @@
 
 <script>
 import SingleApartment from '../components/SingleApartment.vue'
-import {APP_KEYMAPS} from "../key";
 
 export default {
     name:"home",
@@ -56,15 +55,21 @@ export default {
             })
         },
         search(){
-            axios
-            .get('http://localhost:8000/api/apartment?address='+ this.userSearch.replace(/ /g,"%"))
-            .then(resp =>{
-                this.apartmentsSearch = resp.data.apartmentFiltered;
-                console.log(this.apartmentsSearch);
-            })
-            .catch((error)=>{
-            console.warn(error);
-            })
+            if(this.userSearch != "" ){
+                axios
+                .get('http://localhost:8000/api/apartment?address='+ this.userSearch.replace(/ /g,"%"))
+                .then(resp =>{
+                    this.apartmentsSearch = resp.data.apartmentFiltered;
+                    console.log(this.apartmentsSearch);
+                })
+                .catch((error)=>{
+                console.warn(error);
+                })
+                this.userSearch="";
+            }
+            else{
+                this.apartmentsSearch = this.apartments;
+            }
         },
     },
     created(){
@@ -73,8 +78,11 @@ export default {
     computed: {
         filterApartments(){
             if(this.apartmentsSearch != ""){
-                return this.apartmentsSearch
+                return this.apartmentsSearch;
             }
+            // else if(this.userSearch==""){
+            //     return this.apartments;
+            // }
             return this.apartments;
         },
 }
