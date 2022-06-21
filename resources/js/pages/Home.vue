@@ -5,14 +5,14 @@
             <label class="input-container closed">
                 <div class="shadow"></div>
                 <div class="center">
-                    <input type="text" class="input" placeholder="Search" @keyup="search" v-model="userSearch">
+                    <input type="text" class="input" placeholder="Search" @keyup.enter="search" v-model="userSearch">
                 </div>
                 <div class="sticks" ></div>
             </label>
         </div>
     </div>
     <div class="row">
-        <SingleApartment v-for="(apartment,index) in apartments" :key="index" :apartment="apartment"/>
+        <SingleApartment v-for="(apartment,index) in filterApartments" :key="index" :apartment="apartment" />
         <div class="col-12 d-flex justify-content-between my-3">
             <div v-if="pagination.current_page == 1"></div>
             <button class="btn btn-outline-primary" @click="getApartments(pagination.current_page - 1)" v-if="pagination.current_page > 1">prev</button>
@@ -26,6 +26,8 @@
 
 <script>
 import SingleApartment from '../components/SingleApartment.vue'
+import {APP_KEYMAPS} from "../key";
+
 export default {
     name:"home",
     components:{
@@ -36,7 +38,8 @@ export default {
         apartments:[],
         pagination:{},
         last_page:0,
-        apartmentsSearch:[]
+        userSearch:"",
+        apartmentsSearch:[],
         }
     },
     methods:{
@@ -54,23 +57,28 @@ export default {
         },
         search(){
             axios
-            .get(`http://localhost:8000/api/apartments?page=${page}` + this.userSearch.trim())
-            .then(response =>{
-            this.listUserSearch=response.data.data
-            console.log(this.apartmentsSearch);
-            // this.listUserSearch.forEach(element => {
-                // element.popularity=this.getApiActor(element);
-            // });
+            .get('http://localhost:8000/api/apartment?address='+ this.userSearch.replace(/ /g,"%"))
+            .then(resp =>{
+                this.apartmentsSearch = resp.data.apartmentFiltered;
+                console.log(this.apartmentsSearch);
             })
-            .catch(error=>{
-                console.log(error)
+            .catch((error)=>{
+            console.warn(error);
             })
-        }
+        },
     },
     created(){
-        this.getApartments(1);
-    }
-    }
+        this.getApartments(1)
+    },
+    computed: {
+        filterApartments(){
+            if(this.apartmentsSearch != ""){
+                return this.apartmentsSearch
+            }
+            return this.apartments;
+        },
+}
+}
 </script>
 
 <style scoped lang="scss">

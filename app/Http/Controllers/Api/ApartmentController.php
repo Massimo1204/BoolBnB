@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Apartment;
 use App\Model\Service;
+use Illuminate\Support\Facades\Http;
 
 class ApartmentController extends Controller
 {
@@ -15,28 +16,10 @@ class ApartmentController extends Controller
 
         return response()->json($apartments);
     }
-
-
-    public function show($id)
-    {
-        $apartment = Apartment::findOrFail($id);
+    public function show($id){
+        $apartment=Apartment::findOrFail($id);
         return response()->json($apartment);
     }
-
-
-    public function search(Request $request)
-    {
-        $address = $request->get("address");
-        if ($address) {
-            $apartments = Apartment::where('address', 'LIKE', '%' . $address . '%')
-                ->get();
-            return response()->json($apartments);
-        } else {
-            //     $apartment = Apartment::with(['user','categories'])->paginate(9);
-        }
-    }
-
-
     public function filteredSearch(Request $request)
     {
 
@@ -112,5 +95,35 @@ class ApartmentController extends Controller
         //     'data' => $filtered
         // ];
         // return compact('response');
+    }
+    public function search(Request $request){
+        $address = $request->get("address");
+        $apartmentFiltered = [];
+            $response = Http::get('https://api.tomtom.com/search/2/search/' . $address . '.json?countrySet=IT&lat=37.337&lon=-121.89&extendedPostalCodesFor=Str&minFuzzyLevel=1&maxFuzzyLevel=2&view=Unified&relatedPois=off&key=' . env("APP_KEYMAPS") . '&countrySet=Italia');
+            $dataResponse = json_decode($response->body(), true);
+            // dd($dataResponse["results"][0]);
+            $lat=$dataResponse["results"][0]["position"]["lat"];
+            $lon=$dataResponse["results"][0]["position"]["lon"];
+            $allApartments=Apartment::all();
+            
+            foreach ($allApartments as $apartment) {
+                    $distance = self::haversineGreatCircleDistance($lat, $lon, $apartment->lat, $apartment->long);
+                    if ($distance <= 20) {
+                        array_push($apartmentFiltered,$apartment);
+                    }
+                }
+                return compact("apartmentFiltered");
+        
+    }
+    public function haversineGreatCircleDistance(
+        $latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthMeanRadius = 6371)
+    {
+        $deltaLatitude = deg2rad($latitudeTo - $latitudeFrom);
+        $deltaLongitude = deg2rad($longitudeTo - $longitudeFrom);
+        $a = sin($deltaLatitude / 2) * sin($deltaLatitude / 2) +
+            cos(deg2rad($latitudeFrom)) * cos(deg2rad($latitudeTo)) *
+            sin($deltaLongitude / 2) * sin($deltaLongitude / 2);
+        $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+        return $earthMeanRadius * $c;
     }
 }
