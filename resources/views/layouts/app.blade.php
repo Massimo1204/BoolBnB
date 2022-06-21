@@ -7,9 +7,9 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @auth
+    {{-- @auth
         <meta name="user-id" content="{{ Auth::user()->id }}">
-    @endauth
+    @endauth --}}
 
     <title>BoolBnb</title>
 
@@ -102,7 +102,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-end border-0 shadow pt-3"
                                     aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{url('/apartment/messages/1')}}">
                                         {{ __('Messaggi') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('apartment.index') }}">
