@@ -91,7 +91,7 @@ export default {
 				full_name: "",
 				email: "",
 				text: "",
-                apartment_id: 24,
+                apartment_id: this.$route.params.id,
 			},
 			errors: {},
 			type: "",
