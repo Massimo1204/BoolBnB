@@ -33,7 +33,7 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        $services = Service::all();
+        $services = Service::where('required', 1)->get();
         $sponsorships = Sponsorship::all();
 
         return view('user.apartments.create', compact('sponsorships','services'));
@@ -159,7 +159,7 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        $services = Service::all();
+        $services = Service::where('required', 1)->get();
         $sponsorships = Sponsorship::all();
 
         if($apartment->user_id == Auth::user()->id){
@@ -201,8 +201,8 @@ class ApartmentController extends Controller
             $response = Http::get('https://api.tomtom.com/search/2/search/' . $newAddress . '.json?countrySet=IT&lat=37.337&lon=-121.89&extendedPostalCodesFor=Str&minFuzzyLevel=1&maxFuzzyLevel=2&view=Unified&relatedPois=off&key=' . env("APP_KEYMAPS") . '&countrySet=Italia');
             $dataResponse = json_decode($response->body(), true);
             if($dataResponse["results"] !== []){
-                for ($i=0; $i < count($dataResponse["results"]); $i++) { 
-                    
+                for ($i=0; $i < count($dataResponse["results"]); $i++) {
+
                     if(strtolower($dataResponse["results"][$i]["address"]["freeformAddress"] . " " . $dataResponse["results"][$i]["address"]["countryCode"]) == strtolower($data["address"]))
                     {
                         // dd($dataResponse["results"][$i]["position"]["lat"]);
@@ -211,16 +211,16 @@ class ApartmentController extends Controller
                             $data['visible'] = 1;
                         else
                             $data['visible'] = 0;
-            
+
                         if($request['available'] != null)
                             $data['available'] = 1;
                         else
                             $data['available'] = 0;
-            
+
                         // $newAddress = str_replace(" ", "%20", $data['address']);
                         // $response = Http::get('https://api.tomtom.com/search/2/geocode/' . $newAddress . '.json?storeResult=false&view=Unified&key='.env("APP_KEYMAPS"));
                         // $dataResponse = json_decode($response->body(), true);
-            
+
                         $apartment->title = $data["title"];
                         $apartment->user_id = Auth::user()->id;
                         if(isset($data["image"])){
@@ -246,7 +246,7 @@ class ApartmentController extends Controller
 
                         return redirect()->route('apartment.show', compact('apartment'));
                     }
-                } 
+                }
                     // else{
                         // dd(strtolower($dataResponse["results"][0]["address"]["freeformAddress"]));
                         $request->validate([
@@ -255,7 +255,7 @@ class ApartmentController extends Controller
                         [
                             "numeric" => " Non riconosciamo questo indirizzo. L'hai inserito correttamente?",
                         ]);
-                    }   
+                    }
             // }
             else{
                 $request->validate([
@@ -264,7 +264,7 @@ class ApartmentController extends Controller
                 [
                     "numeric" => " Non riconosciamo questo indirizzo. L'hai inserito correttamente?",
                 ]);
-            }    
+            }
         }
     }
 
