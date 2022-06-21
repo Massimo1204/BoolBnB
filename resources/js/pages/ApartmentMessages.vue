@@ -36,6 +36,7 @@
     </div>
 </template>
 
+
 <script>
 export default {
     name:"ApartmentMessage",
@@ -70,8 +71,7 @@ export default {
     created(){
         this.getApartmentMessages(this.$userId);
     },
-    mounted() {
-    }
+
 }
 </script>
 
@@ -79,9 +79,12 @@ export default {
 div.apartment-messages-container{
     div.apartment-messages-wrapper{
         width: 33%;
+        border-left: 1px solid black;
         div.apartment-messages{
+            cursor: pointer;
             padding: 10px;
             border-bottom: solid black 1px;
+            background-color: antiquewhite;
             div.apartment-image-wrapper{
                 img.apartment-message-image{
                     width: 120px;
@@ -98,13 +101,15 @@ div.apartment-messages-container{
     div.apartment-chat{
         border-left: 1px solid black;
         width: 67%;
+        background-color: azure;
         div.apartment-single-message{
             margin: 20px auto 0 auto;
-            height: 200px;
-            width: 90%;
+            height: 210px;
+            width: 97%;
             padding: 10px;
             border: 1px solid black ;
             border-radius: 15px;
+            background-color: aliceblue;
         }
     }
 }

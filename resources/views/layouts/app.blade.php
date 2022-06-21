@@ -7,9 +7,12 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    {{-- @auth
+    @auth
         <meta name="user-id" content="{{ Auth::user()->id }}">
-    @endauth --}}
+    @endauth
+    @guest
+        <meta name="user-id" content="{{ null }}">
+    @endguest
 
     <title>BoolBnb</title>
 
