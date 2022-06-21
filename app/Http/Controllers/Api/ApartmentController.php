@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Apartment;
+use App\Model\Service;
 
 class ApartmentController extends Controller
 {
