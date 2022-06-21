@@ -87,7 +87,7 @@ class ApartmentController extends Controller
 
         //query di ricerca
         $apartments = Apartment::with('services')
-            ->where([['rooms_number', '>=', $rooms], ['beds_number', '>=', $beds]])
+            ->where([['n_rooms', '>=', $rooms], ['n_beds', '>=', $beds]])
             ->where(function ($query) use ($services) {
                 foreach ($services as $service) {
                     $query->whereHas('services', function ($query) use ($service) {
