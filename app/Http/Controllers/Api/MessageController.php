@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\User;
 use App\Model\Message;
 use App\Model\Apartment;
 use App\Mail\SendNewMail;
@@ -48,9 +49,14 @@ class MessageController extends Controller
             $message->fill($data);
             $message->save();
 
+
+        $user_id = Apartment::select('user_id')->where('id', $data['apartment_id'])->first();
+        $id = $user_id->user_id;
+        $user_email = User::select('email')->where('id', $id)->first();
+        $email = $user_email->email;
         $mail = new SendNewMail($data);
         try {
-            Mail::to(env('MAIL_ADMIN_ADDRESS'))->send($mail);
+            Mail::to($email)->send($mail);
             return response('Email inviata con successo', 204);
         } catch (ModelNotFoundException  $exception) {
             return response('Messaggio non inviato. Si è verificato un errore. Riprovare più tardi', 204);
