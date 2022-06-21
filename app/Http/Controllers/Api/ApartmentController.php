@@ -96,7 +96,26 @@ class ApartmentController extends Controller
         // ];
         // return compact('response');
     }
-    function haversineGreatCircleDistance(
+    public function search(Request $request){
+        $address = $request->get("address");
+        $apartmentFiltered = [];
+            $response = Http::get('https://api.tomtom.com/search/2/search/' . $address . '.json?countrySet=IT&lat=37.337&lon=-121.89&extendedPostalCodesFor=Str&minFuzzyLevel=1&maxFuzzyLevel=2&view=Unified&relatedPois=off&key=' . env("APP_KEYMAPS") . '&countrySet=Italia');
+            $dataResponse = json_decode($response->body(), true);
+            // dd($dataResponse["results"][0]);
+            $lat=$dataResponse["results"][0]["position"]["lat"];
+            $lon=$dataResponse["results"][0]["position"]["lon"];
+            $allApartments=Apartment::all();
+            
+            foreach ($allApartments as $apartment) {
+                    $distance = self::haversineGreatCircleDistance($lat, $lon, $apartment->lat, $apartment->long);
+                    if ($distance <= 20) {
+                        array_push($apartmentFiltered,$apartment);
+                    }
+                }
+                return compact("apartmentFiltered");
+        
+    }
+    public function haversineGreatCircleDistance(
         $latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthMeanRadius = 6371)
     {
         $deltaLatitude = deg2rad($latitudeTo - $latitudeFrom);
