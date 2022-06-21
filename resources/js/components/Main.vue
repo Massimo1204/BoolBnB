@@ -10,6 +10,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+div{
+    width: 100vw;
+}
 
 </style>
