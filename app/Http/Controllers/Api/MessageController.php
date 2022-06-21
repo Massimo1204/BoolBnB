@@ -63,9 +63,11 @@ class MessageController extends Controller
         }
     }
 
-    public function getApartmentMessages(Apartment $apartment){
-        $messages = $apartment->messages;
-
-        return response()->json($messages);
+    public function getApartmentMessages(User $user){
+        $apartments = $user->apartments;
+        foreach($apartments as $apartment){
+            $messages[] = $apartment->messages;
+        }
+        return response()->json($apartments);
     }
 }
