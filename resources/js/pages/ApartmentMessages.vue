@@ -36,6 +36,7 @@
     </div>
 </template>
 
+
 <script>
 export default {
     name:"ApartmentMessage",
@@ -56,6 +57,14 @@ export default {
                     console.warn(error);
                 })
         },
+        getUser(){
+            axios.get('http://127.0.0.1:8000/api/user')
+                .then((result)=>{
+                    console.log(result);
+                }).catch((error)=>{
+                    console.warn(error);
+                })
+        },
         chooseApartment(index){
             this.apartmentIndex = index;
             console.log(index, this.apartments[index].messages);
@@ -68,7 +77,9 @@ export default {
         // },
     },
     created(){
-        this.getApartmentMessages(this.$userId);
+        this.getApartmentMessages(1);
+        this.getUser();
+
     },
     mounted() {
     }
