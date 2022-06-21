@@ -179,7 +179,7 @@
                     <div class="service col-4">
                         <input class="form-check-input ms-2" type="checkbox" name="service[]"
                             value="{{ $service->id }}"
-                            {{ $apartment->services->contains($service) ? 'checked' : '' }}>
+                            {{ old('service') != null && in_array($service->id ,old('service')) ? 'checked' : ($apartment->services->contains($service) ? 'checked' : '') }}>
                         <label for="categories">
                             {{ $service->name }}
                         </label>

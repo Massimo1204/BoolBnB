@@ -2,6 +2,8 @@ window.axios=require('axios');
 // window.axios.defaults.headers.common['X-Reuested-With']='XMLHttpRequest';
 window.Vue = require('vue');
 
+Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
+
 import Vue from "vue";
 import VueRouter from "vue-router";
 import App from "./views/App";
