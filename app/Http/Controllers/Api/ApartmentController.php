@@ -18,4 +18,15 @@ class ApartmentController extends Controller
         $apartment=Apartment::findOrFail($id);
         return response()->json($apartment);
     }
+    public function search(Request $request){
+        $address = $request->get("address");
+        if($address){
+            $apartments = Apartment::where('address', 'LIKE', '%' . $address . '%')
+            ->get();
+        return response()->json($apartments);
+        }
+        else {
+        //     $apartment = Apartment::with(['user','categories'])->paginate(9);
+        }
+    }
 }
