@@ -94,9 +94,21 @@ export default {
         .otherPics{
             overflow-y: hidden;
             img{
-                width: 49%;
+                width: 49.5%;
                 height: 49%;
             }
+        }
+        .otherPics::-webkit-scrollbar{
+            height: 1.5vh;
+        }
+        .otherPics::-webkit-scrollbar-track {
+            background: rgb(214, 214, 214);
+            border-radius: 1rem;
+        }
+        .otherPics::-webkit-scrollbar-thumb {
+            background-color: rgb(163, 163, 163) ;
+            border-radius: 1rem;
+            border: .15rem solid rgb(214, 214, 214);
         }
         .price{
             bottom: 0.3rem;
