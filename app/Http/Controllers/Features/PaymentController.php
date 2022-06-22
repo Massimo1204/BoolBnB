@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\Sponsorship;
 use App\Model\Apartment;
+use Carbon\Carbon;
 
 class PaymentController extends Controller
 {
@@ -26,7 +27,6 @@ class PaymentController extends Controller
     }
 
     public function store(Request $request, Sponsorship $sponsorship, Apartment $apartment){
-        date_default_timezone_set('Europe/Belgrade');
 
         $gateway = new \Braintree\Gateway([
             'environment' => config('services.braintree.environment'),
@@ -49,7 +49,7 @@ class PaymentController extends Controller
         if ($result->success) {
             $transaction = $result->transaction;
             // header("Location: " . $baseUrl . "transaction.php?id=" . $transaction->id);
-            $today = date('Y-m-d h:i:s', time());
+            $today = Carbon::now('Europe/Rome');
 
             $duration = $sponsorship->duration;
             $endDate = date('Y-m-d h:i:s', strtotime($today)+60*60*$duration);
