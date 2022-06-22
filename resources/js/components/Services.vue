@@ -42,7 +42,7 @@ export default {
             this.includedServices.forEach((service) => {
                 this.nIncludedServices.push(service.name);
             });
-            console.log(this.nIncludedServices);
+            // console.log(this.nIncludedServices);
         }
     },
     created(){
