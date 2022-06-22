@@ -4,6 +4,8 @@
 
 <script>
 import tt from '@tomtom-international/web-sdk-maps'
+import {APP_KEYMAPS} from "../key";
+
 
 export default {
   data() {
@@ -20,7 +22,7 @@ export default {
     initializeMap() {
       // const tt = window.tt;
       this.map = tt.map({
-        key: 'PAeaq8AFofiaFnTYcbMQMTBAW7ENmXLB',
+        key:APP_KEYMAPS ,
 
         container: this.$refs.mapRef,
         center: this.Italy,
