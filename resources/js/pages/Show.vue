@@ -10,7 +10,7 @@
                     <span>{{apartment.price}}	&euro;</span>
                 </div>
             </div>
-            <div class="col-7 mt-3">
+            <div class="col-7 mt-4">
                 <h1>{{apartment.title}}</h1>
                 <span>{{apartment.address}}</span>
                 <hr>
