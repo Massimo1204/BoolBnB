@@ -8,15 +8,21 @@ import {APP_KEYMAPS} from "../key";
 
 
 export default {
+  name:"Maps",
+  props: ["filteredApartements"], 
   data() {
     return {
       // map: null,
-      Italy : {lng: 12.5674, lat: 41.8719}
-
+      Italy : {lng: 12.5674, lat: 41.8719},
+      markers:[],
+      zoom:4.8
     }
   },
   mounted() {
     this.initializeMap()
+      // console.log(apartments);
+      // console.log(this.Italy)
+
   },
   methods: {
     initializeMap() {
@@ -26,18 +32,43 @@ export default {
 
         container: this.$refs.mapRef,
         center: this.Italy,
-        zoom: 5.2,
-        minZoom:5.2,
+        zoom: this.zoom,
+        minZoom: this.zoom,
 
       })
       this.map.addControl(new tt.FullscreenControl(), 'top-left');
       this.map.addControl(new tt.NavigationControl(), 'top-left');
-
-      new tt.Marker().setLngLat([12.494335 , 41.905719]).addTo(this.map)
+      if (this.markers) {
+        for (let index = 0; index < this.markers.length-1; index++) {
+          new tt.Marker().setLngLat([this.markers[index],this.markers[index+1]]).addTo(this.map);
+        }
+          // console.log(this.markers.length);
+      }
+      
+      // new tt.Marker().setLngLat([12.494335 , 41.905719]).addTo(this.map)
 
       this.map = Object.freeze(this.map)
     },
+    getApartmentsMarker(){
+      if (this.filteredApartements!="") {
+        // console.log(this.filteredApartements[0]);
+        this.filteredApartements.forEach(apartment => {
+          this.markers.push(apartment["long"],apartment["lat"]);
+          // new tt.Marker().setLngLat([apartment["long"],apartment["lat"]]).addTo(this.map);
+          this.Italy= {lng:apartment["long"],lat:apartment["lat"]};
+          this.zoom=10;
+        });
+          this.initializeMap()
+
+      }
+
+    }
   },
+  watch:{
+    filteredApartements(){
+      this.getApartmentsMarker();
+    },
+  }
 }
 </script>
 
