@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row" v-if="apartment.visible">
             <div class="pics col-9 mx-auto">
-                <img :src="apartment.image" class="w-50" alt="">
+                <img :src="apartment.image" class="w-50 rounded" alt="">
                 <img v-for="pic,index in pictures" :key="index" :src="pic.image" class="w-75 d-none" alt="">
                 <div>
                     <span>{{apartment.price}}	&euro;</span>
@@ -16,13 +16,13 @@
                 <p>{{apartment.description}}</p>
                 <h3>Detalis</h3>
                 <Details :apartment="apartment"/>
-                <h3>Servizi</h3>
+                <h3 class="mt-4">Servizi</h3>
                 <Services :id="id"/>
                 <h3>Map</h3>
                 <h3>Meet The Host</h3>
-                <div>
-                    <img :src="host.profile_picture" :alt="host.id">
-                    <h4>{{host.first_name}} {{host.last_name}}</h4>
+                <div class="hostCard d-flex justify-content-around align-items-center">
+                    <img class="rounded-circle" :src="host.profile_picture" :alt="host.id">
+                    <h4 class="m-0">{{host.first_name}} {{host.last_name}}</h4>
                 </div>
             </div>
         </div>
@@ -53,7 +53,9 @@ export default {
             Axios.get('/api/apartment/'+this.id)
             .then(response=>{
                 this.apartment=response.data;
+            this.getHost(this.apartment.user_id);
             })
+
         },
         getpics(){
             Axios.get('/api/apartment/pictures/'+this.id)
@@ -61,19 +63,18 @@ export default {
                 this.pictures=response.data;
             })
         },
-        getHost(){
-            Axios.get('/api/apartment/host/'+this.apartment.user_id)
+        getHost(id){
+            Axios.get('/api/apartment/host/'+id)
             .then(response=>{
-                this.host=response.data;
-                console.log(this.host)
+                this.host=response.data[0][0];    
+                console.log(this.host);
             })
         }
     },
     created(){
         this.getInfo();
         this.getpics();
-        this.getHost();
-    }
+    },
 }
 </script>
 
@@ -84,6 +85,17 @@ export default {
     }
     .row{
         padding: 3rem 10rem;
+    }
+    .hostCard{
+        width: 17rem;
+        img{
+            height: 5rem;
+            width: 5rem;
+            object-fit: cover;
+        }
+        h4{
+            vertical-align: auto;
+        }
     }
 
 </style>
