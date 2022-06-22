@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-column flex-wrap myCont ">
+    <div class="d-flex flex-column flex-wrap myCont overflow-hidden">
         <div class="includedService me-3" v-for="service,index in includedServices" :key="index">
             <h5>{{service.name}}</h5>
         </div>
