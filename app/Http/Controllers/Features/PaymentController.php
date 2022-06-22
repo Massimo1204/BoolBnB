@@ -26,6 +26,7 @@ class PaymentController extends Controller
     }
 
     public function store(Request $request, Sponsorship $sponsorship, Apartment $apartment){
+        date_default_timezone_set('Europe/Belgrade');
 
         $gateway = new \Braintree\Gateway([
             'environment' => config('services.braintree.environment'),
@@ -48,9 +49,11 @@ class PaymentController extends Controller
         if ($result->success) {
             $transaction = $result->transaction;
             // header("Location: " . $baseUrl . "transaction.php?id=" . $transaction->id);
+            $today = date('Y-m-d h:i:s', time());
+
             $duration = $sponsorship->duration;
-            $endDate = date('Y-m-d h:i:s', strtotime($apartment->created_at)+60*60*$duration);
-            $apartment->sponsorships()->sync([$sponsorship->id => ['start_date' => $apartment->created_at, 'end_date' => $endDate]]);
+            $endDate = date('Y-m-d h:i:s', strtotime($today)+60*60*$duration);
+            $apartment->sponsorships()->sync([$sponsorship->id => ['start_date' => $today, 'end_date' => $endDate]]);
 
             return redirect()->route('apartment.show', compact('apartment'))->with('sponsor-success-message', 'Transazione eseguita con successo. Sponsorizzazione: ' . ucfirst($sponsorship->name));
         } else {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\Sponsorship;
 use App\Model\Apartment;
 use App\Model\Service;
 use Illuminate\Support\Facades\Http;
@@ -125,5 +126,11 @@ class ApartmentController extends Controller
             sin($deltaLongitude / 2) * sin($deltaLongitude / 2);
         $c = 2 * atan2(sqrt($a), sqrt(1-$a));
         return $earthMeanRadius * $c;
+    }
+
+    public function getSponsored(){
+        $sponsorships = Sponsorship::with('apartments')->get();
+
+        return response()->json($sponsorships);
     }
 }
