@@ -82,8 +82,8 @@ export default {
 		getSponsoredApartments(){
 			axios.get('http://127.0.0.1:8000/api/apartments/sponsored')
 				.then((result)=>{
-					for(let i=2; i>=0 ; i--){
-						result.data[i].apartments.forEach(element => {
+					for(let i=result.data.length-1; i>=0 ; i--){
+						result.data[i].forEach(element => {
 							this.sponsoredApartments.push(element);
 						});
 					}

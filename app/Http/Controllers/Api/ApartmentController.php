@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Model\Sponsorship;
 use App\Model\Apartment;
 use App\Model\Service;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 
 class ApartmentController extends Controller
@@ -132,5 +133,17 @@ class ApartmentController extends Controller
             sin($deltaLongitude / 2) * sin($deltaLongitude / 2);
         $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
         return $earthMeanRadius * $c;
+    }
+
+    public function getSponsored(){
+        $today = Carbon::now('Europe/Rome');
+        
+        $sponsorships = Sponsorship::with('apartments')->get();
+
+        foreach($sponsorships as $sponsorship){
+            $available[] = $sponsorship->apartments()->wherePivot('end_date', '>', $today)->get();
+        }
+
+        return response()->json($available);
     }
 }
