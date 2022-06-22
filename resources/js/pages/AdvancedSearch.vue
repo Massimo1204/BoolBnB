@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <!-- <div class="row">
+    <div class="row">
       <div class="col-3">
         <form>
           <fieldset>
@@ -66,12 +66,10 @@
           </div>
         </form>
       </div>
-      <div class="col-9"> -->
-
+      <div class="col-9">
         <Maps />
-
-      <!-- </div> -->
-    <!-- </div> -->
+      </div>
+    </div>
   </div>
 </template>
 
