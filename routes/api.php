@@ -28,12 +28,14 @@ Route::get('/services','Api\ServicesController@index');
 Route::get('/apartment/service/{apartment}','Api\ApartmentServiceController@show');
 Route::get('/apartment','Api\ApartmentController@search');
 Route::get('/apartment/host/{id}','Api\UserController@show');
-Route::get('/apartment/filteredsearch', 'Api\ApartmentController@filteredSearch');
+Route::get('/apartments/filteredsearch', 'Api\ApartmentController@filteredSearch');
 
 
 
 Route::namespace('Api')->group( function () {
     Route::post('/message', 'MessageController@store');
     Route::get('/apartment/messages/{user}', 'MessageController@getApartmentMessages');
+    Route::get('/apartments/sponsored', 'ApartmentController@getSponsored');
+
 });
 

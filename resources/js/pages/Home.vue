@@ -12,6 +12,13 @@
         </div>
     </div>
     <div class="row">
+		<div class="col-12">
+			<h1 class="ms-5 mt-4">In evidenza</h1>
+		</div>
+        <SingleApartment v-for="(apartment,index) in sponsoredApartments" :key="'sponsored'+ index" :apartment="apartment" />
+		<div class="col-12">
+			<h1 class="ms-5">Normali</h1>
+		</div>
         <SingleApartment v-for="(apartment,index) in filterApartments" :key="index" :apartment="apartment" />
         <div class="col-12 d-flex justify-content-between my-3" v-if="apartmentsSearch == ''">
             <div v-if="pagination.current_page == 1"></div>
@@ -35,6 +42,7 @@ export default {
     data(){
         return{
         apartments:[],
+		sponsoredApartments:[],
         pagination:{},
         last_page:0,
         userSearch:"",
@@ -71,9 +79,23 @@ export default {
                 this.apartmentsSearch = this.apartments;
             }
         },
+		getSponsoredApartments(){
+			axios.get('http://127.0.0.1:8000/api/apartments/sponsored')
+				.then((result)=>{
+					for(let i=2; i>=0 ; i--){
+						result.data[i].apartments.forEach(element => {
+							this.sponsoredApartments.push(element);
+						});
+					}
+					console.log(this.sponsoredApartments);
+				}).catch((error)=>{
+					console.warn(error);
+				})
+		}
     },
     created(){
-        this.getApartments(1)
+        this.getApartments(1);
+		this.getSponsoredApartments();
     },
     computed: {
         filterApartments(){

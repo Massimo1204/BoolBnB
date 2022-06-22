@@ -1,10 +1,10 @@
 <template>
-    <div class="d-flex flex-column flex-wrap myCont ">
-        <div class="includedService" v-for="service,index in includedServices" :key="index">
-            <h4>{{service.name}}</h4>
+    <div class="d-flex flex-column flex-wrap myCont overflow-hidden">
+        <div class="includedService me-3" v-for="service,index in includedServices" :key="index">
+            <h5>{{service.name}}</h5>
         </div>
-        <div class="includedService" v-for="service,i in services" :key="'A'+i">
-            <h4>{{service.name}}</h4>
+        <div class="notIncludedService me-3" v-for="service,i in services" :key="'A'+i">
+            <h5 v-if="!(nIncludedServices.includes(service.name))"><del>{{service.name}}</del></h5>
         </div>
     </div>
 </template>
@@ -34,31 +34,26 @@ export default {
             .then(response=>{
                 this.includedServices=response.data;
                 // console.log(this.includedServices)
+                this.calcIncluded();
             });
             
         },
         calcIncluded(){
-            // this.includedServices.forEach((service) => {
-                //     this.nIncludedServices.push(service.name);
-            // });
-            // const propertyValues = JSON.parse(this.includedServices);
-            // for (let i = 0; i < propertyValues.length; i++){
-            //     this.nIncludedServices.push(propertyValues[i].name);
-            //     console.log(propertyValues[i].name);
-            // }
-            // console.log(this.propertyValues);
+            this.includedServices.forEach((service) => {
+                this.nIncludedServices.push(service.name);
+            });
+            console.log(this.nIncludedServices);
         }
     },
     created(){
         this.getServices();
         this.getIncludedServices();
-        // this.calcIncluded();
     },
 }
 </script>
 
 <style lang="scss" scoped>
     .myCont{
-        height: 35vh;
+        height: 40vh;
     }
 </style>
