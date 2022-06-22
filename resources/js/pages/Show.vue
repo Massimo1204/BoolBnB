@@ -73,7 +73,7 @@ export default {
             Axios.get('/api/apartment/host/'+id)
             .then(response=>{
                 this.host=response.data[0][0];    
-                console.log(this.host);
+                // console.log(this.host);
             })
         }
     },
