@@ -102,7 +102,7 @@
         </form>
       </div>
       <div class="col-9">
-        <Maps />
+        <Maps  :filteredApartements="filteredApartements" />
       </div>
     </div>
   </div>
@@ -154,7 +154,7 @@ export default {
         )
         .then((response) => {
           this.filteredApartements=response.data.response.data;
-          console.log(this.filteredApartements);
+          // console.log(this.filteredApartements);
         })
         .catch((error) => {
           console.warn(error);
