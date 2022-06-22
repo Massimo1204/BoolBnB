@@ -1,6 +1,6 @@
 <template>
 <div class="col-4 mb-5 " v-if="apartment.visible==1">
-    <div class="cardcontainer my-3 px-5">
+    <div class="cardcontainer my-3">
         <router-link :to="{name: 'Show', params:{id: apartment.id}}" class="text-decoration-none">
             <div class="photo mx-auto position-relative">
                 <img class="w-100" :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" :alt="apartment.title">
