@@ -35,5 +35,7 @@ Route::get('/apartment/filteredsearch', 'Api\ApartmentController@filteredSearch'
 Route::namespace('Api')->group( function () {
     Route::post('/message', 'MessageController@store');
     Route::get('/apartment/messages/{user}', 'MessageController@getApartmentMessages');
+    Route::get('/apartments/sponsored', 'ApartmentController@getSponsored');
+
 });
 
