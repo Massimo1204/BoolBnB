@@ -54,6 +54,6 @@ export default {
 
 <style lang="scss" scoped>
     .myCont{
-        height: 42vh;
+        height: 40vh;
     }
 </style>
