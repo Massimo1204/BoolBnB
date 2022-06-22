@@ -67,7 +67,58 @@ return[
     Lo spazio
     Ci sono tre cabine nella proprietà. Ognuno con il proprio bagno, angolo cottura, camera da letto e salotto.
     
-    Questa cabina ha un letto queen size in camera da letto e due divani letto nel soggiorno. Ha anche un bagno in più al piano di sotto."
+    Questa cabina ha un letto queen size in camera da letto e due divani letto nel soggiorno. Ha anche un bagno in più al piano di sotto.",
+
+    "Casetta in pietra alle porte di Cisternino e Ostuni. All'interno troverete una camera matrimoniale,un bagnetto completo e una cucina dotata di freezer,forno elettrico,frigo ed ogni comfort. In camera abbiamo posizionato un televisore e un condizionatore. All'esterno troverete gazebo,barbecue e doccia all'aperto. La lamia è situata strategicamente in prossimità di Ostuni, Cisternino, Martina Franca, Locorotondo e le spiagge libere di Torre Canne(Fasano),Rosa Marina(Ostuni) e Capitolo(Monopoli).",
+
+    "Questa graziosa casetta a fiori è stata restaurata come uno spazio aperto da godere dalla comoda terrazza e dal soggiorno. Gli interni sono luminosi, moderni e per una personalità disinvolta. Qui avrete una completa privacy.
+    La casa si trova vicino al mare, a 80 metri dalla spiaggia più vicina.
+    Tutto intorno troverai bar, ottimi ristoranti, negozi per lo shopping e souvenir , tobacoo e negozi per il mare.",
+
+    "Casa Pindini è immersa nel verde della macchia mediterranea, all'interno dell'agri resort in una grande proprietà privata a pochi passi dal mare.
+    Il luogo ideale per immergersi nella natura e nel paesaggio salentino caratteristico, con muretti a secco, uliveto secolare, cespugli di rosmarino e mirto, al centro ad attendervi la piscina a sfioro e vasca idromassaggio. Un posto perfetto per ridurre lo stress, a pochi chilometri potrete trovare i ristoranti con i piatti tipici pugliesi.",
+
+    "Affittiamo una nuovissima casa mobile lussuosamente attrezzata per 4 persone presso il bellissimo Jezera Village Holiday Resort sull'isola di Murter. La nostra casa mobile dispone di due camere da letto, bagno con doccia, soggiorno con cucina e ampia terrazza.Wifi gratuito,parcheggio e biciclette, tv satellitare.Gli ospiti hanno a loro disposizione campi da tennis,minigolf,basket,animatori,aqvapark,pedalò windsoufring,immersioni subacquee, visite organizzate ai parchi nazionali.Noleggio barche e ormeggi.",
+
+    "La casa Robinson Orkula, nel cuore del giardino degli ulivi, si trova a Putičanje, un piccolo posto a soli 20 km da Sebenico. Se vuoi trascorrere le tue vacanze in un ambiente tranquillo e silenzioso, lontano dalla città
+    folla, questa è la scelta migliore per voi. Vivi una vacanza unica in una piccola casa Robinson situata nel cuore degli uliveti, circondata da 300 ulivi.
+    
+    Una spaziosa terrazza attrezzata con lettini e ombrelloni, attrezzature per barbecue e sala da pranzo all'aperto sono a vostra disposizione, il che rende questo luogo ideale per una piacevole e rilassante vacanza in famiglia o con gli amici. Questa struttura offre eco - un soggiorno amichevole.
+    
+    La connessione Wi-Fi è gratuita in tutta la struttura.
+    Parcheggio privato è possibile e la prenotazione non è necessaria.",
+
+    "Casa situata all'interno di una grande villa verde e silenziosa, ben attrezzata e con tutti i comfort! Dista soli 8 km dalle spiagge dorate di Metaponto e a 30 km dalla suggestiva città di Matera (Capitale Europea della Cultura 2019).
+
+    Bella casa in una grande villa verde e tranquilla, ben attrezzata con tutti i comfort! La casa dista 8 km dalle spiagge di sabbia dorata di Metaponto e 30 km dall'incantevole città di Matera (Capitale Europea della Cultura 2019).",
+
+    "Hai mai dormito in una botte di vino?
+    La nostra botte è composta al 100% da legno naturale. L'intera struttura è ecologica e antisismica.
+    La sua forma si combina perfettamente con il paesaggio naturale ricco di vigneti. La nostra botte può ospitare fino a quattro persone. Ci sono un piccolo soggiorno e un bagno privato con wc, lavandino e doccia. Questo è il luogo ideale dove trascorrere un fine settimana in relax lontano dal caos.",
+
+    "Marina House offre sistemazioni a Drage. La struttura dista 37 km da Zara e offre viste sul mare.
+
+    C'è una zona salotto e una cucina. L'alloggio è dotato di aria condizionata.
+    
+    Posto bellissimo con vista mozzafiato sul mare e sulle isole. Molto tranquillo, siamo soli nella natura.
+    
+    Il Marina House dista 30,6 km da Sebenico e 22,5 km da Vodice. L'aeroporto più vicino è quello di Zara, a 29 km.
+    
+    Parliamo la tua lingua!",
+
+    "La casa mobile fa parte di un piccolo campeggio Kopito situato nell'oliveto di famiglia. Il campeggio dispone anche di una piscina con area prendisole, a disposizione di tutti gli ospiti. Il campeggio è adatto alle famiglie e a tutti coloro che amano questo tipo di vacanza",
+
+    "Casa vacanze confortevole, spaziosa e completamente attrezzata per un'esperienza ideale di vacanza in famiglia.
+    Case mobili di nuova generazione, perfette per il riposo e il relax.
+    Attrezzature morbide e spazi interni comodi garantiscono comfort e privacy.
+    L'ampia terrazza permette a tutta la famiglia di riunirsi per pranzare e divertirsi.",
+
+    "A soli 40 minuti da Tirana, questa casa al mare recentemente ristrutturata è tutto il necessario per qualche giorno di relax in riva al mare. Completamente immersa nell'ombra dei pini, la casa offre un bellissimo e privato giardino, una spaziosa terrazza con barbecue e zona salotto, soggiorno e cucina completamente attrezzata, due camere da letto e due bagni, tutti arredati con cura e gusto dove tutto parla di mare e sole. Ottimo anche per serate romantiche grazie alla stufa a legna.",
+
+    "La nostra casa mobile si trova vicino alla vita notturna e alla spiaggia ed è adatta a coppie e famiglie. MH si trova a circa 1 km dalla città di Hvar centro ea 2 km dalla spiaggia di ghiaia \"Pokonji Dol\".La cucina dispone di frigorifero, forno, fornelli a gas, macchina da caffè Nespresso e macchina da caffè americano. Piscina è a pochi passi di distanza, noleggio teli
+    mare Il parcheggio è vicino alla casa ed è gratuito. Due camere da letto separate con WC e doccia e lettino prendisole gratuito. Gli animali domestici sono i benvenuti. Asciugamani, biancheria da letto incl."
+
+
 
 ]
 
