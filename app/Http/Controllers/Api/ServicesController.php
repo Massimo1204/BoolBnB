@@ -15,7 +15,7 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        $services=Service::all()->where('required','1');
+        $services=Service::where('required','1')->get();
         return response()->json($services);
     }
 }
