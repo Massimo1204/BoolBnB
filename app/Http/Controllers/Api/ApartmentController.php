@@ -72,7 +72,10 @@ class ApartmentController extends Controller
         }
 
         if ($request->get("services")) {
-            $services = json_decode($request->get("services"));
+            // $services = json_decode($request->get("services"));
+            $services = explode(' ', $request->get("services"));
+            // $services = $request->get("services");
+
         }
         else {
             $services = [];

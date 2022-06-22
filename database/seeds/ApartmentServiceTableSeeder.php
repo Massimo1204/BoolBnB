@@ -20,7 +20,7 @@ class ApartmentServiceTableSeeder extends Seeder
         $apartments = Apartment::all();
 
         foreach ($apartments as $apartment) {
-            $apartment->services()->sync($faker->randomElements($service_ids, rand(1, 8)));
+            $apartment->services()->sync($faker->randomElements($service_ids, rand(5, 9)));
         }
     }
 }

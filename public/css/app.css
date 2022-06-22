@@ -20562,3 +20562,7 @@ div.show-thumbnails img #results li {
 .fs-small {
   font-size: 0.8rem;
 }
+
+body {
+  overflow-x: hidden;
+}
