@@ -28,7 +28,7 @@ Route::get('/services','Api\ServicesController@index');
 Route::get('/apartment/service/{apartment}','Api\ApartmentServiceController@show');
 Route::get('/apartment','Api\ApartmentController@search');
 Route::get('/apartment/host/{id}','Api\UserController@show');
-Route::get('/apartment/filteredsearch', 'Api\ApartmentController@filteredSearch');
+Route::get('/apartments/filteredsearch', 'Api\ApartmentController@filteredSearch');
 
 
 
