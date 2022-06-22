@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     initializeMap() {
-      // const tt = window.tt; 
+      // const tt = window.tt;
       this.map = tt.map({
         key: 'PAeaq8AFofiaFnTYcbMQMTBAW7ENmXLB',
 
