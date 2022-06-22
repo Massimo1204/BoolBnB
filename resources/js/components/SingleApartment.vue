@@ -37,6 +37,7 @@ props: ['apartment']
     img{
         height: 100%;
         border-radius: 15px;
+        object-fit: cover;
     }
     .price{
         background-color: $light-dark-background;

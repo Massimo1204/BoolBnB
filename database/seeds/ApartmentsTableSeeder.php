@@ -19,6 +19,7 @@ class ApartmentsTableSeeder extends Seeder
     {
         $user_ids = User::pluck('id')->toArray();
         $RandDescs=config('descs');
+        $RandTitles=config('Titles');
         for($i=2;$i<8;$i++){
             $AppartmentQuery = Http::get('https://api.unsplash.com/search/photos?client_id='.env("APP_KEYHOUSE").'&&query=apartment-building&&page='.$i);
             $Appartments = $AppartmentQuery->getBody();
@@ -39,7 +40,7 @@ class ApartmentsTableSeeder extends Seeder
             $newApartment->n_bathrooms = $faker->numberBetween(1,3);
             $newApartment->n_beds = $faker->numberBetween(1,10);
             $newApartment->guests = $faker->numberBetween(1,20);
-            $newApartment->title = $faker->word();
+            $newApartment->title = $faker->randomElement($RandTitles);
             $newApartment->address = $faker->address();
             $newApartment->lat = $faker->latitude($min=36.647000, $max= 44.000000);
             $newApartment->long = $faker->longitude($min=7.900000, $max= 15.080000);
