@@ -49,12 +49,7 @@ class ApartmentsTableSeeder extends Seeder
             $newApartment->available = $faker->boolean();
             $newApartment->price = $faker->randomFloat(2,70,1000);
             $newApartment->image = $imgs[$i];
-            if($descs[$i] == null){
-                $newApartment->description = $RandDescs[rand(0,6)];
-            }
-            else{
-                $newApartment->description = $descs[$i];
-            }
+            $newApartment->description = $faker->randomElement($RandDescs);
             $newApartment->save();
         }
     }
