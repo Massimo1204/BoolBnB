@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $Host=User::all()->where('id',$id);
-        return response()->json($Host);
+        $Host=User::where('id',$id)->get();
+        return response()->json([$Host]);
     }
 }

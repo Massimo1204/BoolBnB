@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex justify-content-around">
+    <div class="d-flex justify-content-around pt-3">
         <div class="card">
             <span>Superficie</span>
             <span>{{apartment.square_meters}} m2</span>
