@@ -14,6 +14,7 @@ import Home from './pages/Home';
 import Show from './pages/Show';
 import Messages from './pages/Messages';
 import ApartmentMessages from './pages/ApartmentMessages';
+import AdvancedSearch from './pages/AdvancedSearch.vue';
 
 const router = new VueRouter({
     mode:'history',
@@ -37,7 +38,12 @@ const router = new VueRouter({
             path:'/apartment/messages/:id',
             name:'ApartmentMessages',
             component:ApartmentMessages
-        }
+        },
+        {
+            path:'/apartments/search',
+            name:'AdvancedSearch',
+            component:AdvancedSearch
+        },
 ]
 })
 
