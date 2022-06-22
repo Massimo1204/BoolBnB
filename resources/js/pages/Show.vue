@@ -3,8 +3,8 @@
         <div class="row w-100" v-if="apartment.visible">
             <div class="pics position-relative col-9 mx-auto d-flex gap-1">
                 <img :src="apartment.image" class="w-50 rounded h-100" alt="">
-                <div class="otherPics w-50 h-100 d-flex flex-column flex-wrap">
-                    <img v-for="pic,index in pictures" :key="index" :src="pic.image" class="w-50 h-50 p-1 rounded">
+                <div class="otherPics w-50 h-100 d-flex flex-column flex-wrap gap-1">
+                    <img v-for="pic,index in pictures" :key="index" :src="pic.image" class="rounded">
                 </div>
                 <div class="price position-absolute px-2 py-1 bg-light rounded-pill">
                     <span>{{apartment.price}}	&euro;</span>
@@ -93,6 +93,22 @@ export default {
         }
         .otherPics{
             overflow-y: hidden;
+            img{
+                width: 49.5%;
+                height: 49%;
+            }
+        }
+        .otherPics::-webkit-scrollbar{
+            height: 1.5vh;
+        }
+        .otherPics::-webkit-scrollbar-track {
+            background: rgb(214, 214, 214);
+            border-radius: 1rem;
+        }
+        .otherPics::-webkit-scrollbar-thumb {
+            background-color: rgb(163, 163, 163) ;
+            border-radius: 1rem;
+            border: .15rem solid rgb(214, 214, 214);
         }
         .price{
             bottom: 0.3rem;
