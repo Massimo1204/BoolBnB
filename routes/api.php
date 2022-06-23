@@ -36,7 +36,7 @@ Route::get('/apartments/{id}', 'Api\ApartmentController@statsApartment');
 Route::namespace('Api')->group( function () {
     Route::post('/message', 'MessageController@store');
     Route::get('/apartment/messages/{user}', 'MessageController@getApartmentMessages');
-    Route::get('/apartments/sponsored', 'ApartmentController@getSponsored');
+    Route::get('/sponsored/apartments', 'ApartmentController@getSponsored');
 
 });
 

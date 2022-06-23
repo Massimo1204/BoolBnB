@@ -100,14 +100,13 @@ export default {
             }
         },
 		getSponsoredApartments(){
-			axios.get('http://127.0.0.1:8000/api/apartments/sponsored')
+			axios.get('http://127.0.0.1:8000/api/sponsored/apartments')
 				.then((result)=>{
 					for(let i=result.data.length-1; i>=0 ; i--){
-						result.data[i].forEach(element => {
+						result.data[i].apartments.forEach(element => {
 							this.sponsoredApartments.push(element);
 						});
 					}
-					console.log(this.sponsoredApartments);
 				}).catch((error)=>{
 					console.warn(error);
 				})

@@ -153,6 +153,6 @@ class ApartmentController extends Controller
             $available[] = $sponsorship->apartments()->wherePivot('end_date', '>', $today)->get();
         }
 
-        return response()->json($available);
+        return response()->json($sponsorships);
     }
 }
