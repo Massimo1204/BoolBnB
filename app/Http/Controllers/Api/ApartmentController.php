@@ -14,7 +14,7 @@ class ApartmentController extends Controller
 {
     public function index()
     {
-        $apartments = Apartment::with(['messages', 'user'])->paginate(12);
+        $apartments = Apartment::with(['messages', 'user'])->where('visible','1')->paginate(12);
 
         return response()->json($apartments);
     }
@@ -110,6 +110,7 @@ class ApartmentController extends Controller
         $filtered = [];
         foreach ($apartments as $apartment) {
             $distance = self::haversineGreatCircleDistance($lat, $lon, $apartment->lat, $apartment->long);
+            $apartment->distance = $distance;
             if ($distance <= $range) {
                 array_push($filtered, $apartment);
             };
@@ -140,7 +141,7 @@ class ApartmentController extends Controller
 
     public function getSponsored(){
         $today = Carbon::now('Europe/Rome');
-        
+
         $sponsorships = Sponsorship::with('apartments')->get();
 
         foreach($sponsorships as $sponsorship){

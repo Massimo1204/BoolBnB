@@ -1,5 +1,5 @@
 <template>
-<div class="col-4 mb-5 " v-if="apartment.visible==1">
+<div class="col-3" v-if="apartment.visible==1">
     <div class="cardcontainer my-3">
         <router-link :to="{name: 'Show', params:{id: apartment.id}}" class="text-decoration-none">
             <div class="photo mx-auto position-relative">
