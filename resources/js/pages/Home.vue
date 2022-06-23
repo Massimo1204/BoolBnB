@@ -25,7 +25,7 @@
 		<div class="col-12">
 			<h1 >Normali</h1>
 		</div>
-        <SingleApartment v-for="(apartment,index) in filterApartments" :key="index" :apartment="apartment" />
+        <SingleApartment v-for="(apartment,index) in apartments" :key="index" :apartment="apartment" />
         <div class="col-12 d-flex justify-content-between my-3" v-if="apartmentsSearch == ''">
             <div v-if="pagination.current_page == 1"></div>
             <button class="btn btn-outline-primary" @click="getApartments(pagination.current_page - 1)" v-if="pagination.current_page > 1">prev</button>
@@ -103,17 +103,6 @@ export default {
         this.getApartments(1);
 		this.getSponsoredApartments();
     },
-    computed: {
-        filterApartments(){
-            if(this.apartmentsSearch != ""){
-                return this.apartmentsSearch;
-            }
-            // else if(this.userSearch==""){
-            //     return this.apartments;
-            // }
-            return this.apartments;
-        },
-}
 }
 </script>
 
