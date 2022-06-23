@@ -16,10 +16,11 @@ class ViewsTableSeeder extends Seeder
     {
         $apartment_ids = Apartment::pluck('id')->toArray();
 
-        for ($i = 0; $i < 200; $i++) {
+        for ($i = 0; $i < 1000; $i++) {
             $newView = new View();
             $newView->apartment_id = $faker->randomElement($apartment_ids);
             $newView->ip_address = $faker->randomFloat();
+            $newView->date_time = $faker->dateTimeBetween('-1 year', '+1 year');
             $newView->save();
         }
     }

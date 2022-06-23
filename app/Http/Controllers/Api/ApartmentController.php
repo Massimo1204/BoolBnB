@@ -24,8 +24,8 @@ class ApartmentController extends Controller
         return response()->json($apartment);
     }
 
-    public function userApartments($id){
-        $apartments = Apartment::where('user_id',$id)->get();
+    public function statsApartment($id){
+        $apartments = Apartment::with('views')->with('messages')->where('id',$id)->get();
         return response()->json($apartments);
     }
 
