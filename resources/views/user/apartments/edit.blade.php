@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="text-center">
+    <h1 class="text-center mt-3">
         Modifica Appartamento
     </h1>
-    <div class="container edit-container mt-5 w-50">
+    <div class="container-fluid edit-container my-3 px-5">
         <div class="edit">
-            <div class="col-lg-12">
+            <div class="col-sm-12">
                 <h6>
                     Le foto del tuo appartamento:
                 </h6>
@@ -21,9 +21,9 @@
                 </script>
             @endif
             {{-- @dd($apartment->pictures) --}}
-            <div class="col-lg-12 d-flex flex-wrap mb-4">
+            <div class="picsContainer col-12 d-flex flex-wrap mb-4">
                 @foreach ($apartment->pictures as $photo)
-                    <div class="col-lg-4 p-1 position-relative">
+                    <div class="w-25 p-1 position-relative">
                         <div class="delete position-absolute">
                             <form action="{{ route('picture.destroy', $photo) }}" method="POST"
                                 class="picture-form-destroyer">
@@ -33,20 +33,20 @@
                             </form>
                         </div>
                         @if (str_starts_with($apartment->image, 'https://') || str_starts_with($apartment->image, 'http://'))
-                            <img class="rounded-1" src="{{ $photo->image }}" alt="apartment img">
+                            <img class="rounded-1 w-100" src="{{ $photo->image }}" alt="apartment img">
                         @else
-                            <img class="rounded-1" src="{{ asset('/storage') . '/' . $photo->image }}" alt="">
+                            <img class="rounded-1 w-100" src="{{ asset('/storage') . '/' . $photo->image }}" alt="">
                         @endif
                     </div>
                 @endforeach
             </div>
         </div>
-        <form class="row" action="{{ route('apartment.update', $apartment) }}" method="post"
+        <form class="w-100" action="{{ route('apartment.update', $apartment) }}" method="post"
             enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="row apartment">
-                <div class="col-lg-12">
+            <div class="row gy-sm-5 apartment">
+                <div class="col-sm-12">
                     <label for="title">Titolo*</label>
                     <input class="form-control" type="text" name="title" id="title"
                         value="{{ old('title') ?? $apartment->title }}" required autocomplete="on" autofocus
@@ -57,7 +57,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-lg-12">
+                <div class="col-sm-12 mt-3">
                     <label for="image">Carica la foto cover:*</label>
                     <input type="file" name="image" id="image" value="{{ $apartment->image }}">
                     @error('image')
@@ -66,7 +66,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-lg-12">
+                <div class="col-sm-12">
                     <label for="description">Descrizione*</label>
                     <textarea class="form-control" type="text" name="description" id="description" required autocomplete="on" autofocus
                         minlength="10">{{ old('description') ?? $apartment->description }}</textarea>
@@ -147,15 +147,12 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
-
-                </div>
-                <div class="col-lg-2">
+                <div class="col-3">
                     <label for="visible">Visibile </label>
                     <input type="checkbox" name="visible" id="visible"
                         @if ($apartment->visible == 1) checked @endif>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-3">
                     <label for="available">Disponibile </label>
                     <input type="checkbox" name="available" id="available"
                         @if ($apartment->available == 1) checked @endif>
@@ -181,7 +178,7 @@
                 <label for="address_city">Servizi:*</label><br>
 
                 @foreach ($services as $service)
-                    <div class="service col-4">
+                    <div class="service col-lg-4">
                         <input class="form-check-input ms-2" type="checkbox" name="service[]"
                             value="{{ $service->id }}"
                             {{ old('service') != null && in_array($service->id, old('service')) ? 'checked' : ($apartment->services->contains($service) ? 'checked' : '') }}>
@@ -196,7 +193,7 @@
                     </div>
                 @enderror
 
-                <div class="col-12">
+                <div class="col-12 mt-3">
                     <label for="image[]">inserisci altre foto del tuo appartamento</label>
                     {{-- @dd($apartment->pictures) --}}
                     <input type="file" class="form-control" name="images[]" id="image[]" multiple>

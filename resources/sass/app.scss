@@ -84,8 +84,20 @@
     // i:hover{
     //   color: red;
     // }
+    .picsContainer{
+        img{
+            height: 40vh;
+            object-fit: cover;
+        }
+    }
 }
-
+.create-container,.edit-container{
+    .col-3{
+        input{
+            vertical-align: middle;
+        }
+    }
+}
 div.show-img {
     height: 70vh;
 
