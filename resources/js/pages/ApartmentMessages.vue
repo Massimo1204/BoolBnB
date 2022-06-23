@@ -125,13 +125,6 @@ export default {
         },
         getDate(date){
             let newDate =  date.slice(8, 10)+'/'+date.slice(5, 7)+'/'+date.slice(0, 4)+', '+date.slice(11,16);
-            let year = date.slice(0,4);
-            let month = date.slice(5,7);
-            let day = date.slice(8,10);
-
-            let hour = date.slice(11,16);
-
-            console.log(newDate , date, year, month, day, hour);
             return newDate;
         },
     },
