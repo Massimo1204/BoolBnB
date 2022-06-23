@@ -1,36 +1,39 @@
 <template>
     <div class="MyContainer w-100">
-        <div class="row mx-auto px-5 w-100" v-if="apartment.visible">
-            <div class="pics position-relative col-12 mx-sm-auto d-flex gap-1">
-                <img :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" class="w-50 rounded h-100" alt="">
-                <div class="otherPics w-50 h-100 d-flex flex-column flex-wrap gap-1">
-                    <img v-for="pic,index in pictures" :key="index" :src="(pic.image.startsWith('https://')) ? pic.image : '../../storage/'+ pic.image" class="rounded">
+        <div>
+            <div class="row mx-auto px-5 w-100" v-if="apartment.visible">
+                <div class="pics position-relative col-12 mx-sm-auto d-flex gap-1">
+                    <img :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" class="w-50 rounded h-100" alt="">
+                    <div class="otherPics w-50 h-100 d-flex flex-column flex-wrap gap-1">
+                        <img v-for="pic,index in pictures" :key="index" :src="(pic.image.startsWith('https://')) ? pic.image : '../../storage/'+ pic.image" class="rounded">
+                    </div>
+                    <div class="price position-absolute px-2 py-1 bg-light rounded-pill">
+                        <span v-if="apartment.available">{{apartment.price}}	&euro;</span>
+                        <span v-else class="text-danger">Non Disponibile</span>
+                    </div>
                 </div>
-                <div class="price position-absolute px-2 py-1 bg-light rounded-pill">
-                    <span v-if="apartment.available">{{apartment.price}}	&euro;</span>
-                    <span v-else class="text-danger">Non Disponibile</span>
+                <div class="col-sm-12 col-md-8 col-lg-7 mt-4">
+                    <h1>{{apartment.title}}</h1>
+                    <span id="apartment_address">{{apartment.address}}</span>
+                    <hr>
+                    <h3>Description</h3>
+                    <p>{{apartment.description}}</p>
                 </div>
-            </div>
-            <div class="col-sm-12 col-md-8 col-lg-7 mt-4">
-                <h1>{{apartment.title}}</h1>
-                <span id="apartment_address">{{apartment.address}}</span>
-                <hr>
-                <h3>Description</h3>
-                <p>{{apartment.description}}</p>
-            </div>
-            <div class="col-sm-12 col-md-8 col-lg-7 mt-3">
-                <h3>Detalis</h3>
-                <Details :apartment="apartment"/>
-                <h3 class="mt-5">Servizi</h3>
-                <Services :id="id"/>
+                <div class="col-sm-12 col-md-8 col-lg-7 mt-3">
+                    <h3>Detalis</h3>
+                    <Details :apartment="apartment"/>
+                    <h3 class="mt-5">Servizi</h3>
+                    <Services :id="id"/>
+                </div>
             </div>
         </div>
         <div class="row mx-auto px-5 w-100">
-            <div class="col-sm-12 col-md-8 col-lg-7 mt-4">
+             <div class="px-3">
                 <h3>Map</h3>
                 <div class="map" id="map" ref="mapRef"></div>
-            </div>
+             </div>
         </div>
+
         <div class="row mx-auto px-5 w-100" v-if="apartment.visible">
             <div class="col-sm-12 col-md-8 col-lg-7 mt-4">
                 <h3>Meet The Host</h3>
@@ -39,12 +42,12 @@
                         <img class="rounded-circle" :src="(host.profile_picture.startsWith('https://')) ? host.profile_picture : '../../storage/'+ host.profile_picture" :alt="host.id">
                         <h4 class="m-0">{{host.first_name}} {{host.last_name}}</h4>
                     </div>
-                    <button type="button" class="btn btn-outline-dark shadow-none" @click="showContact = true">Contatta l'host</button>
+                    <button type="button" class="btn btn-outline-dark shadow-none" @click="showContact = !showContact">Contatta l'host</button>
                 </div>
             </div>
         </div>
-        <div v-if="showContact" class="contactContainer shadow border rounded my-4">
-            <section id="contacts" class="col-12 mx-auto">
+        <div v-if="showContact" class="contactContainer shadow border rounded my-4 mx-5">
+            <section id="contacts" class="col-12 mx-auto px-2">
                 <div class="container">
                     <!-- <Loader v-if="isLoading" /> -->
                     <div
@@ -127,6 +130,7 @@
             </section>
         </div>
             <h1 class="text-center mt-5" v-if="apartment.visible == 0">Nothing To See Here</h1>
+
     </div>
 </template>
 
@@ -212,7 +216,7 @@ export default {
         getHost(id){
             Axios.get('/api/apartment/host/'+id)
             .then(response=>{
-                this.host=response.data[0][0];    
+                this.host=response.data[0][0];
                 // console.log(this.host);
             })
         },
@@ -329,7 +333,7 @@ export default {
                 height: 49%;
             }
         }
-    
+
     @media(max-width: 767.98px)  {
         .otherPics{
             img{
@@ -345,7 +349,7 @@ export default {
             max-width: 70vw;
             margin: 0 auto;
         }
-    } 
+    }
         .otherPics::-webkit-scrollbar{
             height: 1.5vh;
         }
@@ -380,8 +384,9 @@ export default {
             border-radius: 20px;
         }
     }
-    .map{
-        height: 20vh;
-    }
+.map {
+  height: 40vh;
+  width: 100%;
+}
 
 </style>
