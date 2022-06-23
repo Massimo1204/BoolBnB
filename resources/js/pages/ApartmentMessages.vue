@@ -1,6 +1,6 @@
 <template>
     <div id="messages">
-        <h1 class="pt-4 pb-5 ms-4">I tuoi messaggi</h1>
+        <h1 class="my-title text-uppercase">I tuoi messaggi</h1>
         <div class="apartment-messages-container d-flex">
             <div class="apartment-messages-wrapper">
                 <div class="d-flex apartment-messages" v-for="(apartment, index) in apartments" :key="'apartment' + index" @click="chooseApartment(index)">
@@ -22,7 +22,7 @@
             <div class="apartment-chat">
                 <div v-if="apartmentIndex != null">
                     <div class="apartment-single-message" v-for="(message, index) in apartments[apartmentIndex].messages" :key="'apartmentMessages' + index" >
-                        <div v-if="apartments[index].messages.length != 0" class="message-chat-content">
+                        <div class="message-chat-content">
                             <div class="sender-details">
                                 <p>Inviato da:  <span class="message-sender">{{message.full_name}}</span></p>
                                 <p>Email:  <span class="message-email">{{message.email}}</span></p>
@@ -33,13 +33,13 @@
                                 </p>
                             </div>
                         </div>
-                        <div v-else>
-                            <h1>Non ci sono messaggi per questo appartamento</h1>
-                        </div>
+                    </div>
+                    <div v-if="apartments[apartmentIndex].messages.length == 0" class="d-flex">
+                        <h1 class="text-center text-secondary info-message">Non ci sono messaggi per questo appartamento</h1>
                     </div>
                 </div>
-                <div v-else>
-                    <h1 class="text-center text-secondary">Seleziona un appartamento per vedere i suoi messaggi</h1>
+                <div v-else class="d-flex">
+                    <h1 class="text-center text-secondary info-message">Seleziona un appartamento per vedere i suoi messaggi</h1>
                 </div>
             </div>
         </div>
@@ -88,12 +88,18 @@ export default {
 
 <style lang="scss" scoped>
 div#messages{
+    .my-title{
+        color: rgb(1, 11, 95);
+        font-weight: 600;
+        padding: 30px 0 0 50px;
+    }
     background-color: rgb(245, 248, 255);
     div.apartment-messages-container{
         div.apartment-messages-wrapper{
             width: 33%;
             border-left: 1px solid black;
-            height: calc(100vh -200px);
+            height: calc(100vh - 197px);
+            overflow-y: scroll;
             div.apartment-messages{
                 cursor: pointer;
                 padding: 15px;
@@ -133,6 +139,11 @@ div#messages{
         }
         div.apartment-chat{
             width: calc(67% - 40px);
+            height: calc(100vh - 197px);
+            overflow-y: scroll;
+            h1.info-message{
+                align-self: center;
+            }
             div.apartment-single-message{
                 margin: 20px auto 0 auto;
                 width: 97%;
