@@ -49,11 +49,11 @@
                                     BoolBnB
                                 </a>
                             @endif
-                            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
+                                {{-- <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button> --}}
 
                         </li>
 
@@ -86,7 +86,7 @@
                                     Area Riservata
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end border-0 shadow pt-3"
+                                <div class="dropdown-menu dropdown-menu-end border-0 shadow pt-3 position-absolute"
                                     aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('login') }}">
                                         {{ __('Login') }}

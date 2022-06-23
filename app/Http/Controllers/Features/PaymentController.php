@@ -57,7 +57,7 @@ class PaymentController extends Controller
             $apartment->visible = 1;
             $apartment->save();
             
-            return redirect()->route('apartment.show', compact('apartment'))->with('sponsor-success-message', 'Transazione eseguita con successo. Sponsorizzazione: ' . ucfirst($sponsorship->name));
+            return redirect()->route('apartment.index', compact('apartment'))->with('sponsor-success-message', 'Transazione eseguita con successo. Sponsorizzazione: ' . ucfirst($sponsorship->name));
         } else {
             $errorString = "";
 
