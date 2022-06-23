@@ -15,6 +15,10 @@
 }
 </script>
 
-<style lang="scss" scoped>
-    
+<style lang="scss">
+        @import 'resources/sass/_variables.scss';
+
+    h1,h2,h3,h4{
+        color: $text-color;
+    }
 </style>

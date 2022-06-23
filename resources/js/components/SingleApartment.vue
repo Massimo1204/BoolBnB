@@ -4,9 +4,9 @@
         <router-link :to="{name: 'Show', params:{id: apartment.id}}" class="text-decoration-none">
             <div class="photo mx-auto position-relative">
                 <img class="w-100" :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" :alt="apartment.title">
-                <div class="price position-absolute px-2 py-2">{{apartment.price}} €</div>
+                <div class="price position-absolute px-2 py-1 rounded-pill bg-light">{{apartment.price}} €</div>
             </div>
-            <h2 class="txt m-0 title text-capitalize text-black">{{apartment.title}}</h2>
+            <h2 class="txt m-0 mt-3 title text-capitalize">{{apartment.title}}</h2>
             <div class="content address">
                 <p>{{ apartment.address}}</p>
             </div>
@@ -18,9 +18,6 @@
 <script>
 export default {
 name:"SingleApartment",
-components:{
-
-},
 props: ['apartment']
 }
 </script>
@@ -40,15 +37,17 @@ props: ['apartment']
         object-fit: cover;
     }
     .price{
-        background-color: $light-dark-background;
-        border-radius: 50%;
-        bottom: 1rem;
-        left: 1rem;
+        color: $text-color;
+        bottom: 0.5rem;
+        left: .6rem;
     }
 }
+    .title:hover{
+        color:$primary
+    }
 .address
 {
-    color: $medium-dark-background;
+    color: $light-grey;
     font-size: 1.2rem;
 }
 </style>

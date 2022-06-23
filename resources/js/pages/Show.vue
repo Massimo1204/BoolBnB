@@ -12,7 +12,7 @@
             </div>
             <div class="col-7 mt-4">
                 <h1>{{apartment.title}}</h1>
-                <span>{{apartment.address}}</span>
+                <span id="apartment_address">{{apartment.address}}</span>
                 <hr>
                 <h3>Description</h3>
                 <p>{{apartment.description}}</p>
@@ -85,6 +85,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+    @import 'resources/sass/_variables.scss';
+    .container-fluid{
+        background-color: $light-dark-background;
+    }
+        #apartment_address{
+            color: $light-grey;
+        }
+
     .pics{
         height: 50vh;
         width: 80vw;
