@@ -49,7 +49,7 @@
                         </div>
                         <div class="btn btn-primary me-2">
                             <a class="text-white text-decoration-none"
-                            href="{{url('/apartment/statistics/'.Auth::id())}}">Statistiche</a>
+                            href="{{url('/apartment/statistics/'.$apartment->id)}}">Statistiche</a>
                         </div>
                         <div class="me-2">
                             <a type="button" class="btn btn-success"
