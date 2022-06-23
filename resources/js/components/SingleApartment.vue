@@ -4,7 +4,10 @@
         <router-link :to="{name: 'Show', params:{id: apartment.id}}" class="text-decoration-none">
             <div class="photo mx-auto position-relative">
                 <img class="w-100" :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" :alt="apartment.title">
-                <div class="price position-absolute px-2 py-1 rounded-pill bg-light">{{apartment.price}} €</div>
+                <div class="price position-absolute px-2 py-1 rounded-pill bg-light">
+                    <span v-if="apartment.available">{{apartment.price}}	&euro;</span>
+                    <span v-else class="text-danger">Non Disponibile</span>
+                </div>
             </div>
             <h2 class="txt m-0 mt-3 title text-capitalize">{{apartment.title}}</h2>
             <div class="content address">
