@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container ps-4">
         <router-view></router-view>
     </div>
 </template>
@@ -19,6 +19,9 @@ div{
     overflow: auto;
     height: 100%;
     border-radius: 15px;
+    padding: 0;
+    min-width: 375px;
+
 }
 
 </style>
