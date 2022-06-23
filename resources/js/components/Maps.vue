@@ -128,7 +128,7 @@ export default {
   }
   .address
   {
-      color: $medium-dark-background;
+      color: $light-grey;;
       font-size: 1.2rem;
   }
 }
