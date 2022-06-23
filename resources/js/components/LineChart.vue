@@ -89,6 +89,7 @@ export default {
                         {
                             label: this.datasetIdKey,
                             backgroundColor: this.color,
+                            borderColor: 'darkgray',
                             data: this.data
                         }
                     ]
