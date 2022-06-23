@@ -1,7 +1,7 @@
 <template>
-<div>
+<div class="p-0">
   <div class="map" id="map" ref="mapRef"></div>
-  <div class="row mt-4 border-top border-3 border-primary" v-if="filteredApartments != ''">
+  <div class="row mt-4 border-top border-2 border-primary pe-4" v-if="filteredApartments != ''">
       <div class="col-lg-6 col-md-6" v-for="(apartment, index) in filterApartmentsDistance" :key="index" >
         <div class="cardcontainer my-3 view-details" >
             <router-link :to="{name: 'Show', params:{id: apartment['id']}}" class="text-decoration-none">
@@ -9,9 +9,9 @@
                     <img class="w-100" :src="(apartment['image'].startsWith('https://')) ? apartment['image'] : '../../storage/'+ apartment['image']" :alt="apartment['title']">
                     <div class="price position-absolute px-2 py-2">{{apartment['price']}} €</div>
                 </div>
-                <h2 class="txt m-0 title text-capitalize text-black">{{apartment['title']}}</h2>
+                <h2 class="txt m-0 title text-capitalize text-primary">{{apartment['title']}}</h2>
                 <div class="content address">
-                    <p>{{ apartment['address']}}</p>
+                    <p class="text-black ">{{ apartment['address']}}</p>
                 </div>
             </router-link>
         </div>
@@ -122,6 +122,7 @@ export default {
 .map {
   height: 80vh;
   width: 100%;
+  // padding: 0;
 }
 .col-lg-6, .col-md-12{
   .content{
