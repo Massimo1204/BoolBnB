@@ -93,6 +93,7 @@ div#messages{
         div.apartment-messages-wrapper{
             width: 33%;
             border-left: 1px solid black;
+            height: calc(100vh -200px);
             div.apartment-messages{
                 cursor: pointer;
                 padding: 15px;
