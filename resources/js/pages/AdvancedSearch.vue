@@ -102,7 +102,7 @@
         </form>
       </div>
       <div class="col-9">
-        <Maps  :filteredApartements="filteredApartements" />
+        <Maps  :filteredApartments="filteredApartments" />
       </div>
     </div>
   </div>
@@ -124,7 +124,7 @@ export default {
       roomsToSearch: "",
       bedsToSearch: "",
       addressToSearch: "",
-      filteredApartements: [],
+      filteredApartments: [],
     };
   },
   methods: {
@@ -153,8 +153,8 @@ export default {
             this.serviceToSearch
         )
         .then((response) => {
-          this.filteredApartements=response.data.response.data;
-          // console.log(this.filteredApartements);
+          this.filteredApartments=response.data.response.data;
+          console.log(this.filteredApartments);
         })
         .catch((error) => {
           console.warn(error);
