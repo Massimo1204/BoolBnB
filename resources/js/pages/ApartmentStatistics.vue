@@ -1,9 +1,11 @@
 <template>
     <div class="container-fluid w-100">
         <div class="my-chart p-5">
+            <h3 class="text-center">Views per ogni giorno della settimana</h3>
             <LineChart datasetIdKey="Views" :data="viewsArray" color="blue"/>
         </div>
         <div class="my-chart p-5">
+            <h3 class="text-center">Messaggi ricevuti per ogni giorno della settimana</h3>
             <LineChart datasetIdKey="Messaggi" :data="messagesArray" color="black"/>
         </div>
     </div>
