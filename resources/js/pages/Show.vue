@@ -1,8 +1,7 @@
 <template>
-    <div class="container-fluid">
-        <div class="row w-100" v-if="apartment.visible">
-            <div class="pics position-relative col-9 mx-auto d-flex gap-1">
-
+    <div class="MyContainer w-100">
+        <div class="row mx-auto px-5 w-100" v-if="apartment.visible">
+            <div class="pics position-relative col-sm-12 col-md-9 mx-sm-auto d-flex gap-1">
                 <img :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" class="w-50 rounded h-100" alt="">
                 <div class="otherPics w-50 h-100 d-flex flex-column flex-wrap gap-1">
                     <img v-for="pic,index in pictures" :key="index" :src="(pic.image.startsWith('https://')) ? pic.image : '../../storage/'+ pic.image" class="rounded">
@@ -12,23 +11,23 @@
                     <span v-else class="text-danger">Non Disponibile</span>
                 </div>
             </div>
-            <div class="col-7 mt-4">
+            <div class="col-sm-12 col-md-7 mt-4">
                 <h1>{{apartment.title}}</h1>
                 <span id="apartment_address">{{apartment.address}}</span>
                 <hr>
                 <h3>Description</h3>
                 <p>{{apartment.description}}</p>
             </div>
-            <div class="col-7 mt-3">
+            <div class="col-sm-12 col-md-7 mt-3">
                 <h3>Detalis</h3>
                 <Details :apartment="apartment"/>
                 <h3 class="mt-5">Servizi</h3>
                 <Services :id="id"/>
             </div>
-            <div class="col-7 mt-4">
+            <div class="col-sm-12 col-md-7 mt-4">
                 <h3>Map</h3>
                 <h3>Meet The Host</h3>
-                <div class="hostCard mt-4 w-100 d-flex justify-content-between align-items-center p-3 rounded bg-white shadow">
+                <div class="hostCard my-4 w-100 d-flex justify-content-between align-items-center p-3 rounded bg-white shadow">
                     <div class="d-flex justify-content-around align-items-center">
                         <img class="rounded-circle" :src="(host.profile_picture.startsWith('https://')) ? host.profile_picture : '../../storage/'+ host.profile_picture" :alt="host.id">
                         <h4 class="m-0">{{host.first_name}} {{host.last_name}}</h4>
@@ -37,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="showContact" class="container shadow border rounded mt-3 mb-5">
+        <div v-if="showContact" class="container shadow border rounded mt-5">
             <section id="contacts" class="col-12 mx-auto">
                 <div class="container">
                     <!-- <Loader v-if="isLoading" /> -->
@@ -59,24 +58,24 @@
                         l'Host ti risponderà in poche ore per aiutarti.
                     </p>
                     <div class="row p-0">
-                        <div class="col-md-12 mb-md-0 mb-5 p-0">
+                        <div class="col-md-12 mb-md-0 mb-5 p-0 ">
                             <div class="row p-0">
-                                <div class="col-md-6 px-5">
-                                    <div class="md-form mb-0">
+                                <div class="col-md-6 px-4">
+                                    <div class="md-form mb-3">
                                         <input
                                             type="text"
                                             id="full_name"
                                             v-model="form.full_name"
                                             class="form-control border-info"
                                             :class="{ 'is-invalid': errors.full_name }"
+                                            placeholder="Il tuo nome"
                                         />
                                         <div v-if="errors.full_name" class="invalid-feedback">
                                             {{ errors.full_name }}
                                         </div>
-                                        <label v-else for="full_name" class="">Il tuo nome</label>
                                     </div>
                                 </div>
-                                <div class="col-md-6 px-5 mb-3">
+                                <div class="col-md-6 px-4 mb-3">
                                     <div class="md-form mb-0">
                                         <input
                                             type="text"
@@ -84,16 +83,16 @@
                                             v-model="form.email"
                                             class="form-control border-info"
                                             :class="{ 'is-invalid': errors.email }"
+                                            placeholder="La tua email"
                                         />
                                         <div v-if="errors.email" class="invalid-feedback">
                                             {{ errors.email }}
                                         </div>
-                                        <label v-else for="email">La tua email</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row p-0">
-                                <div class="col-md-12 px-5">
+                                <div class="col-md-12 px-4">
                                     <div class="md-form">
                                         <textarea
                                             type="text"
@@ -101,14 +100,14 @@
                                             v-model="form.text"
                                             rows="4"
                                             class="form-control border-info md-textarea"
-                                            :class="{ 'is-invalid': errors.text }"></textarea>
+                                            :class="{ 'is-invalid': errors.text }"
+                                            placeholder="Il tuo messaggio"></textarea>
                                         <div v-if="errors.text" class="invalid-feedback">
                                             {{ errors.text }}
                                         </div>
-                                        <label v-else for="text">Il tuo messaggio</label>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-center text-md-left m-3">
+                                <div class="d-flex justify-content-center my-3 p-0">
                                     <button class="btn btn-primary" @click="sendForm">
                                         Invia
                                     </button>
@@ -128,7 +127,6 @@
 import Axios from 'axios';
 import Details from '../components/Details.vue';
 import Services from '../components/Services.vue';
-import { isEmpty } from "lodash";
 export default {
     name:'Show',
     components:{
@@ -181,7 +179,7 @@ export default {
         getHost(id){
             Axios.get('/api/apartment/host/'+id)
             .then(response=>{
-                this.host=response.data[0][0];
+                this.host=response.data[0][0];    
                 // console.log(this.host);
             })
         },
@@ -268,7 +266,7 @@ export default {
 <style lang="scss" scoped>
 
     @import 'resources/sass/_variables.scss';
-    .container-fluid{
+    .MyContainer{
         background-color: $light-dark-background;
     }
         #apartment_address{
@@ -288,6 +286,14 @@ export default {
                 height: 49%;
             }
         }
+    
+    @media(max-width: 767.98px)  {
+        .otherPics{
+            img{
+                width: 99.5%;
+            }
+        }
+                }  
         .otherPics::-webkit-scrollbar{
             height: 1.5vh;
         }
@@ -304,9 +310,6 @@ export default {
             bottom: 0.3rem;
             left: 1rem;
         }
-    }
-    .row{
-        padding: 3rem 10rem;
     }
     .hostCard{
         div{
