@@ -7,12 +7,13 @@
                     <img v-for="pic,index in pictures" :key="index" :src="pic.image" class="rounded">
                 </div>
                 <div class="price position-absolute px-2 py-1 bg-light rounded-pill">
-                    <span>{{apartment.price}}	&euro;</span>
+                    <span v-if="apartment.available">{{apartment.price}}	&euro;</span>
+                    <span v-else class="text-danger">Non Disponibile</span>
                 </div>
             </div>
             <div class="col-7 mt-4">
                 <h1>{{apartment.title}}</h1>
-                <span>{{apartment.address}}</span>
+                <span id="apartment_address">{{apartment.address}}</span>
                 <hr>
                 <h3>Description</h3>
                 <p>{{apartment.description}}</p>
@@ -26,9 +27,12 @@
             <div class="col-7 mt-4">
                 <h3>Map</h3>
                 <h3>Meet The Host</h3>
-                <div class="hostCard d-flex justify-content-around align-items-center">
-                    <img class="rounded-circle" :src="host.profile_picture" :alt="host.id">
-                    <h4 class="m-0">{{host.first_name}} {{host.last_name}}</h4>
+                <div class="hostCard mt-4 w-100 d-flex justify-content-between align-items-center p-3 rounded bg-white shadow">
+                    <div class="d-flex justify-content-around align-items-center">
+                        <img class="rounded-circle" :src="host.profile_picture" :alt="host.id">
+                        <h4 class="m-0">{{host.first_name}} {{host.last_name}}</h4>
+                    </div>
+                    <button type="button" class="btn btn-outline-dark shadow-none">Contatta l'host</button>
                 </div>
             </div>
         </div>
@@ -59,6 +63,7 @@ export default {
             Axios.get('/api/apartment/'+this.id)
             .then(response=>{
                 this.apartment=response.data;
+                console.log(this.apartment);
             this.getHost(this.apartment.user_id);
             })
 
@@ -85,6 +90,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+    @import 'resources/sass/_variables.scss';
+    .container-fluid{
+        background-color: $light-dark-background;
+    }
+        #apartment_address{
+            color: $light-grey;
+        }
+
     .pics{
         height: 50vh;
         width: 80vw;
@@ -119,7 +133,9 @@ export default {
         padding: 3rem 10rem;
     }
     .hostCard{
-        width: 17rem;
+        div{
+            width: 17rem;
+        }
         img{
             height: 5rem;
             width: 5rem;
