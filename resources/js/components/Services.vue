@@ -54,6 +54,11 @@ export default {
 
 <style lang="scss" scoped>
     .myCont{
-        height: 40vh;
+        height: 50vh;
+        min-width: 490px;
     }
+    @media(max-width: 767.98px) {
+        .myCont {
+            height: 60vh;
+        }}
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div class="w-100">
-    <div class="row">
+    <div class="row text-primary">
       <div class="col-lg-3 col-md-12">
         <form>
           <fieldset>
-            <legend>SEARCH BnB</legend>
+            <legend class="text-center mt-2 fw-bolder text-primary ">Ricerca BnB</legend>
           </fieldset>
           <div class="inner-form">
             <div class="input-field first-wrap">
@@ -14,7 +14,7 @@
                 type="text"
                 placeholder="In che città vuoi cercare?"
                 class="w-100"
-                v-model="addressToSearch"
+                v-model="addressToSearch" required
               />
             </div>
 
@@ -26,7 +26,7 @@
                 />
               </div>
               <div class="w-75">
-                <label for="bed" class="w-100">posti letto:</label>
+                <label for="bed" class="w-100">Posti letto:</label>
                 <select name="bed" id="bed" v-model="bedsToSearch">
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -154,7 +154,7 @@ export default {
         )
         .then((response) => {
           this.filteredApartments=response.data.response.data;
-          // console.log(this.filteredApartments);
+          console.log(this.filteredApartments);
         })
         .catch((error) => {
           console.warn(error);
@@ -176,8 +176,9 @@ export default {
     }
   }
 }
-.container{
-  min-width: 375px;
+.w-100{
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 </style>
 

@@ -18,7 +18,7 @@ class CreateViewsTable extends Migration
             $table->unsignedBigInteger('apartment_id');
             $table->foreign('apartment_id')->references('id')->on('apartments')->onDelete('cascade');
             $table->string('ip_address');
-            $table->timestamps();
+            $table->dateTime('date_time')->nullable();
         });
     }
 

@@ -1,29 +1,32 @@
 <template>
-    <div>
-        <div v-for="(apartment, index) in apartments" :key="index" class="apartment">
-            {{ apartment.title }}
-        </div>
+    <div class="container-fluid w-100">
+        {{apartment[0].title}}
 
-
+    <LineChart datasetIdKey="Views" :data="viewsArray"/>
     </div>
 </template>
 
 
 <script>
+import LineChart from '../components/LineChart.vue'
 export default {
     name: "ApartmentStatistics",
+    components:{
+        LineChart
+    },
     data: function () {
         return {
-            apartments: [],
+            apartment: [],
+            viewsArray: [30,40,50,60,30,50,80]
 
         }
     },
     methods: {
-        getApartmentMessages(id) {
+        getApartmentStatistics(id) {
             axios.get('http://127.0.0.1:8000/api/apartments/' + id)
                 .then((result) => {
-                    console.log(result);
-                    this.apartments = result.data;
+                    this.apartment = result.data;
+                    console.log(this.apartment);
                 }).catch((error) => {
                     console.warn(error);
                 })
@@ -33,7 +36,7 @@ export default {
     computed: {
     },
     created() {
-        this.getApartmentMessages(this.$userId);
+        this.getApartmentStatistics(this.$route.params.id);
     },
 
 }
