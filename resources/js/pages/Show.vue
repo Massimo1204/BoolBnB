@@ -2,9 +2,9 @@
     <div class="container-fluid">
         <div class="row w-100" v-if="apartment.visible">
             <div class="pics position-relative col-9 mx-auto d-flex gap-1">
-                <img :src="apartment.image" class="w-50 rounded h-100" alt="">
+                <img :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" class="w-50 rounded h-100" alt="">
                 <div class="otherPics w-50 h-100 d-flex flex-column flex-wrap gap-1">
-                    <img v-for="pic,index in pictures" :key="index" :src="pic.image" class="rounded">
+                    <img v-for="pic,index in pictures" :key="index" :src="(pic.image.startsWith('https://')) ? pic.image : '../../storage/'+ pic.image" class="rounded">
                 </div>
                 <div class="price position-absolute px-2 py-1 bg-light rounded-pill">
                     <span v-if="apartment.available">{{apartment.price}}	&euro;</span>
@@ -29,7 +29,7 @@
                 <h3>Meet The Host</h3>
                 <div class="hostCard mt-4 w-100 d-flex justify-content-between align-items-center p-3 rounded bg-white shadow">
                     <div class="d-flex justify-content-around align-items-center">
-                        <img class="rounded-circle" :src="host.profile_picture" :alt="host.id">
+                        <img class="rounded-circle" :src="(host.profile_picture.startsWith('https://')) ? host.profile_picture : '../../storage/'+ host.profile_picture" :alt="host.id">
                         <h4 class="m-0">{{host.first_name}} {{host.last_name}}</h4>
                     </div>
                     <button type="button" class="btn btn-outline-dark shadow-none">Contatta l'host</button>
