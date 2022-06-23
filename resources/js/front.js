@@ -14,6 +14,7 @@ import Home from './pages/Home';
 import Show from './pages/Show';
 import Messages from './pages/Messages';
 import ApartmentMessages from './pages/ApartmentMessages';
+import ApartmentStatistics from './pages/ApartmentStatistics';
 import AdvancedSearch from './pages/AdvancedSearch.vue';
 
 const router = new VueRouter({
@@ -38,6 +39,11 @@ const router = new VueRouter({
             path:'/apartment/messages/:id',
             name:'ApartmentMessages',
             component:ApartmentMessages
+        },
+        {
+            path:'/apartment/statistics/:id',
+            name:'ApartmentStatistics',
+            component:ApartmentStatistics
         },
         {
             path:'/apartments/search',

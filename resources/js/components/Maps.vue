@@ -2,7 +2,7 @@
 <div>
   <div class="map" id="map" ref="mapRef"></div>
   <div class="row mt-4 border-top border-3 border-primary" v-if="filteredApartments != ''">
-      <div class="col-6" v-for="(apartment, index) in filterApartmentsVisible" :key="index" >
+      <div class="col-lg-6 col-md-6" v-for="(apartment, index) in filterApartmentsDistance" :key="index" >
         <div class="cardcontainer my-3 view-details" >
             <router-link :to="{name: 'Show', params:{id: apartment['id']}}" class="text-decoration-none">
                 <div class="photo mx-auto position-relative">
@@ -70,9 +70,9 @@ export default {
       this.map.addControl(new tt.NavigationControl(), 'top-left');
       this.map = Object.freeze(this.map)
         if (this.filteredApartments != "") {
-          this.filteredApartments.forEach(apartment => {
+          this.filterApartmentsVisible.forEach(apartment => {
             let marker = new tt.Marker().setLngLat([apartment["long"], apartment["lat"]]).addTo(this.map);
-            let popup = new tt.Popup({offset: this.popupOffsets}).setHTML(`<b>${apartment["title"]}</b><br/>${apartment["address"]}`);
+            let popup = new tt.Popup({offset: this.popupOffsets}).setHTML(`<b>${apartment["title"]}</b><br/>${apartment["address"]}. <br/> Dista ${apartment['distance'].toFixed(2)} km dalla tua ricerca`);
             marker.setPopup(popup).togglePopup();
           });
         }
@@ -95,6 +95,23 @@ export default {
       });
       return apartmentVisible;
     },
+    filterApartmentsDistance(){
+      let apartmentDistance=[];
+      let distance=[];
+      this.filterApartmentsVisible.forEach(apartment => {
+        distance.push(apartment["distance"])
+      });
+        const sorted = distance.slice().sort((a,b)=>a-b) // Make a copy with .slice()
+        sorted.forEach(element => {
+          for (let i = 0; i < this.filterApartmentsVisible.length; i++) {
+            if (element == this.filterApartmentsVisible[i]["distance"]) {
+              apartmentDistance.push(this.filterApartmentsVisible[i]);
+            }
+          }
+        });
+        // console.log(apartmentDistance);
+      return apartmentDistance;
+    }
   }
 }
 </script>
@@ -106,7 +123,7 @@ export default {
   height: 80vh;
   width: 100%;
 }
-.col-6{
+.col-lg-6, .col-md-12{
   .content{
       // max-height: 220px; 
       overflow: auto;

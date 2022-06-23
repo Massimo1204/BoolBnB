@@ -2,16 +2,20 @@
 
 @section('content')
     @if (session('deleted-message'))
-        <div class="mx-2 alert alert-success">
-            {{ session('deleted-message') }}
-        </div>
+        <script>
+            Swal.fire(
+                'Eliminato!',
+                'Il tuo annuncio è stato eliminato.',
+                'success'
+            )
+        </script>
     @endif
     <div class="add-apartment-jumbo">
         <div class="container">
             <div class="row">
                 <div class="col-12 py-5 d-flex align-items-center text-white justify-content-between">
                     <div class="title-add-apartment">
-                        <h2>BoolBnb - Host</h2>
+                        <h2 class="text-white">BoolBnb - Host</h2>
                         <p>Aggiungi nuovi annunci o gestisci quelli già presenti</p>
                     </div>
                     <a href="{{ route('apartment.create') }}" class="btn btn-light">Crea annuncio</a>
@@ -43,6 +47,10 @@
                             <a class="text-white text-decoration-none"
                                 href="{{ route('apartment.edit', $apartment) }}">Modifica</a>
                         </div>
+                        <div class="btn btn-primary me-2">
+                            <a class="text-white text-decoration-none"
+                            href="{{url('/apartment/statistics/'.Auth::id())}}">Statistiche</a>
+                        </div>
                         <div class="me-2">
                             <a type="button" class="btn btn-success"
                                 href="{{ route('sponsorship.index', $apartment) }}">Attiva sponsorizzazione</a>
@@ -67,11 +75,20 @@
 
         deleteForm.addEventListener('submit', function(event) {
             event.preventDefault(); // § blocchiamo l'invio del form
-            userConfirmation = window.confirm(
-                `Sei sicuro di voler eliminare ${this.getAttribute('apartment-title')}?`);
-            if (userConfirmation) {
-                this.submit();
-            }
+            Swal.fire({
+                title: 'Sei Sicuro?',
+                text: "Non sarà più possibile tornare indietro!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Elimina!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    this.submit();
+                }
+            })
         });
     </script>
 @endsection

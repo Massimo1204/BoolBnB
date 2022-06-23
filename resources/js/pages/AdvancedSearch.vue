@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-3">
+      <div class="col-lg-3 col-md-12">
         <form>
           <fieldset>
             <legend>SEARCH BnB</legend>
@@ -77,7 +77,7 @@
               <div
                 v-for="(service, index) in services"
                 :key="index"
-                class="service col-12"
+                class="service col-lg-12 col-md-6"
               >
                 <input
                   class="form-check-input"
@@ -101,7 +101,7 @@
           </div>
         </form>
       </div>
-      <div class="col-9">
+      <div class="col-lg-9 col-md-12">
         <Maps  :filteredApartments="filteredApartments" />
       </div>
     </div>
@@ -154,7 +154,7 @@ export default {
         )
         .then((response) => {
           this.filteredApartments=response.data.response.data;
-          console.log(this.filteredApartments);
+          // console.log(this.filteredApartments);
         })
         .catch((error) => {
           console.warn(error);
@@ -168,13 +168,16 @@ export default {
 </script>
 
 <style scoped lang="scss" >
-.col-3 {
+.col-md-3, .col-md-12 {
   .input-field {
     margin: 2rem 0;
     img {
       width: 50px;
     }
   }
+}
+.container{
+  min-width: 375px;
 }
 </style>
 
