@@ -26,13 +26,26 @@
 			<h1 >Normali</h1>
 		</div>
         <SingleApartment v-for="(apartment,index) in apartments" :key="index" :apartment="apartment" />
-        <div class="col-12 d-flex justify-content-between my-3" v-if="apartmentsSearch == ''">
+        <div class="pagination col-12 d-flex justify-content-between align-content-center my-3" v-if="apartmentsSearch == ''">
             <div v-if="pagination.current_page == 1"></div>
-            <button class="btn btn-outline-primary" @click="getApartments(pagination.current_page - 1)" v-if="pagination.current_page > 1">prev</button>
+            <button class="btn btn-outline-primary shadow-none" @click="getApartments(pagination.current_page - 1)" v-if="pagination.current_page > 1">prev</button>
             <h5>Pagina: {{pagination.current_page}}</h5>
-            <button class="btn btn-outline-primary" @click="getApartments(pagination.current_page + 1)" v-if="pagination.current_page < pagination.last_page">next</button>
+            <button class="btn btn-outline-primary shadow-none" @click="getApartments(pagination.current_page + 1)" v-if="pagination.current_page < pagination.last_page">next</button>
             <div v-if="pagination.current_page == last_page"></div>
         </div>
+        <!-- <nav>
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="" tabindex="-1" @click="getApartments(pagination.current_page - 1)" :class="pagination.current_page = 1 ? 'disabled' :''">Previous</a>
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="">{{pagination.current_page}}</a>
+                </li>
+                <li class="page-item">      
+                    <a class="page-link" href="" @click="getApartments(pagination.current_page + 1)" :class="pagination.current_page = pagination.last_page ? 'disabled' :''">Next</a>
+                </li>
+            </ul>
+        </nav> -->
     </div>
 </div>
 </template>
@@ -67,6 +80,7 @@ export default {
             .catch((error)=>{
             console.warn(error);
             })
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         },
         search(){
             if(this.userSearch != "" ){
@@ -165,7 +179,12 @@ $color: $primary;
         }
     }
 }
-
+    .pagination{
+        h5{
+            line-height: 2.4rem;
+            margin: 0;
+        }
+    }
 // ::selection {
 //     background: rgba(#fff, .2);
 // }
