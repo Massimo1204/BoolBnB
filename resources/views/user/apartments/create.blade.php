@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container create-container mt-1 w-50">
+    <div class="create-container my-3">
         <h1 class="text-center">
             Aggiungi un nuovo Appartamento
         </h1>
-        <form class="row mt-4 g-3" action="{{ route('apartment.store') }}" method="post" enctype="multipart/form-data">
+        <form class="container-fluid px-5 mt-4" action="{{ route('apartment.store') }}" method="post" enctype="multipart/form-data">
             @csrf
-            <div class="row apartment">
-                <div class="col-lg-12">
+            <div class="row g-2 px-4 apartment">
+                <div class="col-12">
                     <label for="title">Titolo*</label>
                     <input class="form-control" type="text" name="title" id="title"
                         value="{{ old('title') ?? '' }}" required autocomplete="on" autofocus minlength="5">
@@ -19,7 +19,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-lg-12">
+                <div class="col-12">
                     <label for="image">Carica la foto cover:*</label>
                     <input class="form-control" type="file" name="image" id="image" required autocomplete="on"
                         autofocus>
@@ -30,7 +30,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-lg-12">
+                <div class="col-12">
                     <label for="description">Descrizione*</label>
                     <textarea class="form-control" name="description" id="description" required autocomplete="on" autofocus minlength="10">{{ old('description') ?? '' }}</textarea>
                     @error('description')
@@ -40,7 +40,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                <div class="col-12 ">
                     <label for="n_rooms">N. di stanze:*</label>
                     <input type="number" name="n_rooms" id="n_rooms" value="{{ old('n_rooms') ?? '' }}" required
                         min="1">
@@ -51,7 +51,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                <div class="col-12 ">
                     <label for="n_bedrooms">N. di stanze da letto:*</label>
                     <input type="number" name="n_bedrooms" id="n_bedrooms" value="{{ old('n_bedrooms') ?? '' }}" required
                         min="1">
@@ -62,7 +62,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                <div class="col-12 ">
                     <label for="n_bathrooms">N. di bagni:*</label>
                     <input type="number" name="n_bathrooms" id="n_bathrooms" value="{{ old('n_bathrooms') ?? '' }}"
                         required min="1">
@@ -73,7 +73,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                <div class="col-12">
                     <label for="guests">N. massimo di ospiti:*</label>
                     <input type="number" name="guests" id="guests" value="{{ old('guests') ?? '' }}" required
                         min="1">
@@ -84,7 +84,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                <div class="col-12 ">
                     <label for="n_beds">N. di letti:*</label>
                     <input type="number" name="n_beds" id="n_beds" value="{{ old('n_beds') ?? '' }}" required
                         min="1">
@@ -96,7 +96,7 @@
                     @enderror
                 </div>
 
-                <div class="col-12 col-md-6 col-lg-4 col-xxl-3 mb-3">
+                <div class="col-12  mb-3">
                     <label for="price">Prezzo a notte per ospite:*</label>
 
                     <input type="number" name="price" id="price" value="{{ old('price') ?? '' }}" required>
@@ -107,23 +107,23 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                <div class="col-12 ">
                     <label for="square_meters">N. di metri quadrati: </label>
                     <input type="number" name="square_meters" id="square_meters"
                         value="{{ old('square_meters') ?? '' }}">
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                <div class="col-12 ">
 
                 </div>
-                <div class="col-lg-2">
+                <div class="col-3">
                     <label for="visible">Visibile </label>
                     <input type="checkbox" name="visible" id="visible" checked=true>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-3">
                     <label for="available">Disponibile </label>
                     <input type="checkbox" name="available" id="available" checked=true>
                 </div>
-                <div class="col-lg-12">
+                <div class="col-12">
                     <label for="address">inserisci la via:*</label>
                     <input class="w-100" type="text" name="address" id="address"
                         value="{{ old('address') ?? '' }}" autocomplete="off" required>
@@ -159,14 +159,14 @@
                 @enderror
 
 
-                <div class="col-lg-12">
-                    <div class="col-lg-12">
+                <div class="col-12 mt-4">
+                    <div class="w-100">
                         <label for="image[]">inserisci altre foto del tuo appartamento</label>
                         <input type="file" class="form-control" name="images[]" id="image[]" multiple>
                     </div>
                 </div>
 
-                <div class="col-lg-12 text-center mt-3">
+                <div class="col-12 text-center mt-3">
                     <button class="btn btn-outline-primary" type="submit">send</button>
                 </div>
             </div>

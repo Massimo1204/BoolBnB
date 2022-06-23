@@ -236,6 +236,14 @@ class ApartmentController extends Controller
                         $apartment->visible = $data["visible"];
                         if(isset($data["available"]))
                         $apartment->available = $data["available"];
+                        if($files=$request->file('images')){
+                            foreach($files as $file){
+                                $newPicture = new Picture();
+                                $newPicture->apartment_id = $apartment->id;
+                                $newPicture->image=Storage::put('uploads',$file);
+                                $newPicture->save();
+                            }
+                        }
                         $apartment->price = $data["price"];
                         $apartment->square_meters = $data["square_meters"];
                         $apartment->lat = $dataResponse["results"][$i]["position"]["lat"];
