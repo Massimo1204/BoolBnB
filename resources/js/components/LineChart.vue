@@ -50,7 +50,11 @@ export default {
         },
         height: {
             type: Number,
-            default: 400
+            default: 300
+        },
+        color:{
+            type: String,
+            default: 'red'
         },
         cssClasses: {
             default: '',
@@ -84,7 +88,7 @@ export default {
                     datasets: [
                         {
                             label: this.datasetIdKey,
-                            backgroundColor: '#f87979',
+                            backgroundColor: this.color,
                             data: this.data
                         }
                     ]
