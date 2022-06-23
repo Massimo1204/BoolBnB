@@ -31,8 +31,15 @@ class ApartmentsTableSeeder extends Seeder
                 $descs[]=$desc;
             }
         }
+        function randomNum($min,$max){
+            $num = rand($min,$max);
+            if ($num < 10) {
+                return 1;
+            }else{
+                return 0;
+            }
+        }
         for($i=0; $i < 60; $i++){
-
             $newApartment = new Apartment();
             $newApartment->user_id = $faker->randomElement($user_ids);
             $newApartment->n_rooms = $faker->numberBetween(1,10);
@@ -46,7 +53,7 @@ class ApartmentsTableSeeder extends Seeder
             $newApartment->long = $faker->longitude($min=7.900000, $max= 15.080000);
             $newApartment->visible = $faker->boolean();
             $newApartment->square_meters = $faker->numberBetween(30,3000);
-            $newApartment->available = $faker->boolean();
+            $newApartment->available = randomNum(0,11);
             $newApartment->price = $faker->randomFloat(2,70,1000);
             $newApartment->image = $imgs[$i];
             $newApartment->description = $faker->randomElement($RandDescs);
