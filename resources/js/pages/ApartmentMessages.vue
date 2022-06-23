@@ -113,10 +113,20 @@ export default {
             }else{
                 this.isSmall = false;
             }
+
+            this.orderMessages(this.apartments[index].messages);
         },
         orderApartments(){
             this.apartments.sort(function(a, b){return b.messages.length - a.messages.length});
             this.createIsShowingArray();
+        },
+        orderMessages(messages){
+            messages.sort(function(a, b){
+            console.log(a.created_at);
+
+                return b.created_at - a.created_at});
+            console.log(messages);
+            return messages;
         },
         createIsShowingArray() {
             for (let index = 0; index < this.apartments.length; index++) {
@@ -127,8 +137,6 @@ export default {
             let newDate =  date.slice(8, 10)+'/'+date.slice(5, 7)+'/'+date.slice(0, 4)+', '+date.slice(11,16);
             return newDate;
         },
-    },
-    computed:{
     },
     created(){
         this.getApartmentMessages(this.$userId);
