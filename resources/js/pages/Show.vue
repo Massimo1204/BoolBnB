@@ -26,7 +26,6 @@
             </div>
         </div>
         <div class="row mx-auto px-5 w-100">
-
             <div class="col-sm-12 col-md-8 col-lg-7 mt-4">
                 <h3>Map</h3>
                 <div class="map" id="map" ref="mapRef"></div>
@@ -38,7 +37,7 @@
                 <h3>Meet The Host</h3>
                 <div class="hostCard my-4 w-100 d-flex justify-content-between align-items-center p-3 rounded bg-white shadow">
                     <div class="d-flex justify-content-around align-items-center">
-                        <!-- <img class="rounded-circle" :src="(host.profile_picture.startsWith('https://')) ? host.profile_picture : '../../storage/'+ host.profile_picture" :alt="host.id"> -->
+                        <img class="rounded-circle" :src="(host.profile_picture.startsWith('https://')) ? host.profile_picture : '../../storage/'+ host.profile_picture" :alt="host.id">
                         <h4 class="m-0">{{host.first_name}} {{host.last_name}}</h4>
                     </div>
                     <button type="button" class="btn btn-outline-dark shadow-none" @click="showContact = true">Contatta l'host</button>
