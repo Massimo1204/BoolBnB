@@ -1,6 +1,9 @@
 <template>
     <div>
-        statistic
+        <div v-for="(apartment, index) in apartments" :key="index" class="apartment">
+            {{ apartment.title }}
+        </div>
+
 
     </div>
 </template>
@@ -17,10 +20,10 @@ export default {
     },
     methods: {
         getApartmentMessages(id) {
-            axios.get('http://127.0.0.1:8000/api/apartment/messages/' + id)
+            axios.get('http://127.0.0.1:8000/api/apartments/' + id)
                 .then((result) => {
+                    console.log(result);
                     this.apartments = result.data;
-                    this.orderApartments();
                 }).catch((error) => {
                     console.warn(error);
                 })

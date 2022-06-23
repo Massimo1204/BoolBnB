@@ -24,6 +24,11 @@ class ApartmentController extends Controller
         return response()->json($apartment);
     }
 
+    public function userApartments($id){
+        $apartments = Apartment::where('user_id',$id)->get();
+        return response()->json($apartments);
+    }
+
     public function search(Request $request)
     {
         $address = $request->get("address");
