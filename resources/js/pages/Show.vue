@@ -50,18 +50,20 @@
         <div v-if="showContact" class="contactContainer shadow border rounded my-4 mx-5">
             <section id="contacts" class="col-12 mx-auto px-2">
                 <div class="container">
-                    <!-- <Loader v-if="isLoading" /> -->
                     <div
                         class="alert d-flex justify-content-between align-items-center"
                         :class="`alert-${type}`"
                         role="alert"
-                        v-if="alert && !isLoading"
+                        v-if="(alert && type !='success')"
                     >
                         <span v-if="alertMessage">{{ alertMessage }} </span>
                         <ul v-if="hasErrors" class="mb-0 pl-4">
                             <li v-for="(error, key) in errors" :key="key">{{ error }}</li>
                         </ul>
                         <span @click="alert = !alert" class="h2 mb-0" role="button">&times;</span>
+                    </div>
+                    <div v-if="(alert && type =='success')">
+                        {{showAlert()}}
                     </div>
                     <h2 class="h1-responsive font-weight-bold text-center my-4">Contattaci</h2>
                     <p class="text-center w-responsive mx-auto">
@@ -166,25 +168,20 @@ export default {
             errors: {},
             type: "",
             alert: false,
-            isLoading: false,
             alertMessage: "",
         };
     },
     computed: {
         hasErrors() {
         // ! Ha errori se non è vuoto, se è vuoto non ha errori
-        return !isEmpty(this.errors); //Object.keys(this.errors).lenth;
+        return !isEmpty(this.errors);
         },
     },
     methods:{
         initializeMap() {
-            // console.log(this.apartment.lat );
-            // const mapRef = ref(null)
             this.map = tt.map({
                 key:APP_KEYMAPS ,
-// container: 'map',
                 container: this.$refs.mapRef,
-                // container: 'map',
                 center: {lng: this.apartment.long , lat: this.apartment.lat},
                 zoom: 8,
                 minZoom: 8,
@@ -247,7 +244,6 @@ export default {
             this.validateForm();
             // Controllo se ci sono errori
             if (!this.hasErrors) {
-                this.isLoading = true;
                 // * Creo una variabile per recuperare i params
                 // Posso usare anche lo spread
                 const params = {
@@ -291,14 +287,19 @@ export default {
                 });
             }
         },
+        showAlert() {
+            // Use sweetalert2
+            this.$swal({
+                icon: 'success',
+                title: 'Messaggio inviato!',
+            });
+            this.alert = !this.alert
+        },
     },
     created(){
         this.getInfo();
         this.getpics();
     }
-    // mounted() {
-    //     this.initializeMap()
-    // },
 }
 </script>
 

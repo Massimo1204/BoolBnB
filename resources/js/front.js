@@ -6,9 +6,11 @@ Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttrib
 
 import Vue from "vue";
 import VueRouter from "vue-router";
+import VueSweetalert2 from 'vue-sweetalert2';
 import App from "./views/App";
 
 Vue.use(VueRouter);
+Vue.use(VueSweetalert2);
 
 import Home from './pages/Home';
 import Show from './pages/Show';

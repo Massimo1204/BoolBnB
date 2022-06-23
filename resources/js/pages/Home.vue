@@ -27,11 +27,8 @@
 		<div class="col-12">
 			<h1 class="mt-4">In evidenza</h1>
 		</div>
-        <SingleApartment v-for="(apartment,index) in sponsoredApartments" :key="'sponsored'+ index" :apartment="apartment" />
-		<div class="col-12">
-			<h1 >Normali</h1>
-		</div>
-        <SingleApartment v-for="(apartment,index) in apartmentsSearch" :key="index" :apartment="apartment" />
+        <SingleApartment v-for="(apartment,index) in sponsoredApartments" :key="'sponsored'+ index" :apartment="apartment" :isLoading="isLoading" />
+        <SingleApartment v-for="(apartment,index) in apartmentsSearch" :key="index" :apartment="apartment" :isLoading="isLoading" />
         <div class="col-12">
             <h1 v-show="apartmentsSearch==null"> Niente da mostrare</h1>
         </div>
@@ -49,12 +46,12 @@
 </template>
 
 <script>
-import SingleApartment from '../components/SingleApartment.vue'
+import SingleApartment from '../components/SingleApartment.vue';
 
 export default {
     name:"home",
     components:{
-        SingleApartment
+        SingleApartment,
     },
     data(){
         return{
@@ -64,10 +61,12 @@ export default {
         last_page:0,
         userSearch:"",
         apartmentsSearch:[],
+        isLoading: true,
         }
     },
     methods:{
         getApartments(page){
+            this.isLoading = true;
             axios.get(`http://localhost:8000/api/apartments?page=${page}`)
             .then(resp => {
                 this.apartments = resp.data.data;
@@ -75,6 +74,7 @@ export default {
                 this.pagination = {current_page : current_page, last_page : last_page};
                 this.last_page = last_page;
                 this.search();
+                this.isLoading = false;
             })
             .catch((error)=>{
             console.warn(error);
