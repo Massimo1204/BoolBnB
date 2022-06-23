@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-    <div class="row">
+    <div class="row px-5">
         <div class="col-12 search">
             <div class="search">
                 <input type="text" placeholder=" " @keyup.enter="search" v-model="userSearch">
@@ -17,7 +17,7 @@
             </svg>
         </div>
     </div>
-    <div class="row">
+    <div class="row px-5">
 		<div class="col-12">
 			<h1 class="mt-4">In evidenza</h1>
 		</div>
@@ -25,8 +25,10 @@
 		<div class="col-12">
 			<h1 >Normali</h1>
 		</div>
-        <SingleApartment v-for="(apartment,index) in apartments" :key="index" :apartment="apartment" />
-        <div class="pagination col-12 d-flex justify-content-between align-content-center my-3" v-if="apartmentsSearch == ''">
+        <SingleApartment v-for="(apartment,index) in apartmentsSearch" :key="index" :apartment="apartment" />
+        <h1 v-show="apartmentsSearch==null"> Niente da mostrare</h1>
+
+        <div class="myPagination col-12 d-flex justify-content-between align-content-center my-3 px-sm-3" v-if="apartmentsSearch !== ''">
             <div v-if="pagination.current_page == 1"></div>
             <button class="btn btn-outline-primary shadow-none" @click="getApartments(pagination.current_page - 1)" v-if="pagination.current_page > 1">prev</button>
             <h5>Pagina: {{pagination.current_page}}</h5>
@@ -76,6 +78,7 @@ export default {
                 const { current_page, last_page } = resp.data;
                 this.pagination = {current_page : current_page, last_page : last_page};
                 this.last_page = last_page;
+                this.search();
             })
             .catch((error)=>{
             console.warn(error);
@@ -83,7 +86,7 @@ export default {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         },
         search(){
-            if(this.userSearch != "" ){
+            if(this.userSearch != ""){
                 axios
                 .get('http://localhost:8000/api/apartment?address='+ this.userSearch.replace(/ /g,"%"))
                 .then(resp =>{
@@ -91,7 +94,8 @@ export default {
                     console.log(this.apartmentsSearch);
                 })
                 .catch((error)=>{
-                console.warn(error);
+                    console.warn(error);
+                    this.apartmentsSearch=null;
                 })
                 this.userSearch="";
             }
@@ -179,7 +183,7 @@ $color: $primary;
         }
     }
 }
-    .pagination{
+    .myPagination{
         h5{
             line-height: 2.4rem;
             margin: 0;
