@@ -2,7 +2,7 @@
 <div>
   <div class="map" id="map" ref="mapRef"></div>
   <div class="row mt-4 border-top border-3 border-primary" v-if="filteredApartments != ''">
-      <div class="col-6" v-for="(apartment, index) in filterApartmentsDistance" :key="index" >
+      <div class="col-lg-6 col-md-6" v-for="(apartment, index) in filterApartmentsDistance" :key="index" >
         <div class="cardcontainer my-3 view-details" >
             <router-link :to="{name: 'Show', params:{id: apartment['id']}}" class="text-decoration-none">
                 <div class="photo mx-auto position-relative">
@@ -109,7 +109,7 @@ export default {
             }
           }
         });
-        console.log(apartmentDistance);
+        // console.log(apartmentDistance);
       return apartmentDistance;
     }
   }
@@ -123,7 +123,7 @@ export default {
   height: 80vh;
   width: 100%;
 }
-.col-6{
+.col-lg-6, .col-md-12{
   .content{
       // max-height: 220px; 
       overflow: auto;
