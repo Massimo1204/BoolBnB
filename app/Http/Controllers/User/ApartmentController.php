@@ -119,7 +119,7 @@ class ApartmentController extends Controller
                 }
                 $newApartment->services()->sync($data['service']);
 
-                return redirect()->route('apartment.show', ["apartment" => $newApartment]);
+                return redirect()->route('apartment.index', ["apartment" => $newApartment]);
             }
             else{
                 $request->validate([
@@ -244,7 +244,7 @@ class ApartmentController extends Controller
                         $apartment->save();
                         $apartment->services()->sync($data['service']);
 
-                        return redirect()->route('apartment.show', compact('apartment'));
+                        return redirect()->route('apartment.index', compact('apartment'));
                     }
                 }
                     // else{

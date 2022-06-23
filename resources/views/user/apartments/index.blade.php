@@ -29,13 +29,13 @@
                 @foreach ($apartments as $apartment)
                     <div class="col-6 d-flex justify-content-between my-apartments">
                         <div class="apartment-img">
-                            <a href="{{ route('apartment.show', $apartment) }}">
+                            {{-- <a href="{{ route('apartment.show', $apartment) }}"> --}}
                                 @if (str_starts_with($apartment->image, 'https://') || str_starts_with($apartment->image, 'http://'))
                                     <img src="{{ $apartment->image }}" alt="apartment">
                                 @else
                                     <img src="{{ asset('/storage') . '/' . $apartment->image }}" alt="apartment">
                                 @endif
-                            </a>
+                            {{-- </a> --}}
                         </div>
                         <div class="apartment-info">
                             <h3>{{ $apartment->title }}</h3>
