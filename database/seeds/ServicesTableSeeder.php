@@ -15,12 +15,13 @@ class ServicesTableSeeder extends Seeder
     public function run(Faker $faker)
     {
         $Services=config('Servicess');
-            foreach ($Services as  $Service) {
-                $newService=new Service();
-                $newService->name=$Service;
-                $newService->required=$faker->boolean();
-                $newService->save();
-            }
+        
+        foreach ($Services as  $Service) {
+            $newService=new Service();
+            $newService->name=$Service;
+            $newService->required=$faker->boolean();
+            $newService->save();
+        }
         
     }
 }

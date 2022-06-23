@@ -20,7 +20,7 @@
                     <p>{{apartment.description}}</p>
                 </div>
                 <div class="col-sm-12 col-md-8 col-lg-7 mt-3">
-                    <h3>Detalis</h3>
+                    <h3>Details</h3>
                     <Details :apartment="apartment"/>
                     <h3 class="mt-5">Servizi</h3>
                     <Services :id="id"/>
@@ -28,10 +28,10 @@
             </div>
         </div>
         <div class="row mx-auto px-5 w-100">
-             <div class="px-3">
-                <h3>Map</h3>
-                <div class="map" id="map" ref="mapRef"></div>
-             </div>
+            <div class="px-3">
+            <h3>Map</h3>
+            <div class="map" id="map" ref="mapRef"></div>
+            </div>
         </div>
 
         <div class="row mx-auto px-5 w-100" v-if="apartment.visible">

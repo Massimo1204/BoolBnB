@@ -114,20 +114,20 @@ export default {
                 this.isSmall = false;
             }
 
-            this.orderMessages(this.apartments[index].messages);
+            // this.orderMessages(this.apartments[index].messages);
         },
         orderApartments(){
             this.apartments.sort(function(a, b){return b.messages.length - a.messages.length});
             this.createIsShowingArray();
         },
-        orderMessages(messages){
-            messages.sort(function(a, b){
-            console.log(a.created_at);
+        // orderMessages(messages){
+        //     messages.sort(function(a, b){
+        //     console.log(a.created_at);
 
-                return b.created_at - a.created_at});
-            console.log(messages);
-            return messages;
-        },
+        //         return b.created_at - a.created_at});
+        //     console.log(messages);
+        //     return messages;
+        // },
         createIsShowingArray() {
             for (let index = 0; index < this.apartments.length; index++) {
                 this.isShowing[index] = false;

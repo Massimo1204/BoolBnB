@@ -1,12 +1,18 @@
 <template>
-    <div class="d-flex flex-column flex-wrap myCont overflow-hidden">
+<div class="d-flex">
+    <div class="">
         <div class="includedService me-3" v-for="service,index in includedServices" :key="index">
             <h5>{{service.name}}</h5>
         </div>
+    </div>
+
+    <div>
         <div class="notIncludedService me-3" v-for="service,i in services" :key="'A'+i">
             <h5 v-if="!(nIncludedServices.includes(service.name))"><del>{{service.name}}</del></h5>
         </div>
     </div>
+
+</div>
 </template>
 
 <script>
