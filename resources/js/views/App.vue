@@ -22,9 +22,10 @@
         color: $text-color;
     }
     .main{
-        background-image: url("https://wallpapercave.com/wp/wp4432767.jpg");
+        background-image: url("https://www.wallpapers13.com/wp-content/uploads/2019/08/Indonesia-Banyak-Islands-Sumatra-tropical-desert-beach-Sunset-sky-sea-palm-trees-photo-landscape-4K-Ultra-HD-Wallpaper-for-Desktop-Laptop.jpg");
         background-repeat: no-repeat;
         background-size: 100%;
+        background-position-y: center;
         height: 92vh;
         padding-top:1rem;
         padding-bottom: 1rem;
