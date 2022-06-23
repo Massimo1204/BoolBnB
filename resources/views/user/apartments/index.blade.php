@@ -2,10 +2,13 @@
 
 @section('content')
     @if (session('deleted-message'))
-        <div class="mx-2 alert alert-success">
-            {{ session('deleted-message') }}
-        </div>
-
+        <script>
+            Swal.fire(
+                'Eliminato!',
+                'Il tuo annuncio è stato eliminato.',
+                'success'
+            )
+        </script>
     @endif
     <div class="add-apartment-jumbo">
         <div class="container">
