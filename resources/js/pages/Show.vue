@@ -33,11 +33,11 @@
                         <img class="rounded-circle" :src="(host.profile_picture.startsWith('https://')) ? host.profile_picture : '../../storage/'+ host.profile_picture" :alt="host.id">
                         <h4 class="m-0">{{host.first_name}} {{host.last_name}}</h4>
                     </div>
-                    <button type="button" class="btn btn-outline-dark shadow-none">Contatta l'host</button>
+                    <button type="button" class="btn btn-outline-dark shadow-none" @click="showContact = true">Contatta l'host</button>
                 </div>
             </div>
         </div>
-        <div v-if="showContact" class="container shadow border rounded mt-5">
+        <div v-if="showContact" class="container shadow border rounded mt-3 mb-5">
             <section id="contacts" class="col-12 mx-auto">
                 <div class="container">
                     <!-- <Loader v-if="isLoading" /> -->
@@ -61,7 +61,7 @@
                     <div class="row p-0">
                         <div class="col-md-12 mb-md-0 mb-5 p-0">
                             <div class="row p-0">
-                                <div class="col-md-6 px-4">
+                                <div class="col-md-6 px-5">
                                     <div class="md-form mb-0">
                                         <input
                                             type="text"
@@ -76,7 +76,7 @@
                                         <label v-else for="full_name" class="">Il tuo nome</label>
                                     </div>
                                 </div>
-                                <div class="col-md-6 px-4 mb-3">
+                                <div class="col-md-6 px-5 mb-3">
                                     <div class="md-form mb-0">
                                         <input
                                             type="text"
@@ -93,7 +93,7 @@
                                 </div>
                             </div>
                             <div class="row p-0">
-                                <div class="col-md-12 px-4">
+                                <div class="col-md-12 px-5">
                                     <div class="md-form">
                                         <textarea
                                             type="text"
@@ -128,6 +128,7 @@
 import Axios from 'axios';
 import Details from '../components/Details.vue';
 import Services from '../components/Services.vue';
+import { isEmpty } from "lodash";
 export default {
     name:'Show',
     components:{
@@ -180,7 +181,7 @@ export default {
         getHost(id){
             Axios.get('/api/apartment/host/'+id)
             .then(response=>{
-                this.host=response.data[0][0];    
+                this.host=response.data[0][0];
                 // console.log(this.host);
             })
         },
