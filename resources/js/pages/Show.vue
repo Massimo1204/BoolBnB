@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="row mx-auto px-5 w-100">
-            <div>
+            <div class="col-12">
                 <h3>Map</h3>
                 <div class="map" id="map" ref="mapRef"></div>
             </div>
