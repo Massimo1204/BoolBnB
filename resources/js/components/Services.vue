@@ -59,6 +59,10 @@ export default {
     @media(max-width: 767.98px) {
         .myCont {
             height: 60vh;
+        }}
+        @media(max-width: 991.98px) {
+        .myCont {
+            height: 50vh;
         }
-}
+        }
 </style>
