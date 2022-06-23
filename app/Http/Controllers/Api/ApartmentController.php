@@ -14,7 +14,7 @@ class ApartmentController extends Controller
 {
     public function index()
     {
-        $apartments = Apartment::with(['messages', 'user'])->paginate(12);
+        $apartments = Apartment::with(['messages', 'user'])->where('visible','1')->paginate(12);
 
         return response()->json($apartments);
     }
