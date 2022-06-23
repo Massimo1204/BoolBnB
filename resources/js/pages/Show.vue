@@ -2,6 +2,7 @@
     <div class="container-fluid">
         <div class="row w-100" v-if="apartment.visible">
             <div class="pics position-relative col-9 mx-auto d-flex gap-1">
+
                 <img :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" class="w-50 rounded h-100" alt="">
                 <div class="otherPics w-50 h-100 d-flex flex-column flex-wrap gap-1">
                     <img v-for="pic,index in pictures" :key="index" :src="(pic.image.startsWith('https://')) ? pic.image : '../../storage/'+ pic.image" class="rounded">
@@ -124,7 +125,7 @@
 </template>
 
 <script>
-import Axios from 'axios'
+import Axios from 'axios';
 import Details from '../components/Details.vue';
 import Services from '../components/Services.vue';
 export default {
@@ -139,6 +140,7 @@ export default {
             apartment:[],
             pictures:[],
             host:[],
+
             showContact: false,
             form: {
                 full_name: "",
@@ -194,7 +196,7 @@ export default {
             if (
                 this.form.email.trim() &&
                 !this.form.email.match(
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
                 )
             )
                 errors.email = "La mail non è valida";

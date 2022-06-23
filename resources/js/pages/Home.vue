@@ -16,6 +16,13 @@
                 </symbol>
             </svg>
         </div>
+        <div class="col-6 mt-3">
+        <router-link :to="{name: 'AdvancedSearch'}" class="text-decoration-none d-flex justify-content-end ">
+            <button class="btn btn-primary">Ricerca avanzata</button>
+        </router-link>
+        </div>
+    </div>
+    <div class="row px-5">
 		<div class="col-12">
 			<h1 class="mt-4">In evidenza</h1>
 		</div>

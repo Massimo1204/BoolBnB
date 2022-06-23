@@ -47,6 +47,10 @@
                             <a class="text-white text-decoration-none"
                                 href="{{ route('apartment.edit', $apartment) }}">Modifica</a>
                         </div>
+                        <div class="btn btn-primary me-2">
+                            <a class="text-white text-decoration-none"
+                            href="{{url('/apartment/statistics/'.Auth::id())}}">Statistiche</a>
+                        </div>
                         <div class="me-2">
                             <a type="button" class="btn btn-success"
                                 href="{{ route('sponsorship.index', $apartment) }}">Attiva sponsorizzazione</a>
