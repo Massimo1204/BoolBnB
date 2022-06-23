@@ -24,12 +24,21 @@
                 <h3 class="mt-5">Servizi</h3>
                 <Services :id="id"/>
             </div>
+        </div>
+        <div class="row mx-auto px-5 w-100">
+
             <div class="col-sm-12 col-md-8 col-lg-7 mt-4">
                 <h3>Map</h3>
+                <div class="map" id="map" ref="mapRef"></div>
+            </div>
+        </div>
+        <div class="row mx-auto px-5 w-100" v-if="apartment.visible">
+            <div class="col-sm-12 col-md-8 col-lg-7 mt-4">
+
                 <h3>Meet The Host</h3>
                 <div class="hostCard my-4 w-100 d-flex justify-content-between align-items-center p-3 rounded bg-white shadow">
                     <div class="d-flex justify-content-around align-items-center">
-                        <img class="rounded-circle" :src="(host.profile_picture.startsWith('https://')) ? host.profile_picture : '../../storage/'+ host.profile_picture" :alt="host.id">
+                        <!-- <img class="rounded-circle" :src="(host.profile_picture.startsWith('https://')) ? host.profile_picture : '../../storage/'+ host.profile_picture" :alt="host.id"> -->
                         <h4 class="m-0">{{host.first_name}} {{host.last_name}}</h4>
                     </div>
                     <button type="button" class="btn btn-outline-dark shadow-none" @click="showContact = true">Contatta l'host</button>
@@ -127,6 +136,9 @@
 import Axios from 'axios';
 import Details from '../components/Details.vue';
 import Services from '../components/Services.vue';
+import tt from '@tomtom-international/web-sdk-maps'
+import {APP_KEYMAPS} from "../key";
+import  ref  from 'vue'
 export default {
     name:'Show',
     components:{
@@ -161,12 +173,34 @@ export default {
         },
     },
     methods:{
+        initializeMap() {
+            // console.log(this.apartment.lat );
+            // const mapRef = ref(null)
+            this.map = tt.map({
+                key:APP_KEYMAPS ,
+// container: 'map',
+                container: this.$refs.mapRef,
+                // container: 'map',
+                center: {lng: this.apartment.long , lat: this.apartment.lat},
+                zoom: 8,
+                minZoom: 8,
+
+            })
+            this.map.addControl(new tt.FullscreenControl(), 'top-left');
+            this.map.addControl(new tt.NavigationControl(), 'top-left');
+            let marker =new tt.Marker().setLngLat([this.apartment.long, this.apartment.lat]).addTo(this.map);
+            let popup = new tt.Popup({offset: this.popupOffsets}).setHTML(`<b>${this.apartment.title}</b><br/>${this.apartment.address}. <br/> Dista ${this.apartment.distance.toFixed(2)} km dalla tua ricerca`);
+            marker.setPopup(popup).togglePopup();
+            this.map = Object.freeze(this.map)
+        },
         getInfo(){
             Axios.get('/api/apartment/'+this.id)
             .then(response=>{
                 this.apartment=response.data;
                 console.log(this.apartment);
-            this.getHost(this.apartment.user_id);
+                this.getHost(this.apartment.user_id);
+                this.initializeMap()
+
             })
 
         },
@@ -259,7 +293,10 @@ export default {
     created(){
         this.getInfo();
         this.getpics();
-    },
+    }
+    // mounted() {
+    //     this.initializeMap()
+    // },
 }
 </script>
 
@@ -267,7 +304,7 @@ export default {
 
     @import 'resources/sass/_variables.scss';
     .MyContainer{
-        background-color: $light-dark-background;
+        // background-color: $light-dark-background;
         padding: 2rem 0;
     }
     #apartment_address{
@@ -343,6 +380,9 @@ export default {
             background-color: #fff;
             border-radius: 20px;
         }
+    }
+    .map{
+        height: 20vh;
     }
 
 </style>
