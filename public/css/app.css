@@ -20519,10 +20519,29 @@ readers do not read off random characters that represent icons */
      object-fit: cover;
 }
 
-.edit-container .row .col-12, .create-container .row .col-12 {
+.my-apartments {
+  height: 200px;
+}
+.my-apartments .apartment-img {
+  width: 50%;
+  padding: 1rem;
+}
+.my-apartments .apartment-img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
+.my-apartments .apartment-info {
+  width: 50%;
+  padding: 1rem;
+}
+
+.edit-container .row .col-12,
+.create-container .row .col-12 {
   margin: 0.3rem 0;
 }
-.edit-container .row .col-12 .servizi, .create-container .row .col-12 .servizi {
+.edit-container .row .col-12 .servizi,
+.create-container .row .col-12 .servizi {
   height: 42vh;
 }
 
@@ -20565,4 +20584,8 @@ div.show-thumbnails img #results li {
 
 body {
   overflow-x: hidden;
+}
+
+.add-apartment-jumbo {
+  background: linear-gradient(90deg, rgb(2, 0, 36) 0%, rgb(9, 9, 121) 35%, rgb(0, 212, 255) 100%);
 }
