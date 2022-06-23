@@ -25,7 +25,10 @@
                         <div class="apartment-single-message" v-for="(message, index) in apartment.messages" :key="'apartmentMessages' + index" >
                             <div class="message-chat-content">
                                 <div class="sender-details">
-                                    <p>Inviato da:  <span class="message-sender">{{message.full_name}}</span></p>
+                                    <p>Inviato da:  
+                                        <span class="message-sender">{{message.full_name}}</span>
+                                        <span class="message-date float-end">{{getDate(message.created_at)}}</span>
+                                    </p>
                                     <p>Email:  <span class="message-email">{{message.email}}</span></p>
                                 </div>
                                 <div class="message-text mt-3">
@@ -46,8 +49,12 @@
                     <div class="apartment-single-message" v-for="(message, index) in apartments[apartmentIndex].messages" :key="'apartmentMessages' + index" >
                         <div class="message-chat-content">
                             <div class="sender-details">
-                                <p>Inviato da:  <span class="message-sender">{{message.full_name}}</span></p>
+                                <p>Inviato da:  
+                                    <span class="message-sender">{{message.full_name}}</span>
+                                    <span class="message-date float-end">{{getDate(message.created_at)}}</span>
+                                </p>
                                 <p>Email:  <span class="message-email">{{message.email}}</span></p>
+                                
                             </div>
                             <div class="message-text mt-3">
                                 <p class="message-content">
@@ -98,8 +105,6 @@ export default {
                 this.isShowing.splice(index, 1, false);
             }
 
-            console.log(this.isShowing);
-
             this.apartmentIndex = index;
             this.windowWidth = window.innerWidth;
 
@@ -117,13 +122,20 @@ export default {
             for (let index = 0; index < this.apartments.length; index++) {
                 this.isShowing[index] = false;
             }
-        }
+        },
+        getDate(date){
+            let newDate =  date.slice(8, 10)+'/'+date.slice(5, 7)+'/'+date.slice(0, 4)+', '+date.slice(11,16);
+            let year = date.slice(0,4);
+            let month = date.slice(5,7);
+            let day = date.slice(8,10);
+
+            let hour = date.slice(11,16);
+
+            console.log(newDate , date, year, month, day, hour);
+            return newDate;
+        },
     },
     computed:{
-        // getDate: function(date){
-        //     newDate = date.slice(0, 10);
-        //     return newDate;
-        // },
     },
     created(){
         this.getApartmentMessages(this.$userId);
@@ -136,7 +148,7 @@ div#messages{
     .my-title{
         color: rgb(1, 11, 95);
         font-weight: 600;
-        padding: 30px 0 10px 0;
+        padding: 30px 0 10px 30px;
     }
     background-color: rgb(245, 248, 255);
     div.apartment-messages-container{
@@ -217,6 +229,10 @@ div#messages{
                     font-weight: 600;
                     font-size: 1rem;
                     margin-left: 1rem;
+                }
+                .message-date{
+                    color: rgb(168, 164, 164);
+                    font-size: 0.8rem;
                 }
             }
             .message-text{
