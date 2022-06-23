@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-    <div class="row px-5">
+    <div class="row px-5 px-md-3">
         <div class="col-12 search">
             <div class="search">
                 <input type="text" placeholder=" " @keyup.enter="search" v-model="userSearch">
@@ -16,8 +16,6 @@
                 </symbol>
             </svg>
         </div>
-    </div>
-    <div class="row px-5">
 		<div class="col-12">
 			<h1 class="mt-4">In evidenza</h1>
 		</div>
