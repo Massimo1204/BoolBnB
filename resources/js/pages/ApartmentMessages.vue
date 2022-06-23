@@ -22,7 +22,7 @@
             <div class="apartment-chat">
                 <div v-if="apartmentIndex != null">
                     <div class="apartment-single-message" v-for="(message, index) in apartments[apartmentIndex].messages" :key="'apartmentMessages' + index" >
-                        <div class="message-chat-content">
+                        <div v-if="apartments[index].messages.length != 0" class="message-chat-content">
                             <div class="sender-details">
                                 <p>Inviato da:  <span class="message-sender">{{message.full_name}}</span></p>
                                 <p>Email:  <span class="message-email">{{message.email}}</span></p>
@@ -33,7 +33,13 @@
                                 </p>
                             </div>
                         </div>
+                        <div v-else>
+                            <h1>Non ci sono messaggi per questo appartamento</h1>
+                        </div>
                     </div>
+                </div>
+                <div v-else>
+                    <h1 class="text-center text-secondary">Seleziona un appartamento per vedere i suoi messaggi</h1>
                 </div>
             </div>
         </div>
@@ -44,7 +50,6 @@
 <script>
 export default {
     name:"ApartmentMessage",
-    props:['apartment'],
     data: function() {
         return{
             apartments: [],
@@ -56,14 +61,16 @@ export default {
             axios.get('http://127.0.0.1:8000/api/apartment/messages/'+ id)
                 .then((result)=>{
                     this.apartments = result.data;
-                    console.log(this.apartments)
+                    this.orderApartments();
                 }).catch((error)=>{
                     console.warn(error);
                 })
         },
         chooseApartment(index){
             this.apartmentIndex = index;
-            console.log(index, this.apartments[index].messages);
+        },
+        orderApartments(){
+            this.apartments.sort(function(a, b){return b.messages.length - a.messages.length});
         }
     },
     computed:{
@@ -96,7 +103,7 @@ div#messages{
                     img.apartment-message-image{
                         width: 120px;
                         height: 120px;
-                        border-radius: 50%;
+                        border-radius: 20px;
                         object-fit: fill;
                     }
                 }
@@ -127,11 +134,10 @@ div#messages{
             width: calc(67% - 40px);
             div.apartment-single-message{
                 margin: 20px auto 0 auto;
-                height: 210px;
                 width: 97%;
-                padding: 20px 35px;
+                padding: 20px 35px 10px 35px;
                 border-radius: 15px;
-                background-color: white;
+                background-color: rgb(238, 242, 253);
                 div.message-chat-content{
                     div.sender-details{
                     p{
@@ -147,7 +153,7 @@ div#messages{
                     }
                     .message-text{
                         .message-content{
-                            background-color: rgb(238, 242, 253);
+                            background-color: white;
                             border-radius: 10px;
                             padding: 10px;
                         }
