@@ -1,26 +1,48 @@
 <template>
-    <div id="messages">
-        <h1 class="my-title text-uppercase">I tuoi messaggi</h1>
-        <div class="apartment-messages-container d-flex">
-            <div class="apartment-messages-wrapper">
-                <div class="d-flex apartment-messages" v-for="(apartment, index) in apartments" :key="'apartment' + index" @click="chooseApartment(index)">
-                    <div class="apartment-image-wrapper">
-                        <img class="apartment-message-image img-fluid" :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" :alt="apartment.title">
-                    </div>
-                    <div class="apartment-message-content">
-                        <h5 class="message-title text-capitalize">{{apartment.title}}</h5>
-                        <h6 class="message-description">{{apartment.address}}</h6>
-                        <div v-if="(apartment.messages.length > 0 )">
-                            <p class="fw-bold">Messaggi : <span class="number-messages-enlighter">{{apartment.messages.length}}</span></p>
+    <div class="row" id="messages">
+        <div class="col-12">
+            <h1 class="my-title text-uppercase">I tuoi messaggi</h1>
+        </div>
+        <div class="row apartment-messages-container d-flex">
+            <div class="col-xl-5 col-lg-6 col-md-12 apartment-messages-wrapper">
+                <div class="d-flex flex-column apartment-messages" v-for="(apartment, index) in apartments" :key="'apartment' + index" @click="chooseApartment(index)">
+                    <div class="d-flex">
+                        <div class="apartment-image-wrapper">
+                            <img class="apartment-message-image img-fluid" :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" :alt="apartment.title">
                         </div>
-                        <div v-else>
-                            <p class="fw-bold">Nessun Messaggio</p>
+                        <div class="apartment-message-content">
+                            <h5 class="message-title text-capitalize">{{apartment.title}}</h5>
+                            <h6 class="message-description">{{apartment.address}}</h6>
+                            <div v-if="(apartment.messages.length > 0 )">
+                                <p class="fw-bold">Messaggi : <span class="number-messages-enlighter">{{apartment.messages.length}}</span></p>
+                            </div>
+                            <div v-else>
+                                <p class="fw-bold">Nessun Messaggio</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-if="apartmentIndex != null && isSmall == true && isShowing[index] == true">
+                        <div class="apartment-single-message" v-for="(message, index) in apartment.messages" :key="'apartmentMessages' + index" >
+                            <div class="message-chat-content">
+                                <div class="sender-details">
+                                    <p>Inviato da:  <span class="message-sender">{{message.full_name}}</span></p>
+                                    <p>Email:  <span class="message-email">{{message.email}}</span></p>
+                                </div>
+                                <div class="message-text mt-3">
+                                    <p class="message-content">
+                                        {{message.text}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-if="apartment.messages.length == 0" class="info-message-wrapper">
+                            <h1 class="info-message">Non ci sono messaggi per questo appartamento</h1>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="apartment-chat">
-                <div v-if="apartmentIndex != null">
+            <div class="col-xl-7 col-lg-6 apartment-chat">
+                <div v-if="apartmentIndex != null && isSmall == false">
                     <div class="apartment-single-message" v-for="(message, index) in apartments[apartmentIndex].messages" :key="'apartmentMessages' + index" >
                         <div class="message-chat-content">
                             <div class="sender-details">
@@ -54,6 +76,9 @@ export default {
         return{
             apartments: [],
             apartmentIndex: null,
+            windowWidth: window.innerWidth,
+            isSmall: false,
+            isShowing: [],
         }
     },
     methods: {
@@ -67,10 +92,31 @@ export default {
                 })
         },
         chooseApartment(index){
+            if(this.isShowing[index] == false){
+                this.isShowing.splice(index, 1, true);
+            }else{
+                this.isShowing.splice(index, 1, false);
+            }
+
+            console.log(this.isShowing);
+
             this.apartmentIndex = index;
+            this.windowWidth = window.innerWidth;
+
+            if(this.windowWidth < 1000) {
+                this.isSmall = true;
+            }else{
+                this.isSmall = false;
+            }
         },
         orderApartments(){
             this.apartments.sort(function(a, b){return b.messages.length - a.messages.length});
+            this.createIsShowingArray();
+        },
+        createIsShowingArray() {
+            for (let index = 0; index < this.apartments.length; index++) {
+                this.isShowing[index] = false;
+            }
         }
     },
     computed:{
@@ -82,7 +128,6 @@ export default {
     created(){
         this.getApartmentMessages(this.$userId);
     },
-
 }
 </script>
 
@@ -92,16 +137,12 @@ div#messages{
         color: rgb(1, 11, 95);
         font-weight: 600;
         padding: 30px 0 10px 0;
-        margin-left: 15vw;
     }
     background-color: rgb(245, 248, 255);
     div.apartment-messages-container{
         border-top: 2px solid white;
         padding-top: 20px;
-        width: 75vw;
-        margin: 0 auto;
         div.apartment-messages-wrapper{
-            width: 40%;
             height: calc(100vh - 187px);
             overflow-y: scroll;
             div.apartment-messages{
@@ -143,50 +184,49 @@ div#messages{
             }
         }
         div.apartment-chat{
-            width: 60%;
             height: calc(100vh - 187px);
             overflow-y: scroll;
             padding-right: 10px;
-            div.info-message-wrapper{
-                height: 50vh;
-                display: flex;
-                justify-content: center;
-                h1.info-message{
-                    align-self: center;
-                    color: rgb(182, 179, 179);
-                    text-align: center;
-                }
-            }
-            div.apartment-single-message{
-                margin: 0 auto 20px auto;
-                width: 97.5%;
-                padding: 20px 35px 10px 35px;
-                border-radius: 15px;
-                background-color: rgb(219, 226, 245);
-                div.message-chat-content{
-                    div.sender-details{
-                    p{
-                        margin-bottom: 0.4rem;
-                        padding-left: 10px;
-                    }
-                        .message-email,
-                        .message-sender{
-                            font-weight: 600;
-                            font-size: 1rem;
-                            margin-left: 1rem;
-                        }
-                    }
-                    .message-text{
-                        .message-content{
-                            background-color: white;
-                            border-radius: 10px;
-                            padding: 10px;
-                        }
-                    }
-                }
             }
         }
     }
+    div.info-message-wrapper{
+        height: 25vh;
+        display: flex;
+        justify-content: center;
+        h1.info-message{
+            align-self: center;
+            color: rgb(182, 179, 179);
+            text-align: center;
+        }
+    }
+    div.apartment-single-message{
+        margin: 20px auto 10px auto;
+        width: 97.5%;
+        padding: 20px 35px 10px 35px;
+        border-radius: 15px;
+        background-color: rgb(219, 226, 245);
+        div.message-chat-content{
+            div.sender-details{
+            p{
+                margin-bottom: 0.4rem;
+                padding-left: 10px;
+            }
+                .message-email,
+                .message-sender{
+                    font-weight: 600;
+                    font-size: 1rem;
+                    margin-left: 1rem;
+                }
+            }
+            .message-text{
+                .message-content{
+                    background-color: white;
+                    border-radius: 10px;
+                    padding: 10px;
+                }
+            }
+        }
     ::-webkit-scrollbar {
     width: 6px;
     }
@@ -201,6 +241,5 @@ div#messages{
     ::-webkit-scrollbar-thumb:hover {
     background: grey; 
     }
-
 }
 </style>

@@ -11,9 +11,6 @@ export default {
 </script>
 
 <style scoped>
-div{
-    width: 100vw;
-}
 .container{
     background-color: rgba(255, 255, 255, .85);
     overflow: auto;
