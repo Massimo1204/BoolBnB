@@ -1,6 +1,6 @@
 <template>
     <div id="messages">
-        <h1 class="pt-4 pb-5 ms-4">I tuoi messaggi</h1>
+        <h1 class="my-title text-uppercase">I tuoi messaggi</h1>
         <div class="apartment-messages-container d-flex">
             <div class="apartment-messages-wrapper">
                 <div class="d-flex apartment-messages" v-for="(apartment, index) in apartments" :key="'apartment' + index" @click="chooseApartment(index)">
@@ -34,6 +34,12 @@
                             </div>
                         </div>
                     </div>
+                    <div v-if="apartments[apartmentIndex].messages.length == 0" class="d-flex">
+                        <h1 class="text-center text-secondary info-message">Non ci sono messaggi per questo appartamento</h1>
+                    </div>
+                </div>
+                <div v-else class="d-flex">
+                    <h1 class="text-center text-secondary info-message">Seleziona un appartamento per vedere i suoi messaggi</h1>
                 </div>
             </div>
         </div>
@@ -44,7 +50,6 @@
 <script>
 export default {
     name:"ApartmentMessage",
-    props:['apartment'],
     data: function() {
         return{
             apartments: [],
@@ -56,14 +61,16 @@ export default {
             axios.get('http://127.0.0.1:8000/api/apartment/messages/'+ id)
                 .then((result)=>{
                     this.apartments = result.data;
-                    console.log(this.apartments)
+                    this.orderApartments();
                 }).catch((error)=>{
                     console.warn(error);
                 })
         },
         chooseApartment(index){
             this.apartmentIndex = index;
-            console.log(index, this.apartments[index].messages);
+        },
+        orderApartments(){
+            this.apartments.sort(function(a, b){return b.messages.length - a.messages.length});
         }
     },
     computed:{
@@ -81,11 +88,18 @@ export default {
 
 <style lang="scss" scoped>
 div#messages{
+    .my-title{
+        color: rgb(1, 11, 95);
+        font-weight: 600;
+        padding: 30px 0 0 50px;
+    }
     background-color: rgb(245, 248, 255);
     div.apartment-messages-container{
         div.apartment-messages-wrapper{
             width: 33%;
             border-left: 1px solid black;
+            height: calc(100vh - 197px);
+            overflow-y: scroll;
             div.apartment-messages{
                 cursor: pointer;
                 padding: 15px;
@@ -96,7 +110,7 @@ div#messages{
                     img.apartment-message-image{
                         width: 120px;
                         height: 120px;
-                        border-radius: 50%;
+                        border-radius: 20px;
                         object-fit: fill;
                     }
                 }
@@ -125,13 +139,17 @@ div#messages{
         }
         div.apartment-chat{
             width: calc(67% - 40px);
+            height: calc(100vh - 197px);
+            overflow-y: scroll;
+            h1.info-message{
+                align-self: center;
+            }
             div.apartment-single-message{
                 margin: 20px auto 0 auto;
-                height: 210px;
                 width: 97%;
-                padding: 20px 35px;
+                padding: 20px 35px 10px 35px;
                 border-radius: 15px;
-                background-color: white;
+                background-color: rgb(238, 242, 253);
                 div.message-chat-content{
                     div.sender-details{
                     p{
@@ -147,7 +165,7 @@ div#messages{
                     }
                     .message-text{
                         .message-content{
-                            background-color: rgb(238, 242, 253);
+                            background-color: white;
                             border-radius: 10px;
                             padding: 10px;
                         }
