@@ -1,7 +1,7 @@
 <template>
     <div class="MyContainer w-100">
         <div class="row mx-auto px-5 w-100" v-if="apartment.visible">
-            <div class="pics position-relative col-sm-12 col-md-10 mx-sm-auto d-flex gap-1">
+            <div class="pics position-relative col-12 mx-sm-auto d-flex gap-1">
                 <img :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" class="w-50 rounded h-100" alt="">
                 <div class="otherPics w-50 h-100 d-flex flex-column flex-wrap gap-1">
                     <img v-for="pic,index in pictures" :key="index" :src="(pic.image.startsWith('https://')) ? pic.image : '../../storage/'+ pic.image" class="rounded">
@@ -11,20 +11,20 @@
                     <span v-else class="text-danger">Non Disponibile</span>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-8 ps-md-5 mt-4">
+            <div class="col-sm-12 col-md-8 col-lg-7 mt-4">
                 <h1>{{apartment.title}}</h1>
                 <span id="apartment_address">{{apartment.address}}</span>
                 <hr>
                 <h3>Description</h3>
                 <p>{{apartment.description}}</p>
             </div>
-            <div class="col-sm-12 col-md-8 ps-md-5 mt-3">
+            <div class="col-sm-12 col-md-8 col-lg-7 mt-3">
                 <h3>Detalis</h3>
                 <Details :apartment="apartment"/>
                 <h3 class="mt-5">Servizi</h3>
                 <Services :id="id"/>
             </div>
-            <div class="col-sm-12 col-md-8 ps-md-5 mt-4">
+            <div class="col-sm-12 col-md-8 col-lg-7 mt-4">
                 <h3>Map</h3>
                 <h3>Meet The Host</h3>
                 <div class="hostCard my-4 w-100 d-flex justify-content-between align-items-center p-3 rounded bg-white shadow">
@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="showContact" class="container shadow border rounded my-4">
+        <div v-if="showContact" class="contactContainer shadow border rounded my-4">
             <section id="contacts" class="col-12 mx-auto">
                 <div class="container">
                     <!-- <Loader v-if="isLoading" /> -->
@@ -268,14 +268,21 @@ export default {
     @import 'resources/sass/_variables.scss';
     .MyContainer{
         background-color: $light-dark-background;
+        padding: 2rem 0;
     }
-        #apartment_address{
-            color: $light-grey;
+    #apartment_address{
+        color: $light-grey;
+    }
+    @media (min-width: 992px){
+        .MyContainer{
+            padding: 2rem 10vw;
         }
+    }
 
     .pics{
         height: 50vh;
-        width: 80vw;
+        // width: 80vw;
+        min-width: 455px;
         img, .otherPics img{
             object-fit: cover;
         }
@@ -292,8 +299,17 @@ export default {
             img{
                 width: 99.5%;
             }
+            }
+        .contactContainer{
+            max-width: 90vw;
         }
-                }  
+        }
+    @media(max-width: 1399.98px){
+        .contactContainer{
+            max-width: 70vw;
+            margin: 0 auto;
+        }
+    } 
         .otherPics::-webkit-scrollbar{
             height: 1.5vh;
         }
