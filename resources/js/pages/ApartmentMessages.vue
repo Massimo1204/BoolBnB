@@ -34,12 +34,12 @@
                             </div>
                         </div>
                     </div>
-                    <div v-if="apartments[apartmentIndex].messages.length == 0" class="d-flex">
-                        <h1 class="text-center text-secondary info-message">Non ci sono messaggi per questo appartamento</h1>
+                    <div v-if="apartments[apartmentIndex].messages.length == 0" class="info-message-wrapper">
+                        <h1 class="info-message">Non ci sono messaggi per questo appartamento</h1>
                     </div>
                 </div>
-                <div v-else class="d-flex">
-                    <h1 class="text-center text-secondary info-message">Seleziona un appartamento per vedere i suoi messaggi</h1>
+                <div v-else class="info-message-wrapper">
+                    <h1 class="info-message">Seleziona un appartamento per vedere i suoi messaggi</h1>
                 </div>
             </div>
         </div>
@@ -91,20 +91,22 @@ div#messages{
     .my-title{
         color: rgb(1, 11, 95);
         font-weight: 600;
-        padding: 30px 0 0 50px;
+        padding: 30px 0 10px 50px;
     }
     background-color: rgb(245, 248, 255);
     div.apartment-messages-container{
+        border-top: 2px solid white;
+        padding-top: 20px;
         div.apartment-messages-wrapper{
             width: 33%;
             border-left: 1px solid black;
-            height: calc(100vh - 197px);
+            height: calc(100vh - 187px);
             overflow-y: scroll;
             div.apartment-messages{
                 cursor: pointer;
                 padding: 15px;
                 background-color: white;
-                margin: 20px;
+                margin: 0 20px 20px 20px;
                 border-radius: 30px;
                 div.apartment-image-wrapper{
                     img.apartment-message-image{
@@ -138,15 +140,21 @@ div#messages{
             }
         }
         div.apartment-chat{
-            width: calc(67% - 40px);
-            height: calc(100vh - 197px);
+            width: 67%;
+            height: calc(100vh - 187px);
             overflow-y: scroll;
-            h1.info-message{
-                align-self: center;
+            div.info-message-wrapper{
+                height: 50vh;
+                display: flex;
+                justify-content: center;
+                h1.info-message{
+                    align-self: center;
+                    color: rgb(182, 179, 179)
+                }
             }
             div.apartment-single-message{
-                margin: 20px auto 0 auto;
-                width: 97%;
+                margin: 0 auto 20px auto;
+                width: 97.5%;
                 padding: 20px 35px 10px 35px;
                 border-radius: 15px;
                 background-color: rgb(238, 242, 253);
@@ -173,6 +181,27 @@ div#messages{
                 }
             }
         }
+    }
+    /* width */
+    ::-webkit-scrollbar {
+    width: 6px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 9px;
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+    background: lightgrey; 
+    border-radius: 9px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+    background: grey; 
     }
 }
 </style>
