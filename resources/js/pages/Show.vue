@@ -26,9 +26,12 @@
             <div class="col-7 mt-4">
                 <h3>Map</h3>
                 <h3>Meet The Host</h3>
-                <div class="hostCard d-flex justify-content-around align-items-center">
-                    <img class="rounded-circle" :src="host.profile_picture" :alt="host.id">
-                    <h4 class="m-0">{{host.first_name}} {{host.last_name}}</h4>
+                <div class="hostCard mt-4 w-100 d-flex justify-content-between align-items-center p-3 rounded bg-white shadow">
+                    <div class="d-flex justify-content-around align-items-center">
+                        <img class="rounded-circle" :src="host.profile_picture" :alt="host.id">
+                        <h4 class="m-0">{{host.first_name}} {{host.last_name}}</h4>
+                    </div>
+                    <button type="button" class="btn btn-outline-dark shadow-none">Contatta l'host</button>
                 </div>
             </div>
         </div>
@@ -128,7 +131,9 @@ export default {
         padding: 3rem 10rem;
     }
     .hostCard{
-        width: 17rem;
+        div{
+            width: 17rem;
+        }
         img{
             height: 5rem;
             width: 5rem;
