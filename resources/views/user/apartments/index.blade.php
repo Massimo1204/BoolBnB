@@ -29,13 +29,13 @@
                 @foreach ($apartments as $apartment)
                     <div class="col-6 d-flex justify-content-between my-apartments">
                         <div class="apartment-img">
-                            {{-- <a href="{{ route('apartment.show', $apartment) }}"> --}}
+                            <a href="{{url('/apartment/'.$apartment->id)}}">
                                 @if (str_starts_with($apartment->image, 'https://') || str_starts_with($apartment->image, 'http://'))
                                     <img src="{{ $apartment->image }}" alt="apartment">
                                 @else
                                     <img src="{{ asset('/storage') . '/' . $apartment->image }}" alt="apartment">
                                 @endif
-                            {{-- </a> --}}
+                            </a>
                         </div>
                         <div class="apartment-info">
                             <h3>{{ $apartment->title }}</h3>
@@ -70,24 +70,27 @@
 @endsection
 
 @section('footer-scripts')
+    <script src="{{ asset('js/tipsAddress.js') }}"></script>
     <script defer>
-        const deleteForm = document.querySelector('.apartment-form-destroyer');
+        const deleteForms = document.querySelectorAll('.apartment-form-destroyer');
 
-        deleteForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // § blocchiamo l'invio del form
-            Swal.fire({
-                title: 'Sei Sicuro?',
-                text: "Non sarà più possibile tornare indietro!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, Elimina!'
-            }).then((result) => {
-                if (result.isConfirmed) {
+        deleteForms.forEach(singleForm => {
+            singleForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // § blocchiamo l'invio del form
+                Swal.fire({
+                    title: 'Sei Sicuro?',
+                    text: "Non sarà più possibile tornare indietro!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, Elimina!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
 
-                    this.submit();
-                }
+                        this.submit();
+                    }
+                })
             })
         });
     </script>
