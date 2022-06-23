@@ -28,10 +28,10 @@
             </div>
         </div>
         <div class="row mx-auto px-5 w-100">
-             <div class="px-3">
+            <div class="col-sm-12 col-md-8 col-lg-7 mt-3">
                 <h3>Map</h3>
                 <div class="map" id="map" ref="mapRef"></div>
-             </div>
+            </div>
         </div>
 
         <div class="row mx-auto px-5 w-100" v-if="apartment.visible">
@@ -76,7 +76,7 @@
                                             type="text"
                                             id="full_name"
                                             v-model="form.full_name"
-                                            class="form-control border-info"
+                                            class="form-control border-info shadow-none"
                                             :class="{ 'is-invalid': errors.full_name }"
                                             placeholder="Il tuo nome"
                                         />
@@ -91,7 +91,7 @@
                                             type="text"
                                             id="email"
                                             v-model="form.email"
-                                            class="form-control border-info"
+                                            class="form-control border-info shadow-none"
                                             :class="{ 'is-invalid': errors.email }"
                                             placeholder="La tua email"
                                         />
@@ -109,7 +109,7 @@
                                             id="text"
                                             v-model="form.text"
                                             rows="4"
-                                            class="form-control border-info md-textarea"
+                                            class="form-control border-info md-textarea shadow-none"
                                             :class="{ 'is-invalid': errors.text }"
                                             placeholder="Il tuo messaggio"></textarea>
                                         <div v-if="errors.text" class="invalid-feedback">
