@@ -1,5 +1,5 @@
 <template>
-<div class=" col-sm-12 col-md-6 col-lg-3" v-if="apartment.visible==1">
+<div class=" col-sm-12 col-md-6 col-lg-4 col-xl-3" v-if="apartment.visible==1">
     <div class="cardcontainer my-3">
         <router-link :to="{name: 'Show', params:{id: apartment.id}}" class="text-decoration-none">
             <div class="photo mx-auto position-relative">
@@ -9,9 +9,9 @@
                     <span v-else class="text-danger">Non Disponibile</span>
                 </div>
             </div>
-            <h2 class="txt m-0 mt-3 title text-capitalize">{{apartment.title}}</h2>
+            <h3 class="txt m-0 mt-3 title text-capitalize">{{apartment.title}}</h3>
             <div class="content address">
-                <p>{{ apartment.address}}</p>
+                <p class="fs-5">{{ apartment.address}}</p>
             </div>
         </router-link>
     </div>
@@ -34,7 +34,7 @@ props: ['apartment']
     // max-height: 220px; 
     overflow: auto;
 }
-h2{
+h3{
     color: $primary;
 }
 p{
@@ -60,6 +60,5 @@ p{
 .address
 {
     color: $light-grey;
-    font-size: 1.2rem;
 }
 </style>

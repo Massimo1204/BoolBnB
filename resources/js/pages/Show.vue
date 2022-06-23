@@ -20,7 +20,7 @@
                     <p>{{apartment.description}}</p>
                 </div>
                 <div class="col-sm-12 col-md-8 col-lg-7 mt-3">
-                    <h3>Detalis</h3>
+                    <h3>Details</h3>
                     <Details :apartment="apartment"/>
                     <h3 class="mt-5">Servizi</h3>
                     <Services :id="id"/>
