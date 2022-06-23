@@ -7,7 +7,8 @@
                     <img v-for="pic,index in pictures" :key="index" :src="pic.image" class="rounded">
                 </div>
                 <div class="price position-absolute px-2 py-1 bg-light rounded-pill">
-                    <span>{{apartment.price}}	&euro;</span>
+                    <span v-if="apartment.available">{{apartment.price}}	&euro;</span>
+                    <span v-else class="text-danger">Non Disponibile</span>
                 </div>
             </div>
             <div class="col-7 mt-4">
@@ -62,6 +63,7 @@ export default {
             Axios.get('/api/apartment/'+this.id)
             .then(response=>{
                 this.apartment=response.data;
+                console.log(this.apartment);
             this.getHost(this.apartment.user_id);
             })
 
