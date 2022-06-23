@@ -8,7 +8,7 @@
         <form class="container-fluid px-5 mt-4" action="{{ route('apartment.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row g-2 px-4 apartment">
-                <div class="col-sm-12">
+                <div class="col-12">
                     <label for="title">Titolo*</label>
                     <input class="form-control" type="text" name="title" id="title"
                         value="{{ old('title') ?? '' }}" required autocomplete="on" autofocus minlength="5">
@@ -19,7 +19,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-sm-12">
+                <div class="col-12">
                     <label for="image">Carica la foto cover:*</label>
                     <input class="form-control" type="file" name="image" id="image" required autocomplete="on"
                         autofocus>
@@ -30,7 +30,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-sm-12">
+                <div class="col-12">
                     <label for="description">Descrizione*</label>
                     <textarea class="form-control" name="description" id="description" required autocomplete="on" autofocus minlength="10">{{ old('description') ?? '' }}</textarea>
                     @error('description')
@@ -123,7 +123,7 @@
                     <label for="available">Disponibile </label>
                     <input type="checkbox" name="available" id="available" checked=true>
                 </div>
-                <div class="col-sm-12">
+                <div class="col-12">
                     <label for="address">inserisci la via:*</label>
                     <input class="w-100" type="text" name="address" id="address"
                         value="{{ old('address') ?? '' }}" autocomplete="off" required>
@@ -159,14 +159,14 @@
                 @enderror
 
 
-                <div class="col-sm-12 mt-4">
+                <div class="col-12 mt-4">
                     <div class="w-100">
                         <label for="image[]">inserisci altre foto del tuo appartamento</label>
                         <input type="file" class="form-control" name="images[]" id="image[]" multiple>
                     </div>
                 </div>
 
-                <div class="col-sm-12 text-center mt-3">
+                <div class="col-12 text-center mt-3">
                     <button class="btn btn-outline-primary" type="submit">send</button>
                 </div>
             </div>

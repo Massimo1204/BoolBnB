@@ -98,6 +98,11 @@
         }
     }
 }
+@media (min-width: 768px){
+    .create-container,.edit-container{
+        padding: 2rem 10vw !important;
+    }
+}
 div.show-img {
     height: 70vh;
 

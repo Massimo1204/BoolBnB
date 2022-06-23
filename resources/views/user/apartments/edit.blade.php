@@ -6,7 +6,7 @@
     </h1>
     <div class="container-fluid edit-container my-3 px-5">
         <div class="edit">
-            <div class="col-sm-12">
+            <div class="col-12">
                 <h6>
                     Le foto del tuo appartamento:
                 </h6>
@@ -45,8 +45,8 @@
             enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="row gy-sm-5 apartment">
-                <div class="col-sm-12">
+            <div class="row gy-sm-4 g-md-2 apartment">
+                <div class="col-12">
                     <label for="title">Titolo*</label>
                     <input class="form-control" type="text" name="title" id="title"
                         value="{{ old('title') ?? $apartment->title }}" required autocomplete="on" autofocus
@@ -57,7 +57,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-sm-12 mt-3">
+                <div class="col-12 mt-3">
                     <label for="image">Carica la foto cover:*</label>
                     <input type="file" name="image" id="image" value="{{ $apartment->image }}">
                     @error('image')
@@ -66,7 +66,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-sm-12">
+                <div class="col-12">
                     <label for="description">Descrizione*</label>
                     <textarea class="form-control" type="text" name="description" id="description" required autocomplete="on" autofocus
                         minlength="10">{{ old('description') ?? $apartment->description }}</textarea>
@@ -76,7 +76,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                <div class="col-12 col-md-6">
                     <label for="n_rooms">Numero di stanze:*</label>
                     <input type="number" name="n_rooms" id="n_rooms"
                         value="{{ old('n_rooms') ?? $apartment->n_rooms }}" required min="1">
@@ -86,7 +86,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                <div class="col-12 col-md-6">
                     <label for="n_bedrooms">Numero di stanze da letto:*</label>
                     <input type="number" name="n_bedrooms" id="n_bedrooms"
                         value="{{ old('n_bedrooms') ?? $apartment->n_bedrooms }}" required min="1">
@@ -96,7 +96,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                <div class="col-12 col-md-6">
                     <label for="n_beds">Numero di letti:*</label>
                     <input type="number" name="n_beds" id="n_beds" value="{{ old('n_beds') ?? $apartment->n_beds }}"
                         required min="1">
@@ -106,7 +106,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                <div class="col-12 col-md-6">
                     <label for="n_bathrooms">Numero di bagni:*</label>
                     <input type="number" name="n_bathrooms" id="n_bathrooms"
                         value="{{ old('n_bathrooms') ?? $apartment->n_bathrooms }}" required min="1">
@@ -116,7 +116,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                <div class="col-12 col-md-6">
                     <label for="guests">Numero massimo di ospiti:*</label>
                     <input type="number" name="guests" id="guests" value="{{ old('guests') ?? $apartment->guests }}"
                         required min="1">
@@ -127,7 +127,7 @@
                     @enderror
                 </div>
 
-                <div class="col-12 col-md-6 col-lg-4 col-xxl-3">
+                <div class="col-12 col-md-6">
                     <label for="price">Inserisci il prezzo a notte per ospite:* </label>
                     <input type="number" step="0.01" name="price" id="price"
                         value="{{ old('price') ?? $apartment->price }}" required min="1">
@@ -137,7 +137,7 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-12 col-md-6 col-lg-4 col-xxl-3 mb-2">
+                <div class="col-12 col-md-6">
                     <label for="square_meters">Inserisci il numero di metri quadrati: </label>
                     <input type="number" name="square_meters" id="square_meters"
                         value="{{ old('square_meters') ?? $apartment->square_meters }}">
