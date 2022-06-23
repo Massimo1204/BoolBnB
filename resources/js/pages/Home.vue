@@ -19,7 +19,7 @@
         </div>
         <div class="col-6 mt-3">
         <router-link :to="{name: 'AdvancedSearch'}" class="text-decoration-none d-flex justify-content-end ">
-            <button class="btn btn-primary">Ricerca avanzata</button>
+            <button class="btn btn-primary btn-sm">Ricerca avanzata</button>
         </router-link>
         </div>
     </div>
