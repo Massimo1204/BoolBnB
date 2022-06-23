@@ -28,9 +28,9 @@
             </div>
         </div>
         <div class="row mx-auto px-5 w-100">
-            <div class="px-3">
-            <h3>Map</h3>
-            <div class="map" id="map" ref="mapRef"></div>
+            <div class="col-12">
+                <h3>Map</h3>
+                <div class="map" id="map" ref="mapRef"></div>
             </div>
         </div>
 
@@ -39,7 +39,8 @@
                 <h3>Meet The Host</h3>
                 <div class="hostCard my-4 w-100 d-flex justify-content-between align-items-center p-3 rounded bg-white shadow">
                     <div class="d-flex justify-content-around align-items-center">
-                        <img class="rounded-circle" :src="(host.profile_picture.startsWith('https://')) ? host.profile_picture : '../../storage/'+ host.profile_picture" :alt="host.id">
+
+                        <img class="rounded-circle" :src="((host.profile_picture) && (host.profile_picture.startsWith('https://'))) ? host.profile_picture : '../../storage/'+ host.profile_picture" :alt="host.id">
                         <h4 class="m-0">{{host.first_name}} {{host.last_name}}</h4>
                     </div>
                     <button type="button" class="btn btn-outline-dark shadow-none" @click="showContact = !showContact">Contatta l'host</button>
@@ -76,7 +77,7 @@
                                             type="text"
                                             id="full_name"
                                             v-model="form.full_name"
-                                            class="form-control border-info"
+                                            class="form-control border-info shadow-none"
                                             :class="{ 'is-invalid': errors.full_name }"
                                             placeholder="Il tuo nome"
                                         />
@@ -91,7 +92,7 @@
                                             type="text"
                                             id="email"
                                             v-model="form.email"
-                                            class="form-control border-info"
+                                            class="form-control border-info shadow-none"
                                             :class="{ 'is-invalid': errors.email }"
                                             placeholder="La tua email"
                                         />
@@ -109,7 +110,7 @@
                                             id="text"
                                             v-model="form.text"
                                             rows="4"
-                                            class="form-control border-info md-textarea"
+                                            class="form-control border-info md-textarea shadow-none"
                                             :class="{ 'is-invalid': errors.text }"
                                             placeholder="Il tuo messaggio"></textarea>
                                         <div v-if="errors.text" class="invalid-feedback">
@@ -192,8 +193,6 @@ export default {
             this.map.addControl(new tt.FullscreenControl(), 'top-left');
             this.map.addControl(new tt.NavigationControl(), 'top-left');
             let marker =new tt.Marker().setLngLat([this.apartment.long, this.apartment.lat]).addTo(this.map);
-            let popup = new tt.Popup({offset: this.popupOffsets}).setHTML(`<b>${this.apartment.title}</b><br/>${this.apartment.address}. <br/> Dista ${this.apartment.distance.toFixed(2)} km dalla tua ricerca`);
-            marker.setPopup(popup).togglePopup();
             this.map = Object.freeze(this.map)
         },
         getInfo(){
@@ -217,7 +216,7 @@ export default {
             Axios.get('/api/apartment/host/'+id)
             .then(response=>{
                 this.host=response.data[0][0];
-                // console.log(this.host);
+                console.log(this.host);
             })
         },
         validateForm() {
