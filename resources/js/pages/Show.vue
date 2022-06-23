@@ -32,7 +32,7 @@
                         <img class="rounded-circle" :src="(host.profile_picture.startsWith('https://')) ? host.profile_picture : '../../storage/'+ host.profile_picture" :alt="host.id">
                         <h4 class="m-0">{{host.first_name}} {{host.last_name}}</h4>
                     </div>
-                    <button type="button" class="btn btn-outline-dark shadow-none">Contatta l'host</button>
+                    <button type="button" class="btn btn-outline-dark shadow-none" @click="showContact = true">Contatta l'host</button>
                 </div>
             </div>
         </div>
@@ -58,21 +58,21 @@
                         l'Host ti risponderà in poche ore per aiutarti.
                     </p>
                     <div class="row p-0">
-                        <div class="col-md-12 mb-md-0 mb-5 p-0">
+                        <div class="col-md-12 mb-md-0 mb-5 p-0 ">
                             <div class="row p-0">
                                 <div class="col-md-6 px-4">
-                                    <div class="md-form mb-0">
+                                    <div class="md-form mb-3">
                                         <input
                                             type="text"
                                             id="full_name"
                                             v-model="form.full_name"
                                             class="form-control border-info"
                                             :class="{ 'is-invalid': errors.full_name }"
+                                            placeholder="Il tuo nome"
                                         />
                                         <div v-if="errors.full_name" class="invalid-feedback">
                                             {{ errors.full_name }}
                                         </div>
-                                        <label v-else for="full_name" class="">Il tuo nome</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6 px-4 mb-3">
@@ -83,11 +83,11 @@
                                             v-model="form.email"
                                             class="form-control border-info"
                                             :class="{ 'is-invalid': errors.email }"
+                                            placeholder="La tua email"
                                         />
                                         <div v-if="errors.email" class="invalid-feedback">
                                             {{ errors.email }}
                                         </div>
-                                        <label v-else for="email">La tua email</label>
                                     </div>
                                 </div>
                             </div>
@@ -100,14 +100,14 @@
                                             v-model="form.text"
                                             rows="4"
                                             class="form-control border-info md-textarea"
-                                            :class="{ 'is-invalid': errors.text }"></textarea>
+                                            :class="{ 'is-invalid': errors.text }"
+                                            placeholder="Il tuo messaggio"></textarea>
                                         <div v-if="errors.text" class="invalid-feedback">
                                             {{ errors.text }}
                                         </div>
-                                        <label v-else for="text">Il tuo messaggio</label>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-center text-md-left m-3">
+                                <div class="d-flex justify-content-center my-3 p-0">
                                     <button class="btn btn-primary" @click="sendForm">
                                         Invia
                                     </button>
