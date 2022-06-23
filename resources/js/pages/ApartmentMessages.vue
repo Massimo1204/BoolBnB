@@ -91,15 +91,17 @@ div#messages{
     .my-title{
         color: rgb(1, 11, 95);
         font-weight: 600;
-        padding: 30px 0 10px 50px;
+        padding: 30px 0 10px 0;
+        margin-left: 15vw;
     }
     background-color: rgb(245, 248, 255);
     div.apartment-messages-container{
         border-top: 2px solid white;
         padding-top: 20px;
+        width: 75vw;
+        margin: 0 auto;
         div.apartment-messages-wrapper{
             width: 33%;
-            border-left: 1px solid black;
             height: calc(100vh - 187px);
             overflow-y: scroll;
             div.apartment-messages{
@@ -157,7 +159,7 @@ div#messages{
                 width: 97.5%;
                 padding: 20px 35px 10px 35px;
                 border-radius: 15px;
-                background-color: rgb(238, 242, 253);
+                background-color: rgb(219, 226, 245);
                 div.message-chat-content{
                     div.sender-details{
                     p{

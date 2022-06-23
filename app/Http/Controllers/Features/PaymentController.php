@@ -54,7 +54,9 @@ class PaymentController extends Controller
             $duration = $sponsorship->duration;
             $endDate = date('Y-m-d h:i:s', strtotime($today)+60*60*$duration);
             $apartment->sponsorships()->sync([$sponsorship->id => ['start_date' => $today, 'end_date' => $endDate]]);
-
+            $apartment->visible = 1;
+            $apartment->save();
+            
             return redirect()->route('apartment.show', compact('apartment'))->with('sponsor-success-message', 'Transazione eseguita con successo. Sponsorizzazione: ' . ucfirst($sponsorship->name));
         } else {
             $errorString = "";
