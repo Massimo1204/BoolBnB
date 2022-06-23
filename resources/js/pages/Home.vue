@@ -1,6 +1,6 @@
 <template>
 
-<div class="w-100">
+<div class="w-100 overflow-hidden">
     <div class="row px-5">
         <div class="col-6 search mt-2">
             <div class="search">
@@ -27,8 +27,11 @@
 		<div class="col-12">
 			<h1 class="mt-4">In evidenza</h1>
 		</div>
-        <SingleApartment v-for="(apartment,index) in sponsoredApartments" :key="'sponsored'+ index" :apartment="apartment" :isLoading="isLoading" />
-        <SingleApartment v-for="(apartment,index) in apartmentsSearch" :key="index" :apartment="apartment" :isLoading="isLoading" />
+        <div class="border-bottom border-primary row">
+            <SingleApartment v-for="(apartment,index) in sponsoredApartments" :key="'sponsored'+ index" :apartment="apartment" />
+        </div>
+
+        <SingleApartment v-for="(apartment,index) in apartmentsSearch" :key="index" :apartment="apartment" />
         <div class="col-12">
             <h1 v-show="apartmentsSearch==null"> Niente da mostrare</h1>
         </div>
@@ -61,12 +64,12 @@ export default {
         last_page:0,
         userSearch:"",
         apartmentsSearch:[],
-        isLoading: true,
+        // isLoading: true,
         }
     },
     methods:{
         getApartments(page){
-            this.isLoading = true;
+            // this.isLoading = true;
             axios.get(`http://localhost:8000/api/apartments?page=${page}`)
             .then(resp => {
                 this.apartments = resp.data.data;
@@ -74,7 +77,7 @@ export default {
                 this.pagination = {current_page : current_page, last_page : last_page};
                 this.last_page = last_page;
                 this.search();
-                this.isLoading = false;
+                // this.isLoading = false;
             })
             .catch((error)=>{
             console.warn(error);
