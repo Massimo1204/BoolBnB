@@ -14,7 +14,7 @@
                 type="text"
                 placeholder="In che città vuoi cercare?"
                 class="w-100"
-                v-model="addressToSearch"
+                v-model="addressToSearch" required
               />
             </div>
 
@@ -154,7 +154,7 @@ export default {
         )
         .then((response) => {
           this.filteredApartments=response.data.response.data;
-          // console.log(this.filteredApartments);
+          console.log(this.filteredApartments);
         })
         .catch((error) => {
           console.warn(error);
