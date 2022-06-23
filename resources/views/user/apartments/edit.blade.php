@@ -35,7 +35,8 @@
                         @if (str_starts_with($apartment->image, 'https://') || str_starts_with($apartment->image, 'http://'))
                             <img class="rounded-1 w-100" src="{{ $photo->image }}" alt="apartment img">
                         @else
-                            <img class="rounded-1 w-100" src="{{ asset('/storage') . '/' . $photo->image }}" alt="">
+                            <img class="rounded-1 w-100" src="{{ asset('/storage') . '/' . $photo->image }}"
+                                alt="">
                         @endif
                     </div>
                 @endforeach
@@ -222,43 +223,46 @@
 @section('footer-scripts')
     <script src="{{ asset('js/tipsAddress.js') }}"></script>
     <script defer>
-        const deleteForm = document.querySelector('.apartment-form-destroyer');
+        const deleteForms = document.querySelectorAll('.apartment-form-destroyer');
 
-        deleteForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // § blocchiamo l'invio del form
-            Swal.fire({
-                title: 'Sei Sicuro?',
-                text: "Non sarà più possibile tornare indietro!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, Elimina!'
-            }).then((result) => {
-                if (result.isConfirmed) {
+        deleteForms.forEach(singleForm => {
+            singleForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // § blocchiamo l'invio del form
+                Swal.fire({
+                    title: 'Sei Sicuro?',
+                    text: "Non sarà più possibile tornare indietro!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, Elimina!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
 
-                    this.submit();
-                }
+                        this.submit();
+                    }
+                })
             })
         });
 
-        const deletePicture = document.querySelector('.picture-form-destroyer');
+        const deletePictures = document.querySelectorAll('.picture-form-destroyer');
+        deletePictures.forEach(singlePicture => {
+            singlePicture.addEventListener('submit', function(event) {
+                event.preventDefault(); // § blocchiamo l'invio del form
+                Swal.fire({
+                    title: 'Sei Sicuro?',
+                    text: "Non sarà più possibile tornare indietro!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, Elimina!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
 
-        deletePicture.addEventListener('submit', function(event) {
-            event.preventDefault(); // § blocchiamo l'invio del form
-            Swal.fire({
-                title: 'Sei Sicuro?',
-                text: "Non sarà più possibile tornare indietro!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, Elimina!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-
-                    this.submit();
-                }
+                        this.submit();
+                    }
+                })
             })
         });
     </script>

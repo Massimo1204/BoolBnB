@@ -70,24 +70,27 @@
 @endsection
 
 @section('footer-scripts')
+    <script src="{{ asset('js/tipsAddress.js') }}"></script>
     <script defer>
-        const deleteForm = document.querySelector('.apartment-form-destroyer');
+        const deleteForms = document.querySelectorAll('.apartment-form-destroyer');
 
-        deleteForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // § blocchiamo l'invio del form
-            Swal.fire({
-                title: 'Sei Sicuro?',
-                text: "Non sarà più possibile tornare indietro!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, Elimina!'
-            }).then((result) => {
-                if (result.isConfirmed) {
+        deleteForms.forEach(singleForm => {
+            singleForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // § blocchiamo l'invio del form
+                Swal.fire({
+                    title: 'Sei Sicuro?',
+                    text: "Non sarà più possibile tornare indietro!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, Elimina!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
 
-                    this.submit();
-                }
+                        this.submit();
+                    }
+                })
             })
         });
     </script>
