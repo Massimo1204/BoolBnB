@@ -1,7 +1,7 @@
 <template>
 <div class="container">
-    <div class="row px-5">
-        <div class="col-6 search mt-2">
+    <div class="row px-5 px-md-3">
+        <div class="col-12 search">
             <div class="search">
                 <input type="text" placeholder=" " @keyup.enter="search" v-model="userSearch">
                 <div>
