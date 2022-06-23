@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="main">
         <Main/>
     </div>
 </template>
@@ -20,5 +20,13 @@
 
     h1,h2,h3,h4{
         color: $text-color;
+    }
+    .main{
+        background-image: url("https://wallpapercave.com/wp/wp4432767.jpg");
+        background-repeat: no-repeat;
+        background-size: 100%;
+        height: 92vh;
+        padding-top:1rem;
+        padding-bottom: 1rem;
     }
 </style>

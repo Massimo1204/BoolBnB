@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="w-100">
     <div class="row px-5">
         <div class="col-6 search mt-2">
             <div class="search">
@@ -31,28 +31,18 @@
 			<h1 >Normali</h1>
 		</div>
         <SingleApartment v-for="(apartment,index) in apartmentsSearch" :key="index" :apartment="apartment" />
-        <h1 v-show="apartmentsSearch==null"> Niente da mostrare</h1>
-
-        <div class="myPagination col-12 d-flex justify-content-between align-content-center my-3 px-sm-3" v-if="apartmentsSearch !== ''">
+        <div class="col-12">
+            <h1 v-show="apartmentsSearch==null"> Niente da mostrare</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="myPagination col-12 d-flex justify-content-between align-content-center my-3 px-sm-3 w-50 mx-auto" v-if="apartmentsSearch !== ''">
             <div v-if="pagination.current_page == 1"></div>
             <button class="btn btn-outline-primary shadow-none" @click="getApartments(pagination.current_page - 1)" v-if="pagination.current_page > 1">prev</button>
             <h5>Pagina: {{pagination.current_page}}</h5>
             <button class="btn btn-outline-primary shadow-none" @click="getApartments(pagination.current_page + 1)" v-if="pagination.current_page < pagination.last_page">next</button>
             <div v-if="pagination.current_page == last_page"></div>
         </div>
-        <!-- <nav>
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" href="" tabindex="-1" @click="getApartments(pagination.current_page - 1)" :class="pagination.current_page = 1 ? 'disabled' :''">Previous</a>
-                </li>
-                <li class="page-item active">
-                    <a class="page-link" href="">{{pagination.current_page}}</a>
-                </li>
-                <li class="page-item">      
-                    <a class="page-link" href="" @click="getApartments(pagination.current_page + 1)" :class="pagination.current_page = pagination.last_page ? 'disabled' :''">Next</a>
-                </li>
-            </ul>
-        </nav> -->
     </div>
 </div>
 </template>
@@ -194,43 +184,4 @@ $color: $primary;
             margin: 0;
         }
     }
-// ::selection {
-//     background: rgba(#fff, .2);
-// }
-// ::-moz-selection {
-//     background: rgba(#fff, .2);
-// }
-
-// html {
-//     box-sizing: border-box;
-//     -webkit-font-smoothing: antialiased;
-// }
-
-// * {
-//     box-sizing: inherit;
-//     &:before,
-//     &:after {
-//         box-sizing: inherit;
-//     }
-// }
-
-// Center & dribbble
-// body {
-//     min-height: 100vh;
-//     font-family: 'Mukta Malar', Arial;
-//     background: #F3628D;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     .dribbble {
-//         position: fixed;
-//         display: block;
-//         right: 24px;
-//         bottom: 24px;
-//         img {
-//             display: block;
-//             width: 76px;
-//         }
-//     }
-// }
 </style>

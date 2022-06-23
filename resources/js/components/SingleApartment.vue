@@ -27,9 +27,18 @@ props: ['apartment']
 
 <style scoped lang="scss">
 @import "../../sass/_variables.scss";
+.cardcontainer{
+    max-height: 450px;
+}
 .content{
     // max-height: 220px; 
     overflow: auto;
+}
+h2{
+    color: $primary;
+}
+p{
+    color: black;
 }
 .photo{
     height: 250px;

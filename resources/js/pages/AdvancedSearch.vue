@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="w-100">
     <div class="row">
       <div class="col-lg-3 col-md-12">
         <form>
