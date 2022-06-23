@@ -33,7 +33,6 @@
         </div>
         <div class="row mx-auto px-5 w-100" v-if="apartment.visible">
             <div class="col-sm-12 col-md-8 col-lg-7 mt-4">
-
                 <h3>Meet The Host</h3>
                 <div class="hostCard my-4 w-100 d-flex justify-content-between align-items-center p-3 rounded bg-white shadow">
                     <div class="d-flex justify-content-around align-items-center">
@@ -135,7 +134,8 @@
 import Axios from 'axios';
 import Details from '../components/Details.vue';
 import Services from '../components/Services.vue';
-import tt from '@tomtom-international/web-sdk-maps'
+import tt from '@tomtom-international/web-sdk-maps';
+import { isEmpty } from "lodash";
 import {APP_KEYMAPS} from "../key";
 import  ref  from 'vue'
 export default {
