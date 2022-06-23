@@ -21,7 +21,7 @@
 		<div class="col-12">
 			<h1 class="mt-4">In evidenza</h1>
 		</div>
-        <!-- <SingleApartment v-for="(apartment,index) in sponsoredApartments" :key="'sponsored'+ index" :apartment="apartment" /> -->
+        <SingleApartment v-for="(apartment,index) in sponsoredApartments" :key="'sponsored'+ index" :apartment="apartment" />
 		<div class="col-12">
 			<h1 >Normali</h1>
 		</div>
