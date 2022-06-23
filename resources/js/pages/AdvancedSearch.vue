@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-md-3 col-md-12">
+      <div class="col-lg-3 col-md-12">
         <form>
           <fieldset>
             <legend>SEARCH BnB</legend>
@@ -101,7 +101,7 @@
           </div>
         </form>
       </div>
-      <div class="col-md-9 col-md-12">
+      <div class="col-lg-9 col-md-12">
         <Maps  :filteredApartments="filteredApartments" />
       </div>
     </div>
