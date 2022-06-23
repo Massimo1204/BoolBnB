@@ -101,7 +101,7 @@ div#messages{
         width: 75vw;
         margin: 0 auto;
         div.apartment-messages-wrapper{
-            width: 33%;
+            width: 40%;
             height: calc(100vh - 187px);
             overflow-y: scroll;
             div.apartment-messages{
@@ -110,6 +110,7 @@ div#messages{
                 background-color: white;
                 margin: 0 20px 20px 20px;
                 border-radius: 30px;
+                box-shadow: 3px 5px rgb(248, 240, 240);
                 div.apartment-image-wrapper{
                     img.apartment-message-image{
                         width: 120px;
@@ -142,16 +143,18 @@ div#messages{
             }
         }
         div.apartment-chat{
-            width: 67%;
+            width: 60%;
             height: calc(100vh - 187px);
             overflow-y: scroll;
+            padding-right: 10px;
             div.info-message-wrapper{
                 height: 50vh;
                 display: flex;
                 justify-content: center;
                 h1.info-message{
                     align-self: center;
-                    color: rgb(182, 179, 179)
+                    color: rgb(182, 179, 179);
+                    text-align: center;
                 }
             }
             div.apartment-single-message{
@@ -184,26 +187,20 @@ div#messages{
             }
         }
     }
-    /* width */
     ::-webkit-scrollbar {
     width: 6px;
     }
-
-    /* Track */
     ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px grey; 
     border-radius: 9px;
     }
-    
-    /* Handle */
     ::-webkit-scrollbar-thumb {
     background: lightgrey; 
     border-radius: 9px;
     }
-
-    /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
     background: grey; 
     }
+
 }
 </style>
