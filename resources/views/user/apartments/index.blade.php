@@ -10,6 +10,15 @@
             )
         </script>
     @endif
+    @if (session('sponsor-success-message'))
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-success">
+                {{session('sponsor-success-message')}}
+            </div>
+        </div>
+    </div>
+    @endif
     <div class="add-apartment-jumbo">
         <div class="container">
             <div class="row">
