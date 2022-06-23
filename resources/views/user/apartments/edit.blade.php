@@ -207,8 +207,7 @@
         <div class="delete-button mt-2">
             @if (Auth::user()->id == $apartment->user_id)
                 <form action="{{ route('apartment.destroy', $apartment->id) }}" method="POST"
-                    class="apartment-form-destroyer"
-                    onclick="return confirm('Sei sicuro di voler eliminare l\'appartamento {{ $apartment->title }} ?' )">
+                    class="apartment-form-destroyer">
                     {{-- apartment-title="{{ $apartment->title }}" --}}
                     @csrf
                     @method('DELETE')
@@ -220,4 +219,25 @@
 @endsection
 @section('footer-scripts')
     <script src="{{ asset('js/tipsAddress.js') }}"></script>
+    <script defer>
+        const deleteForm = document.querySelector('.apartment-form-destroyer');
+
+        deleteForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // § blocchiamo l'invio del form
+            Swal.fire({
+                title: 'Sei Sicuro?',
+                text: "Non sarà più possibile tornare indietro!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Elimina!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    this.submit();
+                }
+            })
+        });
+    </script>
 @endsection
