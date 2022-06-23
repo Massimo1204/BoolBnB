@@ -12,17 +12,21 @@
                 </h6>
             </div>
             @if (session('deleted-message'))
-                <div class="mx-2 alert alert-success">
-                    {{ session('deleted-message') }}
-                </div>
+                <script>
+                    Swal.fire(
+                        'Eliminato!',
+                        'La foto è stata eliminata.',
+                        'success'
+                    )
+                </script>
             @endif
             {{-- @dd($apartment->pictures) --}}
             <div class="col-12 d-flex flex-wrap mb-4">
                 @foreach ($apartment->pictures as $photo)
                     <div class="col-4 p-1 position-relative">
                         <div class="delete position-absolute">
-                            <form action="{{ route('picture.destroy', $photo) }}" method="POST" class="picture-form-destroyer"
-                                onclick="return confirm('Sei sicuro di voler eliminare la seguente foto?')">
+                            <form action="{{ route('picture.destroy', $photo) }}" method="POST"
+                                class="picture-form-destroyer">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="rounded-1 delete">X</button>
@@ -148,7 +152,8 @@
                 </div>
                 <div class="col-2">
                     <label for="visible">Visibile </label>
-                    <input type="checkbox" name="visible" id="visible" @if ($apartment->visible == 1) checked @endif>
+                    <input type="checkbox" name="visible" id="visible"
+                        @if ($apartment->visible == 1) checked @endif>
                 </div>
                 <div class="col-2">
                     <label for="available">Disponibile </label>
@@ -179,7 +184,7 @@
                     <div class="service col-4">
                         <input class="form-check-input ms-2" type="checkbox" name="service[]"
                             value="{{ $service->id }}"
-                            {{ old('service') != null && in_array($service->id ,old('service')) ? 'checked' : ($apartment->services->contains($service) ? 'checked' : '') }}>
+                            {{ old('service') != null && in_array($service->id, old('service')) ? 'checked' : ($apartment->services->contains($service) ? 'checked' : '') }}>
                         <label for="categories">
                             {{ $service->name }}
                         </label>
@@ -223,6 +228,26 @@
         const deleteForm = document.querySelector('.apartment-form-destroyer');
 
         deleteForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // § blocchiamo l'invio del form
+            Swal.fire({
+                title: 'Sei Sicuro?',
+                text: "Non sarà più possibile tornare indietro!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Elimina!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    this.submit();
+                }
+            })
+        });
+
+        const deletePicture = document.querySelector('.picture-form-destroyer');
+
+        deletePicture.addEventListener('submit', function(event) {
             event.preventDefault(); // § blocchiamo l'invio del form
             Swal.fire({
                 title: 'Sei Sicuro?',
