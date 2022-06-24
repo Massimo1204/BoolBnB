@@ -1,10 +1,10 @@
 <template>
-    <div class="row" id="messages">
+    <div id="messages">
         <div class="col-12">
-            <h1 class="my-title text-uppercase">I tuoi messaggi</h1>
+            <h1 class="my-title text-uppercase m-0">I tuoi messaggi</h1>
         </div>
-        <div class="row apartment-messages-container d-flex">
-            <div class="col-xl-5 col-lg-6 col-md-12 apartment-messages-wrapper">
+        <div class="apartment-messages-container d-flex">
+            <div class="col-xl-5 col-lg-6 col-12 apartment-messages-wrapper">
                 <div class="d-flex flex-column apartment-messages" v-for="(apartment, index) in apartments" :key="'apartment' + index" @click="chooseApartment(index)">
                     <div class="d-flex">
                         <div class="apartment-image-wrapper">
@@ -44,8 +44,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-7 col-lg-6 apartment-chat">
-                <div v-if="apartmentIndex != null && isSmall == false">
+            <div class="col-xl-7 col-lg-6 apartment-chat" v-if="isSmall == false">
+                <div v-if="apartmentIndex != null">
                     <div class="apartment-single-message" v-for="(message, index) in apartments[apartmentIndex].messages" :key="'apartmentMessages' + index" >
                         <div class="message-chat-content">
                             <div class="sender-details">
@@ -104,30 +104,17 @@ export default {
             }else{
                 this.isShowing.splice(index, 1, false);
             }
-
             this.apartmentIndex = index;
             this.windowWidth = window.innerWidth;
-
-            if(this.windowWidth < 1000) {
-                this.isSmall = true;
-            }else{
-                this.isSmall = false;
-            }
-
-            // this.orderMessages(this.apartments[index].messages);
+            this.orderMessages(this.apartments[index].messages);
         },
         orderApartments(){
             this.apartments.sort(function(a, b){return b.messages.length - a.messages.length});
             this.createIsShowingArray();
         },
-        // orderMessages(messages){
-        //     messages.sort(function(a, b){
-        //     console.log(a.created_at);
-
-        //         return b.created_at - a.created_at});
-        //     console.log(messages);
-        //     return messages;
-        // },
+        orderMessages(messages){
+            messages.sort(function(a, b){return new Date(b.created_at) - new Date(a.created_at)});
+        },
         createIsShowingArray() {
             for (let index = 0; index < this.apartments.length; index++) {
                 this.isShowing[index] = false;
@@ -137,26 +124,42 @@ export default {
             let newDate =  date.slice(8, 10)+'/'+date.slice(5, 7)+'/'+date.slice(0, 4)+', '+date.slice(11,16);
             return newDate;
         },
+        checkWindowSize(){
+            if(window.innerWidth < 992) {
+                this.isSmall = true;
+            }else{
+                this.isSmall = false;
+            }
+        },  
     },
     created(){
         this.getApartmentMessages(this.$userId);
     },
+    mounted(){
+        this.checkWindowSize();
+        window.onresize = () => {
+            this.checkWindowSize();
+        }
+    }
 }
 </script>
 
 <style lang="scss" scoped>
 div#messages{
+    background-color: rgb(245, 248, 255);
     .my-title{
         color: rgb(1, 11, 95);
         font-weight: 600;
         padding: 30px 0 10px 30px;
     }
-    background-color: rgb(245, 248, 255);
     div.apartment-messages-container{
+        height: calc(100vh - 155.4px - 3rem);
         border-top: 2px solid white;
         padding-top: 20px;
+        @media screen and (max-width: 992px){
+            height: 100%;
+        }
         div.apartment-messages-wrapper{
-            height: calc(100vh - 187px);
             overflow-y: scroll;
             div.apartment-messages{
                 cursor: pointer;
@@ -165,6 +168,9 @@ div#messages{
                 margin: 0 20px 20px 20px;
                 border-radius: 30px;
                 box-shadow: 3px 5px rgb(248, 240, 240);
+                @media screen and (max-width: 992px){
+                    padding: 20px;
+                }
                 div.apartment-image-wrapper{
                     img.apartment-message-image{
                         width: 120px;
@@ -174,7 +180,7 @@ div#messages{
                     }
                 }
                 div.apartment-message-content{
-                    width: calc(100% - 150px);
+                    width: calc(100% - 120px);
                     padding-left: 20px;
                     .message-title{
                         color: rgb(1, 11, 95);
@@ -197,10 +203,8 @@ div#messages{
             }
         }
         div.apartment-chat{
-            height: calc(100vh - 187px);
             overflow-y: scroll;
             padding-right: 10px;
-            }
         }
     }
     div.info-message-wrapper{
@@ -208,17 +212,22 @@ div#messages{
         display: flex;
         justify-content: center;
         h1.info-message{
+            width: 80%;
             align-self: center;
             color: rgb(182, 179, 179);
             text-align: center;
         }
     }
     div.apartment-single-message{
-        margin: 20px auto 10px auto;
-        width: 97.5%;
+        margin: 0 auto 10px auto;
+        width: 96.8%;
         padding: 20px 35px 10px 35px;
         border-radius: 15px;
         background-color: rgb(219, 226, 245);
+        @media screen and (max-width: 992px){
+            width: 99%;
+            margin: 20px auto 10px auto;
+        }
         div.message-chat-content{
             div.sender-details{
             p{
@@ -244,6 +253,7 @@ div#messages{
                 }
             }
         }
+    }
     ::-webkit-scrollbar {
     width: 6px;
     }
