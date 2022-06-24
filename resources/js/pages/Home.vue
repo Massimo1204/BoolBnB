@@ -23,10 +23,13 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-6 mt-3">
-            <router-link :to="{name: 'AdvancedSearch'}" class="text-decoration-none d-flex justify-content-end ">
-                <button class="btn btn-primary btn-sm">Ricerca avanzata</button>
-            </router-link>
+            <div class="col-6 mt-3 d-flex justify-content-end">
+            
+                <button class="btn btn-primary btn-sm ">
+                    <router-link :to="{name: 'AdvancedSearch'}" class="text-decoration-none text-white">
+                        Ricerca avanzata
+                    </router-link>
+                </button>
             </div>
         </div>
         <div class="row px-5">
@@ -37,7 +40,7 @@
                 <SingleApartment v-for="(apartment,index) in sponsoredApartments" :key="'sponsored'+ index" :apartment="apartment" />
             </div>
             <SingleApartment v-for="(apartment,index) in apartmentsShow" :key="index" :apartment="apartment" />
-            <div class="col-12 nothing" :class="{'nothing' : apartmentsShow == '' }">
+            <div class="col-12" :class="{'nothing' : apartmentsShow == '' && sponsoredApartments == '' } ">
                 <h1 class="text-center text-primary" v-show="apartmentsShow == '' "> Niente da mostrare</h1>
             </div>
         </div>
