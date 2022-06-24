@@ -16,7 +16,7 @@ class ViewsTableSeeder extends Seeder
     {
         $apartment_ids = Apartment::pluck('id')->toArray();
 
-        for ($i = 0; $i < 1000; $i++) {
+        for ($i = 0; $i < 10000; $i++) {
             $newView = new View();
             $newView->apartment_id = $faker->randomElement($apartment_ids);
             $newView->ip_address = $faker->randomFloat();
