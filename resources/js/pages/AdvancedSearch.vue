@@ -102,7 +102,7 @@
                 type="button"
                 @click="getFilteredApartments()"
               >
-                SEARCH
+                Ricerca
               </button>
             </div>
           </div>
