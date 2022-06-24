@@ -1,7 +1,7 @@
 <template>
     <div class="MyContainer w-100">
         <div>
-            <div class="row mx-auto px-5 w-100" v-if="apartment.visible">
+            <div class="row mx-auto px-sm-1 px-md-5 w-100" v-if="apartment.visible">
                 <div class="pics position-relative col-12 mx-sm-auto d-flex gap-1">
                     <img :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" class="w-50 rounded h-100" alt="">
                     <div class="otherPics w-50 h-100 d-flex flex-column flex-wrap gap-1">
@@ -184,7 +184,7 @@ export default {
                 container: this.$refs.mapRef,
                 center: {lng: this.apartment.long , lat: this.apartment.lat},
                 zoom: 8,
-                minZoom: 8,
+                minZoom: 4,
 
             })
             this.map.addControl(new tt.FullscreenControl(), 'top-left');

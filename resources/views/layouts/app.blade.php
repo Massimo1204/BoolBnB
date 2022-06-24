@@ -31,7 +31,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm the-header">
             <div class="container">
 
                 <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
@@ -98,10 +98,19 @@
                             </li>
                         @else
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle border border-light rounded-pill my-2 shadow"
+                                <a class="nav-link dropdown-toggle border border-light rounded-circle my-2 shadow myNav-dropdown p-0"
                                     href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                    {{ ucfirst(Auth::user()->first_name) . ' ' . ucfirst(Auth::user()->last_name) }}
+                                    {{-- @dd(Auth::user()->profile_picture) --}}
+                                    @if (str_starts_with(Auth::user()->profile_picture, 'https://') || str_starts_with(Auth::user()->profile_picture, 'http://'))
+                                        <div class="PF-container rounded-circle">
+                                            <img class="rounded-circle" src="{{Auth::user()->profile_picture}}" alt="{{  ucfirst(Auth::user()->first_name) . ' ' . ucfirst(Auth::user()->last_name) }}">
+                                        </div>
+                                    @else
+                                        <div class="PF-container">
+                                            <img class="rounded-circle" src="{{ asset('/storage') . '/' . Auth::user()->profile_picture }}" alt="{{  ucfirst(Auth::user()->first_name) . ' ' . ucfirst(Auth::user()->last_name) }}">
+                                        </div>
+                                    @endif
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end border-0 shadow pt-3"
