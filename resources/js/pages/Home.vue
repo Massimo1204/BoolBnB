@@ -36,7 +36,7 @@
             <h1 v-show="apartmentsSearch==null"> Niente da mostrare</h1>
         </div>
     </div>
-    <div class="row">
+    <div class="row" v-if="( apartmentsSearch.length == 12 )">
         <div class="myPagination col-12 d-flex justify-content-between align-content-center my-3 px-sm-3 w-50 mx-auto" v-if="apartmentsSearch !== ''">
             <div v-if="pagination.current_page == 1"></div>
             <button class="btn btn-outline-primary shadow-none" @click="getApartments(pagination.current_page - 1)" v-if="pagination.current_page > 1">prev</button>
