@@ -33,11 +33,11 @@
             <div class="col-12">
                 <h1 class="mt-4" v-if="sponsoredApartments != ''">In evidenza</h1>
             </div>
-            <div class="border-bottom border-primary row">
+            <div class="border-bottom border-primary row mt-2">
                 <SingleApartment v-for="(apartment,index) in sponsoredApartments" :key="'sponsored'+ index" :apartment="apartment" />
             </div>
             <SingleApartment v-for="(apartment,index) in apartmentsShow" :key="index" :apartment="apartment" />
-            <div class="col-12">
+            <div class="col-12 nothing">
                 <h1 class="text-center" v-show="apartmentsShow == '' "> Niente da mostrare</h1>
             </div>
         </div>
@@ -226,7 +226,9 @@ $color: $primary;
 }
 .container-tips{
     // height: 300px;
+    
     ul{
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         background-color: white;
         z-index: 3;
         // padding: 1rem;
@@ -271,5 +273,8 @@ $color: $primary;
         line-height: 2.4rem;
         margin: 0;
     }
+}
+.nothing{
+    height: 50vh;
 }
 </style>
