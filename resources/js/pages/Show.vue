@@ -43,11 +43,11 @@
                         <img class="rounded-circle" :src="((host.profile_picture) && (host.profile_picture.startsWith('https://'))) ? host.profile_picture : '../../storage/'+ host.profile_picture" :alt="host.id">
                         <h4 class="m-0">{{host.first_name}} {{host.last_name}}</h4>
                     </div>
-                    <button type="button" class="btn btn-outline-dark shadow-none" @click="showContact = !showContact">Contatta l'host</button>
+                    <button type="button" class="btn btn-outline-dark shadow-none" @click="showMessage"><a class=" text-decoration-none" href="#message"> Contatta l'host</a></button>
                 </div>
             </div>
         </div>
-        <div v-if="showContact" class="contactContainer shadow border rounded my-4 mx-5">
+        <div v-if="showContact" class="contactContainer shadow border rounded my-4 mx-5" id="message">
             <section id="contacts" class="col-12 mx-auto px-2">
                 <div class="container">
                     <div
@@ -294,6 +294,11 @@ export default {
                 title: 'Messaggio inviato!',
             });
             this.alert = !this.alert
+        },
+        showMessage(){
+            this.showContact = !this.showContact
+            window.scrollTo(0, document.body.scrollHeight);
+
         },
     },
     created(){
