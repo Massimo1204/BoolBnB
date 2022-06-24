@@ -13,23 +13,23 @@
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-8 col-lg-7 mt-4">
-                    <h1>{{apartment.title}}</h1>
-                    <span id="apartment_address">{{apartment.address}}</span>
+                    <h1 class="text-primary">{{apartment.title}}</h1>
+                    <span id="apartment_address" class="text-dark">{{apartment.address}}</span>
                     <hr>
-                    <h3>Description</h3>
-                    <p>{{apartment.description}}</p>
+                    <h3 class="text-primary">Descrizione</h3>
+                    <p >{{apartment.description}}</p>
                 </div>
                 <div class="col-sm-12 col-md-8 col-lg-7 mt-3">
-                    <h3>Details</h3>
+                    <h3 class="text-primary">Dettagli</h3>
                     <Details :apartment="apartment"/>
-                    <h3 class="mt-5">Servizi</h3>
+                    <h3 class="mt-5 text-primary">Servizi</h3>
                     <Services :id="id"/>
                 </div>
             </div>
         </div>
         <div class="row mx-auto px-5 w-100 ">
             <div class="col-12">
-                <h3>Map</h3>
+                <h3 class="text-primary">Mappa</h3>
             </div>
             <div class="col-12 position-relative">
                 <div class="map" id="map" ref="mapRef"></div>
@@ -40,14 +40,14 @@
 
         <div class="row mx-auto px-5 w-100" v-if="apartment.visible">
             <div class="col-sm-12 col-md-8 col-lg-7 mt-4">
-                <h3>Meet The Host</h3>
+                <h3 class="text-primary">Contatta l'host</h3>
                 <div class="hostCard my-4 w-100 d-flex justify-content-between align-items-center p-3 rounded bg-white shadow">
                     <div class="d-flex justify-content-around align-items-center">
 
                         <img class="rounded-circle" :src="((host.profile_picture) && (host.profile_picture.startsWith('https://'))) ? host.profile_picture : '../../storage/'+ host.profile_picture" :alt="host.id">
-                        <h4 class="m-0">{{host.first_name}} {{host.last_name}}</h4>
+                        <h4 class="m-0 text-primary">{{host.first_name}} {{host.last_name}}</h4>
                     </div>
-                    <button type="button" class="btn btn-outline-dark shadow-none" @click="showMessage"><a class=" text-decoration-none" href="#message"> Contatta l'host</a></button>
+                    <button type="button" class="btn btn-outline-primary shadow-none host" @click="showMessage"><a class=" text-decoration-none" href="#message"> Contatta l'host</a></button>
                 </div>
             </div>
         </div>
@@ -416,6 +416,9 @@ export default {
   height: 28.99px;
   display: flex;
   justify-content: center;
+}
+.host:hover a{
+    color: white;
 }
 
 </style>

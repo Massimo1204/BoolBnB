@@ -31,14 +31,14 @@
         </div>
         <div class="row px-5">
             <div class="col-12">
-                <h1 class="mt-4" v-if="sponsoredApartments != ''">In evidenza</h1>
+                <h1 class="mt-4 text-primary" v-if="sponsoredApartments != ''">In evidenza</h1>
             </div>
             <div class="border-bottom border-primary row mt-2">
                 <SingleApartment v-for="(apartment,index) in sponsoredApartments" :key="'sponsored'+ index" :apartment="apartment" />
             </div>
             <SingleApartment v-for="(apartment,index) in apartmentsShow" :key="index" :apartment="apartment" />
             <div class="col-12 nothing">
-                <h1 class="text-center" v-show="apartmentsShow == '' "> Niente da mostrare</h1>
+                <h1 class="text-center text-primary" v-show="apartmentsShow == '' "> Niente da mostrare</h1>
             </div>
         </div>
         <div class="row" v-if="( apartmentsShow.length == 12 || pagination.current_page == last_page)">
