@@ -34,7 +34,6 @@
             <div class="col-12 position-relative">
                 <div class="map" id="map" ref="mapRef"></div>
                 <button class="btn btn-light position-absolute dark" @click="darkmode()"> <i class="fas fa-lightbulb"></i></button>
-
             </div>
         </div>
 
@@ -410,7 +409,7 @@ export default {
     width: 100%;
 }
 .dark{
-  top: 1rem;
+  top: 3rem;
   right: 1.5rem;
   width: 28.99px;
   height: 28.99px;

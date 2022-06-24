@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-column flex-wrap myCont">
+    <div class="d-flex flex-column flex-wrap myCont mb-4">
         <div class="includedService me-3" v-for="service,index in includedServices" :key="index">
             <h5>{{service.name}}</h5>
         </div>
@@ -53,12 +53,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .myCont{
-        height: 50vh;
-        // min-width: 490px;
-    }
-    @media(max-width: 767.98px) {
-        .myCont {
-            height: 60vh;
-        }}
+    // .myCont{
+    //     height: 50vh;
+    //     // min-width: 490px;
+    // }
+    // @media(max-width: 767.98px) {
+    //     .myCont {
+    //         height: 60vh;
+    //     }}
 </style>
