@@ -3,7 +3,7 @@
         <div class="col-12 my-title-wrapper">
             <h1 class="my-title text-uppercase m-0">I tuoi messaggi</h1>
         </div>
-        <div class="apartment-messages-container d-flex">
+        <div v-if="apartments.length != 0" class="apartment-messages-container d-flex">
             <div class="col-xl-5 col-lg-6 col-12 apartment-messages-wrapper">
                 <div class="d-flex flex-column apartment-messages" v-for="(apartment, index) in apartments" :key="'apartment' + index" @click="chooseApartment(index)">
                     <div class="d-flex">
@@ -71,6 +71,11 @@
                     <h1 class="info-message">Seleziona un appartamento per vedere i suoi messaggi</h1>
                 </div>
             </div>
+        </div>
+        <div v-else class="col-12 info-message-wrapper-big">
+            <h1 class="info-message">
+                Non hai ancora pubblicato un appartamento, non ci sono messaggi per te. 
+            </h1>
         </div>
     </div>
 </template>
@@ -160,7 +165,7 @@ div#messages{
         }
     }
     div.apartment-messages-container{
-        height: calc(100vh - 11vh - 2rem);
+        height: calc(100vh - 8vh - 2rem);
         // padding-top: 70.2px;
         @media screen and (max-width: 992px){
             height: 100%;
@@ -215,6 +220,7 @@ div#messages{
             padding: 70.2px 0 10px 0;
         }
     }
+    div.info-message-wrapper-big,
     div.info-message-wrapper{
         height: 25vh;
         display: flex;
@@ -226,6 +232,10 @@ div#messages{
             text-align: center;
         }
     }
+    div.info-message-wrapper-big{
+        height: 90vh;
+    }
+
     div.apartment-single-message{
         margin: 10px auto 10px auto;
         width: 96.8%;

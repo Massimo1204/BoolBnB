@@ -32,6 +32,17 @@
             </div>
         </div>
     </div>
+    @if (count($apartments) == 0)
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="text-center mt-5" style="color: grey">
+                        Non ci sono appartamenti
+                    </h1>
+                </div>
+            </div>
+        </div>
+    @endif
     @if ($apartments->total())
         <div class="container dashboardContainer">
             <div class="row py-5 justify-content-between g-3">
