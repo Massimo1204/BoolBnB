@@ -22,6 +22,7 @@
       <h1 class="text-center text-primary" v-if="filterApartmentsDistance == '' && lookedFor == true "> Nessun appartamento nelle vicinanze da mostrare</h1>
     </div>
   <!-- </div> -->
+  <button class="btn btn-light position-absolute dark" @click="darkmode()"> <i class="fas fa-lightbulb"></i></button>
 </div>
 </template>
 
@@ -50,7 +51,8 @@ export default {
         right: [-25, -35]
       },
       apartments:[],
-      lookedFor:false
+      lookedFor:false,
+      mapStyle:"https://api.tomtom.com/style/1/style/22.2.1-9/?map=2/basic_street-light",
       
     }
   },
@@ -75,6 +77,7 @@ export default {
         center: this.center,
         zoom: this.zoom,
         minZoom: this.minZoom,
+        style: this.mapStyle,
 
       })
       this.map.addControl(new tt.FullscreenControl(), 'top-left');
@@ -88,6 +91,15 @@ export default {
           });
         }
     },
+    darkmode(){
+      if(this.mapStyle=="https://api.tomtom.com/style/1/style/22.2.1-9/?map=2/basic_street-light"){
+        this.mapStyle="https://api.tomtom.com/style/1/style/20.4.5-*/?map=basic_night&poi=poi_main";
+      }
+      else{
+        this.mapStyle="https://api.tomtom.com/style/1/style/22.2.1-9/?map=2/basic_street-light"
+      }
+      this.initializeMap()
+    }
   },
   watch:{
     filteredApartments(){
@@ -123,7 +135,7 @@ export default {
         });
         // console.log(apartmentDistance);
       return apartmentDistance;
-    }
+    },
   }
 }
 </script>
@@ -170,5 +182,12 @@ export default {
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-
+.dark{
+  top: 1rem;
+  right: 1rem;
+  width: 28.99px;
+  height: 28.99px;
+  display: flex;
+  justify-content: center;
+}
 </style>
