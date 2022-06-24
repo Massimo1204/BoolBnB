@@ -26,7 +26,13 @@ class ApartmentController extends Controller
 
     public function statsApartment($id){
         $apartments = Apartment::with('views')->with('messages')->where('id',$id)->get();
-        return response()->json($apartments);
+        $apartmentsViews = Apartment::with('views')->get();
+        $totViews = 0;
+        foreach ($apartmentsViews as $apartmentViews){
+            $totViews = $totViews + count($apartmentViews['views']);
+        }
+        $mediaViews = $totViews / count(Apartment::all());
+        return response()->json([$apartments,$mediaViews]);
     }
 
     public function search(Request $request)
