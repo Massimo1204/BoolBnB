@@ -37,6 +37,5 @@ Route::namespace('Api')->group( function () {
     Route::post('/message', 'MessageController@store');
     Route::get('/apartment/messages/{user}', 'MessageController@getApartmentMessages');
     Route::get('/sponsored/apartments', 'ApartmentController@getSponsored');
-
 });
 

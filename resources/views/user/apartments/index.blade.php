@@ -62,7 +62,7 @@
                         </div>
                         <div class="me-2">
                             <a type="button" class="btn btn-success"
-                                href="{{ route('sponsorship.index', $apartment) }}">sponsorizza</a>
+                                href="{{ route('sponsorship.index', $apartment) }}">Sponsorizza</a>
                         </div>
                         <form action="{{ route('apartment.destroy', $apartment->id) }}" method="POST"
                             class="apartment-form-destroyer me-2" apartment-title="{{ $apartment->title }}">
