@@ -37,7 +37,7 @@
                 <SingleApartment v-for="(apartment,index) in sponsoredApartments" :key="'sponsored'+ index" :apartment="apartment" />
             </div>
             <SingleApartment v-for="(apartment,index) in apartmentsShow" :key="index" :apartment="apartment" />
-            <div class="col-12 nothing">
+            <div class="col-12 nothing" :class="{'nothing' : apartmentsShow == '' }">
                 <h1 class="text-center text-primary" v-show="apartmentsShow == '' "> Niente da mostrare</h1>
             </div>
         </div>
@@ -96,7 +96,7 @@ export default {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         },
         search(){
-            if(this.userSearch != ""){
+            if(this.userSearch != "" && this.userSearch.length > 3){
                 console.log(this.tips[0]);
                 axios
                 .get('http://localhost:8000/api/apartment?address='+ this.userSearch.replace(/ /g,"%20"))
