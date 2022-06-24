@@ -390,8 +390,8 @@ export default {
         }
     }
 .map {
-  height: 40vh;
-  width: 100%;
+    height: 40vh;
+    width: 100%;
 }
 
 </style>

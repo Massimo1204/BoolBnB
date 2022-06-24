@@ -1,11 +1,17 @@
 <template>
     <div class="container-fluid w-100">
+        <h2 class="p-2 bold">{{apartment.title}}</h2>
+        <p class="p-2 text-success" v-if="apartmentMediaViews > mediaViews">Complimenti il tuo annuncio ha un numero di visualizzazioni totali di {{apartmentMediaViews}}, maggiore rispetto alla media di {{Math.floor(mediaViews)}} visualizzazioni</p>
+        <div v-else>
+            <p class="p-2 text-danger">Attenzione il tuo annuncio ha un numero di visualizzazioni totali di {{apartmentMediaViews}}, minore rispetto alla media di {{Math.floor(mediaViews)}} visualizzazioni.</p>
+            <p class="p-2"> Ti consigliamo di attivare la sponsorizzazione del tuo annuncio per aumentare le tue visualizzazioni <a class="btn btn-sm btn-primary ms-3" :href="'http://127.0.0.1:8000/sponsorship/' + apartment.id">Sponsorizza</a></p>
+        </div>
         <div class="my-chart p-5">
-            <h3 class="text-center mb-4">Views negli ultimi 12 mesi</h3>
+            <h5 class="text-center mb-4">Visualizzazioni negli ultimi 12 mesi</h5>
             <LineChart datasetIdKey="Views" :data="viewsArray" color="blue" :labelMonth="labelMonth" />
         </div>
         <div class="my-chart p-5">
-            <h3 class="text-center mb-4">Messaggi ricevuti negli ultimi 12 mesi</h3>
+            <h5 class="text-center mb-4">Messaggi ricevuti negli ultimi 12 mesi</h5>
             <LineChart datasetIdKey="Messaggi" :data="messagesArray" color="black" :labelMonth="labelMonth" />
         </div>
     </div>
@@ -27,6 +33,8 @@ export default {
             messages: [],
             messagesArray: [],
             labelMonth: [],
+            mediaViews : 0,
+            apartmentMediaViews : 0,
 
         }
     },
@@ -34,10 +42,14 @@ export default {
         getApartmentStatistics(id) {
             axios.get('http://127.0.0.1:8000/api/apartments/' + id)
                 .then((result) => {
-                    this.apartment = result.data;
-                    this.views = result.data[0].views;
+                    this.apartment = result.data[0][0];
+                    this.views = result.data[0][0].views;
+                    this.mediaViews = result.data[1];
+                    this.apartmentMediaViews = result.data[0][0].views.length;
+                    console.log(this.mediaViews);
+                    console.log(this.apartmentMediaViews);
                     this.getViewsArray(this.views);
-                    this.messages = result.data[0].messages;
+                    this.messages = result.data[0][0].messages;
                     this.getMessagesArray(this.messages);
                 }).catch((error) => {
                     console.warn(error);

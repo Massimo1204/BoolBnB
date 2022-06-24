@@ -16,7 +16,7 @@ class MessagesTableSeeder extends Seeder
     {
         $apartment_ids = Apartment::pluck('id')->toArray();
 
-        for ($i = 0; $i < 1000; $i++) {
+        for ($i = 0; $i < 10000; $i++) {
             $newMessage = new Message();
             $newMessage->apartment_id = $faker->randomElement($apartment_ids);
             $newMessage->text = $faker->sentence();

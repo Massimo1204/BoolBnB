@@ -21,8 +21,8 @@
     @endif
     <div class="add-apartment-jumbo">
         <div class="container">
-            <div class="row">
-                <div class="col-12 py-5 d-flex align-items-center text-white justify-content-between">
+            <div class="row justify-content-center">
+                <div class="col-12 px-3 py-5 d-flex align-items-center text-white justify-content-between add-apartment-cont">
                     <div class="title-add-apartment">
                         <h2 class="text-white">BoolBnb - Host</h2>
                         <p>Aggiungi nuovi annunci o gestisci quelli già presenti</p>
@@ -33,10 +33,10 @@
         </div>
     </div>
     @if ($apartments->total())
-        <div class="container py-5">
-            <div class="row py-5 justify-content-between">
+        <div class="container dashboardContainer">
+            <div class="row py-5 justify-content-between g-3">
                 @foreach ($apartments as $apartment)
-                    <div class="col-6 d-flex justify-content-between my-apartments">
+                    <div class="col-12 col-lg-6 d-flex justify-content-between my-apartments">
                         <div class="apartment-img">
                             <a href="{{url('/apartment/'.$apartment->id)}}">
                                 @if (str_starts_with($apartment->image, 'https://') || str_starts_with($apartment->image, 'http://'))
@@ -46,12 +46,12 @@
                                 @endif
                             </a>
                         </div>
-                        <div class="apartment-info">
+                        <div class="apartment-info overflow-hidden">
                             <h3>{{ $apartment->title }}</h3>
                             <h5>{{ $apartment->address }}</h5>
                         </div>
                     </div>
-                    <div class="col-6 d-flex justify-content-start align-items-start p-5">
+                    <div class="col-12 col-lg-6 d-flex justify-content-around align-items-center px-2 mb-4">
                         <div class="btn btn-primary me-2">
                             <a class="text-white text-decoration-none"
                                 href="{{ route('apartment.edit', $apartment) }}">Modifica</a>
@@ -62,7 +62,7 @@
                         </div>
                         <div class="me-2">
                             <a type="button" class="btn btn-success"
-                                href="{{ route('sponsorship.index', $apartment) }}">Attiva sponsorizzazione</a>
+                                href="{{ route('sponsorship.index', $apartment) }}">sponsorizza</a>
                         </div>
                         <form action="{{ route('apartment.destroy', $apartment->id) }}" method="POST"
                             class="apartment-form-destroyer me-2" apartment-title="{{ $apartment->title }}">
@@ -72,6 +72,9 @@
                             <button type="submit" class="btn btn-danger text-white">Elimina</a>
                         </form>
                     </div>
+                    @if (!$loop->last)
+                        <hr> 
+                    @endif
                 @endforeach
             </div>
         </div>
