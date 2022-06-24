@@ -184,7 +184,7 @@ export default {
                 container: this.$refs.mapRef,
                 center: {lng: this.apartment.long , lat: this.apartment.lat},
                 zoom: 8,
-                minZoom: 8,
+                minZoom: 4,
 
             })
             this.map.addControl(new tt.FullscreenControl(), 'top-left');
