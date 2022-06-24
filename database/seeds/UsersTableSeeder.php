@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
         $admin->password = Hash::make('admin');
         $admin->email = "admin@admin.admin";
         $admin->birth_date = $faker->date();
-        $admin->profile_picture = "https://cdn2.vectorstock.com/i/1000x1000/13/76/icon-of-user-avatar-for-web-site-or-mobile-vector-4031376.jpg";
+        $admin->profile_picture = "https://media.istockphoto.com/vectors/user-icon-admin-profile-pictogram-vector-id1327656409?b=1&k=20&m=1327656409&s=170667a&w=0&h=a8rGhCe2dgUHDa_sw38uR9v_qvyTteXrWP22BOKRViI=q";
         $admin->save();
 
         $userQuery = Http::get('https://api.unsplash.com/search/photos?client_id='.env("APP_KEYHOUSE").'&&query=portrait-photography');

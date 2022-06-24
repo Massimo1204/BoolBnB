@@ -1,5 +1,5 @@
 <template>
-    <div class="main py-md-4">
+    <div class="main p-3">
         <Main/>
     </div>
 </template>
@@ -27,7 +27,7 @@
         background-size: cover;
         background-position-y: center;
         background-position-x:right;
-        height: 92vh;
+        height: calc(100vh - 90.75px);
         // padding-top:1rem;
         // padding-bottom: 1rem;
     }
