@@ -19,7 +19,7 @@
             @csrf
             <section>
                 <label for="amount">
-                    <span class="input-label">Amount</span>
+                    <span class="input-label" readonly>Amount</span>
                     <div class="input-wrapper amount-wrapper">
                         <input readonly id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="{{$amount}}">
                     </div>
