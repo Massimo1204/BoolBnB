@@ -31,7 +31,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm the-header">
             <div class="container">
 
                 <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">

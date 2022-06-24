@@ -18,6 +18,7 @@ export default {
     border-radius: 15px;
     padding: 0;
     min-width: 375px;
+    height: 85.5vh;
 }
 
 </style>
