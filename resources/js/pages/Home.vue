@@ -4,7 +4,7 @@
     <div class="row px-5">
         <div class="col-6 search mt-2">
             <div class="search">
-                <input type="text" placeholder=" " @keyup.enter="search" v-model="userSearch">
+                <input type="text" placeholder=" " @keyup="getTipsAddress" @keyup.enter="search" v-model="userSearch" required> 
                 <div>
                     <svg>
                         <use xlink:href="#path"></use>
@@ -16,6 +16,9 @@
                     <path d="M32.9418651,-20.6880772 C37.9418651,-20.6880772 40.9418651,-16.6880772 40.9418651,-12.6880772 C40.9418651,-8.68807717 37.9418651,-4.68807717 32.9418651,-4.68807717 C27.9418651,-4.68807717 24.9418651,-8.68807717 24.9418651,-12.6880772 C24.9418651,-16.6880772 27.9418651,-20.6880772 32.9418651,-20.6880772 L32.9418651,-29.870624 C32.9418651,-30.3676803 33.3448089,-30.770624 33.8418651,-30.770624 C34.08056,-30.770624 34.3094785,-30.6758029 34.4782612,-30.5070201 L141.371843,76.386562" transform="translate(83.156854, 22.171573) rotate(-225.000000) translate(-83.156854, -22.171573)"></path>
                 </symbol>
             </svg>
+            <ul class="list-group " id="results" v-for="(result,i) in results" :key="i" >
+                <li class="list-group-item active"  v-if="result != '' && userSearch != ''" @click="passAddress(result)">{{result}}</li>
+            </ul>
         </div>
         <div class="col-6 mt-3">
         <router-link :to="{name: 'AdvancedSearch'}" class="text-decoration-none d-flex justify-content-end ">
@@ -31,12 +34,12 @@
             <SingleApartment v-for="(apartment,index) in sponsoredApartments" :key="'sponsored'+ index" :apartment="apartment" />
         </div>
 
-        <SingleApartment v-for="(apartment,index) in apartmentsSearch" :key="index" :apartment="apartment" />
+        <SingleApartment v-for="(apartment,index) in apartmentsShow" :key="index" :apartment="apartment" />
         <div class="col-12">
-            <h1 v-show="apartmentsSearch==null"> Niente da mostrare</h1>
+            <h1 class="text-center" v-show="apartmentsShow == '' "> Niente da mostrare</h1>
         </div>
     </div>
-    <div class="row" v-if="( apartmentsSearch.length == 12 || pagination.current_page == last_page)">
+    <div class="row" v-if="( apartmentsShow.length == 12 || pagination.current_page == last_page)">
         <div class="myPagination col-12 d-flex justify-content-between align-content-center my-3 px-sm-3 w-50 mx-auto" v-if="apartmentsSearch !== ''">
             <div v-if="pagination.current_page == 1"></div>
             <button class="btn btn-outline-primary shadow-none" @click="getApartments(pagination.current_page - 1)" v-if="pagination.current_page > 1">prev</button>
@@ -50,6 +53,7 @@
 
 <script>
 import SingleApartment from '../components/SingleApartment.vue';
+import {APP_KEYMAPS} from "../key";
 
 export default {
     name:"home",
@@ -59,11 +63,14 @@ export default {
     data(){
         return{
         apartments:[],
+        apartmentsShow:[],
 		sponsoredApartments:[],
         pagination:{},
         last_page:0,
         userSearch:"",
         apartmentsSearch:[],
+        tips:[],
+        results:[],
         // isLoading: true,
         }
     },
@@ -76,7 +83,7 @@ export default {
                 const { current_page, last_page } = resp.data;
                 this.pagination = {current_page : current_page, last_page : last_page};
                 this.last_page = last_page;
-                this.search();
+                this.apartmentsShow=this.apartments;
                 // this.isLoading = false;
             })
             .catch((error)=>{
@@ -86,11 +93,13 @@ export default {
         },
         search(){
             if(this.userSearch != ""){
+                console.log(this.tips[0]);
                 axios
-                .get('http://localhost:8000/api/apartment?address='+ this.userSearch.replace(/ /g,"%"))
+                .get('http://localhost:8000/api/apartment?address='+ this.userSearch.replace(/ /g,"%20"))
                 .then(resp =>{
                     this.apartmentsSearch = resp.data.apartmentFiltered;
                     console.log(this.apartmentsSearch);
+                    this.apartmentsShow=this.apartmentsSearch;
                 })
                 .catch((error)=>{
                     console.warn(error);
@@ -99,7 +108,7 @@ export default {
                 this.userSearch="";
             }
             else{
-                this.apartmentsSearch = this.apartments;
+                this.apartmentsShow = this.apartments;
             }
         },
 		getSponsoredApartments(){
@@ -113,7 +122,28 @@ export default {
 				}).catch((error)=>{
 					console.warn(error);
 				})
-		}
+		},
+        getTipsAddress(){
+            if (this.userSearch != '') {
+                axios
+                    .get('https://api.tomtom.com/search/2/search/'+ this.userSearch.replace(/ /g,"%20") + '.json?countrySet=IT&lat=37.337&lon=-121.89&extendedPostalCodesFor=Str&minFuzzyLevel=1&maxFuzzyLevel=2&view=Unified&relatedPois=off&key=' + APP_KEYMAPS + '&countrySet=Italia')
+                    .then(resp =>{
+                        this.tips = resp.data.results;
+                        for (let index = 0; index < 5; index++) {
+                            if(this.tips[index]["address"]["freeformAddress"] != undefined && this.tips[index]["address"]["countryCode"] != undefined ){
+                                this.results[index]=this.tips[index]["address"]["freeformAddress"] + " " + this.tips[index]["address"]["countryCode"];
+                            }                
+                        }
+                    })
+                    .catch((error)=>{
+                        console.warn(error);
+                    })
+            }
+        },
+        passAddress(address){
+            this.userSearch=address;
+            this.search();
+        }
     },
     created(){
         this.getApartments(1);
