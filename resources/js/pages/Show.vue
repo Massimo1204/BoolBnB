@@ -16,11 +16,11 @@
                     <h1>{{apartment.title}}</h1>
                     <span id="apartment_address">{{apartment.address}}</span>
                     <hr>
-                    <h3>Description</h3>
+                    <h3>Descrizione</h3>
                     <p>{{apartment.description}}</p>
                 </div>
                 <div class="col-sm-12 col-md-8 col-lg-7 mt-3">
-                    <h3>Details</h3>
+                    <h3>Dettagli</h3>
                     <Details :apartment="apartment"/>
                     <h3 class="mt-5">Servizi</h3>
                     <Services :id="id"/>
@@ -29,14 +29,14 @@
         </div>
         <div class="row mx-auto px-5 w-100">
             <div class="col-12">
-                <h3>Map</h3>
+                <h3>Mappa</h3>
                 <div class="map" id="map" ref="mapRef"></div>
             </div>
         </div>
 
         <div class="row mx-auto px-5 w-100" v-if="apartment.visible">
             <div class="col-sm-12 col-md-8 col-lg-7 mt-4">
-                <h3>Meet The Host</h3>
+                <h3>Meet the Host</h3>
                 <div class="hostCard my-4 w-100 d-flex justify-content-between align-items-center p-3 rounded bg-white shadow">
                     <div class="d-flex justify-content-around align-items-center">
 
