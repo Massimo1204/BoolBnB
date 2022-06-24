@@ -153,7 +153,7 @@ div#messages{
         padding: 30px 0 10px 30px;
     }
     div.apartment-messages-container{
-        height: calc(100vh - 155.4px - 3rem);
+        height: calc(100vh - 11vh - 83.2px - 2rem);
         border-top: 2px solid white;
         padding-top: 20px;
         @media screen and (max-width: 992px){

@@ -27,7 +27,7 @@
         background-size: cover;
         background-position-y: center;
         background-position-x:right;
-        height: calc(100vh - 90.75px);
+        height: 89vh;
         // padding-top:1rem;
         // padding-bottom: 1rem;
     }
