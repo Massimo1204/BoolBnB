@@ -31,7 +31,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm the-header">
+        <nav class="navbar navbar-expand-md navbar-light the-header">
             <div class="container">
 
                 <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
@@ -41,11 +41,11 @@
                         <li>
 
                             @if (!Auth::check())
-                                <a class="navbar-brand" href="{{ url('/') }}">
+                                <a class="navbar-brand my-drop-login rounded-pill py-1 px-3" href="{{ url('/') }}">
                                     BoolBnB
                                 </a>
                             @else
-                                <a class="navbar-brand" href="{{ url('/') }}">
+                                <a class="navbar-brand my-drop-login rounded-pill py-1 px-3" href="{{ url('/') }}">
                                     BoolBnB
                                 </a>
                             @endif
@@ -80,13 +80,13 @@
                         @guest
 
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle border border-light rounded-pill my-2 shadow"
+                                <a class="nav-link dropdown-toggle border border-light rounded-pill my-drop-login"
                                     href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     Area Riservata
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end border-0 shadow pt-3 position-absolute"
+                                <div class="dropdown-menu dropdown-menu-end border-0 my-drop-login mt-2 pt-3 position-absolute"
                                     aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('login') }}">
                                         {{ __('Login') }}
@@ -98,22 +98,22 @@
                             </li>
                         @else
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle border border-light rounded-circle my-2 shadow myNav-dropdown p-0"
+                                <a class="nav-link dropdown-toggle border border-light rounded-pill myNav-dropdown"
                                     href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     {{-- @dd(Auth::user()->profile_picture) --}}
                                     @if (str_starts_with(Auth::user()->profile_picture, 'https://') || str_starts_with(Auth::user()->profile_picture, 'http://'))
-                                        <div class="PF-container rounded-circle">
-                                            <img class="rounded-circle" src="{{Auth::user()->profile_picture}}" alt="{{  ucfirst(Auth::user()->first_name) . ' ' . ucfirst(Auth::user()->last_name) }}">
-                                        </div>
+
+                                        {{Auth::user()->first_name}} {{Auth::user()->last_name}} <img class=" rounded-circle" src="{{Auth::user()->profile_picture}}" alt="{{  ucfirst(Auth::user()->first_name) . ' ' . ucfirst(Auth::user()->last_name) }}">
+
                                     @else
-                                        <div class="PF-container">
-                                            <img class="rounded-circle" src="{{ asset('/storage') . '/' . Auth::user()->profile_picture }}" alt="{{  ucfirst(Auth::user()->first_name) . ' ' . ucfirst(Auth::user()->last_name) }}">
-                                        </div>
+
+                                        {{Auth::user()->first_name}} {{Auth::user()->last_name}} <img class=" rounded-circle"  src="{{ asset('/storage') . '/' . Auth::user()->profile_picture }}" alt="{{  ucfirst(Auth::user()->first_name) . ' ' . ucfirst(Auth::user()->last_name) }}">
+
                                     @endif
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end border-0 shadow pt-3"
+                                <div class="dropdown-menu dropdown-menu-end border-0 my-drop-login pt-3"
                                     aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{url('/apartment/messages/1')}}">
                                         {{ __('Messaggi') }}

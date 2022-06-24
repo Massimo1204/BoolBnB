@@ -27,10 +27,15 @@
                 </div>
             </div>
         </div>
-        <div class="row mx-auto px-5 w-100">
-            <div class="col-12">
+        <div class="row mx-auto px-5 w-100 ">
+
+            <div class="col-12 position-relative">
+
                 <h3>Mappa</h3>
+
                 <div class="map" id="map" ref="mapRef"></div>
+                <button class="btn btn-light position-absolute dark" @click="darkmode()"> <i class="fas fa-lightbulb"></i></button>
+
             </div>
         </div>
 
@@ -169,6 +174,8 @@ export default {
             type: "",
             alert: false,
             alertMessage: "",
+            mapStyle:"https://api.tomtom.com/style/1/style/22.2.1-9/?map=2/basic_street-light",
+
         };
     },
     computed: {
@@ -185,6 +192,7 @@ export default {
                 center: {lng: this.apartment.long , lat: this.apartment.lat},
                 zoom: 8,
                 minZoom: 4,
+                style: this.mapStyle,
 
             })
             this.map.addControl(new tt.FullscreenControl(), 'top-left');
@@ -300,6 +308,15 @@ export default {
             window.scrollTo(0, document.body.scrollHeight);
 
         },
+        darkmode(){
+            if(this.mapStyle=="https://api.tomtom.com/style/1/style/22.2.1-9/?map=2/basic_street-light"){
+                this.mapStyle="https://api.tomtom.com/style/1/style/20.4.5-*/?map=basic_night&poi=poi_main";
+            }
+            else{
+                this.mapStyle="https://api.tomtom.com/style/1/style/22.2.1-9/?map=2/basic_street-light"
+            }
+            this.initializeMap()
+        }
     },
     created(){
         this.getInfo();
@@ -392,6 +409,14 @@ export default {
 .map {
     height: 40vh;
     width: 100%;
+}
+.dark{
+  top: 1rem;
+  right: 1.5rem;
+  width: 28.99px;
+  height: 28.99px;
+  display: flex;
+  justify-content: center;
 }
 
 </style>
