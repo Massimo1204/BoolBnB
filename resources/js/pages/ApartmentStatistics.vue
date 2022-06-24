@@ -1,11 +1,12 @@
 <template>
     <div class="container-fluid w-100">
+        <h2 class="p-2 bold">{{apartment[0].title}}</h2>
         <div class="my-chart p-5">
-            <h3 class="text-center mb-4">Views negli ultimi 12 mesi</h3>
+            <h5 class="text-center mb-4">Views negli ultimi 12 mesi</h5>
             <LineChart datasetIdKey="Views" :data="viewsArray" color="blue" :labelMonth="labelMonth" />
         </div>
         <div class="my-chart p-5">
-            <h3 class="text-center mb-4">Messaggi ricevuti negli ultimi 12 mesi</h3>
+            <h5 class="text-center mb-4">Messaggi ricevuti negli ultimi 12 mesi</h5>
             <LineChart datasetIdKey="Messaggi" :data="messagesArray" color="black" :labelMonth="labelMonth" />
         </div>
     </div>
