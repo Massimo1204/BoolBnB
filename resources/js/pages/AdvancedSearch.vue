@@ -15,7 +15,14 @@
                 placeholder="In che città vuoi cercare?"
                 class="w-100"
                 v-model="addressToSearch" required
+                @keyup="getTipsAddress"
+                @click="active(false)"
               />
+              <div class="position-relative container-tips" >
+                  <ul class="list-group position-absolute" :class="{'d-none': isActive}" id="results" v-if="addressToSearch != ''" >
+                    <li class="border-primary " v-for="(result,i) in tipsFiltered" :key="i" @click="passAddress(result), active(true)">{{result}}</li>
+                  </ul>
+              </div>
             </div>
 
             <div class="input-field fouth-wrap w-100 d-flex overflow-hidden">
@@ -111,6 +118,7 @@
 <script>
 import Maps from "../components/Maps";
 import axios from "axios";
+import {APP_KEYMAPS} from "../key";
 
 export default {
   components: {
@@ -125,6 +133,9 @@ export default {
       bedsToSearch: "",
       addressToSearch: "",
       filteredApartments: [],
+      tips:[],
+      results:[],
+      isActive: false
     };
   },
   methods: {
@@ -160,14 +171,48 @@ export default {
           console.warn(error);
         });
     },
+    getTipsAddress(){
+      if (this.addressToSearch != '') {
+        axios
+          .get('https://api.tomtom.com/search/2/search/'+ this.addressToSearch.replace(/ /g,"%20") + '.json?countrySet=IT&lat=37.337&lon=-121.89&extendedPostalCodesFor=Str&minFuzzyLevel=1&maxFuzzyLevel=2&view=Unified&relatedPois=off&key=' + APP_KEYMAPS + '&countrySet=Italia')
+          .then(resp =>{
+            this.tips = resp.data.results;
+            for (let index = 0; index < 5; index++) {
+              if(this.tips[index]["address"]["freeformAddress"] != undefined && this.tips[index]["address"]["countryCode"] != undefined ){
+                this.results[index]=this.tips[index]["address"]["freeformAddress"] + " " + this.tips[index]["address"]["countryCode"];
+              }                
+            }
+
+          })
+          .catch((error)=>{
+              console.warn(error);
+          })
+      }
+    },
+    passAddress(address){
+      this.addressToSearch = address;
+      // this.search();
+    },
+    active(trueFalse){
+      this.isActive = trueFalse;
+    }
   },
   created() {
     this.getServices();
   },
+  computed:{
+    tipsFiltered(){
+      if(this.addressToSearch != ''){
+          return this.results;
+      }
+    }
+  }
 };
 </script>
 
 <style scoped lang="scss" >
+@import "../../sass/_variables.scss";
+
 .col-md-3, .col-md-12 {
   .input-field {
     margin: 2rem 0;
@@ -179,6 +224,36 @@ export default {
 .w-100{
   overflow-x: hidden;
   overflow-y: scroll;
+}
+.container-tips{
+    // height: 300px;
+    ul{
+        background-color: white;
+        z-index: 3;
+        // padding: 1rem;
+        li{
+            border-bottom: 2px solid $primary;
+            cursor: pointer;
+            height: 35px;
+            width: 500px;
+            list-style: none;
+            color: black;
+            padding: .4rem;
+            // border-radius: 15px;
+        }
+        :hover{
+            background-color: $primary;
+            color: white;
+            // border-radius: 15px;
+            
+        }
+        li:first-child {
+            border-radius: 5px 5px 0 0;
+        }
+        li:last-child{
+            border-radius: 0 0 5px 5px ;
+        }
+    }
 }
 </style>
 

@@ -50,7 +50,7 @@
                 <div v-if="pagination.current_page == last_page"></div>
             </div>
         </div>
-    <div class=" transparent"></div>
+    <!-- <div class=" transparent"></div> -->
 </div>
 </template>
 
@@ -145,7 +145,7 @@ export default {
             }
         },
         passAddress(address){
-            this.userSearch=address;
+            this.userSearch = address;
             this.search();
         }
     },
