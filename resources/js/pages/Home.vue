@@ -1,59 +1,63 @@
 <template>
 
-<div class="w-100 overflow-hidden">
-    <div class="row px-5">
-        <div class="col-6 search mt-2">
-            <div class="search">
-                <input type="text" placeholder=" " @keyup="getTipsAddress" @keyup.enter="search" v-model="userSearch" required> 
-                <div>
-                    <svg>
-                        <use xlink:href="#path"></use>
-                    </svg>
+<div class="w-100 overflow-hidden position-relative">
+        <div class="row px-5">
+            <div class="col-6 search mt-2">
+                <div class="search">
+                    <input type="text" placeholder=" " @keyup="getTipsAddress" @keyup.enter="search" v-model="userSearch" required> 
+                    <div>
+                        <svg>
+                            <use xlink:href="#path"></use>
+                        </svg>
+                    </div>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                    <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 28" id="path">
+                        <path d="M32.9418651,-20.6880772 C37.9418651,-20.6880772 40.9418651,-16.6880772 40.9418651,-12.6880772 C40.9418651,-8.68807717 37.9418651,-4.68807717 32.9418651,-4.68807717 C27.9418651,-4.68807717 24.9418651,-8.68807717 24.9418651,-12.6880772 C24.9418651,-16.6880772 27.9418651,-20.6880772 32.9418651,-20.6880772 L32.9418651,-29.870624 C32.9418651,-30.3676803 33.3448089,-30.770624 33.8418651,-30.770624 C34.08056,-30.770624 34.3094785,-30.6758029 34.4782612,-30.5070201 L141.371843,76.386562" transform="translate(83.156854, 22.171573) rotate(-225.000000) translate(-83.156854, -22.171573)"></path>
+                    </symbol>
+                </svg>
+                
+                <div class="position-relative container-tips" >
+                    <ul class="list-group position-absolute" id="results" v-if="userSearch != ''" >
+                        <li class="border-primary " v-for="(result,i) in tipsFiltered" :key="i" @click="passAddress(result)">{{result}}</li>
+                    </ul>
                 </div>
             </div>
-            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-                <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 28" id="path">
-                    <path d="M32.9418651,-20.6880772 C37.9418651,-20.6880772 40.9418651,-16.6880772 40.9418651,-12.6880772 C40.9418651,-8.68807717 37.9418651,-4.68807717 32.9418651,-4.68807717 C27.9418651,-4.68807717 24.9418651,-8.68807717 24.9418651,-12.6880772 C24.9418651,-16.6880772 27.9418651,-20.6880772 32.9418651,-20.6880772 L32.9418651,-29.870624 C32.9418651,-30.3676803 33.3448089,-30.770624 33.8418651,-30.770624 C34.08056,-30.770624 34.3094785,-30.6758029 34.4782612,-30.5070201 L141.371843,76.386562" transform="translate(83.156854, 22.171573) rotate(-225.000000) translate(-83.156854, -22.171573)"></path>
-                </symbol>
-            </svg>
-            <ul class="list-group " id="results" v-for="(result,i) in results" :key="i" >
-                <li class="list-group-item active"  v-if="result != '' && userSearch != ''" @click="passAddress(result)">{{result}}</li>
-            </ul>
+            <div class="col-6 mt-3">
+            <router-link :to="{name: 'AdvancedSearch'}" class="text-decoration-none d-flex justify-content-end ">
+                <button class="btn btn-primary btn-sm">Ricerca avanzata</button>
+            </router-link>
+            </div>
         </div>
-        <div class="col-6 mt-3">
-        <router-link :to="{name: 'AdvancedSearch'}" class="text-decoration-none d-flex justify-content-end ">
-            <button class="btn btn-primary btn-sm">Ricerca avanzata</button>
-        </router-link>
+        <div class="row px-5">
+            <div class="col-12">
+                <h1 class="mt-4" v-if="sponsoredApartments != ''">In evidenza</h1>
+            </div>
+            <div class="border-bottom border-primary row">
+                <SingleApartment v-for="(apartment,index) in sponsoredApartments" :key="'sponsored'+ index" :apartment="apartment" />
+            </div>
+            <SingleApartment v-for="(apartment,index) in apartmentsShow" :key="index" :apartment="apartment" />
+            <div class="col-12">
+                <h1 class="text-center" v-show="apartmentsShow == '' "> Niente da mostrare</h1>
+            </div>
         </div>
-    </div>
-    <div class="row px-5">
-		<div class="col-12">
-			<h1 class="mt-4">In evidenza</h1>
-		</div>
-        <div class="border-bottom border-primary row">
-            <SingleApartment v-for="(apartment,index) in sponsoredApartments" :key="'sponsored'+ index" :apartment="apartment" />
+        <div class="row" v-if="( apartmentsShow.length == 12 || pagination.current_page == last_page)">
+            <div class="myPagination col-12 d-flex justify-content-between align-content-center my-3 px-sm-3 w-50 mx-auto" v-if="apartmentsSearch !== ''">
+                <div v-if="pagination.current_page == 1"></div>
+                <button class="btn btn-outline-primary shadow-none" @click="getApartments(pagination.current_page - 1)" v-if="pagination.current_page > 1">Precedente</button>
+                <h5>Pagina: {{pagination.current_page}}</h5>
+                <button class="btn btn-outline-primary shadow-none" @click="getApartments(pagination.current_page + 1)" v-if="pagination.current_page < pagination.last_page">Successivo</button>
+                <div v-if="pagination.current_page == last_page"></div>
+            </div>
         </div>
-
-        <SingleApartment v-for="(apartment,index) in apartmentsShow" :key="index" :apartment="apartment" />
-        <div class="col-12">
-            <h1 class="text-center" v-show="apartmentsShow == '' "> Niente da mostrare</h1>
-        </div>
-    </div>
-    <div class="row" v-if="( apartmentsShow.length == 12 || pagination.current_page == last_page)">
-        <div class="myPagination col-12 d-flex justify-content-between align-content-center my-3 px-sm-3 w-50 mx-auto" v-if="apartmentsSearch !== ''">
-            <div v-if="pagination.current_page == 1"></div>
-            <button class="btn btn-outline-primary shadow-none" @click="getApartments(pagination.current_page - 1)" v-if="pagination.current_page > 1">prev</button>
-            <h5>Pagina: {{pagination.current_page}}</h5>
-            <button class="btn btn-outline-primary shadow-none" @click="getApartments(pagination.current_page + 1)" v-if="pagination.current_page < pagination.last_page">next</button>
-            <div v-if="pagination.current_page == last_page"></div>
-        </div>
-    </div>
+    <div class=" transparent"></div>
 </div>
 </template>
 
 <script>
 import SingleApartment from '../components/SingleApartment.vue';
 import {APP_KEYMAPS} from "../key";
+
 
 export default {
     name:"home",
@@ -149,6 +153,13 @@ export default {
         this.getApartments(1);
 		this.getSponsoredApartments();
     },
+    computed:{
+        tipsFiltered(){
+            if(this.userSearch != ''){
+                return this.results;
+            }
+        }
+    }
 }
 </script>
 
@@ -156,7 +167,9 @@ export default {
 @import "../../sass/_variables.scss";
 
 $color: $primary;
-
+// .w-100{
+    // z-index: 2;
+// }
 .search {
     display: table;
     // img { height: 2em; }
@@ -211,10 +224,52 @@ $color: $primary;
         }
     }
 }
-    .myPagination{
-        h5{
-            line-height: 2.4rem;
-            margin: 0;
+.container-tips{
+    // height: 300px;
+    ul{
+        background-color: white;
+        z-index: 3;
+        // padding: 1rem;
+        li{
+            border-bottom: 2px solid $primary;
+            cursor: pointer;
+            height: 35px;
+            width: 500px;
+            list-style: none;
+            color: black;
+            padding: .4rem;
+            // border-radius: 15px;
+        }
+        :hover{
+            background-color: $primary;
+            color: white;
+            // border-radius: 15px;
+            
+        }
+        li:first-child {
+            border-radius: 5px 5px 0 0;
+        }
+        li:last-child{
+            border-radius: 0 0 5px 5px ;
         }
     }
+}
+    .transparent{
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        // background-color: rgba($color: white, $alpha: 0.7);
+        // display: none;
+        position: absolute;
+    }
+.container-tips:hover .transparent{
+    background-color: rgba($color: white, $alpha: 0.7);
+}
+.myPagination{
+    h5{
+        line-height: 2.4rem;
+        margin: 0;
+    }
+}
 </style>
