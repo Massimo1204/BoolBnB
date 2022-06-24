@@ -22,7 +22,7 @@ class MessagesTableSeeder extends Seeder
             $newMessage->text = $faker->sentence();
             $newMessage->full_name = $faker->firstName().' '.$faker->lastName();
             $newMessage->email = $faker->email();
-            $newMessage->created_at = $faker->dateTimeThisYear();
+            $newMessage->created_at = $faker->dateTimeBetween('-1 year', 'now');
             $newMessage->save();
         }
     }

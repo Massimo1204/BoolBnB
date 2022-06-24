@@ -71,20 +71,16 @@ export default {
         data: {
         type: Array,
         default: () => [40, 39, 10, 40, 39, 80, 40]
-      },
+        },
+        labelMonth: {
+        type: Array,
+        default: () => []
+        },
         },
         data() {
             return {
                 chartData: {
-                    labels: [
-                        'Lunedí',
-                        'Martedí',
-                        'Mercoledí',
-                        'Giovedí',
-                        'Venerdí',
-                        'Sabato',
-                        'Domenica'
-                    ],
+                    labels: this.labelMonth,
                     datasets: [
                         {
                             label: this.datasetIdKey,
