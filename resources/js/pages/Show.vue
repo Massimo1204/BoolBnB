@@ -409,7 +409,7 @@ export default {
     width: 100%;
 }
 .dark{
-  top: 3rem;
+  top: 1rem;
   right: 1.5rem;
   width: 28.99px;
   height: 28.99px;
