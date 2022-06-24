@@ -1,22 +1,27 @@
 <template>
-<div class="p-0">
+<div class="p-0 position-relative">
   <div class="map" id="map" ref="mapRef"></div>
   <div class="row mt-4 border-top border-2 border-primary pe-4" v-if="filteredApartments != ''">
-      <div class="col-lg-6 col-md-6" v-for="(apartment, index) in filterApartmentsDistance" :key="index" >
-        <div class="cardcontainer my-3 view-details" >
-            <router-link :to="{name: 'Show', params:{id: apartment['id']}}" class="text-decoration-none">
-                <div class="photo mx-auto position-relative">
-                    <img class="w-100" :src="(apartment['image'].startsWith('https://')) ? apartment['image'] : '../../storage/'+ apartment['image']" :alt="apartment['title']">
-                    <div class="price position-absolute px-2 py-2">{{apartment['price']}} €</div>
-                </div>
-                <h2 class="txt m-0 title text-capitalize text-primary">{{apartment['title']}}</h2>
-                <div class="content address">
-                    <p class="text-black ">{{ apartment['address']}}</p>
-                </div>
-            </router-link>
-        </div>
+    <div class="col-lg-6 col-md-6" v-for="(apartment, index) in filterApartmentsDistance" :key="index" >
+      <div class="cardcontainer my-3 view-details" >
+          <router-link :to="{name: 'Show', params:{id: apartment['id']}}" class="text-decoration-none">
+              <div class="photo mx-auto position-relative">
+                  <img class="w-100" :src="(apartment['image'].startsWith('https://')) ? apartment['image'] : '../../storage/'+ apartment['image']" :alt="apartment['title']">
+                  <div class="price position-absolute px-2 py-2">{{apartment['price']}} €</div>
+              </div>
+              <h2 class="txt m-0 title text-capitalize text-primary">{{apartment['title']}}</h2>
+              <div class="content address">
+                  <p class="text-black ">{{ apartment['address']}}</p>
+              </div>
+          </router-link>
       </div>
+    </div>
   </div>
+  <!-- <div class="row"> -->
+    <div class="position-absolute results">
+      <h1 class="text-center text-primary" v-if="filterApartmentsDistance == '' && lookedFor == true "> Nessun appartamento nelle vicinanze da mostrare</h1>
+    </div>
+  <!-- </div> -->
 </div>
 </template>
 
@@ -32,6 +37,7 @@ export default {
     return {
       // map: null,
       Italy : {lng: 12.5674, lat: 41.8719},
+      center:"",
       markers:[],
       zoom:4.8,
       minZoom:4.8,
@@ -43,7 +49,8 @@ export default {
         left: [25, -35],
         right: [-25, -35]
       },
-      apartments:[]
+      apartments:[],
+      lookedFor:false
       
     }
   },
@@ -55,13 +62,17 @@ export default {
       // const tt = window.tt;
       if (this.filteredApartments != "") {
         this.zoom=10;
-        this.Italy= {lng:this.filteredApartments[0]["long"],lat:this.filteredApartments[0]["lat"]};
+        this.center= {lng:this.filteredApartments[0]["long"],lat:this.filteredApartments[0]["lat"]};
+      }
+      else{
+        this.center=this.Italy;
+        this.zoom=4.8;
       }
       this.map = tt.map({
         key:APP_KEYMAPS ,
 
         container: this.$refs.mapRef,
-        center: this.Italy,
+        center: this.center,
         zoom: this.zoom,
         minZoom: this.minZoom,
 
@@ -81,6 +92,7 @@ export default {
   watch:{
     filteredApartments(){
       this.initializeMap();
+      this.lookedFor=true;
     },
   },
   computed:{
@@ -150,4 +162,13 @@ export default {
       font-size: 1.2rem;
   }
 }
+.results{
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
 </style>
