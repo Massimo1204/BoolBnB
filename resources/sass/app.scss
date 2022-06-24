@@ -157,3 +157,24 @@ body {
 .the-header{
     height: 11vh;
 }
+
+@media(max-width: 767.98px)  {
+    .dashboardContainer,.add-apartment-cont{
+        max-width: 90vw;
+    }
+    }
+
+@media(min-width:768px) and (max-width: 1399.98px){
+    .dashboardContainer,.add-apartment-cont{
+        max-width: 80vw;
+        margin: 0 auto;
+        img{
+            max-width: 230px;
+        }
+    }
+}
+.dashboardContainer{
+    img{
+        max-width: 220px;
+    }
+}
