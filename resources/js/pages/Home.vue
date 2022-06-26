@@ -37,9 +37,9 @@
                 <h1 class="mt-4 text-primary" v-if="sponsoredApartments != ''">In evidenza</h1>
             </div>
             <div class="border-bottom border-primary row mt-2">
-                <SingleApartment v-for="(apartment,index) in sponsoredApartments" :key="'sponsored'+ index" :apartment="apartment" />
+                <SingleApartment v-for="(apartment,index) in sponsoredApartments" :key="'sponsored'+ index" :apartment="apartment" :isLoaded='isLoaded' />
             </div>
-            <SingleApartment v-for="(apartment,index) in apartmentsShow" :key="index" :apartment="apartment" />
+            <SingleApartment v-for="(apartment,index) in apartmentsShow" :key="index" :apartment="apartment" :isLoaded='isLoaded' />
             <div class="col-12" :class="{'nothing' : apartmentsShow == '' && sponsoredApartments == '' } ">
                 <h1 class="text-center text-primary" v-show="apartmentsShow == '' "> Niente da mostrare</h1>
             </div>
@@ -78,12 +78,12 @@ export default {
         apartmentsSearch:[],
         tips:[],
         results:[],
-        // isLoading: true,
+        isLoaded: false,
         }
     },
     methods:{
         getApartments(page){
-            // this.isLoading = true;
+            this.isLoaded = false;
             axios.get(`http://localhost:8000/api/apartments?page=${page}`)
             .then(resp => {
                 this.apartments = resp.data.data;
@@ -91,7 +91,7 @@ export default {
                 this.pagination = {current_page : current_page, last_page : last_page};
                 this.last_page = last_page;
                 this.apartmentsShow=this.apartments;
-                // this.isLoading = false;
+                this.setLoader();
             })
             .catch((error)=>{
             console.warn(error);
@@ -150,6 +150,11 @@ export default {
         passAddress(address){
             this.userSearch = address;
             this.search();
+        },
+        setLoader(){
+            setTimeout(() => {
+                this.isLoaded = true;
+            }, 1000);
         }
     },
     created(){
