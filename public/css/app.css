@@ -20604,17 +20604,18 @@ body {
   background: linear-gradient(90deg, rgb(2, 0, 36) 0%, rgb(9, 9, 121) 35%, rgb(0, 212, 255) 100%);
 }
 
-.my-drop-login {
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+.logo img {
+  width: 7vw;
 }
 
 .myNav-dropdown {
   padding: 0.2rem 0.5rem 0.2rem 0.6rem !important;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 .myNav-dropdown img {
   width: 2rem;
   height: 2rem;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .myNav-dropdown::after {
@@ -20622,7 +20623,7 @@ body {
 }
 
 .the-header {
-  height: 8vh;
+  height: 11vh;
 }
 
 @media (max-width: 767.98px) {

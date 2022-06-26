@@ -41,12 +41,12 @@
                         <li>
 
                             @if (!Auth::check())
-                                <a class="navbar-brand my-drop-login rounded-pill py-1 px-3" href="{{ url('/') }}">
-                                    BoolBnB
+                                <a class="navbar-brand logo py-1 ps-3" href="{{ url('/') }}">
+                                    <img src="https://i.ibb.co/kGX158j/Bool-Bn-B-logos-transparent.png" alt="BoolBnB">
                                 </a>
                             @else
-                                <a class="navbar-brand my-drop-login rounded-pill py-1 px-3" href="{{ url('/') }}">
-                                    BoolBnB
+                                <a class="navbar-brand logo py-1 ps-3" href="{{ url('/') }}">
+                                    <img src="https://i.ibb.co/kGX158j/Bool-Bn-B-logos-transparent.png" alt="BoolBnB">
                                 </a>
                             @endif
                                 {{-- <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -98,7 +98,7 @@
                             </li>
                         @else
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle border border-light rounded-pill myNav-dropdown"
+                                <a class="nav-link dropdown-toggle border border-light rounded-pill myNav-dropdown shadow"
                                     href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     {{-- @dd(Auth::user()->profile_picture) --}}
