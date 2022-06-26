@@ -98,7 +98,7 @@
                             </li>
                         @else
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle border border-light rounded-pill myNav-dropdown"
+                                <a class="nav-link dropdown-toggle border border-light rounded-pill myNav-dropdown shadow"
                                     href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     {{-- @dd(Auth::user()->profile_picture) --}}
