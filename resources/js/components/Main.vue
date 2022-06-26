@@ -21,4 +21,17 @@ export default {
     height: 85.5vh;
 }
 
+
+.container::-webkit-scrollbar{
+    width: .5vw;
+}
+.container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0);
+}
+.container::-webkit-scrollbar-thumb {
+    background-color: rgba(103, 103, 103, 0.692) ;
+    border-radius: 1.5rem;
+    border: .3rem solid rgba(255, 255, 255, 0);
+}
+
 </style>
