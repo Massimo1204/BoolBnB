@@ -94,9 +94,9 @@
 </div>
 @endsection
 
-{{-- @section('footer-scripts') --}}
-    {{-- <script src="{{ asset('js/tipsAddress.js') }}"></script> --}}
-    {{-- <script defer>
+@section('footer-scripts')
+    <script src="{{ asset('js/tipsAddress.js') }}"></script>
+    <script defer>
         const deleteForms = document.querySelectorAll('.apartment-form-destroyer');
 
         deleteForms.forEach(singleForm => {
@@ -118,22 +118,22 @@
                 })
             })
         });
-        document.addEventListener("DOMContentLoaded", function(event) { 
-        function toggleDarkMode() {
-            if(document.querySelector('html').classList.contains("dark"))
-                enableDarkMode(false)
-            else
-                enableDarkMode(true)
-        }
-        function enableDarkMode(status = true) {
-            if(status)
-                document.querySelector('html').classList.add('dark')
-            else
-                document.querySelector('html').classList.remove('dark')
-        }
-        document.getElementById('theme-toggler').addEventListener('click', function() { 
-            toggleDarkMode();
-        }, false);
-    });
-    </script> --}}
-{{-- @endsection --}}
+    //     // document.addEventListener("DOMContentLoaded", function(event) {
+    //     // function toggleDarkMode() {
+    //     //     if(document.querySelector('html').classList.contains("dark"))
+    //     //         enableDarkMode(false)
+    //     //     else
+    //     //         enableDarkMode(true)
+    //     // }
+    //     // function enableDarkMode(status = true) {
+    //     //     if(status)
+    //     //         document.querySelector('html').classList.add('dark')
+    //     //     else
+    //     //         document.querySelector('html').classList.remove('dark')
+    //     // }
+    //     // document.getElementById('theme-toggler').addEventListener('click', function() {
+    //     //     toggleDarkMode();
+    //     // }, false);
+    // });
+    </script>
+@endsection
