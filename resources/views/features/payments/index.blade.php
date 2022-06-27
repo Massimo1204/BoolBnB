@@ -21,7 +21,7 @@
                     <label for="amount">
                         <span class="input-label" readonly>Prezzo</span>
                         <div class="input-wrapper amount-wrapper">
-                            <input readonly id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="{{$amount}} €">
+                            <input readonly id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="{{$amount}}">
                         </div>
                     </label>
 
