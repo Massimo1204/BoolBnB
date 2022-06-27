@@ -3,15 +3,15 @@
     <div class="cardcontainer my-3">
         <router-link :to="{name: 'Show', params:{id: apartment.id}}" class="text-decoration-none">
             <div class="photo mx-auto position-relative">
-                <img class="w-100" :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" :alt="apartment.title">
+                <img v-show="isLoaded == true" class="w-100" :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" :alt="apartment.title">
+                <div v-if="isLoaded == false" class="photo d-flex justify-content-center align-items-center">
+                    <Loader/>
+                </div>
                 <div class="price position-absolute px-2 py-1 rounded-pill bg-light">
                     <span v-if="apartment.available">{{apartment.price}}	&euro;</span>
                     <span v-else class="text-danger">Non Disponibile</span>
                 </div>
             </div>
-            <!-- <div v-else class="photo d-flex justify-content-center align-items-center">
-                <Loader/>
-            </div> -->
             <h3 class="txt m-0 mt-3 title text-capitalize">{{apartment.title}}</h3>
             <div class="content address">
                 <p class="fs-5">{{ apartment.address}}</p>
@@ -22,16 +22,30 @@
 </template>
 
 <script>
-// import Loader from "../components/Loader.vue";
+import Loader from "../components/Loader.vue";
 
 export default {
     name:"SingleApartment",
-    // components:{
-    //     Loader,
-    // },
+    components:{
+        Loader,
+    },
     props: [
         'apartment',
+        'isLoaded'
     ],
+    data: function(){
+        return {
+            // loaded : this.isLoaded,
+        }
+    },
+    methods: {
+        // load(){
+        //     console.log(this.loaded)
+
+        //     this.loaded = true;
+        //     console.log(this.loaded)
+        // }
+    },
 }
 </script>
 

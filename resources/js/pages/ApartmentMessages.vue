@@ -1,9 +1,9 @@
 <template>
-    <div id="messages">
+    <div id="messages" class="container">
         <div class="col-12 my-title-wrapper">
             <h1 class="my-title text-uppercase m-0">I tuoi messaggi</h1>
         </div>
-        <div v-if="apartments.length != 0" class="apartment-messages-container d-flex">
+        <div v-if="noApartments == false" class="apartment-messages-container d-flex">
             <div class="col-xl-5 col-lg-6 col-12 apartment-messages-wrapper">
                 <div class="d-flex flex-column apartment-messages" v-for="(apartment, index) in apartments" :key="'apartment' + index" @click="chooseApartment(index)">
                     <div class="d-flex">
@@ -91,6 +91,7 @@ export default {
             windowWidth: window.innerWidth,
             isSmall: false,
             isShowing: [],
+            noApartments: false,
         }
     },
     methods: {
@@ -99,6 +100,9 @@ export default {
                 .then((result)=>{
                     this.apartments = result.data;
                     this.orderApartments();
+                    if(this.apartments.length == 0){
+                        this.noApartments = true;
+                    }
                 }).catch((error)=>{
                     console.warn(error);
                 })
@@ -151,29 +155,23 @@ export default {
 
 <style lang="scss" scoped>
 div#messages{
-    background-color: rgb(245, 248, 255);
-    position: relative;
+    background-color: rgba(245, 248, 255, .9);
     div.my-title-wrapper{
-        background-color: rgba(245, 248, 255, 0.8);
-        z-index: 2;
-        position: absolute;
-        top: 0;
+        border-bottom: 2px solid white;
         .my-title{
             color: rgb(1, 11, 95);
             font-weight: 600;
-            padding: 15px 0 10px 30px;
+            padding: 10px 0 10px 30px;
         }
     }
     div.apartment-messages-container{
-        height: calc(100vh - 8vh - 2rem);
+        height: calc(100vh - 76px - 65.2px - 2rem);
         // padding-top: 70.2px;
         @media screen and (max-width: 992px){
             height: 100%;
         }
         div.apartment-messages-wrapper{
-            border-top: 2px solid white;
             overflow-y: scroll;
-            margin-top: 70.2px;
             div.apartment-messages{
                 cursor: pointer;
                 padding: 15px;
@@ -217,7 +215,6 @@ div#messages{
         }
         div.apartment-chat{
             overflow-y: scroll;
-            padding: 70.2px 0 10px 0;
         }
     }
     div.info-message-wrapper-big,
@@ -235,7 +232,6 @@ div#messages{
     div.info-message-wrapper-big{
         height: 90vh;
     }
-
     div.apartment-single-message{
         margin: 10px auto 10px auto;
         width: 96.8%;

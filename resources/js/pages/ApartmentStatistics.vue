@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid w-100">
+    <div class="container">
         <h2 class="p-2 bold">{{apartment.title}}</h2>
         <p class="p-2 text-success" v-if="apartmentMediaViews > mediaViews">Complimenti il tuo annuncio ha un numero di visualizzazioni totali di {{apartmentMediaViews}}, maggiore rispetto alla media di {{Math.floor(mediaViews)}} visualizzazioni</p>
         <div v-else>
