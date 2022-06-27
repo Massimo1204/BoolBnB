@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="my-container">
         <router-view></router-view>
     </div>
 </template>
@@ -11,24 +11,22 @@ export default {
 </script>
 
 <style scoped>
-.container{
-    background-color: rgba(255, 255, 255, .85);
-    overflow: auto;
-    height: 100%;
-    border-radius: 15px;
-    padding: 0;
+.my-container{
+    /* background-color: rgba(255, 255, 255, .85); */
+    /* border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    overflow-y : scroll;
+    height: calc(100vh - 76px - 2rem); */
     min-width: 375px;
-    height: 85.5vh;
 }
 
-
-.container::-webkit-scrollbar{
+.my-container::-webkit-scrollbar{
     width: .5vw;
 }
-.container::-webkit-scrollbar-track {
+.my-container::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0);
 }
-.container::-webkit-scrollbar-thumb {
+.my-container::-webkit-scrollbar-thumb {
     background-color: rgba(103, 103, 103, 0.692) ;
     border-radius: 1.5rem;
     border: .3rem solid rgba(255, 255, 255, 0);

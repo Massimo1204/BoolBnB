@@ -13,6 +13,37 @@
 @import '~@fortawesome/fontawesome-free/scss/solid';
 @import '~@fortawesome/fontawesome-free/scss/brands';
 
+body {
+    // overflow-x: hidden;
+    background-image: url("https://www.wallpapers13.com/wp-content/uploads/2019/08/Indonesia-Banyak-Islands-Sumatra-tropical-desert-beach-Sunset-sky-sea-palm-trees-photo-landscape-4K-Ultra-HD-Wallpaper-for-Desktop-Laptop.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: center;
+    background-position-x:right;
+    padding: 1rem 0;
+    height: 100vh;
+}
+.the-header{
+    height: 76px;
+    // background-color: rgba(255, 255, 255, .85);
+    background-color: rgba(245, 248, 255, .9);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 9.8px 0;
+    min-width: 375px;
+    border-bottom: 2px solid white;
+}
+
+main {
+    .container{
+        background-color: rgba(245, 248, 255, .9);
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        overflow-y : scroll;
+        height: calc(100vh - 76px - 2rem);
+    }
+}
+
 .apartment-wrapper {
     height: 430px;
     margin-top: 50px;
@@ -130,16 +161,13 @@ div.show-thumbnails {
     font-size: .8rem;
 }
 
-body {
-    overflow-x: hidden;
-}
-
 .add-apartment-jumbo {
     background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
 }
+
 .logo{
     img{
-        width: 7vw;
+        width: 100px;
     }
 }
 
@@ -154,9 +182,6 @@ body {
 }
 .myNav-dropdown::after {
     content: none !important;
-}
-.the-header{
-    height: 11vh;
 }
 
 @media(max-width: 767.98px)  {

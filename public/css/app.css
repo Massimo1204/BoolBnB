@@ -20508,6 +20508,34 @@ readers do not read off random characters that represent icons */
   content: "\F63F";
 }
 
+body {
+  background-image: url("https://www.wallpapers13.com/wp-content/uploads/2019/08/Indonesia-Banyak-Islands-Sumatra-tropical-desert-beach-Sunset-sky-sea-palm-trees-photo-landscape-4K-Ultra-HD-Wallpaper-for-Desktop-Laptop.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: center;
+  background-position-x: right;
+  padding: 1rem 0;
+  height: 100vh;
+}
+
+.the-header {
+  height: 76px;
+  background-color: rgba(245, 248, 255, 0.9);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  padding: 9.8px 0;
+  min-width: 375px;
+  border-bottom: 2px solid white;
+}
+
+main .container {
+  background-color: rgba(245, 248, 255, 0.9);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  overflow-y: scroll;
+  height: calc(100vh - 76px - 2rem);
+}
+
 .apartment-wrapper {
   height: 430px;
   margin-top: 50px;
@@ -20596,16 +20624,12 @@ div.show-thumbnails img #results li {
   font-size: 0.8rem;
 }
 
-body {
-  overflow-x: hidden;
-}
-
 .add-apartment-jumbo {
   background: linear-gradient(90deg, rgb(2, 0, 36) 0%, rgb(9, 9, 121) 35%, rgb(0, 212, 255) 100%);
 }
 
 .logo img {
-  width: 7vw;
+  width: 100px;
 }
 
 .myNav-dropdown {
@@ -20620,10 +20644,6 @@ body {
 
 .myNav-dropdown::after {
   content: none !important;
-}
-
-.the-header {
-  height: 11vh;
 }
 
 @media (max-width: 767.98px) {

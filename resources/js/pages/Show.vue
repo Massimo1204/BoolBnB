@@ -1,5 +1,5 @@
 <template>
-    <div class="MyContainer w-100">
+    <div class="MyContainer container">
         <div>
             <div class="row mx-auto px-sm-1 px-md-5 w-100" v-if="apartment.visible">
                 <div class="pics position-relative col-12 mx-sm-auto d-flex gap-1">
@@ -405,7 +405,7 @@ export default {
         }
     }
 .map {
-    height: 40vh;
+    height: 370px;
     width: 100%;
 }
 .dark{
