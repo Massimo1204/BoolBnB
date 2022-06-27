@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row text-primary">
-      <div class="col-lg-3 col-md-12 ps-5 pe-4 pt-2">
+      <div class="col-lg-3 col-md-12 ps-5 pe-4 px-lg-3 pt-2">
         <form>
           <fieldset>
             <legend class="text-center mt-2 fw-bolder text-primary ">Ricerca BnB</legend>
@@ -34,7 +34,7 @@
               </div>
               <div class="w-75">
                 <label for="bed">Posti letto:</label><br>
-                <select name="bed" id="bed" v-model="bedsToSearch" class="w-75">
+                <select name="bed" id="bed" v-model="bedsToSearch" class="w-75 form-select h-50">
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -87,7 +87,7 @@
                 class="service col-lg-12 col-md-6"
               >
                 <input
-                  class="form-check-input"
+                  class="form-check-input shadow-none"
                   type="checkbox"
                   name="services"
                   :value="service.id"
