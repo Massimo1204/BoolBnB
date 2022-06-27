@@ -3,7 +3,7 @@
     <div class="cardcontainer position-relative my-3">
         <router-link :to="{name: 'Show', params:{id: apartment.id}}" class="text-decoration-none">
             <div class="photo mx-auto position-relative">
-                <div v-show="isLoaded == true" v-for="( picture , index ) in apartmentImages" :key="'apartment-images' + index" class="img-wrapper">
+                <div v-show="isLoaded == true" v-for="( picture , index ) in getPicture" :key="'apartment-images' + index" class="img-wrapper">
                     <img 
                         v-if="counter == index" 
                         @mouseover="setOnSwipeButtons" 
@@ -25,12 +25,12 @@
                 <p class="apartment-address fs-5">{{ apartment.address}}</p>
             </div>
         </router-link>
-        <div v-show="showSwipeButtons == true" class="my-previous position-absolute" @click="swipePrevious" @mouseover="setOnSwipeButtons" >
+        <div v-show="showSwipeButtons == true && apartment.pictures != ''" class="my-previous position-absolute" @click="swipePrevious" @mouseover="setOnSwipeButtons" >
             <span class="my-prev-hook">
                 <i class="fas fa-chevron-left"></i>
             </span>
         </div>
-        <div v-show="showSwipeButtons == true" class="my-next position-absolute" @click="swipeNext" @mouseover="setOnSwipeButtons" >
+        <div v-show="showSwipeButtons == true && apartment.pictures != ''" class="my-next position-absolute" @click="swipeNext" @mouseover="setOnSwipeButtons" >
             <span class="my-next-hook">
                 <i class="fas fa-chevron-right"></i>
             </span>
@@ -74,13 +74,6 @@ export default {
                 this.counter = 0;
             }
         },
-        getApartmentImages(){
-            this.apartmentImages[0] = this.apartment.image;
-            this.apartment.pictures.forEach(picture => {
-                this.apartmentImages.push(picture.image);
-                // console.log(this.apartmentImages)
-            });
-        },
         setOnSwipeButtons(){
             this.showSwipeButtons = true;
         },
@@ -88,8 +81,18 @@ export default {
             this.showSwipeButtons = false;
         }
     },
-    mounted(){
-        this.getApartmentImages();
+    computed:{
+        getPicture(){
+            this.apartmentImages[0] = this.apartment.image;
+            if (this.apartment.pictures != "") {
+                
+                this.apartment.pictures.forEach(picture => {
+                    this.apartmentImages.push(picture.image);
+                    // console.log(this.apartmentImages)
+                });
+            }
+            return this.apartmentImages;
+        }
     }
 }
 </script>
