@@ -176,6 +176,7 @@ export default {
             alertMessage: "",
             mapStyle:"https://api.tomtom.com/style/1/style/22.2.1-9/?map=2/basic_street-light",
             isLoaded: false,
+            userInfo:null,
         };
     },
     computed: {
@@ -319,11 +320,23 @@ export default {
                 this.mapStyle="https://api.tomtom.com/style/1/style/22.2.1-9/?map=2/basic_street-light"
             }
             this.initializeMap()
+        },
+        getUserInfo(){
+             axios.get('http://127.0.0.1:8000/api/apartment/host/' + this.$userId)
+                .then((result) => {
+                    this.form.email = result.data[0][0].email;
+                    this.form.full_name = result.data[0][0].first_name + ' ' + result.data[0][0].last_name;
+
+
+                }).catch((error) => {
+                    console.warn(error);
+                })
         }
     },
     created(){
         this.getInfo();
         this.getpics();
+        this.getUserInfo();
     }
 }
 </script>
