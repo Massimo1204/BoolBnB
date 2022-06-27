@@ -155,7 +155,6 @@ export default {
 
 <style lang="scss" scoped>
 div#messages{
-    background-color: rgba(245, 248, 255, .9);
     div.my-title-wrapper{
         border-bottom: 2px solid white;
         .my-title{
