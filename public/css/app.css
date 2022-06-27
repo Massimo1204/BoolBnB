@@ -20535,6 +20535,17 @@ main .container {
   overflow-y: scroll;
   height: calc(100vh - 76px - 2rem);
 }
+main .container::-webkit-scrollbar {
+  width: 0.5vw;
+}
+main .container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0);
+}
+main .container::-webkit-scrollbar-thumb {
+  background-color: rgba(103, 103, 103, 0.692);
+  border-radius: 1.5rem;
+  border: 0.3rem solid rgba(255, 255, 255, 0);
+}
 
 .apartment-wrapper {
   height: 430px;
