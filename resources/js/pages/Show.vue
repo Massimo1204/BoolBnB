@@ -208,10 +208,8 @@ export default {
                 this.apartment=response.data;
                 console.log(this.apartment);
                 this.getHost(this.apartment.user_id);
-                setTimeout(this.infoLoaded=true,5000);
-                this.initializeMap();
+                this.initializeMap()
             })
-
         },
         getpics(){
             Axios.get('/api/apartment/pictures/'+this.id)
