@@ -221,8 +221,12 @@ div.show-thumbnails {
     background-color: $body-bg-dk !important;
     color: $text-white-dk !important; 
 }
-main{
-    .container.dark-mode{
+.dark {
+    .the-header{
+        background-color: rgba(0, 0, 0, .8);
+        color: white;
+    }
+    .container{
         background-color: $body-bg-dk !important;
         color: $text-white-dk !important; 
         .search{

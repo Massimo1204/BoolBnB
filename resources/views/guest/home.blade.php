@@ -25,5 +25,29 @@
 <div class="mx-auto">
     {{ $apartments->links() }}
 </div> --}}
-<div id="root"></div>
+{{-- <div id="root"></div> --}}
+@endsection
+@section('footer-scripts')
+    <script >
+        
+    document.addEventListener("DOMContentLoaded", function(event) { 
+        function toggleDarkMode() {
+            if(document.querySelector('html').classList.contains("dark"))
+                enableDarkMode(false)
+            else
+                enableDarkMode(true)
+        }
+        function enableDarkMode(status = true) {
+            if(status)
+                document.querySelector('html').classList.add('dark')
+            else
+                document.querySelector('html').classList.remove('dark')
+        }
+        document.getElementById('theme-toggler').addEventListener('click', function() { 
+        toggleDarkMode();
+        }, false);
+    });
+    </script>
+    {{-- <script src="{{ asset('js/darkmode.js') }}"></script> --}}
+
 @endsection
