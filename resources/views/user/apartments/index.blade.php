@@ -94,9 +94,9 @@
 </div>
 @endsection
 
-@section('footer-scripts')
+{{-- @section('footer-scripts') --}}
     {{-- <script src="{{ asset('js/tipsAddress.js') }}"></script> --}}
-    <script defer>
+    {{-- <script defer>
         const deleteForms = document.querySelectorAll('.apartment-form-destroyer');
 
         deleteForms.forEach(singleForm => {
@@ -135,5 +135,5 @@
             toggleDarkMode();
         }, false);
     });
-    </script>
-@endsection
+    </script> --}}
+{{-- @endsection --}}
