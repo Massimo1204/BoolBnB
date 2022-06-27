@@ -44,7 +44,7 @@ class ApartmentController extends Controller
         // dd($dataResponse["results"][0]);
         $lat = $dataResponse["results"][0]["position"]["lat"];
         $lon = $dataResponse["results"][0]["position"]["lon"];
-        $allApartments = Apartment::all();
+        $allApartments = Apartment::with('pictures')->get();
 
         foreach ($allApartments as $apartment) {
             $distance = self::haversineGreatCircleDistance($lat, $lon, $apartment->lat, $apartment->long);
