@@ -75,7 +75,7 @@
                     @guest
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle border border-light rounded-pill my-drop-login"
+                            <a class="nav-link dropdown-toggle border border-light rounded-pill my-drop-login shadow"
                                 href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 Area Riservata
@@ -97,14 +97,18 @@
                                 href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 {{-- @dd(Auth::user()->profile_picture) --}}
-                                @if (str_starts_with(Auth::user()->profile_picture, 'https://') || str_starts_with(Auth::user()->profile_picture, 'http://'))
-
+                                @if (Auth::user()->profile_picture)
+                                    @if (str_starts_with(Auth::user()->profile_picture, 'https://') || str_starts_with(Auth::user()->profile_picture, 'http://'))
+                                    
                                     {{Auth::user()->first_name}} {{Auth::user()->last_name}} <img class=" rounded-circle" src="{{Auth::user()->profile_picture}}" alt="{{  ucfirst(Auth::user()->first_name) . ' ' . ucfirst(Auth::user()->last_name) }}">
-
-                                @else
-
+                                    
+                                    @else
+                                    
                                     {{Auth::user()->first_name}} {{Auth::user()->last_name}} <img class=" rounded-circle"  src="{{ asset('/storage') . '/' . Auth::user()->profile_picture }}" alt="{{  ucfirst(Auth::user()->first_name) . ' ' . ucfirst(Auth::user()->last_name) }}">
-
+                                    
+                                    @endif
+                                @else
+                                {{Auth::user()->first_name}} {{Auth::user()->last_name}} <img class=" rounded-circle" src="https://media.istockphoto.com/vectors/user-icon-admin-profile-pictogram-vector-id1327656409?b=1&k=20&m=1327656409&s=170667a&w=0&h=a8rGhCe2dgUHDa_sw38uR9v_qvyTteXrWP22BOKRViI=" alt="{{  ucfirst(Auth::user()->first_name) . ' ' . ucfirst(Auth::user()->last_name) }}">
                                 @endif
                             </a>
 

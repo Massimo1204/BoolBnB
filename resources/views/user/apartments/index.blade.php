@@ -13,13 +13,20 @@
         </script>
     @endif
     @if (session('sponsor-success-message'))
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-12">
             <div class="alert alert-success">
                 {{session('sponsor-success-message')}}
             </div>
         </div>
-    </div>
+    </div> --}}
+    <script>
+        Swal.fire(
+            'Sponsorizzato!',
+            'Il tuo annuncio è stato sponsorizzato.',
+            'success'
+        )
+    </script>
     @endif
     <div class="add-apartment-jumbo row justify-content-center mb-3">
         <div class="col-12 px-3 py-5 d-flex align-items-center text-white justify-content-between add-apartment-cont">
@@ -79,7 +86,7 @@
                     </form>
                 </div>
                 @if (!$loop->last)
-                    <hr> 
+                    <hr>
                 @endif
             @endforeach
         </div>

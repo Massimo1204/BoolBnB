@@ -13,27 +13,29 @@
             </div>
         @endforeach
     @endif
+    <div class="container pt-5">
+        <div class="d-flex justify-content-center">
+            <form class="text-center" method="post" id="payment-form" action="{{route('payments.checkout', [$sponsorship, $apartment])}}">
+                @csrf
+                <section>
+                    <label for="amount">
+                        <span class="input-label" readonly>Amount</span>
+                        <div class="input-wrapper amount-wrapper">
+                            <input readonly id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="{{$amount}}">
+                        </div>
+                    </label>
 
-    <div class="d-flex justify-content-center">
-        <form method="post" id="payment-form" action="{{route('payments.checkout', [$sponsorship, $apartment])}}">
-            @csrf
-            <section>
-                <label for="amount">
-                    <span class="input-label" readonly>Amount</span>
-                    <div class="input-wrapper amount-wrapper">
-                        <input readonly id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="{{$amount}}">
+                    <div class="bt-drop-in-wrapper text-start">
+                        <div id="bt-dropin"></div>
                     </div>
-                </label>
+                </section>
 
-                <div class="bt-drop-in-wrapper">
-                    <div id="bt-dropin"></div>
-                </div>
-            </section>
-
-            <input id="nonce" name="payment_method_nonce" type="hidden" />
-            <button class="btn btn-info float-end" type="submit"><span>Procedi e Paga</span></button>
-        </form>
+                <input id="nonce" name="payment_method_nonce" type="hidden" />
+                <button class="btn btn-info mt-2" type="submit"><span>Procedi e Paga</span></button>
+            </form>
+        </div>
     </div>
+
 @endsection
 @section('footer-scripts')
     <script src="https://js.braintreegateway.com/web/dropin/1.33.2/js/dropin.min.js"></script>

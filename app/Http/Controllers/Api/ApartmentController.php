@@ -14,7 +14,7 @@ class ApartmentController extends Controller
 {
     public function index()
     {
-        $apartments = Apartment::with(['messages', 'user'])->where('visible','1')->paginate(12);
+        $apartments = Apartment::with(['user', 'pictures'])->where('visible','1')->paginate(12);
 
         return response()->json($apartments);
     }
@@ -156,6 +156,9 @@ class ApartmentController extends Controller
         $sponsorships = Sponsorship::with('apartments')->get();
 
         foreach($sponsorships as $sponsorship){
+            foreach ($sponsorship->apartments as $apartment) {
+                $pictures = $apartment->pictures;
+            }
             $available[] = $sponsorship->apartments()->wherePivot('end_date', '>', $today)->get();
         }
 

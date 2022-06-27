@@ -1,9 +1,17 @@
 <template>
 <div class=" col-sm-12 col-md-6 col-lg-4 col-xl-3" v-if="apartment.visible==1">
-    <div class="cardcontainer my-3">
+    <div class="cardcontainer position-relative my-3">
         <router-link :to="{name: 'Show', params:{id: apartment.id}}" class="text-decoration-none">
             <div class="photo mx-auto position-relative">
-                <img v-show="isLoaded == true" class="w-100" :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" :alt="apartment.title">
+                <div v-show="isLoaded == true" v-for="( picture , index ) in apartmentImages" :key="'apartment-images' + index" class="img-wrapper">
+                    <img 
+                        v-if="counter == index" 
+                        @mouseover="setOnSwipeButtons" 
+                        @mouseleave="setOffSwipeButtons" 
+                        :src="(picture.startsWith('https://')) ? picture : '../../storage/'+ picture" 
+                        :alt="apartment.title"
+                    >
+                </div>
                 <div v-if="isLoaded == false" class="photo d-flex justify-content-center align-items-center">
                     <Loader/>
                 </div>
@@ -17,6 +25,16 @@
                 <p class="apartment-address fs-5">{{ apartment.address}}</p>
             </div>
         </router-link>
+        <div v-show="showSwipeButtons == true" class="my-previous position-absolute" @click="swipePrevious">
+            <span class="my-prev-hook">
+                <i class="fas fa-chevron-left"></i>
+            </span>
+        </div>
+        <div v-show="showSwipeButtons == true" class="my-next position-absolute" @click="swipeNext">
+            <span class="my-next-hook">
+                <i class="fas fa-chevron-right"></i>
+            </span>
+        </div>
     </div>
 </div>
 </template>
@@ -36,17 +54,43 @@ export default {
     ],
     data: function(){
         return {
-            // loaded : this.isLoaded,
+            apartmentImages: [],
+            counter: 0,
+            showSwipeButtons: false,
         }
     },
     methods: {
-        // load(){
-        //     console.log(this.loaded)
-
-        //     this.loaded = true;
-        //     console.log(this.loaded)
-        // }
+        swipePrevious (){
+            if(this.counter>0 && this.counter<this.apartmentImages.length){
+                this.counter--;
+            }else if(this.counter <= 0){
+                this.counter = this.apartmentImages.length-1;
+            }
+        },
+        swipeNext(){
+            if(this.counter>=0 && this.counter<this.apartmentImages.length-1){
+                this.counter++;
+            }else if(this.counter >= this.apartmentImages.length-1){
+                this.counter = 0;
+            }
+        },
+        getApartmentImages(){
+            this.apartmentImages[0] = this.apartment.image;
+            this.apartment.pictures.forEach(picture => {
+                this.apartmentImages.push(picture.image);
+                console.log(this.apartmentImages)
+            });
+        },
+        setOnSwipeButtons(){
+            this.showSwipeButtons = true;
+        },
+        setOffSwipeButtons(){
+            this.showSwipeButtons = false;
+        }
     },
+    mounted(){
+        this.getApartmentImages();
+    }
 }
 </script>
 
@@ -54,6 +98,23 @@ export default {
 @import "../../sass/_variables.scss";
 .cardcontainer{
     max-height: 450px;
+    div.my-previous,
+    div.my-next{
+        cursor: pointer;
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        padding: 3px 0 3px 10px;
+        background-color: rgba(255, 255, 255, .9);
+        z-index: 2;
+        top: 115px;
+    }
+    div.my-previous{
+        left: .5rem;
+    }
+    div.my-next{
+        right: .5rem;
+    }
 }
 .content{
     // max-height: 220px; 
@@ -63,16 +124,15 @@ h3{
     color: $primary;
     font-weight: bolder;
 }
-// p.apartment-address{
-//     color: rgb(5, 5, 5);
-// }
 .photo{
-    height: 250px;
     border-radius: 15px;
-    img{
-        height: 100%;
-        border-radius: 15px;
-        object-fit: cover;
+    div.img-wrapper{
+        img{
+            height: 250px;
+            width: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+        }
     }
     .price{
         color: $text-color;
