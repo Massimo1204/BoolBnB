@@ -25,12 +25,12 @@
                 <p class="apartment-address fs-5">{{ apartment.address}}</p>
             </div>
         </router-link>
-        <div v-show="showSwipeButtons == true" class="my-previous position-absolute" @click="swipePrevious">
+        <div v-show="showSwipeButtons == true" class="my-previous position-absolute" @click="swipePrevious" @mouseover="setOnSwipeButtons" >
             <span class="my-prev-hook">
                 <i class="fas fa-chevron-left"></i>
             </span>
         </div>
-        <div v-show="showSwipeButtons == true" class="my-next position-absolute" @click="swipeNext">
+        <div v-show="showSwipeButtons == true" class="my-next position-absolute" @click="swipeNext" @mouseover="setOnSwipeButtons" >
             <span class="my-next-hook">
                 <i class="fas fa-chevron-right"></i>
             </span>
