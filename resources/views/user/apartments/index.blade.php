@@ -28,7 +28,7 @@
         )
     </script>
     @endif
-    <div class="add-apartment-jumbo row justify-content-center mb-3">
+    <div class="add-apartment-jumbo row justify-content-center mb-3 px-3">
         <div class="col-12 px-3 py-5 d-flex align-items-center text-white justify-content-between add-apartment-cont">
             <div class="title-add-apartment">
                 <h2 class="text-white">BoolBnb - Host</h2>
@@ -47,7 +47,7 @@
         </div>
     @endif
     @if ($apartments->total())
-        <div class="row py-5 justify-content-between g-3">
+        <div class="row py-5 px-2 justify-content-between g-3">
             @foreach ($apartments as $apartment)
                 <div class="col-12 col-lg-6 d-flex justify-content-between my-apartments">
                     <div class="apartment-img">
@@ -64,7 +64,7 @@
                         <h5>{{ $apartment->address }}</h5>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6 d-flex justify-content-around align-items-center px-2 mb-4">
+                <div class="col-12 col-lg-6 d-flex justify-content-around align-items-center px-3 mb-4">
                     <div class="btn btn-primary me-2">
                         <a class="text-white text-decoration-none"
                             href="{{ route('apartment.edit', $apartment) }}">Modifica</a>
