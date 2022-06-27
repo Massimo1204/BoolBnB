@@ -76,7 +76,7 @@
                         Hai qualche domanda? Non esitare a contattarci direttamente.
                         l'Host ti risponderà in poche ore per aiutarti.
                     </p>
-                    <div class="row p-0">
+                    <div class="row p-0 px-5">
                         <div class="col-md-12 mb-md-0 mb-5 p-0 ">
                             <div class="row p-0">
                                 <div class="col-md-6 px-4">
