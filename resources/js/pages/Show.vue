@@ -1,7 +1,7 @@
 <template>
     <div class="MyContainer container">
-        <div v-if="infoLoaded&&picsLoaded">
-            <div class="row mx-auto px-sm-1 px-md-5 w-100" v-if="apartment.visible">
+        <div v-if="infoLoaded&&picsLoaded&&apartment.visible">
+            <div class="row mx-auto px-sm-1 px-md-5 w-100">
                     <div class="pics position-relative col-12 mx-sm-auto d-flex gap-1">
                         <img :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" class="w-50 rounded h-100" alt="">
                     <div class="otherPics w-50 h-100 d-flex flex-column flex-wrap gap-1">
@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <div class="row mx-auto px-5 w-100" v-if="apartment.visible">
+            <div class="row mx-auto px-5 w-100">
                 <div class="col-sm-12 col-md-8 col-lg-7 mt-4">
                     <h3 class="text-primary">Contatta l'host</h3>
                     <div class="hostCard my-4 w-100 d-flex justify-content-between align-items-center p-3 rounded bg-white shadow">
@@ -134,10 +134,10 @@
                     </div>
                 </section>
             </div>
-            <h1 class="text-center mt-5" v-if="apartment.visible == 0">Nothing To See Here</h1>
         </div>
         <div v-else>
-            <div class="cube mx-auto position-absolute top-50 start-50 translate-middle"><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            <img v-if="apartment.visible == 0" src="https://i.ibb.co/YbYtKPN/404-error-Bool-Bnb.png" alt="Nothing To See Here" class="position-absolute top-50 start-50 translate-middle w-25">
+            <div v-else class="cube mx-auto position-absolute top-50 start-50 translate-middle"><div></div><div></div><div></div><div></div><div></div><div></div></div>
         </div>
     </div>
 </template>
