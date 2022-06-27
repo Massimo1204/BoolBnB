@@ -4,7 +4,7 @@
     <div class="row px-5">
         <div class="col-6 search mt-2">
             <div class="search">
-                <input type="text" placeholder=" " @keyup="getTipsAddress" @keyup.enter="search" v-model="userSearch" required> 
+                <input type="text" placeholder=" " @keyup="getTipsAddress" @keyup.enter="search" v-model="userSearch" required>
                 <div>
                     <svg>
                         <use xlink:href="#path"></use>
@@ -16,7 +16,7 @@
                     <path d="M32.9418651,-20.6880772 C37.9418651,-20.6880772 40.9418651,-16.6880772 40.9418651,-12.6880772 C40.9418651,-8.68807717 37.9418651,-4.68807717 32.9418651,-4.68807717 C27.9418651,-4.68807717 24.9418651,-8.68807717 24.9418651,-12.6880772 C24.9418651,-16.6880772 27.9418651,-20.6880772 32.9418651,-20.6880772 L32.9418651,-29.870624 C32.9418651,-30.3676803 33.3448089,-30.770624 33.8418651,-30.770624 C34.08056,-30.770624 34.3094785,-30.6758029 34.4782612,-30.5070201 L141.371843,76.386562" transform="translate(83.156854, 22.171573) rotate(-225.000000) translate(-83.156854, -22.171573)"></path>
                 </symbol>
             </svg>
-            
+
             <div class="position-relative container-tips" >
                 <ul class="list-group position-absolute" id="results" v-if="userSearch != ''" >
                     <li class="border-primary " v-for="(result,i) in tipsFiltered" :key="i" @click="passAddress(result)">{{result}}</li>
@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="col-6 mt-3 d-flex justify-content-end">
-        
+
             <button class="btn btn-primary btn-sm ">
                 <router-link :to="{name: 'AdvancedSearch'}" class="text-decoration-none text-white">
                     Ricerca avanzata
@@ -40,9 +40,9 @@
     </div>
     <div class="row px-5">
         <SingleApartment v-for="(apartment,index) in apartmentsShow" :key="index" :apartment="apartment" :isLoaded='isLoaded' />
-        <!-- <div class="col-12" :class="{'nothing' : apartmentsShow == '' && sponsoredApartments == '' } ">
-            <h1 class="text-center text-primary" v-show="apartmentsShow == '' "> Niente da mostrare</h1>
-        </div> -->
+        <div v-if="zeroResults" class="col-12" :class="{'nothing' : apartmentsShow == '' && sponsoredApartments == '' }  ">
+            <h1 class="text-center text-primary pt-5" >Nessun risultato per la tua ricerca</h1>
+        </div>
     </div>
     <div class="row mb-3" v-if="( apartmentsShow.length == 12 || pagination.current_page == last_page)">
         <div class="myPagination col-12 d-flex justify-content-between align-content-center my-3 px-sm-3 w-50 mx-auto" v-if="apartmentsSearch !== ''">
@@ -79,6 +79,7 @@ export default {
         tips:[],
         results:[],
         isLoaded: false,
+        zeroResults : false
         }
     },
     methods:{
@@ -100,6 +101,7 @@ export default {
         },
         search(){
             if(this.userSearch != "" && this.userSearch.length > 3){
+                this.apartmentsShow = [];
                 console.log(this.tips[0]);
                 axios
                 .get('http://localhost:8000/api/apartment?address='+ this.userSearch.replace(/ /g,"%20"))
@@ -107,15 +109,21 @@ export default {
                     this.apartmentsSearch = resp.data.apartmentFiltered;
                     console.log(this.apartmentsSearch);
                     this.apartmentsShow=this.apartmentsSearch;
+                    if(this.apartmentsShow.length == 0){
+                        this.zeroResults = true;
+                    }
                 })
                 .catch((error)=>{
                     console.warn(error);
                     this.apartmentsSearch=null;
+                    this.zeroResults = true;
                 })
                 this.userSearch="";
+                this.zeroResults = false;
             }
             else{
                 this.apartmentsShow = this.apartments;
+                this.zeroResults = true;
             }
         },
 		getSponsoredApartments(){
@@ -139,7 +147,7 @@ export default {
                         for (let index = 0; index < 5; index++) {
                             if(this.tips[index]["address"]["freeformAddress"] != undefined && this.tips[index]["address"]["countryCode"] != undefined ){
                                 this.results[index]=this.tips[index]["address"]["freeformAddress"] + " " + this.tips[index]["address"]["countryCode"];
-                            }                
+                            }
                         }
                     })
                     .catch((error)=>{
@@ -234,7 +242,7 @@ $color: $primary;
 }
 .container-tips{
     // height: 300px;
-    
+
     ul{
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         background-color: white;
@@ -254,7 +262,7 @@ $color: $primary;
             background-color: $primary;
             color: white;
             // border-radius: 15px;
-            
+
         }
         li:first-child {
             border-radius: 5px 5px 0 0;
