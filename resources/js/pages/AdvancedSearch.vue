@@ -1,5 +1,5 @@
 <template>
-  <div class="w-100 overflow-hidden">
+  <div class="overflow-auto container">
     <div class="row text-primary">
       <div class="col-lg-3 col-md-12 ps-5 pe-4 pt-2">
         <form>
