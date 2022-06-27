@@ -1,6 +1,6 @@
 <template>
 
-<div class="container">
+<div class="container" :class="{'dark-mode' : dark == true}">
     <div class="row px-5">
         <div class="col-6 search mt-2">
             <div class="search">
@@ -30,6 +30,7 @@
                     Ricerca avanzata
                 </router-link>
             </button>
+            <!-- <button class="btn btn-light ms-2" :class="{'dark-mode' : dark == false} "  @click="darkmode"> <i class="fas fa-lightbulb"></i></button> -->
         </div>
     </div>
     <div v-if="sponsoredApartments.length != 0" class="border-2 border-bottom border-white row px-5 mb-3">
@@ -79,7 +80,8 @@ export default {
         tips:[],
         results:[],
         isLoaded: false,
-        zeroResults : false
+        zeroResults : false,
+        dark:false,
         }
     },
     methods:{
@@ -163,7 +165,17 @@ export default {
             setTimeout(() => {
                 this.isLoaded = true;
             }, 1000);
+        },
+        darkmode(){
+            if(this.dark == false){
+                // console.log("ciao");
+                this.dark = true;
+            }
+            else{
+                this.dark=false;
+            }
         }
+
     },
     created(){
         this.getApartments(1);
