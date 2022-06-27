@@ -34,7 +34,7 @@
               </div>
               <div class="w-75">
                 <label for="bed">Posti letto:</label><br>
-                <select name="bed" id="bed" v-model="bedsToSearch" class="w-75 form-select h-50">
+                <select name="bed" id="bed" v-model="bedsToSearch" class="w-75 form-select h-50 shadow-none">
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -51,7 +51,7 @@
               </div>
               <div class="w-75">
                 <label for="room">Numero di stanze:</label><br>
-                <select name="room" id="room" v-model="roomsToSearch" class="w-75 ">
+                <select name="room" id="room" v-model="roomsToSearch" class="w-75 form-select h-50 shadow-none">
                   <option value="1">1 stanza</option>
                   <option value="2">2 stanze</option>
                   <option value="3">3 stanze</option>
@@ -73,7 +73,7 @@
                   name="radius"
                   id="radius"
                   min="1"
-                  class="w-75"
+                  class="w-75 form-control h-50 shadow-none"
                   v-model="rangeToSearch"
                 />
               </div>
