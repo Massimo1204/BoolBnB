@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <div class="row mx-auto px-5 w-100">
+        <div class="row mx-auto px-1 px-md-5 w-100">
             <div class="col-12">
                 <h3 class="text-primary">Mappa</h3>
             </div>
@@ -41,7 +41,7 @@
                 <button class="btn btn-light position-absolute dark" @click="darkmode()"> <i class="fas fa-lightbulb"></i></button>
             </div>
         </div>
-        <div class="row mx-auto px-5 w-100" v-if="apartment.visible">
+        <div class="row mx-auto px-2 px-md-5 w-100" v-if="apartment.visible">
             <div class="col-sm-12 col-md-8 col-lg-7 mt-4">
                 <h3 class="text-primary">Contatta l'host</h3>
                 <div class="hostCard my-4 w-100 d-flex justify-content-between align-items-center p-3 rounded bg-white shadow">
@@ -53,7 +53,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="showContact" class="contactContainer shadow border rounded my-4 mx-5" id="message">
+        <div v-if="showContact" class="contactContainer shadow border rounded my-4 mx-3 mx-md-5" id="message">
             <section id="contacts" class="col-12 mx-auto px-2">
                 <div class="container-fluid">
                     <div
@@ -76,7 +76,7 @@
                         Hai qualche domanda? Non esitare a contattarci direttamente.
                         l'Host ti risponderà in poche ore per aiutarti.
                     </p>
-                    <div class="row p-0 px-5">
+                    <div class="row p-0 px-3 px-md-5">
                         <div class="col-md-12 mb-md-0 mb-5 p-0 ">
                             <div class="row p-0">
                                 <div class="col-md-6 px-4">
