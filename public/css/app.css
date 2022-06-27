@@ -20527,6 +20527,9 @@ body {
   min-width: 375px;
   border-bottom: 2px solid white;
 }
+.the-header .dropdown-menu {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
 
 main .container {
   background-color: rgba(245, 248, 255, 0.95);

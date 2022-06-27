@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center pt-5">
+        <div class="row justify-content-center pt-3">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Register') }}</div>
+                    <div class="card-header">Edit Account Info</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('user.update', Auth::id()) }}" enctype="multipart/form-data">
@@ -139,8 +139,8 @@
                     </div>
 
                     <div class="form-group row mb-2">
-                        <div class="col-md-6 offset-md-4">
-                            <button type="submit" class="btn btn-primary">
+                        <div class="col-1 mx-auto">
+                            <button type="submit" class="btn btn-primary mx-auto">
                                 {{ __('Edit') }}
                             </button>
                         </div>
