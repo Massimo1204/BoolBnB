@@ -79,9 +79,9 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-xl-6">
                         <label for="n_rooms">Numero di stanze:*</label>
-                        <input type="number" name="n_rooms" id="n_rooms"
+                        <input class="float-end" type="number" name="n_rooms" id="n_rooms"
                             value="{{ old('n_rooms') ?? $apartment->n_rooms }}" required min="1">
                         @error('n_rooms')
                             <div class="alert alert-danger mt-2">
@@ -89,9 +89,9 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-xl-6">
                         <label for="n_bedrooms">Numero di stanze da letto:*</label>
-                        <input type="number" name="n_bedrooms" id="n_bedrooms"
+                        <input class="float-end" type="number" name="n_bedrooms" id="n_bedrooms"
                             value="{{ old('n_bedrooms') ?? $apartment->n_bedrooms }}" required min="1">
                         @error('n_bedrooms')
                             <div class="alert alert-danger mt-2">
@@ -99,9 +99,9 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-xl-6">
                         <label for="n_beds">Numero di letti:*</label>
-                        <input type="number" name="n_beds" id="n_beds" value="{{ old('n_beds') ?? $apartment->n_beds }}"
+                        <input class="float-end" type="number" name="n_beds" id="n_beds" value="{{ old('n_beds') ?? $apartment->n_beds }}"
                             required min="1">
                         @error('n_beds')
                             <div class="alert alert-danger mt-2">
@@ -109,9 +109,9 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-xl-6">
                         <label for="n_bathrooms">Numero di bagni:*</label>
-                        <input type="number" name="n_bathrooms" id="n_bathrooms"
+                        <input class="float-end" type="number" name="n_bathrooms" id="n_bathrooms"
                             value="{{ old('n_bathrooms') ?? $apartment->n_bathrooms }}" required min="1">
                         @error('n_bathrooms')
                             <div class="alert alert-danger mt-2">
@@ -119,9 +119,9 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-xl-6">
                         <label for="guests">Numero massimo di ospiti:*</label>
-                        <input type="number" name="guests" id="guests" value="{{ old('guests') ?? $apartment->guests }}"
+                        <input class="float-end" type="number" name="guests" id="guests" value="{{ old('guests') ?? $apartment->guests }}"
                             required min="1">
                         @error('guests')
                             <div class="alert alert-danger mt-2">
@@ -130,9 +130,9 @@
                         @enderror
                     </div>
 
-                    <div class="col-12 col-md-6">
-                        <label for="price">Inserisci il prezzo a notte per ospite:* </label>
-                        <input type="number" step="0.01" name="price" id="price"
+                    <div class="col-12 col-xl-6">
+                        <label for="price">Prezzo per notte:* </label>
+                        <input class="float-end" type="number" step="0.01" name="price" id="price"
                             value="{{ old('price') ?? $apartment->price }}" required min="1">
                         @error('price')
                             <div class="alert alert-danger mt-2">
@@ -140,9 +140,9 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="col-12 col-md-6">
-                        <label for="square_meters">Inserisci il numero di metri quadrati: </label>
-                        <input type="number" name="square_meters" id="square_meters"
+                    <div class="col-12 col-xl-6">
+                        <label for="square_meters">Numero di metri quadrati: </label>
+                        <input class="float-end" type="number" name="square_meters" id="square_meters"
                             value="{{ old('square_meters') ?? $apartment->square_meters }}">
                         @error('square_meters')
                             <div class="alert alert-danger mt-2">
@@ -216,7 +216,7 @@
                         {{-- apartment-title="{{ $apartment->title }}" --}}
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-md ms-auto">Cancella</a>
+                        <button type="submit" class="btn btn-danger btn-md ms-auto">Elimina</a>
                     </form>
                 @endif
             </div>

@@ -8,7 +8,7 @@
             </h1>
             <form class="container-fluid px-5 mt-4" action="{{ route('apartment.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                <div class="row g-2 px-4 apartment">
+                <div class="row gy-2 gx-4 px-4 apartment">
                     <div class="col-12">
                         <label for="title">Titolo*</label>
                         <input class="form-control" type="text" name="title" id="title"
@@ -41,9 +41,9 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="col-12 ">
-                        <label for="n_rooms">N. di stanze:*</label>
-                        <input type="number" name="n_rooms" id="n_rooms" value="{{ old('n_rooms') ?? '' }}" required
+                    <div class="col-12 col-xl-6">
+                        <label for="n_rooms">Numero di stanze:*</label>
+                        <input class="float-end" type="number" name="n_rooms" id="n_rooms" value="{{ old('n_rooms') ?? '' }}" required
                             min="1">
                         @error('n_rooms')
                             <div class="alert alert-danger mt-2">
@@ -52,20 +52,20 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="col-12 ">
-                        <label for="n_bedrooms">N. di stanze da letto:*</label>
-                        <input type="number" name="n_bedrooms" id="n_bedrooms" value="{{ old('n_bedrooms') ?? '' }}" required
+                    <div class="col-12 col-xl-6">
+                        <label for="n_bedrooms">Numero di stanze da letto:*</label>
+                        <input class="float-end" type="number" name="n_bedrooms" id="n_bedrooms" value="{{ old('n_bedrooms') ?? '' }}" required
                             min="1">
                         @error('n_bedrooms')
                             <div class="alert alert-danger mt-2">
-                                Il N. di stanze da letto
+                                Il Numero di stanze da letto
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
-                    <div class="col-12 ">
-                        <label for="n_bathrooms">N. di bagni:*</label>
-                        <input type="number" name="n_bathrooms" id="n_bathrooms" value="{{ old('n_bathrooms') ?? '' }}"
+                    <div class="col-12 col-xl-6">
+                        <label for="n_bathrooms">Numero di bagni:*</label>
+                        <input class="float-end" type="number" name="n_bathrooms" id="n_bathrooms" value="{{ old('n_bathrooms') ?? '' }}"
                             required min="1">
                         @error('n_bathrooms')
                             <div class="alert alert-danger mt-2">
@@ -74,20 +74,20 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="col-12">
-                        <label for="guests">N. massimo di ospiti:*</label>
-                        <input type="number" name="guests" id="guests" value="{{ old('guests') ?? '' }}" required
+                    <div class="col-12 col-xl-6">
+                        <label for="guests">Numero massimo di ospiti:*</label>
+                        <input class="float-end" type="number" name="guests" id="guests" value="{{ old('guests') ?? '' }}" required
                             min="1">
                         @error('guests')
                             <div class="alert alert-danger mt-2">
-                                Il N. massimo di ospiti
+                                Il Numero massimo di ospiti
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
-                    <div class="col-12 ">
-                        <label for="n_beds">N. di letti:*</label>
-                        <input type="number" name="n_beds" id="n_beds" value="{{ old('n_beds') ?? '' }}" required
+                    <div class="col-12 col-xl-6">
+                        <label for="n_beds">Numero di letti:*</label>
+                        <input class="float-end" type="number" name="n_beds" id="n_beds" value="{{ old('n_beds') ?? '' }}" required
                             min="1">
                         @error('n_beds')
                             <div class="alert alert-danger mt-2">
@@ -97,10 +97,10 @@
                         @enderror
                     </div>
 
-                    <div class="col-12  mb-3">
-                        <label for="price">Prezzo a notte per ospite:*</label>
+                    <div class="col-12 col-xl-6">
+                        <label for="price">Prezzo per ospite:*</label>
 
-                        <input type="number" name="price" id="price" value="{{ old('price') ?? '' }}" required>
+                        <input class="float-end" type="number" name="price" id="price" value="{{ old('price') ?? '' }}" required>
                         @error('price')
                             <div class="alert alert-danger mt-2">
                                 Il prezzo
@@ -108,13 +108,10 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="col-12 ">
-                        <label for="square_meters">N. di metri quadrati: </label>
-                        <input type="number" name="square_meters" id="square_meters"
+                    <div class="col-12 col-xl-6">
+                        <label for="square_meters">Numero di metri quadrati: </label>
+                        <input class="float-end" type="number" name="square_meters" id="square_meters"
                             value="{{ old('square_meters') ?? '' }}">
-                    </div>
-                    <div class="col-12 ">
-
                     </div>
                     <div class="col-3">
                         <label for="visible">Visibile </label>
@@ -143,9 +140,9 @@
                         </ul>
                     </div>
 
-                    <label for="address_city">Servizi:*</label><br>
+                    <label for="address_city">Servizi:*</label>
                     @foreach ($services as $service)
-                        <div class="service col-lg-4">
+                        <div class="service col-lg-6">
                             <input class="form-check-input" type="checkbox" name="service[]" value="{{ $service->id }}"
                                 {{ (is_array(old('service')) and in_array($service->id, old('service'))) ? ' checked' : '' }}>
                             <label for="categories">
@@ -159,16 +156,14 @@
                         </div>
                     @enderror
 
-
                     <div class="col-12 mt-4">
                         <div class="w-100">
-                            <label for="image[]">Inserisci altre foto del tuo appartamento</label>
+                            <label class="mb-1" for="image[]">Inserisci altre foto del tuo appartamento</label>
                             <input type="file" class="form-control" name="images[]" id="image[]" multiple>
                         </div>
                     </div>
-
                     <div class="col-12 text-center mt-3">
-                        <button class="btn btn-outline-primary" type="submit">send</button>
+                        <button class="btn btn-outline-primary" type="submit">Invia</button>
                     </div>
                 </div>
             </form>
