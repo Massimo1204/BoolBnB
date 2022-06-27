@@ -137,7 +137,7 @@
         </div>
         <div v-else>
             <img v-if="apartment.visible == 0" src="https://i.ibb.co/YbYtKPN/404-error-Bool-Bnb.png" alt="Nothing To See Here" class="position-absolute top-50 start-50 translate-middle w-25">
-            <div v-else class="cube mx-auto position-absolute top-50 start-50 translate-middle"><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            <div v-else class="mx-auto position-absolute top-50 start-50 translate-middle"><div class="blades"><div></div><div></div><div></div><div></div><div></div></div></div>
         </div>
     </div>
 </template>
@@ -208,7 +208,7 @@ export default {
                 this.apartment=response.data;
                 console.log(this.apartment);
                 this.getHost(this.apartment.user_id);
-                setTimeout(this.infoLoaded=true,300);
+                setTimeout(this.infoLoaded=true,5000);
                 this.initializeMap();
             })
 
@@ -218,7 +218,7 @@ export default {
             .then(response=>{
                 this.pictures=response.data;
             });
-                setTimeout(this.picsLoaded=true,300);
+                setTimeout(this.picsLoaded=true,5000);
                 console.log(this.picsLoaded);
         },
         getHost(id){
@@ -322,7 +322,7 @@ export default {
             this.initializeMap()
         }
     },
-    created(){
+    mounted(){
         this.getInfo();
         this.getpics();
     }
@@ -426,68 +426,46 @@ export default {
     color: white;
 }
 
-$size: 40px;
-$color-one: red;
-$color-two: orange;
-$color-three: yellow;
-$color-four: green;
-$color-five: blue;
-$color-six: indigo;
+.blades {
+    -webkit-animation: spin 1s infinite linear;
+    animation: spin 1s infinite linear;
+    height: 20px;
+    width: 20px; 
+}
+.blades div {
+    border: 4px solid transparent;
+    border-left-color: var(--primary);
+    height: 20px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    -webkit-transform-origin: top left;
+            transform-origin: top left;
+    width: 20px; }
+.blades div:nth-child(1) {
+    -webkit-transform: rotate(72deg) translateY(5px);
+            transform: rotate(72deg) translateY(5px); }
+.blades div:nth-child(2) {
+    -webkit-transform: rotate(144deg) translateY(5px);
+            transform: rotate(144deg) translateY(5px); }
+.blades div:nth-child(3) {
+    -webkit-transform: rotate(216deg) translateY(5px);
+            transform: rotate(216deg) translateY(5px); }
+.blades div:nth-child(4) {
+    -webkit-transform: rotate(288deg) translateY(5px);
+            transform: rotate(288deg) translateY(5px); }
+.blades div:nth-child(5) {
+    -webkit-transform: rotate(360deg) translateY(5px);
+            transform: rotate(360deg) translateY(5px); }
 
-@keyframes cube {
-    0% {
-        transform: rotate(45deg) rotateX(-25deg) rotateY(25deg);
-    }
-    50% {
-        transform: rotate(45deg) rotateX(-385deg) rotateY(25deg);
-    }
-    100% {
-        transform: rotate(45deg) rotateX(-385deg) rotateY(385deg);
-    }
-    }
+@-webkit-keyframes spin {
+    to {
+        -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
 
-
-    .cube {
-    animation: cube 2s infinite ease;
-    height: $size;
-    transform-style: preserve-3d;
-    width: $size;
-
-    div {
-        background-color: rgba(167, 167, 167, 0.25);
-        height: 100%;
-        position: absolute;
-        width:  100%;
-        border: 2px solid rgb(0, 0, 0);
-
-        &:nth-of-type(1) {
-        transform: translateZ(-($size / 2)) rotateY(180deg);
-        }
-
-        &:nth-of-type(2) {
-        transform: rotateY(-270deg) translateX(50%);
-        transform-origin: top right;
-        }
-
-        &:nth-of-type(3) {
-        transform: rotateY(270deg) translateX(-50%);
-        transform-origin: center left;
-        }
-
-        &:nth-of-type(4) {
-        transform: rotateX(90deg) translateY(-50%);
-        transform-origin: top center;
-        }
-
-        &:nth-of-type(5) {
-        transform: rotateX(-90deg) translateY(50%);
-        transform-origin: bottom center;
-        }
-
-        &:nth-of-type(6) {
-        transform: translateZ(($size / 2));
-        }
-    }
-
+@keyframes spin {
+    to {
+        -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); }
 }
 </style>
