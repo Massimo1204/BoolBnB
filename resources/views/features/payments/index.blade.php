@@ -19,9 +19,9 @@
                 @csrf
                 <section>
                     <label for="amount">
-                        <span class="input-label" readonly>Amount</span>
+                        <span class="input-label" readonly>Prezzo</span>
                         <div class="input-wrapper amount-wrapper">
-                            <input readonly id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="{{$amount}}">
+                            <input readonly id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="{{$amount}} €">
                         </div>
                     </label>
 
@@ -46,9 +46,10 @@
         braintree.dropin.create({
             authorization: client_token,
             selector: '#bt-dropin',
-            paypal: {
-                flow: 'vault'
-            }
+            locale: 'it_IT',
+            // paypal: {
+            //     flow: 'vault'
+            // }
         }, function (createErr, instance) {
             if (createErr) {
                 console.log('Create Error', createErr);
