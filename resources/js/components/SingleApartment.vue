@@ -78,7 +78,7 @@ export default {
             this.apartmentImages[0] = this.apartment.image;
             this.apartment.pictures.forEach(picture => {
                 this.apartmentImages.push(picture.image);
-                console.log(this.apartmentImages)
+                // console.log(this.apartmentImages)
             });
         },
         setOnSwipeButtons(){

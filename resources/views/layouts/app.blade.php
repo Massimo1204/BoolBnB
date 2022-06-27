@@ -31,7 +31,7 @@
 
 <body>
     <div id="app" class="container the-header">
-        <nav class="navbar navbar-expand-md navbar-light px-5">
+        <nav class="navbar navbar-expand-md navbar-light px-5" >
 
             <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
 
@@ -120,6 +120,9 @@
                                 <a class="dropdown-item" href="{{ route('apartment.index') }}">
                                     {{ __('Gestisci gli annunci') }}
                                 </a>
+                                {{-- <div class="dropdown-item" id="theme-toggler">
+                                    <i class="fas fa-lightbulb" ></i>
+                                </div> --}}
                                 <hr>
                                 <a class="dropdown-item" href="{{ route('user.edit', Auth::id()) }}">
                                     {{ __('Account') }}
@@ -143,6 +146,7 @@
 
     <main>
         @yield('content')
+        <div id="root"></div>
     </main>
 
     @yield('footer-scripts')

@@ -20680,35 +20680,39 @@ div.show-thumbnails img #results li {
   color: white !important;
 }
 
-main .container.dark-mode {
+.dark .the-header {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+}
+.dark .container {
   background-color: rgba(0, 0, 0, 0.9) !important;
   color: white !important;
 }
-main .container.dark-mode .search input {
+.dark .container .search input {
   color: white !important;
 }
-main .container.dark-mode .search svg {
+.dark .container .search svg {
   stroke: white !important;
 }
-main .container.dark-mode .btn-primary {
+.dark .container .btn-primary {
   color: #000;
   background-color: white;
   border-color: white;
 }
-main .container.dark-mode .btn-primary .text-white {
+.dark .container .btn-primary .text-white {
   color: #000 !important;
 }
-main .container.dark-mode .btn-outline-primary {
+.dark .container .btn-outline-primary {
   border-color: white;
   color: white;
 }
-main .container.dark-mode .btn-outline-primary:hover {
+.dark .container .btn-outline-primary:hover {
   background-color: white;
   color: #000;
 }
-main .container.dark-mode .border-primary {
+.dark .container .border-primary {
   border-color: white !important;
 }
-main .container.dark-mode .text-primary, main .container.dark-mode h3, main .container.dark-mode .h3, main .container.dark-mode p.apartment-address {
+.dark .container .text-primary, .dark .container h3, .dark .container .h3, .dark .container p.apartment-address {
   color: white !important;
 }
