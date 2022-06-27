@@ -5,7 +5,12 @@
                 <div class="pics position-relative col-12 mx-sm-auto d-flex gap-1">
                     <img :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" class="w-50 rounded h-100" alt="">
                     <div class="otherPics w-50 h-100 d-flex flex-column flex-wrap gap-1">
-                        <img v-for="pic,index in pictures" :key="index" :src="(pic.image.startsWith('https://')) ? pic.image : '../../storage/'+ pic.image" class="rounded">
+                        <div v-for="pic,index in pictures" :key="'show-images' + index" class="image-wrapper">
+                            <img v-show="isLoaded == true" :src="(pic.image.startsWith('https://')) ? pic.image : '../../storage/'+ pic.image" class="rounded element-fill">
+                            <div v-if="isLoaded == false" class="d-flex justify-content-center align-items-center element-fill">
+                                <Loader/>
+                            </div>
+                        </div>
                     </div>
                     <div class="price position-absolute px-2 py-1 bg-light rounded-pill">
                         <span v-if="apartment.available">{{apartment.price}}	&euro;</span>
@@ -133,7 +138,7 @@
                 </div>
             </section>
         </div>
-            <h1 class="text-center mt-5" v-if="apartment.visible == 0">Nothing To See Here</h1>
+        <h1 class="text-center mt-5" v-if="apartment.visible == 0">L'appartamento non è visibile</h1>
     </div>
 </template>
 <script>
@@ -143,11 +148,14 @@ import Services from '../components/Services.vue';
 import tt from '@tomtom-international/web-sdk-maps';
 import { isEmpty } from "lodash";
 import {APP_KEYMAPS} from "../key";
+import Loader from "../components/Loader.vue";
+
 export default {
     name:'Show',
     components:{
         Details,
-        Services
+        Services,
+        Loader,
     },
     data(){
         return {
@@ -167,6 +175,8 @@ export default {
             alert: false,
             alertMessage: "",
             mapStyle:"https://api.tomtom.com/style/1/style/22.2.1-9/?map=2/basic_street-light",
+            isLoaded: false,
+            userInfo:null,
         };
     },
     computed: {
@@ -191,12 +201,14 @@ export default {
             this.map = Object.freeze(this.map)
         },
         getInfo(){
+            this.isLoaded = false;
             Axios.get('/api/apartment/'+this.id)
             .then(response=>{
                 this.apartment=response.data;
                 console.log(this.apartment);
                 this.getHost(this.apartment.user_id);
                 this.initializeMap()
+                this.setLoader();
             })
         },
         getpics(){
@@ -211,6 +223,11 @@ export default {
                 this.host=response.data[0][0];
                 console.log(this.host);
             })
+        },
+        setLoader(){
+            setTimeout(() => {
+                this.isLoaded = true;
+            }, 1500);
         },
         validateForm() {
             // Validazione
@@ -303,11 +320,23 @@ export default {
                 this.mapStyle="https://api.tomtom.com/style/1/style/22.2.1-9/?map=2/basic_street-light"
             }
             this.initializeMap()
+        },
+        getUserInfo(){
+             axios.get('http://127.0.0.1:8000/api/apartment/host/' + this.$userId)
+                .then((result) => {
+                    this.form.email = result.data[0][0].email;
+                    this.form.full_name = result.data[0][0].first_name + ' ' + result.data[0][0].last_name;
+
+
+                }).catch((error) => {
+                    console.warn(error);
+                })
         }
     },
     created(){
         this.getInfo();
         this.getpics();
+        this.getUserInfo();
     }
 }
 </script>
@@ -334,15 +363,21 @@ export default {
         }
         .otherPics{
             overflow-y: hidden;
-            img{
+            div.image-wrapper{
                 width: 49.5%;
                 height: 49%;
+                .element-fill{
+                    height: 100%;
+                    width: 100%;
+                }
             }
         }
     @media(max-width: 767.98px)  {
         .otherPics{
-            img{
+            div.image-wrapper{
                 width: 99.5%;
+                // img{
+                // }
             }
             }
         .contactContainer{
