@@ -1,9 +1,9 @@
 <template>
     <div class="MyContainer container">
-        <div v-if="infoLoaded&&picsLoaded&&apartment.visible">
-            <div class="row mx-auto px-sm-1 px-md-5 w-100">
-                    <div class="pics position-relative col-12 mx-sm-auto d-flex gap-1">
-                        <img :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" class="w-50 rounded h-100" alt="">
+        <div>
+            <div class="row mx-auto px-sm-1 px-md-5 w-100" v-if="apartment.visible">
+                <div class="pics position-relative col-12 mx-sm-auto d-flex gap-1">
+                    <img :src="(apartment.image.startsWith('https://')) ? apartment.image : '../../storage/'+ apartment.image" class="w-50 rounded h-100" alt="">
                     <div class="otherPics w-50 h-100 d-flex flex-column flex-wrap gap-1">
                         <img v-for="pic,index in pictures" :key="index" :src="(pic.image.startsWith('https://')) ? pic.image : '../../storage/'+ pic.image" class="rounded">
                     </div>
@@ -26,122 +26,116 @@
                     <Services :id="id"/>
                 </div>
             </div>
-            <div class="row mx-auto px-5 w-100" >
-                <div class="col-12">
-                    <h3 class="text-primary">Mappa</h3>
-                </div>
-                <div class="col-12 position-relative">
-                    <div class="map" id="map" ref="mapRef"></div>
-                    <button class="btn btn-light position-absolute dark" @click="darkmode()"> <i class="fas fa-lightbulb"></i></button>
-                </div>
+        </div>
+        <div class="row mx-auto px-5 w-100">
+            <div class="col-12">
+                <h3 class="text-primary">Mappa</h3>
             </div>
-
-            <div class="row mx-auto px-5 w-100">
-                <div class="col-sm-12 col-md-8 col-lg-7 mt-4">
-                    <h3 class="text-primary">Contatta l'host</h3>
-                    <div class="hostCard my-4 w-100 d-flex justify-content-between align-items-center p-3 rounded bg-white shadow">
-                        <div class="d-flex justify-content-around align-items-center">
-                            
-                            <img class="rounded-circle" :src="((host.profile_picture) && (host.profile_picture.startsWith('https://'))) ? host.profile_picture : '../../storage/'+ host.profile_picture" :alt="host.id">
-                            <h4 class="m-0 text-primary">{{host.first_name}} {{host.last_name}}</h4>
-                        </div>
-                        <button type="button" class="btn btn-outline-primary shadow-none host" @click="showMessage"><a class=" text-decoration-none" href="#message"> Contatta l'host</a></button>
+            <div class="col-12 position-relative">
+                <div class="map" id="map" ref="mapRef"></div>
+                <button class="btn btn-light position-absolute dark" @click="darkmode()"> <i class="fas fa-lightbulb"></i></button>
+            </div>
+        </div>
+        <div class="row mx-auto px-5 w-100" v-if="apartment.visible">
+            <div class="col-sm-12 col-md-8 col-lg-7 mt-4">
+                <h3 class="text-primary">Contatta l'host</h3>
+                <div class="hostCard my-4 w-100 d-flex justify-content-between align-items-center p-3 rounded bg-white shadow">
+                    <div class="d-flex justify-content-around align-items-center">
+                        <img class="rounded-circle" :src="((host.profile_picture) && (host.profile_picture.startsWith('https://'))) ? host.profile_picture : '../../storage/'+ host.profile_picture" :alt="host.id">
+                        <h4 class="m-0 text-primary">{{host.first_name}} {{host.last_name}}</h4>
                     </div>
+                    <button type="button" class="btn btn-outline-primary shadow-none host" @click="showMessage"><a class=" text-decoration-none" href="#message"> Contatta l'host</a></button>
                 </div>
             </div>
-            <div v-if="showContact" class="contactContainer shadow border rounded my-4 mx-5" id="message">
-                <section id="contacts" class="col-12 mx-auto px-2">
-                    <div class="container-fluid">
-                        <div
-                            class="alert d-flex justify-content-between align-items-center"
-                            :class="`alert-${type}`"
-                            role="alert"
-                            v-if="(alert && type !='success')"
-                        >
-                            <span v-if="alertMessage">{{ alertMessage }} </span>
-                            <ul v-if="hasErrors" class="mb-0 pl-4">
-                                <li v-for="(error, key) in errors" :key="key">{{ error }}</li>
-                            </ul>
-                            <span @click="alert = !alert" class="h2 mb-0" role="button">&times;</span>
-                        </div>
-                        <div v-if="(alert && type =='success')">
-                            {{showAlert()}}
-                        </div>
-                        <h2 class="h1-responsive font-weight-bold text-center my-4">Contattaci</h2>
-                        <p class="text-center w-responsive mx-auto">
-                            Hai qualche domanda? Non esitare a contattarci direttamente.
-                            l'Host ti risponderà in poche ore per aiutarti.
-                        </p>
-                        <div class="row p-0">
-                            <div class="col-md-12 mb-md-0 mb-5 p-0 ">
-                                <div class="row p-0">
-                                    <div class="col-md-6 px-4">
-                                        <div class="md-form mb-3">
-                                            <input
-                                                type="text"
-                                                id="full_name"
-                                                v-model="form.full_name"
-                                                class="form-control border-info shadow-none"
-                                                :class="{ 'is-invalid': errors.full_name }"
-                                                placeholder="Il tuo nome"
-                                            />
-                                            <div v-if="errors.full_name" class="invalid-feedback">
-                                                {{ errors.full_name }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 px-4 mb-3">
-                                        <div class="md-form mb-0">
-                                            <input
-                                                type="text"
-                                                id="email"
-                                                v-model="form.email"
-                                                class="form-control border-info shadow-none"
-                                                :class="{ 'is-invalid': errors.email }"
-                                                placeholder="La tua email"
-                                            />
-                                            <div v-if="errors.email" class="invalid-feedback">
-                                                {{ errors.email }}
-                                            </div>
+        </div>
+        <div v-if="showContact" class="contactContainer shadow border rounded my-4 mx-5" id="message">
+            <section id="contacts" class="col-12 mx-auto px-2">
+                <div class="container-fluid">
+                    <div
+                        class="alert d-flex justify-content-between align-items-center"
+                        :class="`alert-${type}`"
+                        role="alert"
+                        v-if="(alert && type !='success')"
+                    >
+                        <span v-if="alertMessage">{{ alertMessage }} </span>
+                        <ul v-if="hasErrors" class="mb-0 pl-4">
+                            <li v-for="(error, key) in errors" :key="key">{{ error }}</li>
+                        </ul>
+                        <span @click="alert = !alert" class="h2 mb-0" role="button">&times;</span>
+                    </div>
+                    <div v-if="(alert && type =='success')">
+                        {{showAlert()}}
+                    </div>
+                    <h2 class="h1-responsive font-weight-bold text-center my-4">Contattaci</h2>
+                    <p class="text-center w-responsive mx-auto">
+                        Hai qualche domanda? Non esitare a contattarci direttamente.
+                        l'Host ti risponderà in poche ore per aiutarti.
+                    </p>
+                    <div class="row p-0">
+                        <div class="col-md-12 mb-md-0 mb-5 p-0 ">
+                            <div class="row p-0">
+                                <div class="col-md-6 px-4">
+                                    <div class="md-form mb-3">
+                                        <input
+                                            type="text"
+                                            id="full_name"
+                                            v-model="form.full_name"
+                                            class="form-control border-info shadow-none"
+                                            :class="{ 'is-invalid': errors.full_name }"
+                                            placeholder="Il tuo nome"
+                                        />
+                                        <div v-if="errors.full_name" class="invalid-feedback">
+                                            {{ errors.full_name }}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row p-0">
-                                    <div class="col-md-12 px-4">
-                                        <div class="md-form">
-                                            <textarea
-                                                type="text"
-                                                id="text"
-                                                v-model="form.text"
-                                                rows="4"
-                                                class="form-control border-info md-textarea shadow-none"
-                                                :class="{ 'is-invalid': errors.text }"
-                                                placeholder="Il tuo messaggio"></textarea>
-                                            <div v-if="errors.text" class="invalid-feedback">
-                                                {{ errors.text }}
-                                            </div>
+                                <div class="col-md-6 px-4 mb-3">
+                                    <div class="md-form mb-0">
+                                        <input
+                                            type="text"
+                                            id="email"
+                                            v-model="form.email"
+                                            class="form-control border-info shadow-none"
+                                            :class="{ 'is-invalid': errors.email }"
+                                            placeholder="La tua email"
+                                        />
+                                        <div v-if="errors.email" class="invalid-feedback">
+                                            {{ errors.email }}
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-center my-3 p-0">
-                                        <button class="btn btn-primary" @click="sendForm">
-                                            Invia
-                                        </button>
-                                    </div>
-                                    <div class="status"></div>
                                 </div>
+                            </div>
+                            <div class="row p-0">
+                                <div class="col-md-12 px-4">
+                                    <div class="md-form">
+                                        <textarea
+                                            type="text"
+                                            id="text"
+                                            v-model="form.text"
+                                            rows="4"
+                                            class="form-control border-info md-textarea shadow-none"
+                                            :class="{ 'is-invalid': errors.text }"
+                                            placeholder="Il tuo messaggio"></textarea>
+                                        <div v-if="errors.text" class="invalid-feedback">
+                                            {{ errors.text }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-center my-3 p-0">
+                                    <button class="btn btn-primary" @click="sendForm">
+                                        Invia
+                                    </button>
+                                </div>
+                                <div class="status"></div>
                             </div>
                         </div>
                     </div>
-                </section>
-            </div>
+                </div>
+            </section>
         </div>
-        <div v-else>
-            <img v-if="apartment.visible == 0" src="https://i.ibb.co/YbYtKPN/404-error-Bool-Bnb.png" alt="Nothing To See Here" class="position-absolute top-50 start-50 translate-middle w-25">
-            <div v-else class="mx-auto position-absolute top-50 start-50 translate-middle"><div class="blades"><div></div><div></div><div></div><div></div><div></div></div></div>
-        </div>
+            <h1 class="text-center mt-5" v-if="apartment.visible == 0">Nothing To See Here</h1>
     </div>
 </template>
-
 <script>
 import Axios from 'axios';
 import Details from '../components/Details.vue';
@@ -149,7 +143,6 @@ import Services from '../components/Services.vue';
 import tt from '@tomtom-international/web-sdk-maps';
 import { isEmpty } from "lodash";
 import {APP_KEYMAPS} from "../key";
-import  ref  from 'vue'
 export default {
     name:'Show',
     components:{
@@ -162,9 +155,6 @@ export default {
             apartment:[],
             pictures:[],
             host:[],
-            infoLoaded:false,
-            picsLoaded:false,
-
             showContact: false,
             form: {
                 full_name: "",
@@ -177,7 +167,6 @@ export default {
             alert: false,
             alertMessage: "",
             mapStyle:"https://api.tomtom.com/style/1/style/22.2.1-9/?map=2/basic_street-light",
-
         };
     },
     computed: {
@@ -195,7 +184,6 @@ export default {
                 zoom: 8,
                 minZoom: 4,
                 style: this.mapStyle,
-
             })
             this.map.addControl(new tt.FullscreenControl(), 'top-left');
             this.map.addControl(new tt.NavigationControl(), 'top-left');
@@ -215,9 +203,7 @@ export default {
             Axios.get('/api/apartment/pictures/'+this.id)
             .then(response=>{
                 this.pictures=response.data;
-            });
-                setTimeout(this.picsLoaded=true,5000);
-                console.log(this.picsLoaded);
+            })
         },
         getHost(id){
             Axios.get('/api/apartment/host/'+id)
@@ -308,7 +294,6 @@ export default {
         showMessage(){
             this.showContact = !this.showContact
             window.scrollTo(0, document.body.scrollHeight);
-
         },
         darkmode(){
             if(this.mapStyle=="https://api.tomtom.com/style/1/style/22.2.1-9/?map=2/basic_street-light"){
@@ -320,15 +305,13 @@ export default {
             this.initializeMap()
         }
     },
-    mounted(){
+    created(){
         this.getInfo();
         this.getpics();
     }
 }
 </script>
-
 <style lang="scss" scoped>
-
     @import 'resources/sass/_variables.scss';
     .MyContainer{
         // background-color: $light-dark-background;
@@ -342,7 +325,6 @@ export default {
             padding: 2rem 10vw;
         }
     }
-
     .pics{
         height: 50vh;
         // width: 80vw;
@@ -357,7 +339,6 @@ export default {
                 height: 49%;
             }
         }
-
     @media(max-width: 767.98px)  {
         .otherPics{
             img{
@@ -422,48 +403,5 @@ export default {
 }
 .host:hover a{
     color: white;
-}
-
-.blades {
-    -webkit-animation: spin 1s infinite linear;
-    animation: spin 1s infinite linear;
-    height: 20px;
-    width: 20px; 
-}
-.blades div {
-    border: 4px solid transparent;
-    border-left-color: var(--primary);
-    height: 20px;
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    -webkit-transform-origin: top left;
-            transform-origin: top left;
-    width: 20px; }
-.blades div:nth-child(1) {
-    -webkit-transform: rotate(72deg) translateY(5px);
-            transform: rotate(72deg) translateY(5px); }
-.blades div:nth-child(2) {
-    -webkit-transform: rotate(144deg) translateY(5px);
-            transform: rotate(144deg) translateY(5px); }
-.blades div:nth-child(3) {
-    -webkit-transform: rotate(216deg) translateY(5px);
-            transform: rotate(216deg) translateY(5px); }
-.blades div:nth-child(4) {
-    -webkit-transform: rotate(288deg) translateY(5px);
-            transform: rotate(288deg) translateY(5px); }
-.blades div:nth-child(5) {
-    -webkit-transform: rotate(360deg) translateY(5px);
-            transform: rotate(360deg) translateY(5px); }
-
-@-webkit-keyframes spin {
-    to {
-        -webkit-transform: rotate(360deg);
-            transform: rotate(360deg); } }
-
-@keyframes spin {
-    to {
-        -webkit-transform: rotate(360deg);
-            transform: rotate(360deg); }
 }
 </style>
