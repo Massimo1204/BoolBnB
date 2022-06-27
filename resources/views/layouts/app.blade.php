@@ -29,7 +29,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body>
+<body class="px-2">
     <div id="app" class="container the-header">
         <nav class="navbar navbar-expand-md navbar-light px-5" >
 
@@ -112,7 +112,7 @@
                                 @endif
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-end border-0 my-drop-login pt-3"
+                            <div class="dropdown-menu dropdown-menu-end border-0 my-drop-login pt-3 position-absolute"
                                 aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{url('/apartment/messages/1')}}">
                                     {{ __('Messaggi') }}

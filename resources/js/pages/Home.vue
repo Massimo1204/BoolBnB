@@ -46,7 +46,7 @@
         </div>
     </div>
     <div class="row mb-3" v-if="( apartmentsShow.length == 12 || pagination.current_page == last_page)">
-        <div class="myPagination col-12 d-flex justify-content-between align-content-center my-3 px-sm-3 w-50 mx-auto" v-if="apartmentsSearch !== ''">
+        <div class="myPagination col-10 col-md-6 d-flex justify-content-between align-content-center my-3 px-md-3 mx-auto" v-if="apartmentsSearch !== ''">
 
             <button class="btn btn-outline-primary shadow-none" @click="getApartments(pagination.current_page - 1)" :class="(pagination.current_page > 1) ? 'visible' :  'invisible'" >Precedente</button>
             <h5>Pagina: {{pagination.current_page}}</h5>
