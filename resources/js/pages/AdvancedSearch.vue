@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-auto container">
+  <div class="container">
     <div class="row text-primary">
       <div class="col-lg-3 col-md-12 ps-5 pe-4 pt-2">
         <form>
@@ -42,7 +42,7 @@
                 </select>
               </div>
             </div>
-            <div class="input-field fouth-wrap w-100 d-flex overflow-hidden">
+            <div class="input-field fouth-wrap w-100 d-flex ">
               <div class="icon-wrap w-25">
                 <img
                   src="https://www.svgrepo.com/show/149612/hotel-room.svg"
@@ -59,7 +59,7 @@
                 </select>
               </div>
             </div>
-            <div class="input-field fouth-wrap w-100 d-flex overflow-hidden">
+            <div class="input-field fouth-wrap w-100 d-flex">
               <div class="icon-wrap w-25">
                 <img
                   src="https://www.svgrepo.com/show/137809/distance.svg"
@@ -96,7 +96,7 @@
                 <label for="services">{{ service.name }}</label>
               </div>
             </div>
-            <div class="input-field fifth-wrap text-center overflow-hidden">
+            <div class="input-field fifth-wrap text-center">
               <button
                 class="btn btn-outline-primary"
                 type="button"
@@ -221,7 +221,7 @@ export default {
     }
   }
 }
-.w-100{
+.container{
   overflow-x: hidden;
   overflow-y: scroll;
 }
