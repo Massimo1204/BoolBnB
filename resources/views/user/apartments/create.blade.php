@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="create-container my-3">
+        <div class="create-container my-3 pt-5">
             <h1 class="text-center">
                 Aggiungi un nuovo Appartamento
             </h1>
