@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center pb-5">
+<div class="container px-4 px-lg-5">
+    <div class="row justify-content-center pb-5 px-4 px-lg-5">
         <div class="col-12">
             <h1 class="text-center fw-bold text-success mt-5">Attiva Sponsorizzazione</h1>
         </div>
