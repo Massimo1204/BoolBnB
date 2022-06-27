@@ -49,7 +49,8 @@ export default {
     },
     props: [
         'apartment',
-        'isLoaded'
+        'isLoaded',
+        'dark'
     ],
     data: function(){
         return {
@@ -121,6 +122,7 @@ export default {
 }
 h3{
     color: $primary;
+    font-weight: bolder;
 }
 .photo{
     border-radius: 15px;
