@@ -28,7 +28,7 @@
 {{-- <div id="root"></div> --}}
 @endsection
 @section('footer-scripts')
-    <script >
+    {{-- <script >
         
     document.addEventListener("DOMContentLoaded", function(event) { 
         function toggleDarkMode() {
@@ -47,7 +47,7 @@
         toggleDarkMode();
         }, false);
     });
-    </script>
+    </script> --}}
     {{-- <script src="{{ asset('js/darkmode.js') }}"></script> --}}
 
 @endsection
