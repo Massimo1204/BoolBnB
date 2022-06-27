@@ -20509,7 +20509,7 @@ readers do not read off random characters that represent icons */
 }
 
 body {
-  background-image: url("https://www.wallpapers13.com/wp-content/uploads/2019/08/Indonesia-Banyak-Islands-Sumatra-tropical-desert-beach-Sunset-sky-sea-palm-trees-photo-landscape-4K-Ultra-HD-Wallpaper-for-Desktop-Laptop.jpg");
+  background-image: url("https://images.pexels.com/photos/1450360/pexels-photo-1450360.jpeg?cs=srgb&dl=pexels-asad-photo-maldives-1450360.jpg&fm=jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position-y: center;
@@ -20520,7 +20520,7 @@ body {
 
 .the-header {
   height: 76px;
-  background-color: rgba(245, 248, 255, 0.9);
+  background-color: rgba(245, 248, 255, 0.95);
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   padding: 9.8px 0;
@@ -20529,7 +20529,7 @@ body {
 }
 
 main .container {
-  background-color: rgba(245, 248, 255, 0.9);
+  background-color: rgba(245, 248, 255, 0.95);
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   overflow-y: scroll;

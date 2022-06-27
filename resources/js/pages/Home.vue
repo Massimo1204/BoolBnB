@@ -32,7 +32,7 @@
             </button>
         </div>
     </div>
-    <div v-if="sponsoredApartments.length != 0" class="border-bottom border-primary row px-5 mb-3">
+    <div v-if="sponsoredApartments.length != 0" class="border-2 border-bottom border-white row px-5 mb-3">
         <div class="col-12">
             <h1 class="mt-4 text-primary" v-if="sponsoredApartments != ''">In evidenza</h1>
         </div>

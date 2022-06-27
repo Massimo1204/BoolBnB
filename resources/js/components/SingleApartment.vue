@@ -13,8 +13,8 @@
                 </div>
             </div>
             <h3 class="txt m-0 mt-3 title text-capitalize">{{apartment.title}}</h3>
-            <div class="content address">
-                <p class="fs-5">{{ apartment.address}}</p>
+            <div class="content address-wrapper">
+                <p class="apartment-address fs-5">{{ apartment.address}}</p>
             </div>
         </router-link>
     </div>
@@ -61,9 +61,9 @@ export default {
 h3{
     color: $primary;
 }
-p{
-    color: black;
-}
+// p.apartment-address{
+//     color: rgb(5, 5, 5);
+// }
 .photo{
     height: 250px;
     border-radius: 15px;
@@ -81,8 +81,10 @@ p{
     .title:hover{
         color:$primary
     }
-.address
+.address-wrapper
 {
-    color: $light-grey;
+    p.apartment-address{
+        color: rgb(30, 30, 30);
+    }
 }
 </style>
