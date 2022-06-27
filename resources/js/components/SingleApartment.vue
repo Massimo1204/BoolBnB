@@ -31,7 +31,8 @@ export default {
     },
     props: [
         'apartment',
-        'isLoaded'
+        'isLoaded',
+        'dark'
     ],
     data: function(){
         return {
@@ -60,6 +61,7 @@ export default {
 }
 h3{
     color: $primary;
+    font-weight: bolder;
 }
 // p.apartment-address{
 //     color: rgb(5, 5, 5);

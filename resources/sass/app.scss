@@ -31,6 +31,9 @@ body {
     padding: 9.8px 0;
     min-width: 375px;
     border-bottom: 2px solid white;
+    // .navbar-light .navbar-nav .nav-link {
+    //     color: black;
+    // }
 }
 
 main {
@@ -212,5 +215,46 @@ div.show-thumbnails {
 .dashboardContainer{
     img{
         max-width: 220px;
+    }
+}
+.dark-mode{
+    background-color: $body-bg-dk !important;
+    color: $text-white-dk !important; 
+}
+main{
+    .container.dark-mode{
+        background-color: $body-bg-dk !important;
+        color: $text-white-dk !important; 
+        .search{
+            input{
+                color: $text-white-dk !important;
+            }
+            svg {
+                stroke: $text-white-dk !important;
+            }
+        }
+        .btn-primary{
+            color: $text-black-dk;
+            background-color: $body-bg-white-dk;
+            border-color: $text-white-dk;
+                .text-white{
+                    color: $text-black-dk !important;
+                }
+        }
+        .btn-outline-primary{
+            border-color: $text-white-dk;
+            color: $text-white-dk;
+            
+            &:hover {
+                background-color:$body-bg-white-dk;
+                color: $text-black-dk;
+            }
+        }
+        .border-primary{
+            border-color: $text-white-dk !important;
+        }
+        .text-primary, h3, p.apartment-address{
+            color: $text-white-dk !important;
+        }
     }
 }
