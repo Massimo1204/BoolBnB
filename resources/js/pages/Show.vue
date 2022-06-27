@@ -205,9 +205,7 @@ export default {
                 console.log(this.apartment);
                 this.getHost(this.apartment.user_id);
                 this.initializeMap()
-
             })
-
         },
         getpics(){
             Axios.get('/api/apartment/pictures/'+this.id)
