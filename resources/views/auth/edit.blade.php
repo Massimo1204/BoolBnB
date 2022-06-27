@@ -5,7 +5,7 @@
         <div class="row justify-content-center pt-3">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Edit Account Info</div>
+                    <div class="card-header">Modifica le Informazioni dell'Account</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('user.update', Auth::id()) }}" enctype="multipart/form-data">
@@ -13,7 +13,7 @@
                             @method('PUT')
                             <div class="form-group row mb-3">
                                 <label for="first_name"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}*</label>
+                                    class="col-md-4 col-form-label text-md-right">Nome*</label>
 
                                 <div class="col-md-6">
                                     <input id="first_name" type="text"
@@ -31,7 +31,7 @@
 
                             <div class="form-group row mb-3">
                                 <label for="last_name"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}*</label>
+                                    class="col-md-4 col-form-label text-md-right">Cognome*</label>
 
                                 <div class="col-md-6">
                                     <input id="last_name" type="text"
@@ -48,7 +48,7 @@
 
                             <div class="form-group row mb-3">
                                 <label for="email"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}*</label>
+                                    class="col-md-4 col-form-label text-md-right">Email*</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
@@ -65,7 +65,7 @@
 
                             <div class="form-group row mb-3">
                                 <label for="birth_date"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Birth Date') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">Data di Nascita</label>
 
                                 <div class="col-md-6">
                                     <input id="birth_date" type="date"
@@ -81,7 +81,7 @@
 
                             <div class="form-group row mb-3">
                                 <label for="profile_picture"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Profile Picture') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">Immagine del Profilo</label>
 
                                 <div class="col-md-6">
                                     <input id="profile_picture" type="file"
@@ -98,7 +98,7 @@
 
                             <div class="form-group row mb-3">
                                 <label for="password"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Password') }}*</label>
+                                    class="col-md-4 col-form-label text-md-right">Password*</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
@@ -115,7 +115,7 @@
 
                             <div class="form-group row mb-3">
                                 <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}*</label>
+                                    class="col-md-4 col-form-label text-md-right">Conferma Password*</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control
@@ -141,7 +141,7 @@
                     <div class="form-group row mb-2">
                         <div class="col-1 mx-auto">
                             <button type="submit" class="btn btn-primary mx-auto">
-                                {{ __('Edit') }}
+                                Modifica
                             </button>
                         </div>
                     </div>

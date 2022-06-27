@@ -125,7 +125,7 @@
                         <input type="checkbox" name="available" id="available" checked=true>
                     </div>
                     <div class="col-12">
-                        <label for="address">inserisci la via:*</label>
+                        <label for="address">Inserisci la via:*</label>
                         <input class="w-100" type="text" name="address" id="address"
                             value="{{ old('address') ?? '' }}" autocomplete="off" required>
                         @error('address')
@@ -162,7 +162,7 @@
 
                     <div class="col-12 mt-4">
                         <div class="w-100">
-                            <label for="image[]">inserisci altre foto del tuo appartamento</label>
+                            <label for="image[]">Inserisci altre foto del tuo appartamento</label>
                             <input type="file" class="form-control" name="images[]" id="image[]" multiple>
                         </div>
                     </div>

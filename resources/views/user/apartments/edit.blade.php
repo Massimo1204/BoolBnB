@@ -161,7 +161,7 @@
                             @if ($apartment->available == 1) checked @endif>
                     </div>
                     <div class="col-12">
-                        <label for="address">inserisci la via:*</label>
+                        <label for="address">Inserisci la via:*</label>
                         <input class="w-100" type="text" name="address" id="address"
                             value="{{ old('address') ?? $apartment->address }}" autocomplete="off" required>
                         @error('address')
@@ -197,7 +197,7 @@
                     @enderror
 
                     <div class="col-12 mt-3">
-                        <label for="image[]">inserisci altre foto del tuo appartamento</label>
+                        <label for="image[]">Inserisci altre foto del tuo appartamento</label>
                         {{-- @dd($apartment->pictures) --}}
                         <input type="file" class="form-control" name="images[]" id="image[]" multiple>
                     </div>
