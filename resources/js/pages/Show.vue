@@ -52,7 +52,7 @@
         </div>
         <div v-if="showContact" class="contactContainer shadow border rounded my-4 mx-5" id="message">
             <section id="contacts" class="col-12 mx-auto px-2">
-                <div class="container">
+                <div class="container-fluid">
                     <div
                         class="alert d-flex justify-content-between align-items-center"
                         :class="`alert-${type}`"
