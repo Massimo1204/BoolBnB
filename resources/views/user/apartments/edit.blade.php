@@ -129,7 +129,7 @@
                             </div>
                         @enderror
                     </div>
-    
+
                     <div class="col-12 col-md-6">
                         <label for="price">Inserisci il prezzo a notte per ospite:* </label>
                         <input type="number" step="0.01" name="price" id="price"
@@ -177,9 +177,9 @@
                             <li class="list-group-item active d-none" id="5-result"></li>
                         </ul>
                     </div>
-    
+
                     <label for="address_city">Servizi:*</label><br>
-    
+
                     @foreach ($services as $service)
                         <div class="service col-lg-4">
                             <input class="form-check-input ms-2" type="checkbox" name="service[]"
@@ -195,7 +195,7 @@
                             {{ $message }}
                         </div>
                     @enderror
-    
+
                     <div class="col-12 mt-3">
                         <label for="image[]">inserisci altre foto del tuo appartamento</label>
                         {{-- @dd($apartment->pictures) --}}
@@ -203,9 +203,9 @@
                     </div>
                     <div class="col-10 mt-3">
                         <div class="Send my-auto">
-                            <button class="btn btn-outline-primary btn-md" type="submit">send</button>
+                            <button class="btn btn-outline-primary btn-md" type="submit">Invia</button>
                         </div>
-    
+
                     </div>
                 </div>
             </form>
@@ -216,7 +216,7 @@
                         {{-- apartment-title="{{ $apartment->title }}" --}}
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-md ms-auto">Delete</a>
+                        <button type="submit" class="btn btn-danger btn-md ms-auto">Cancella</a>
                     </form>
                 @endif
             </div>
