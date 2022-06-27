@@ -10,9 +10,9 @@
             <div class="col-12 col-lg-4 col-md-10 mt-4">
                 <div class="card">
                     <h2 class="card-title m-3">{{ucfirst($sponsorship->name)}}</h2>
-                    <p class="card-text m-3">Questa è una offerta molto bella dovresti assolutamente comprarla e darmi tutti i soldi che hai.</p>
+                    <p class="card-text m-3">Riposiziona il tuo annuncio automaticamente in prima pagina, come appena pubblicato. Il tuo annuncio diventa più evidente!</p>
                     <p class="card-text m-3">L' offerta dura: {{$sponsorship->duration}} ore</p>
-                    <h1 class="card-text pb-2 mx-auto" style="color: rgb({{rand(0,255)}},{{rand(0,255)}},{{rand(0,255)}});">{{$sponsorship->price}}$</h1>
+                    <h1 class="card-text pb-2 mx-auto" style="color: rgb({{rand(0,255)}},{{rand(0,255)}},{{rand(0,255)}});">{{$sponsorship->price}}€</h1>
                     <a href="{{route('payments.index', [$sponsorship, $apartment] )}}" class="btn btn-primary">Vai al pagamento</a>
                 </div>
             </div>
